@@ -145,7 +145,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Source\System\ModelVS.hlsl">
+    <FxCompile Include="ModelVS.hlsl">
       <Filter>リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>
