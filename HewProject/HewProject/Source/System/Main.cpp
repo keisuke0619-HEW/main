@@ -6,6 +6,8 @@
 #include "Game3D.h"
 #include "Geometory.h"
 
+#include <DebugWindow.hpp>
+
 //--- ’è”’è‹`
 const unsigned int SCREEN_WIDTH = 1280;
 const unsigned int SCREEN_HEIGHT = 720;
@@ -41,6 +43,7 @@ void Init()
 		Error("geometory initialize failed.");
 	}
 	g_pGame = new Game3D();
+	CDebugWindow::Create();
 }
 void Uninit()
 {

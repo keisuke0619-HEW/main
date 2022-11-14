@@ -11,14 +11,6 @@ float g_geometoryAngleY = 0;
 
 Game3D::Game3D()
 {
-	//m_model.reset(new Model());
-	//m_model.get()->Load("Assets/unitychan/unitychan.fbx", 0.01f);
-	//m_pModelVS = new VertexShader();
-	//if (FAILED(m_pModelVS->Load("Assets/Shader/ModelVS.cso")))
-	//	MessageBox(nullptr, "ModelVS.cso", "Error", MB_OK);
-	//m_model->SetVertexShader(m_pModelVS);
-	//m_pWVP = new ConstantBuffer();
-	//m_pWVP->Create(sizeof(DirectX::XMFLOAT4X4) * 3);
 	m_player.reset(new CPlayer);
 
 	m_camera[0] = new CDebugCamera();
@@ -29,6 +21,10 @@ Game3D::Game3D()
 }
 Game3D::~Game3D()
 {
+	for (int i = 0; i < CAMERA_MAX; i++)
+	{
+		delete m_camera[i];
+	}
 }
 
 void Game3D::Update()
@@ -58,4 +54,5 @@ void Game3D::SwapCamera()
 	{
 		m_camID = CAMERA_DEBUG;
 	}
+	m_player->SetCamera(m_camera[m_camID]);
 }

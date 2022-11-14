@@ -25,10 +25,12 @@
     <ClInclude Include="Source\System\Camera.hpp" />
     <ClInclude Include="Source\System\ConstantBuffer.h" />
     <ClInclude Include="Source\System\DebugCamera.hpp" />
+    <ClInclude Include="Source\System\DebugWindow.hpp" />
     <ClInclude Include="Source\System\DirectX.h" />
     <ClInclude Include="Source\System\Game3D.h" />
     <ClInclude Include="Source\System\Geometory.h" />
     <ClInclude Include="Source\System\Input.h" />
+    <ClInclude Include="Source\System\macro.hpp" />
     <ClInclude Include="Source\System\Main.h" />
     <ClInclude Include="Source\System\MeshBuffer.h" />
     <ClInclude Include="Source\System\Model.h" />
@@ -46,10 +48,12 @@
     <ClCompile Include="Source\System\Camera.cpp" />
     <ClCompile Include="Source\System\ConstantBuffer.cpp" />
     <ClCompile Include="Source\System\DebugCamera.cpp" />
+    <ClCompile Include="Source\System\DebugWindow.cpp" />
     <ClCompile Include="Source\System\DirectX.cpp" />
     <ClCompile Include="Source\System\Game3D.cpp" />
     <ClCompile Include="Source\System\Geometory.cpp" />
     <ClCompile Include="Source\System\Input.cpp" />
+    <ClCompile Include="Source\System\macro.cpp" />
     <ClCompile Include="Source\System\Main.cpp" />
     <ClCompile Include="Source\System\MeshBuffer.cpp" />
     <ClCompile Include="Source\System\Model.cpp" />

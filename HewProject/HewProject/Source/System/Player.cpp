@@ -84,7 +84,6 @@ void CPlayer::Draw()
     m_wvp->BindVS(0);
 
     m_model->Draw();
-
 }
 
 void CPlayer::SetCamera(CCameraBase* pCam)

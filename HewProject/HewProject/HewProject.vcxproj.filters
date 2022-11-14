@@ -78,6 +78,12 @@
     <ClInclude Include="DirectXTex\DirectXTex.h">
       <Filter>システム</Filter>
     </ClInclude>
+    <ClInclude Include="Source\System\macro.hpp">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\DebugWindow.hpp">
+      <Filter>システム</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BlendState.cpp">
@@ -142,6 +148,12 @@
     </ClCompile>
     <ClCompile Include="DirectXTex\Texture.cpp">
       <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\macro.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\DebugWindow.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
