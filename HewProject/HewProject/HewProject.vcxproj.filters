@@ -13,15 +13,140 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="システム">
+      <UniqueIdentifier>{10e1e237-589c-4760-97cf-925b96866e18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\main.hpp">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="Source\System\BlendState.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\ConstantBuffer.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\DirectX.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Game3D.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Geometory.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Input.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Main.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\MeshBuffer.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Model.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\SamplerState.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Shader.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Timer.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\WinUtil.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Camera.hpp">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\DebugCamera.hpp">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Player.hpp">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\PlayerCamera.hpp">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Stage00.hpp">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTex\Texture.h">
+      <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTex\DirectXTex.h">
+      <Filter>システム</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\main.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Source\System\BlendState.cpp">
+      <Filter>システム</Filter>
     </ClCompile>
+    <ClCompile Include="Source\System\Camera.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\ConstantBuffer.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\DebugCamera.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\DirectX.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Game3D.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Geometory.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Input.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Main.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\MeshBuffer.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Model.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Model_Contents.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Player.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\PlayerCamera.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\SamplerState.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Shader.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Stage00.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Startup.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Timer.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\WinUtil.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTex\Texture.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Source\System\ModelVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

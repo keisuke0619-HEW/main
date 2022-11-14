@@ -19,10 +19,55 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\main.hpp" />
+    <ClInclude Include="DirectXTex\DirectXTex.h" />
+    <ClInclude Include="DirectXTex\Texture.h" />
+    <ClInclude Include="Source\System\BlendState.h" />
+    <ClInclude Include="Source\System\Camera.hpp" />
+    <ClInclude Include="Source\System\ConstantBuffer.h" />
+    <ClInclude Include="Source\System\DebugCamera.hpp" />
+    <ClInclude Include="Source\System\DirectX.h" />
+    <ClInclude Include="Source\System\Game3D.h" />
+    <ClInclude Include="Source\System\Geometory.h" />
+    <ClInclude Include="Source\System\Input.h" />
+    <ClInclude Include="Source\System\Main.h" />
+    <ClInclude Include="Source\System\MeshBuffer.h" />
+    <ClInclude Include="Source\System\Model.h" />
+    <ClInclude Include="Source\System\Player.hpp" />
+    <ClInclude Include="Source\System\PlayerCamera.hpp" />
+    <ClInclude Include="Source\System\SamplerState.h" />
+    <ClInclude Include="Source\System\Shader.h" />
+    <ClInclude Include="Source\System\Stage00.hpp" />
+    <ClInclude Include="Source\System\Timer.h" />
+    <ClInclude Include="Source\System\WinUtil.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="DirectXTex\Texture.cpp" />
+    <ClCompile Include="Source\System\BlendState.cpp" />
+    <ClCompile Include="Source\System\Camera.cpp" />
+    <ClCompile Include="Source\System\ConstantBuffer.cpp" />
+    <ClCompile Include="Source\System\DebugCamera.cpp" />
+    <ClCompile Include="Source\System\DirectX.cpp" />
+    <ClCompile Include="Source\System\Game3D.cpp" />
+    <ClCompile Include="Source\System\Geometory.cpp" />
+    <ClCompile Include="Source\System\Input.cpp" />
+    <ClCompile Include="Source\System\Main.cpp" />
+    <ClCompile Include="Source\System\MeshBuffer.cpp" />
+    <ClCompile Include="Source\System\Model.cpp" />
+    <ClCompile Include="Source\System\Model_Contents.cpp" />
+    <ClCompile Include="Source\System\Player.cpp" />
+    <ClCompile Include="Source\System\PlayerCamera.cpp" />
+    <ClCompile Include="Source\System\SamplerState.cpp" />
+    <ClCompile Include="Source\System\Shader.cpp" />
+    <ClCompile Include="Source\System\Stage00.cpp" />
+    <ClCompile Include="Source\System\Startup.cpp" />
+    <ClCompile Include="Source\System\Timer.cpp" />
+    <ClCompile Include="Source\System\WinUtil.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Source\System\ModelVS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
+    </FxCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -77,10 +122,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)Source\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)Source\;$(ProjectDir)Source\System\;$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)Source\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)Source\;$(ProjectDir)Source\System\;$(ProjectDir);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -121,7 +166,11 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>assimp-vc141-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <FxCompile>
+      <ObjectFileOutput>$(ProjectDir)Assets\Shader\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -138,7 +187,11 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>assimp-vc141-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <FxCompile>
+      <ObjectFileOutput>$(ProjectDir)Assets\Shader\%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
