@@ -1,5 +1,6 @@
 #include "player.hpp"
 #include <Input.h>
+#include <DebugWindow.hpp>
 CPlayer::CPlayer()
 {
     m_pos = { 0,0,0 };
@@ -40,6 +41,10 @@ void CPlayer::Update()
     if (IsKeyPress('S'))vMove = DirectX::XMVectorAdd(vMove, vFront);
     if (IsKeyPress('A'))vMove = DirectX::XMVectorAdd(vMove, vSide);
     if (IsKeyPress('D'))vMove = DirectX::XMVectorSubtract(vMove, vSide);
+
+    if (IsKeyTrigger('R'))CDebugWindow::Close();
+    if (IsKeyTrigger('T'))CDebugWindow::Create();
+    if (IsKeyTrigger('C'))printf("a\n");
 
     // è„â∫èàóù
     DirectX::XMFLOAT3 up = { 0, 1, 0 };

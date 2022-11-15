@@ -16,6 +16,12 @@
     <Filter Include="システム">
       <UniqueIdentifier>{10e1e237-589c-4760-97cf-925b96866e18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="システム\BaseClass">
+      <UniqueIdentifier>{1eaa641b-ecf2-426d-97fd-b929f99b8256}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\Manager">
+      <UniqueIdentifier>{14949fde-b293-491a-8b85-313a8c153dc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\System\BlendState.h">
@@ -83,6 +89,15 @@
     </ClInclude>
     <ClInclude Include="Source\System\DebugWindow.hpp">
       <Filter>システム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\BaseClass\ObjectToManagerInterface.hpp">
+      <Filter>システム\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\BaseClass\ObjectBase.hpp">
+      <Filter>システム\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\BaseClass\DataPool.hpp">
+      <Filter>システム\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -153,7 +168,10 @@
       <Filter>システム</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\DebugWindow.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
+      <Filter>システム\BaseClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

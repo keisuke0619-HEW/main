@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include <stdio.h>
 
 // メモ
 // 
@@ -10,15 +11,22 @@
 // 
 //
 
+
+
 class CDebugWindow
 {
 public:
 	// デバッグウィンドウの作成
 	static void Create();
+	// デバッグウィンドウの消去
+	static void Close();
+
 
 	template<class... A>
 	static void Print(const char* src, A... args);
 
+private:
+	static FILE* m_fp;
 };
 
 template<class ...A>

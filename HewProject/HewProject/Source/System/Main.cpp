@@ -43,7 +43,6 @@ void Init()
 		Error("geometory initialize failed.");
 	}
 	g_pGame = new Game3D();
-	CDebugWindow::Create();
 }
 void Uninit()
 {
