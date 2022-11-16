@@ -31,7 +31,7 @@ protected:
 	// オブジェクト情報
 	TObjectParam m_param;
 	// モデル情報
-	std::shared_ptr<Model> m_model;
+	std::unique_ptr<Model> m_model;
 	// 頂点バッファ情報
 	std::unique_ptr<VertexShader> m_vs;
 	// ワールドビュー定数バッファ

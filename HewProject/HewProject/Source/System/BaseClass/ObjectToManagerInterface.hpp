@@ -20,7 +20,9 @@ struct TObjectParam
 	// オブジェクトの加速度
 	DirectX::XMFLOAT3 accel;
 	// オブジェクトの回転
-	DirectX::XMFLOAT3 angle;
+	DirectX::XMFLOAT3 rot;
+	// オブジェクトの拡大率
+	DirectX::XMFLOAT3 scale;
 	// オブジェクトのタググループ（上の列挙体）
 	EObjectTag tag;
 	// 生成からの経過フレーム

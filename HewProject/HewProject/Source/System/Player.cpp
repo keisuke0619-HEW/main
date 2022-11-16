@@ -18,7 +18,7 @@ CPlayer::CPlayer()
 
 CPlayer::~CPlayer()
 {
-    //Model::Release("Assets/unitychan/unitychan.fbx");
+    
 }
 
 void CPlayer::Update()

@@ -13,8 +13,6 @@ float g_geometoryAngleY = 0;
 Game3D::Game3D()
 {
 	//CDataPool::CreateIns();
-	auto a = new CPlayer();
-	delete a;
 	m_player.reset(new CPlayer);
 
 	m_camera[0] = new CDebugCamera();

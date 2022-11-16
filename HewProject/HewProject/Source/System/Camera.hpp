@@ -2,6 +2,15 @@
 #include <DirectXMath.h>
 class CCameraBase
 {
+	//
+	// 今後実装メモ
+	// スタティック領域にカメラのリストを作成
+	// インスタンス化時に自身を登録
+	// デストラクタで解放
+	// スタティック関数で名前を指定（タグ？）で
+	// 使用するカメラ情報を取得。
+	//
+
 public:
 	CCameraBase();
 	virtual ~CCameraBase();
