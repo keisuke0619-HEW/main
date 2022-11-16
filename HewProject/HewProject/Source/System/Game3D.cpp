@@ -3,6 +3,7 @@
 #include "Input.h"
 #include <PlayerCamera.hpp>
 #include <DebugCamera.hpp>
+#include <DataPool.hpp>
 int g_gameFrame = 0;
 float g_geometoryAngleX = 0;
 float g_geometoryAngleY = 0;
@@ -11,6 +12,8 @@ float g_geometoryAngleY = 0;
 
 Game3D::Game3D()
 {
+	//CDataPool::CreateIns();
+
 	m_player.reset(new CPlayer);
 
 	m_camera[0] = new CDebugCamera();
@@ -25,6 +28,7 @@ Game3D::~Game3D()
 	{
 		delete m_camera[i];
 	}
+	//CDataPool::Destroy();
 }
 
 void Game3D::Update()

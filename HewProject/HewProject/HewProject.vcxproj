@@ -21,7 +21,10 @@
   <ItemGroup>
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
-    <ClInclude Include="Source\System\BaseClass\DataPool.hpp" />
+    <ClInclude Include="Source\System\BaseClass\DataPool.hpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Source\System\BaseClass\ObjectBase.hpp" />
     <ClInclude Include="Source\System\BaseClass\ObjectToManagerInterface.hpp" />
     <ClInclude Include="Source\System\BlendState.h" />
@@ -47,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectXTex\Texture.cpp" />
+    <ClCompile Include="Source\System\BaseClass\DataPool.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp" />
     <ClCompile Include="Source\System\BlendState.cpp" />
     <ClCompile Include="Source\System\Camera.cpp" />

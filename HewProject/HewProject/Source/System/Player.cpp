@@ -1,11 +1,13 @@
 #include "player.hpp"
 #include <Input.h>
 #include <DebugWindow.hpp>
+#include <DataPool.hpp>
 CPlayer::CPlayer()
 {
     m_pos = { 0,0,0 };
+    //m_model = CDataPool::GetIns()->GetModel("Assets/NullModel/NullModel.obj");
     m_model.reset(new Model());
-    m_model->Load("Assets/unitychan/unitychan.fbx", 0.01f);
+    m_model->Load("Assets/NullModel/NullModel.obj", 0.5f);
     m_vs.reset(new VertexShader());
     if (FAILED(m_vs.get()->Load("Assets/Shader/ModelVS.cso")))
         MessageBox(nullptr, "ModelVS.cso", "Error", MB_OK);
