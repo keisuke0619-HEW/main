@@ -4,7 +4,7 @@
 #include <DirectXMath.h>
 #include "Shader.h"
 #include "MeshBuffer.h"
-
+#include <map>
 class Model
 {
 public:
@@ -29,6 +29,16 @@ public:
 		unsigned int materialID;
 		MeshBuffer* pMesh;
 	};
+	struct ModelData
+	{
+		Mesh* meshes;
+		unsigned int meshNum;
+		Material* materials;
+		unsigned int materialNum;
+
+	};
+public:
+	static void Release(const char* src);
 public:
 	Model();
 	~Model();
@@ -48,11 +58,9 @@ private:
 	static VertexShader* m_pDefVS;
 	static PixelShader* m_pDefPS;
 	static unsigned int m_shaderRef;
+	static std::map<const char*, ModelData> m_staticModels;
 private:
-	Mesh* m_pMeshes;
-	unsigned int m_meshNum;
-	Material* m_pMaterials;
-	unsigned int m_materialNum;
+	ModelData m_model;
 	VertexShader* m_pVS;
 	PixelShader* m_pPS;
 };

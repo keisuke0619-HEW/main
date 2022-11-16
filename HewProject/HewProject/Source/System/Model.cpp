@@ -3,16 +3,43 @@
 VertexShader* Model::m_pDefVS = nullptr;
 PixelShader* Model::m_pDefPS = nullptr;
 unsigned int Model::m_shaderRef = 0;
+std::map<const char*, Model::ModelData> Model::m_staticModels;
 
 //--- プロトタイプ宣言
 void MakeModelDefaultShader(VertexShader** vs, PixelShader** ps);
 
-Model::Model()
-	: m_meshNum(0)
-	, m_pMeshes(nullptr)
-	, m_materialNum(0)
-	, m_pMaterials(nullptr)
+void Model::Release(const char* src)
 {
+	if (m_staticModels.count(src) == 0)
+		return;
+	for (unsigned int i = 0; i < m_staticModels[src].meshNum; ++i)
+	{
+		delete[] m_staticModels[src].meshes[i].pVertices;
+		delete[] m_staticModels[src].meshes[i].pIndices;
+		delete m_staticModels[src].meshes[i].pMesh;
+	}
+	if (m_staticModels[src].meshes) {
+		delete[] m_staticModels[src].meshes;
+	}
+	for (unsigned int i = 0; i < m_staticModels[src].materialNum; ++i)
+	{
+		if (m_staticModels[src].materials[i].pTexture)
+			m_staticModels[src].materials[i].pTexture->Release();
+	}
+	if (m_staticModels[src].materials) {
+		delete[] m_staticModels[src].materials;
+	}
+	m_staticModels.erase(src);
+}
+
+Model::Model()
+{
+	m_model.meshNum = 0;
+	m_model.meshes = nullptr;
+	m_model.materialNum = 0;
+	m_model.materials = nullptr;
+
+
 	if (m_shaderRef == 0)
 	{
 		MakeModelDefaultShader(&m_pDefVS, &m_pDefPS);
@@ -23,23 +50,6 @@ Model::Model()
 }
 Model::~Model()
 {
-	for (unsigned int i = 0; i < m_meshNum; ++i)
-	{
-		delete[] m_pMeshes[i].pVertices;
-		delete[] m_pMeshes[i].pIndices;
-		delete m_pMeshes[i].pMesh;
-	}
-	if (m_pMeshes) {
-		delete[] m_pMeshes;
-	}
-	for (unsigned int i = 0; i < m_materialNum; ++i)
-	{
-		if (m_pMaterials[i].pTexture)
-			m_pMaterials[i].pTexture->Release();
-	}
-	if (m_pMaterials) {
-		delete[] m_pMaterials;
-	}
 
 	--m_shaderRef;
 	if (m_shaderRef <= 0)
@@ -61,13 +71,13 @@ const Model::Mesh* Model::GetMesh(unsigned int index)
 {
 	if (index >= GetMeshNum())
 	{
-		return &m_pMeshes[index];
+		return &m_model.meshes[index];
 	}
 	return nullptr;
 }
 uint32_t Model::GetMeshNum()
 {
-	return m_meshNum;
+	return m_model.meshNum;
 }
 
 
