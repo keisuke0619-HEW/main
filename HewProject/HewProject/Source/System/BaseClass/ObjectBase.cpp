@@ -62,5 +62,8 @@ void CObjectBase::Draw()
     // 計算型に変換
     DirectX::XMStoreFloat4x4(&mat[0], world);
 
+    // ビューマトリックスとプロジェクションマトリックスを
+    // 設定するために
+    // BaseCameraのStaticでDefaultカメラを取得する関数を作る
 
 }

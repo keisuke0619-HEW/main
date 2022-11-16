@@ -11,7 +11,7 @@ class CObjectBase : IObjectToManager
 {
 public:
 	// 基底コンストラクタ
-	CObjectBase();
+	CObjectBase(const char* src, float scale, bool isFlip);
 	// 仮想デストラクタ
 	virtual ~CObjectBase();
 
