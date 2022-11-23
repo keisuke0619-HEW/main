@@ -46,8 +46,6 @@ void CPlayer::Update()
     if (IsKeyPress('A'))vMove = DirectX::XMVectorAdd(vMove, vSide);
     if (IsKeyPress('D'))vMove = DirectX::XMVectorSubtract(vMove, vSide);
 
-    if (IsKeyTrigger('R'))CDebugWindow::Close();
-    if (IsKeyTrigger('T'))CDebugWindow::Create();
     if (IsKeyTrigger('C'))printf("a\n");
 
     // è„â∫èàóù

@@ -3,7 +3,8 @@
 #include "Input.h"
 #include <PlayerCamera.hpp>
 #include <DebugCamera.hpp>
-#include <DataPool.hpp>
+//#include <DataPool.hpp>
+#include <DebugWindow.hpp>
 int g_gameFrame = 0;
 float g_geometoryAngleX = 0;
 float g_geometoryAngleY = 0;
@@ -17,9 +18,11 @@ Game3D::Game3D()
 	CCameraBase::CreateCamera(new CDebugCamera(), "Debug");
 	CCameraBase::CreateCamera(new CPlayerCamera(m_player),"Player");
 	m_stage.reset(new CStage00());
+	CDebugWindow::Create();
 }
 Game3D::~Game3D()
 {
+	CDebugWindow::Close();
 }
 
 void Game3D::Update()
@@ -28,6 +31,8 @@ void Game3D::Update()
 	if(CCameraBase::GetPrimaryName() == "Player")
 		m_player->Update();
 	CCameraBase::UpdatePrimary();
+	if (IsKeyTrigger('C'))
+		CDebugWindow::Print(ShimizuKeisuke, "aaaaaaa%d%d\n", 1, 1);
 	g_gameFrame++;
 }
 void Game3D::Draw()

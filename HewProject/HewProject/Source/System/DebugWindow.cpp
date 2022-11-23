@@ -22,7 +22,4 @@ void CDebugWindow::Close()
     FreeConsole();
     fclose(m_fp);
     m_fp = nullptr;
-    //DefWindowProc(hWnd, WM_CLOSE, NULL, NULL);
-    //bool log = DestroyWindow(hWnd);
-    //auto a = GetLastError();
 }
