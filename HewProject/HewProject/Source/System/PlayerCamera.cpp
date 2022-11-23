@@ -25,11 +25,11 @@ void CPlayerCamera::Update()
 
 	SET_VAR_RANGE(m_radY, -3.1415f / 2, 3.1415f / 2);
 
-	m_pos.x = cosf(m_radY) * sinf(m_radXZ) * m_distance + m_look.x;
-	m_pos.y = sinf(m_radY) * m_distance + m_look.y;
-	m_pos.z = cosf(m_radY) * cosf(m_radXZ) * m_distance + m_look.z;
+	m_data.pos.x = cosf(m_radY) * sinf(m_radXZ) * m_distance + m_data.look.x;
+	m_data.pos.y = sinf(m_radY) * m_distance + m_data.look.y;
+	m_data.pos.z = cosf(m_radY) * cosf(m_radXZ) * m_distance + m_data.look.z;
 
-	m_look = m_target->GetPos();
-	m_look.y += 1.5f;
+	m_data.look = m_target->GetPos();
+	m_data.look.y += 1.5f;
 
 }

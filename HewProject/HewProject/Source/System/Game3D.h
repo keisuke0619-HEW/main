@@ -10,14 +10,6 @@
 #include <Player.hpp>
 class Game3D
 {
-	enum ECameraID
-	{
-		CAMERA_DEBUG,
-		CAMERA_PLAYER,
-
-
-		CAMERA_MAX,
-	};
 public:
 	Game3D();
 	~Game3D();
@@ -26,9 +18,7 @@ public:
 	void Draw();
 private:
 	std::unique_ptr<Model> m_model;
-	CCameraBase* m_camera[CAMERA_MAX];
 	std::shared_ptr<CPlayer> m_player;
-	ECameraID m_camID;
 	std::unique_ptr<CStage00> m_stage;
 
 

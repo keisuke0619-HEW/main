@@ -11,12 +11,11 @@ public:
 	void Update();
 	void Draw();
 
-	void SetCamera(CCameraBase* pCam);
 	DirectX::XMFLOAT3 GetPos();
 
 private:
 	DirectX::XMFLOAT3 m_pos;
-	CCameraBase *m_cam;
+	//CCameraBase *m_cam;
 	std::unique_ptr<Model> m_model;
 	std::unique_ptr<VertexShader> m_vs;
 	std::unique_ptr<ConstantBuffer> m_wvp;

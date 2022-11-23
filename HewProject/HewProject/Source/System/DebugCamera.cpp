@@ -22,12 +22,12 @@ void CDebugCamera::Update()
 	IF_KEY('D')	m_radXZ -= MOVE_SPEED;
 	IF_KEY('A')	m_radXZ += MOVE_SPEED;
 
-	IF_KEY(VK_UP)		m_look.y += MOVE_SPEED;
-	IF_KEY(VK_DOWN)		m_look.y -= MOVE_SPEED;
-	IF_KEY(VK_RIGHT)	m_look.x += MOVE_SPEED;
-	IF_KEY(VK_LEFT)		m_look.x -= MOVE_SPEED;
-	IF_KEY(VK_SHIFT)	m_look.z += MOVE_SPEED;
-	IF_KEY(VK_CONTROL)	m_look.z -= MOVE_SPEED;
+	IF_KEY(VK_UP)		m_data.look.y += MOVE_SPEED;
+	IF_KEY(VK_DOWN)		m_data.look.y -= MOVE_SPEED;
+	IF_KEY(VK_RIGHT)	m_data.look.x += MOVE_SPEED;
+	IF_KEY(VK_LEFT)		m_data.look.x -= MOVE_SPEED;
+	IF_KEY(VK_SHIFT)	m_data.look.z += MOVE_SPEED;
+	IF_KEY(VK_CONTROL)	m_data.look.z -= MOVE_SPEED;
 
 	IF_KEY('Q') m_distance -= MOVE_SPEED;
 	IF_KEY('E') m_distance += MOVE_SPEED;
@@ -35,9 +35,9 @@ void CDebugCamera::Update()
 	SET_VAR_RANGE(m_distance, 1.0f, 10.0f);
 	SET_VAR_RANGE(m_radY, -3.1415f / 2, 3.1415f / 2);
 
-	m_pos.x = cosf(m_radY) * sinf(m_radXZ) * m_distance + m_look.x;
-	m_pos.y = sinf(m_radY)                 * m_distance + m_look.y;
-	m_pos.z = cosf(m_radY) * cosf(m_radXZ) * m_distance + m_look.z;
+	m_data.pos.x = cosf(m_radY) * sinf(m_radXZ) * m_distance + m_data.look.x;
+	m_data.pos.y = sinf(m_radY)                 * m_distance + m_data.look.y;
+	m_data.pos.z = cosf(m_radY) * cosf(m_radXZ) * m_distance + m_data.look.z;
 
 
 

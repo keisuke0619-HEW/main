@@ -24,9 +24,10 @@ CPlayer::~CPlayer()
 void CPlayer::Update()
 {
     const float MOVE_SPEED = 0.1f;
-    auto camPos = m_cam->GetPos();
+    auto camData = CCameraBase::GetPrimaryData();
+    auto camPos = camData.pos;
     camPos.y = 0;
-    auto camLook = m_cam->GetLook();
+    auto camLook = camData.look;
     camLook.y = 0;
     auto vCamPos = DirectX::XMLoadFloat3(&camPos);
     auto vCamLook = DirectX::XMLoadFloat3(&camLook);
@@ -86,18 +87,15 @@ void CPlayer::Draw()
     world = DirectX::XMMatrixTranspose(world);
     DirectX::XMStoreFloat4x4(&mat[0], world);
 
-    mat[1] = m_cam->GetViewMatrix();
-    mat[2] = m_cam->GetProjectionMatrix();
+    mat[1] = CCameraBase::GetPrimaryViewMatrix();
+    mat[2] = CCameraBase::GetPrimaryProjectionMatrix();
     m_wvp->Write(mat);
     m_wvp->BindVS(0);
 
     m_model->Draw();
 }
 
-void CPlayer::SetCamera(CCameraBase* pCam)
-{
-    m_cam = pCam;
-}
+
 
 DirectX::XMFLOAT3 CPlayer::GetPos()
 {

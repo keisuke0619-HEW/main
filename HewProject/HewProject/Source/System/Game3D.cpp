@@ -12,35 +12,27 @@ float g_geometoryAngleY = 0;
 
 Game3D::Game3D()
 {
-	//CDataPool::CreateIns();
 	m_player.reset(new CPlayer);
 
-	m_camera[0] = new CDebugCamera();
-	m_camera[1] = new CPlayerCamera(m_player);
-	m_player->SetCamera(m_camera[1]);
+	CCameraBase::CreateCamera(new CDebugCamera(), "Debug");
+	CCameraBase::CreateCamera(new CPlayerCamera(m_player),"Player");
 	m_stage.reset(new CStage00());
-	m_camID = CAMERA_PLAYER;
 }
 Game3D::~Game3D()
 {
-	for (int i = 0; i < CAMERA_MAX; i++)
-	{
-		delete m_camera[i];
-	}
-	//CDataPool::Destroy();
 }
 
 void Game3D::Update()
 {
 	SwapCamera();
-	if(m_camID == CAMERA_PLAYER)
+	if(CCameraBase::GetPrimaryName() == "Player")
 		m_player->Update();
-	m_camera[m_camID]->Update();
+	CCameraBase::UpdatePrimary();
 	g_gameFrame++;
 }
 void Game3D::Draw()
 {
-	SetGeometoryVPMatrix(m_camera[m_camID]->GetViewMatrix(), m_camera[m_camID]->GetProjectionMatrix());
+	SetGeometoryVPMatrix(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
 	m_stage.get()->Draw();
 	m_player->Draw();
 }
@@ -51,11 +43,11 @@ void Game3D::SwapCamera()
 		return;
 	if (IsKeyTrigger('P'))
 	{
-		m_camID = CAMERA_PLAYER;
+		CCameraBase::SetPrimaryCamera("Player");
 	}
 	if (IsKeyTrigger('O'))
 	{
-		m_camID = CAMERA_DEBUG;
+		CCameraBase::SetPrimaryCamera("Debug");
 	}
-	m_player->SetCamera(m_camera[m_camID]);
+	//m_player->SetCamera(m_camera[m_camID]);
 }

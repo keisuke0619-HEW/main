@@ -1,9 +1,91 @@
 #include "Camera.hpp"
 
+std::map<const char*, CCameraBase::Ptr> CCameraBase::m_cameraMap;
+const char* CCameraBase::m_primaryCameraName = "Player";
+
+void CCameraBase::DeleteCamera(const char* cameraName)
+{
+    if (m_cameraMap.count(cameraName) == 0)
+    {
+#ifdef _DEBUG
+        MessageBox(NULL, cameraName, "[DeleteCamera]存在しないカメラタグ", MB_ICONEXCLAMATION);
+#endif // _DEBUG
+        return;
+    }
+    m_cameraMap.erase(cameraName);
+}
+void CCameraBase::SetPrimaryCamera(const char* cameraName)
+{
+    if (m_cameraMap.count(cameraName) == 0)
+    {
+#ifdef _DEBUG
+        MessageBox(NULL, cameraName, "[SetPrimaryCamera]存在しないカメラタグ", MB_ICONEXCLAMATION);
+#endif // _DEBUG
+        return;
+    }
+    m_primaryCameraName = cameraName;
+}
+DirectX::XMFLOAT4X4 CCameraBase::GetPrimaryViewMatrix()
+{
+    // もしここでエラーが出る場合はPrimaryCameraNameが存在するか確認。
+    // 登録・削除のタイミングでNULLチェックをしているのでここでは割愛。
+    return m_cameraMap[m_primaryCameraName]->GetViewMatrix();
+}
+
+DirectX::XMFLOAT4X4 CCameraBase::GetPrimaryProjectionMatrix()
+{
+    // もしここでエラーが出る場合はPrimaryCameraNameが存在するか確認。
+    // 登録・削除のタイミングでNULLチェックをしているのでここでは割愛。
+    return m_cameraMap[m_primaryCameraName]->GetProjectionMatrix();
+}
+
+DirectX::XMFLOAT4X4 CCameraBase::GetViewMatrixFromTag(const char* cameraName)
+{
+    const char* retStr = m_cameraMap.count(cameraName) != 0 ?
+        cameraName :
+        m_primaryCameraName;
+
+    return m_cameraMap[retStr]->GetViewMatrix();
+}
+
+DirectX::XMFLOAT4X4 CCameraBase::GetProjectionMatrixFromTag(const char* cameraName)
+{
+    const char* retStr = m_cameraMap.count(cameraName) != 0 ?
+        cameraName :
+        m_primaryCameraName;
+
+    return m_cameraMap[retStr]->GetProjectionMatrix();
+
+}
+
+CCameraBase::Data CCameraBase::GetPrimaryData()
+{
+    // エラーの際はPrimaryCameraNameを確認
+    return m_cameraMap[m_primaryCameraName]->m_data;
+}
+
+CCameraBase::Data CCameraBase::GetDataFromTag(const char* cameraName)
+{
+    const char* retStr = m_cameraMap.count(cameraName) != 0 ?
+        cameraName :
+        m_primaryCameraName;
+
+    return m_cameraMap[retStr]->m_data;
+
+}
+
+void CCameraBase::UpdatePrimary()
+{
+    m_cameraMap[m_primaryCameraName]->Update();
+}
+
+const char* CCameraBase::GetPrimaryName()
+{
+    return m_primaryCameraName;
+}
+
 CCameraBase::CCameraBase()
-    :m_pos(0.0f, 0.0f, 3.0f)
-    ,m_look(4.5f,2,5.0f)
-    ,m_distance(5)
+    :m_distance(5)
     ,m_radXZ(2.5f)
     ,m_radY (0.7f)
     ,m_up(0,1,0)
@@ -11,7 +93,10 @@ CCameraBase::CCameraBase()
     ,m_aspect(16.0f / 9.0f)
     ,m_near(0.2f)
     ,m_far(1000.0f)
+    ,m_tagName(nullptr)
 {
+    m_data.pos = { 0.0f, 0.0f, 3.0f };
+    m_data.look = { 4.5f, 2, 5.0f };
 }
 
 CCameraBase::~CCameraBase()
@@ -22,8 +107,8 @@ DirectX::XMFLOAT4X4 CCameraBase::GetViewMatrix()
 {
     DirectX::XMFLOAT4X4 mat;
     DirectX::XMMATRIX view = DirectX::XMMatrixLookAtLH(
-        DirectX::XMVectorSet(m_pos.x, m_pos.y, m_pos.z, 0),
-        DirectX::XMVectorSet(m_look.x, m_look.y, m_look.z, 0),
+        DirectX::XMVectorSet(m_data.pos.x, m_data.pos.y, m_data.pos.z, 0),
+        DirectX::XMVectorSet(m_data.look.x, m_data.look.y, m_data.look.z, 0),
         DirectX::XMVectorSet(m_up.x, m_up.y, m_up.z, 0)
     );
     view = DirectX::XMMatrixTranspose(view);
@@ -47,10 +132,10 @@ DirectX::XMFLOAT4X4 CCameraBase::GetProjectionMatrix()
 
 DirectX::XMFLOAT3 CCameraBase::GetPos()
 {
-    return m_pos;
+    return m_data.pos;
 }
 
 DirectX::XMFLOAT3 CCameraBase::GetLook()
 {
-    return m_look;
+    return m_data.look;
 }
