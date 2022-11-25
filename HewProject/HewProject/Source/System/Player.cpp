@@ -5,7 +5,6 @@
 CPlayer::CPlayer()
 {
     m_pos = { 0,0,0 };
-    //m_model = CDataPool::GetIns()->GetModel("Assets/NullModel/NullModel.obj");
     m_model.reset(new Model());
     m_model->Load("Assets/unitychan/unitychan.fbx", 0.01f);
     m_vs.reset(new VertexShader());
@@ -46,7 +45,8 @@ void CPlayer::Update()
     if (IsKeyPress('A'))vMove = DirectX::XMVectorAdd(vMove, vSide);
     if (IsKeyPress('D'))vMove = DirectX::XMVectorSubtract(vMove, vSide);
 
-    if (IsKeyTrigger('C'))printf("a\n");
+    //DebugPrint(CreatorTag::ShibataOsuke, printf("pos(%f, %f, %f)\n", m_pos.x, m_pos.y, m_pos.z));
+    
 
     // è„â∫èàóù
     DirectX::XMFLOAT3 up = { 0, 1, 0 };

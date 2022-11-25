@@ -176,6 +176,9 @@
     <ClCompile Include="Source\System\BaseClass\DataPool.cpp">
       <Filter>システム\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Source\System\CreatorUnique.cpp">
+      <Filter>システム</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ModelVS.hlsl">

@@ -58,6 +58,7 @@
     <ClCompile Include="Source\System\BlendState.cpp" />
     <ClCompile Include="Source\System\Camera.cpp" />
     <ClCompile Include="Source\System\ConstantBuffer.cpp" />
+    <ClCompile Include="Source\System\CreatorUnique.cpp" />
     <ClCompile Include="Source\System\DebugCamera.cpp" />
     <ClCompile Include="Source\System\DebugWindow.cpp" />
     <ClCompile Include="Source\System\DirectX.cpp" />

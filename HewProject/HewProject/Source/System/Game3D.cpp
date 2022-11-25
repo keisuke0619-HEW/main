@@ -32,7 +32,8 @@ void Game3D::Update()
 		m_player->Update();
 	CCameraBase::UpdatePrimary();
 	if (IsKeyTrigger('C'))
-		CDebugWindow::Print(ShimizuKeisuke, "aaaaaaa%d%d\n", 1, 1);
+		printf("debug\n");
+		//CDebugWindow::Print(ShimizuKeisuke, "aaaaaaa%d%d\n", 1);
 	g_gameFrame++;
 }
 void Game3D::Draw()
