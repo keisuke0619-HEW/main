@@ -33,7 +33,11 @@ bld/
 
 # [Aa]ssets/
 
+[Aa]ssets/Shader/
+
 *CreatorUnique.cpp
+
+
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
