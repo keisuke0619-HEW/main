@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 FILE* CDebugWindow::m_fp = nullptr;
-CreatorTag CDebugWindow::m_creator = SSK_NULL;
+CreatorTag CDebugWindow::m_creator = NULL_CREATOR;
 
 void CDebugWindow::Create()
 {

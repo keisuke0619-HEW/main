@@ -14,6 +14,7 @@
 
 enum CreatorTag
 {
+	NULL_CREATOR,
 	ShibataOsuke,
 	SatoShunma,
 	HiranoYuki,
@@ -25,7 +26,6 @@ enum CreatorTag
 	IkegamiRenta,
 	HoriKurumi,
 	MasutaRintaro,
-	SSK_NULL,
 };
 
 //#define DebugPrint(name, func) if(name == CreatorTag::ShimizuKeisuke)func;
