@@ -35,70 +35,56 @@ class CDebugWindow
 public:
 	// デバッグウィンドウの作成
 	static void Create();
-	// デバッグウィンドウの消去
+	// デバッグウィンドウの解放
 	static void Close();
 
-	static void SetCreator();
-
-	//template<typename First, typename... A>
-	//static std::string Print(CreatorTag tag, const char* src, First first, A... args);
-
+	/// <summary>
+	/// デバッグウィンドウに文字列を表示します。先にSprintfなどで文字列を作成してください。
+	/// </summary>
+	/// <param name="tag">自分のクリエイタータグ</param>
+	/// <param name="src">表示する文字列</param>
 	static void Print(CreatorTag tag, const char* src);
+	/// <summary>
+	/// デバッグウィンドウに説明用のラベルと整数を表示します
+	/// </summary>
+	/// <param name="tag">自分のクリエイタータグ</param>
+	/// <param name="label">何の変数か説明するラベル</param>
+	/// <param name="data">表示する整数値</param>
 	static void Print(CreatorTag tag, const char* label, int data);
+	/// <summary>
+	/// デバッグウィンドウに説明用のラベルと実数を表示します
+	/// </summary>
+	/// <param name="tag">自分のクリエイタータグ</param>
+	/// <param name="label">何の変数か説明するラベル</param>
+	/// <param name="data">表示する実数値</param>
 	static void Print(CreatorTag tag, const char* label, float data);
-	//static void Print(CreatorTag tag, std::string label, bool data);
+	/// <summary>
+	/// デバッグウィンドウに説明用のラベルとFloat3の値を表示します
+	/// </summary>
+	/// <param name="tag">自分のクリエイタータグ</param>
+	/// <param name="label">何の変数か説明するラベル</param>
+	/// <param name="data">表示するFloat3</param>
 	static void Print(CreatorTag tag, const char* label, DirectX::XMFLOAT3 data);
+	/// <summary>
+	/// デバッグウィンドウに説明用のラベルと3次元ベクトルの値を表示します
+	/// </summary>
+	/// <param name="tag">自分のクリエイタータグ</param>
+	/// <param name="label">何の変数か説明するラベル</param>
+	/// <param name="data">表示する３次元ベクトルデータ</param>
 	static void Print(CreatorTag tag, const char* label, DirectX::XMVECTOR data);
+	/// <summary>
+	/// デバッグウィンドウに説明用のラベルと４ｘ４行列を表示します
+	/// </summary>
+	/// <param name="tag">自分のクリエイタータグ</param>
+	/// <param name="label">何の変数か説明するラベル</param>
+	/// <param name="data">表示する４ｘ４行列</param>
 	static void Print(CreatorTag tag, const char* label, DirectX::XMMATRIX data);
+
 private:
 	static FILE* m_fp;
 	static CreatorTag m_creator;
+	static bool m_enable;
+
+	static void SetCreator();
+	static void SetEnable();
 };
-
-// Printfと大体同じに設定してあります。
-// 使用可能フォーマット指定子（%の後に）
-// d:整数値
-// f:実数値（小数点以下4位固定）
-// s:文字列
-//
-
-//template<typename First, typename... A>
-//std::string CDebugWindow::Print(CreatorTag tag, const char* src, First first, A... args)
-//{
-//#ifdef DEBUG
-//	std::string str;
-//	while (src != '\0')
-//	{
-//		if (*src == '%')
-//		{
-//			src++;
-//			switch (*src)
-//			{
-//			case 'd':
-//			case 'D':
-//				str += std::to_string(first);
-//				src++;
-//				str += Print(tag, src, args...);
-//				break;
-//			case 'f':
-//			case 'F':
-//				//str += std::_Floating_to_string("%.4f",first);
-//				str += std::to_string(first);
-//
-//				src++;
-//				str += Print(tag, src, args...);
-//				break;
-//			case 'c':
-//			case 'C':
-//				str += first;
-//				src++;
-//				str += Print(tag, src, args...);
-//				break;
-//			}
-//		}
-//		str += *src;
-//		src++;
-//	}
-//#endif // _DEBUG
-//
-//}
