@@ -11,14 +11,14 @@ class CObjectBase : IObjectToManager
 {
 public:
 	// 基底コンストラクタ
-	CObjectBase(const char* src, float scale, bool isFlip);
+	CObjectBase(const char* src, float scale = 1.0f, bool isFlip = false);
 	// 仮想デストラクタ
 	virtual ~CObjectBase();
 
 	// システムから呼び出されるアップデート
-	void UpdateBase()override final;
+	void BaseUpdate()override final;
 	// システムから呼び出されるドロー
-	void DrawBase() override final;
+	void BaseDraw() override final;
 	// パラメータ取得
 	TObjectParam GetParam() override final;
 

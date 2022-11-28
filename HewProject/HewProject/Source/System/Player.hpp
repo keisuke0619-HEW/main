@@ -1,22 +1,14 @@
 #pragma once
-#include <Camera.hpp>
-#include <Model.h>
-#include <ConstantBuffer.h>
-#include <memory>
-class CPlayer
+#include <ObjectBase.hpp>
+
+class CPlayer : public CObjectBase
 {
 public:
 	CPlayer();
 	~CPlayer();
-	void Update();
-	void Draw();
 
-	DirectX::XMFLOAT3 GetPos();
+	void Update() override;
 
 private:
-	DirectX::XMFLOAT3 m_pos;
-	//CCameraBase *m_cam;
-	std::unique_ptr<Model> m_model;
-	std::unique_ptr<VertexShader> m_vs;
-	std::unique_ptr<ConstantBuffer> m_wvp;
+	void Move();
 };

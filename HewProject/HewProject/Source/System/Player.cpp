@@ -1,101 +1,57 @@
-#include "player.hpp"
+#include "Player.hpp"
 #include <Input.h>
-#include <DebugWindow.hpp>
-#include <DataPool.hpp>
+#include <Camera.hpp>
+
 CPlayer::CPlayer()
+	: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f)
 {
-    m_pos = { 0,0,0 };
-    m_model.reset(new Model());
-    m_model->Load("Assets/unitychan/unitychan.fbx", 0.01f);
-    m_vs.reset(new VertexShader());
-    if (FAILED(m_vs.get()->Load("Assets/Shader/ModelVS.cso")))
-        MessageBox(nullptr, "ModelVS.cso", "Error", MB_OK);
-    m_model->SetVertexShader(m_vs.get());
-    m_wvp.reset(new ConstantBuffer());
-    m_wvp->Create(sizeof(DirectX::XMFLOAT4X4) * 3);
+	m_param.tag = TAG_PLAYER;
 }
 
 CPlayer::~CPlayer()
 {
-    
 }
 
 void CPlayer::Update()
 {
-    const float MOVE_SPEED = 0.1f;
-    auto camData = CCameraBase::GetPrimaryData();
-    auto camPos = camData.pos;
-    camPos.y = 0;
-    auto camLook = camData.look;
-    camLook.y = 0;
-    auto vCamPos = DirectX::XMLoadFloat3(&camPos);
-    auto vCamLook = DirectX::XMLoadFloat3(&camLook);
-
-    DirectX::XMVECTOR vFront;
-    vFront = DirectX::XMVectorSubtract(vCamPos, vCamLook);
-    vFront = DirectX::XMVector3Normalize(vFront);
-
-    auto matRotSide = DirectX::XMMatrixRotationY(3.14f / 180 * 90);
-    auto vSide = DirectX::XMVector3TransformCoord(vFront, matRotSide);
-
-
-    auto vMove = DirectX::XMVectorZero();
-    if (IsKeyPress('W'))vMove = DirectX::XMVectorSubtract(vMove, vFront);
-    if (IsKeyPress('S'))vMove = DirectX::XMVectorAdd(vMove, vFront);
-    if (IsKeyPress('A'))vMove = DirectX::XMVectorAdd(vMove, vSide);
-    if (IsKeyPress('D'))vMove = DirectX::XMVectorSubtract(vMove, vSide);
-
-    //DebugPrint(CreatorTag::ShibataOsuke, printf("pos(%f, %f, %f)\n", m_pos.x, m_pos.y, m_pos.z));
-    
-
-    // è„â∫èàóù
-    DirectX::XMFLOAT3 up = { 0, 1, 0 };
-    auto vUp = DirectX::XMLoadFloat3(&up);
-    if (IsKeyPress(VK_SPACE))vMove = DirectX::XMVectorAdd(vMove, vUp);
-    if (IsKeyPress(VK_SHIFT))vMove = DirectX::XMVectorSubtract(vMove, vUp); 
-
-    vMove = DirectX::XMVectorScale(vMove, MOVE_SPEED);
-
-
-    DirectX::XMFLOAT3 move;
-    DirectX::XMStoreFloat3(&move, vMove);
-    m_pos.x += move.x;
-    m_pos.y += move.y;
-    m_pos.z += move.z;
-
-    //if (IsKeyPress('W'))m_pos.z += MOVE_SPEED;
-    //if (IsKeyPress('S'))m_pos.z -= MOVE_SPEED;
-    //if (IsKeyPress('D'))m_pos.x += MOVE_SPEED;
-    //if (IsKeyPress('A'))m_pos.x -= MOVE_SPEED;
-    //if (IsKeyPress(VK_SPACE))m_pos.y += MOVE_SPEED;
-    //if (IsKeyPress(VK_SHIFT))m_pos.y -= MOVE_SPEED;
+	Move();
 }
 
-void CPlayer::Draw()
+void CPlayer::Move()
 {
-    DirectX::XMFLOAT4X4 mat[3];
+	const float MOVE_SPEED = 0.1f;
+	auto camData = CCameraBase::GetPrimaryData();
+	auto camPos = camData.pos;
+	auto camLook = camData.look;
+	camPos.y = 0;
+	camLook.y = 0;
+	auto vCamPos = DirectX::XMLoadFloat3(&camPos);
+	auto vCamLook = DirectX::XMLoadFloat3(&camLook);
 
-    DirectX::XMMATRIX T = DirectX::XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);
-    DirectX::XMMATRIX Rx = DirectX::XMMatrixRotationX(0);
-    DirectX::XMMATRIX Ry = DirectX::XMMatrixRotationY(0);
-    DirectX::XMMATRIX Rz = DirectX::XMMatrixRotationZ(0);
-    DirectX::XMMATRIX S = DirectX::XMMatrixScaling(1, 1, 1);
+	DirectX::XMVECTOR vFront;
+	vFront = DirectX::XMVectorSubtract(vCamPos, vCamLook);
+	vFront = DirectX::XMVector3Normalize(vFront);
 
-    DirectX::XMMATRIX world = S * Rx * Ry * Rz * T;
-    world = DirectX::XMMatrixTranspose(world);
-    DirectX::XMStoreFloat4x4(&mat[0], world);
+	auto matRotSide = DirectX::XMMatrixRotationY(3.14f / 180 * 90);
+	auto vSide = DirectX::XMVector3TransformCoord(vFront, matRotSide);
 
-    mat[1] = CCameraBase::GetPrimaryViewMatrix();
-    mat[2] = CCameraBase::GetPrimaryProjectionMatrix();
-    m_wvp->Write(mat);
-    m_wvp->BindVS(0);
 
-    m_model->Draw();
+	auto vMove = DirectX::XMVectorZero();
+	if (IsKeyPress('W'))vMove = DirectX::XMVectorSubtract(vMove, vFront);
+	if (IsKeyPress('S'))vMove = DirectX::XMVectorAdd(vMove, vFront);
+	if (IsKeyPress('A'))vMove = DirectX::XMVectorAdd(vMove, vSide);
+	if (IsKeyPress('D'))vMove = DirectX::XMVectorSubtract(vMove, vSide);
+
+	// è„â∫èàóù
+	DirectX::XMFLOAT3 up = { 0, 1, 0 };
+	auto vUp = DirectX::XMLoadFloat3(&up);
+	if (IsKeyPress(VK_SPACE))vMove = DirectX::XMVectorAdd(vMove, vUp);
+	if (IsKeyPress(VK_SHIFT))vMove = DirectX::XMVectorSubtract(vMove, vUp);
+
+	vMove = DirectX::XMVectorScale(vMove, MOVE_SPEED);
+
+
+	DirectX::XMStoreFloat3(&m_param.move, vMove);
 }
 
 
-
-DirectX::XMFLOAT3 CPlayer::GetPos()
-{
-    return m_pos;
-}

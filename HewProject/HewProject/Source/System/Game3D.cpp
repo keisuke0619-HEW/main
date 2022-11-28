@@ -29,7 +29,7 @@ void Game3D::Update()
 {
 	SwapCamera();
 	if(CCameraBase::GetPrimaryName() == "Player")
-		m_player->Update();
+		m_player->BaseUpdate();
 	CCameraBase::UpdatePrimary();
 	if (IsKeyTrigger('C'))
 		printf("debug\n");

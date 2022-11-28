@@ -37,8 +37,8 @@ struct TObjectParam
 class IObjectToManager
 {
 public:
-	virtual void UpdateBase() = 0;
-	virtual void DrawBase() = 0;
+	virtual void BaseUpdate() = 0;
+	virtual void BaseDraw() = 0;
 	virtual TObjectParam GetParam() = 0;
 
 	virtual ~IObjectToManager() {}

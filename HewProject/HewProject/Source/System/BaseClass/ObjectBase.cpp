@@ -1,13 +1,15 @@
 #include "ObjectBase.hpp"
-
+#include <Camera.hpp>
+#include <DebugWindow.hpp>
 #define AddVector3(v1, v2) v1.x += v2.x; v1.y += v2.y; v1.z += v2.z;
 CObjectBase::CObjectBase(const char* src, float scale, bool isFlip)
 {
     // メンバ変数の初期化
-    m_param.pos =   { 0, 0, 0 };
+    m_param.pos =   { 3, 0, 0 };
     m_param.move =  { 0, 0, 0 };
     m_param.accel = { 0, 0, 0 };
-    m_param.rot = { 0, 0, 0 };
+    m_param.rot =   { 0, 0, 0 };
+    m_param.scale = { 1, 1, 1 };
     m_param.frame = 0;
     m_param.tag =   TAG_NONE;
     // モデル情報の読み込み
@@ -18,6 +20,7 @@ CObjectBase::CObjectBase(const char* src, float scale, bool isFlip)
     if (FAILED(m_vs.get()->Load("Assets/Shader/ModelVS.cso")))
         MessageBox(nullptr, "ModelVS.cso", "Error", MB_OK);
     // 定数バッファ作成
+    m_model->SetVertexShader(m_vs.get());
     m_wvp.reset(new ConstantBuffer());
     m_wvp->Create(sizeof(DirectX::XMFLOAT4X4) * 3);
 }
@@ -26,16 +29,18 @@ CObjectBase::~CObjectBase()
 {
 }
 
-void CObjectBase::UpdateBase()
+void CObjectBase::BaseUpdate()
 {
     Update();
+    CDebugWindow::Print(ShimizuKeisuke, "Move", m_param.move);
     AddVector3(m_param.move, m_param.accel);
     AddVector3(m_param.pos, m_param.move);
+    CDebugWindow::Print(ShimizuKeisuke, "Pos", m_param.pos);
 
     m_param.frame++;
 }
 
-void CObjectBase::DrawBase()
+void CObjectBase::BaseDraw()
 {
     Draw();
 }
@@ -50,7 +55,7 @@ void CObjectBase::Draw()
     DirectX::XMFLOAT4X4 mat[3];
 
     // それぞれのマトリックスを作成
-    auto trs = DirectX::XMMatrixTranslation(m_param.pos.x, m_param.pos.x, m_param.pos.x);
+    auto trs = DirectX::XMMatrixTranslation(m_param.pos.x, m_param.pos.y, m_param.pos.z);
     auto rotX = DirectX::XMMatrixRotationX(m_param.rot.x);
     auto rotY = DirectX::XMMatrixRotationY(m_param.rot.y);
     auto rotZ = DirectX::XMMatrixRotationZ(m_param.rot.z);
@@ -65,5 +70,12 @@ void CObjectBase::Draw()
     // ビューマトリックスとプロジェクションマトリックスを
     // 設定するために
     // BaseCameraのStaticでDefaultカメラを取得する関数を作る
+    mat[1] = CCameraBase::GetPrimaryViewMatrix();
+    mat[2] = CCameraBase::GetPrimaryProjectionMatrix();
+
+    m_wvp->Write(mat);
+    m_wvp->BindVS(0);
+
+    m_model->Draw();
 
 }
