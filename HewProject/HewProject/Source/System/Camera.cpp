@@ -79,11 +79,73 @@ void CCameraBase::UpdatePrimary()
     m_cameraMap[m_primaryCameraName]->Update();
 }
 
+void CCameraBase::UpdateFromTag(const char* cameraName)
+{
+    if (m_cameraMap.count(cameraName) == 0)
+        return;
+    m_cameraMap[cameraName]->Update();
+
+}
+
 const char* CCameraBase::GetPrimaryName()
 {
     return m_primaryCameraName;
 }
 
+DirectX::XMVECTOR CCameraBase::GetPrimaryFront()
+{
+    auto data = m_cameraMap[m_primaryCameraName]->m_data;
+    auto vPos = DirectX::XMLoadFloat3(&data.pos);
+    auto vLook = DirectX::XMLoadFloat3(&data.look);
+    auto front = DirectX::XMVectorSubtract(vLook, vPos);
+    return DirectX::XMVector3Normalize(front);
+}
+
+DirectX::XMVECTOR CCameraBase::GetPrimaryRight()
+{
+    auto front = GetPrimaryFront();
+    auto rotY = DirectX::XMMatrixRotationY(3.14f / 180 * 90);
+    return DirectX::XMVector3TransformCoord(front, rotY);
+}
+
+DirectX::XMVECTOR CCameraBase::GetPrimaryUp()
+{
+    auto front = GetPrimaryFront();
+    auto rotY = DirectX::XMMatrixRotationX(3.14f / 180 * (-90));
+    return DirectX::XMVector3TransformCoord(front, rotY);
+}
+
+DirectX::XMVECTOR CCameraBase::GetPrimaryFrontHorizontal()
+{
+    auto data = m_cameraMap[m_primaryCameraName]->m_data;
+    data.pos.y = 0;
+    data.look.y = 0;
+    auto vPos = DirectX::XMLoadFloat3(&data.pos);
+    auto vLook = DirectX::XMLoadFloat3(&data.look);
+    auto front = DirectX::XMVectorSubtract(vLook, vPos);
+    return DirectX::XMVector3Normalize(front);
+}
+
+DirectX::XMVECTOR CCameraBase::GetPrimaryRightHorizontal()
+{
+    auto front = GetPrimaryFrontHorizontal();
+    auto rotY = DirectX::XMMatrixRotationY(3.14f / 180 * 90);
+    return DirectX::XMVector3TransformCoord(front, rotY);
+}
+
+DirectX::XMVECTOR CCameraBase::GetPrimaryUpHorizontal()
+{
+    auto front = GetPrimaryFrontHorizontal();
+    auto rotY = DirectX::XMMatrixRotationX(3.14f / 180 * (-90));
+    return DirectX::XMVector3TransformCoord(front, rotY);
+
+}
+
+
+
+
+
+//------------ dynamic ----------------//
 CCameraBase::CCameraBase()
     :m_distance(5)
     ,m_radXZ(2.5f)

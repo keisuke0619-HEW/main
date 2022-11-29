@@ -23,17 +23,45 @@ public:
 	};
 	//--- static ---//
 public:
+	// カメラを作成
 	template<class T> static  void CreateCamera(T* cameraPtr, const char* cameraName);
+	// カメラを削除
 	static void DeleteCamera(const char* cameraName);
+	// メインカメラをセット
 	static void SetPrimaryCamera(const char* cameraName);
+	// メインカメラのビュー行列取得
 	static DirectX::XMFLOAT4X4 GetPrimaryViewMatrix();
+	// メインカメラのプロジェクション行列取得
 	static DirectX::XMFLOAT4X4 GetPrimaryProjectionMatrix();
+	// 指定したカメラのビュー行列取得
 	static DirectX::XMFLOAT4X4 GetViewMatrixFromTag(const char* cameraName);
+	// 指定したカメラのプロジェクション行列取得
 	static DirectX::XMFLOAT4X4 GetProjectionMatrixFromTag(const char* cameraName);
+	// メインカメラの情報を取得
 	static Data GetPrimaryData();
+	// 指定したカメラの情報を取得
 	static Data GetDataFromTag(const char* cameraName);
+	// メインカメラを更新
 	static void UpdatePrimary();
+	// 指定したカメラを更新
+	static void UpdateFromTag(const char* cameraName);
+	// メインカメラの名前を取得
 	static const char* GetPrimaryName();
+	// メインカメラの前向き単位ベクトル
+	static DirectX::XMVECTOR GetPrimaryFront();
+	// メインカメラの右向き単位ベクトル
+	static DirectX::XMVECTOR GetPrimaryRight();
+	// メインカメラの上向き単位ベクトル
+	static DirectX::XMVECTOR GetPrimaryUp();
+	// メインカメラの前向き単位ベクトル（水平）
+	static DirectX::XMVECTOR GetPrimaryFrontHorizontal();
+	// メインカメラの右向き単位ベクトル（水平）
+	static DirectX::XMVECTOR GetPrimaryRightHorizontal();
+	// メインカメラの上向き単位ベクトル（水平）
+	static DirectX::XMVECTOR GetPrimaryUpHorizontal();
+
+
+
 private:
 	using Ptr = std::unique_ptr<CCameraBase>;
 	static std::map<const char*,Ptr> m_cameraMap;

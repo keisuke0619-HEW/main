@@ -31,9 +31,6 @@ void Game3D::Update()
 	if(CCameraBase::GetPrimaryName() == "Player")
 		m_player->BaseUpdate();
 	CCameraBase::UpdatePrimary();
-	if (IsKeyTrigger('C'))
-		printf("debug\n");
-		//CDebugWindow::Print(ShimizuKeisuke, "aaaaaaa%d%d\n", 1);
 	g_gameFrame++;
 }
 void Game3D::Draw()
