@@ -7,7 +7,7 @@
 CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string name)
 {
     // メンバ変数の初期化
-    m_param.pos =   { 3, 0, 0 };
+    m_param.pos =   { 0, 0, 0 };
     m_param.move =  { 0, 0, 0 };
     m_param.accel = { 0, 0, 0 };
     m_param.rot =   { 0, 0, 0 };
@@ -21,7 +21,7 @@ CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string 
     m_model->Load(src, scale, isFlip);
     // 頂点シェーダ読み込み
     m_vs.reset(new VertexShader());
-    if (FAILED(m_vs.get()->Load("Assets/Shader/ModelVS.cso")))
+    if (FAILED(m_vs->Load("Assets/Shader/ModelVS.cso")))
         MessageBox(nullptr, "ModelVS.cso", "Error", MB_OK);
     // 定数バッファ作成
     m_model->SetVertexShader(m_vs.get());
@@ -40,7 +40,6 @@ void CObjectBase::BaseUpdate()
     AddVector3(m_param.move, m_param.accel);
     AddVector3(m_param.pos, m_param.move);
     CDebugWindow::Print(ShimizuKeisuke, "Pos", m_param.pos);
-
     m_param.frame++;
 }
 
