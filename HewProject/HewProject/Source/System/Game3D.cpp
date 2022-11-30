@@ -3,11 +3,7 @@
 #include "Input.h"
 #include <PlayerCamera.hpp>
 #include <DebugCamera.hpp>
-//#include <DataPool.hpp>
 #include <DebugWindow.hpp>
-int g_gameFrame = 0;
-float g_geometoryAngleX = 0;
-float g_geometoryAngleY = 0;
 
 
 
@@ -31,12 +27,11 @@ void Game3D::Update()
 	if(CCameraBase::GetPrimaryName() == "Player")
 		m_player->BaseUpdate();
 	CCameraBase::UpdatePrimary();
-	g_gameFrame++;
 }
 void Game3D::Draw()
 {
 	SetGeometoryVPMatrix(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
-	m_stage.get()->Draw();
+	m_stage->Draw();
 	m_player->Draw();
 }
 

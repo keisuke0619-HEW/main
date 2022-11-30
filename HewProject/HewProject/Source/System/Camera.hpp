@@ -27,6 +27,8 @@ public:
 	template<class T> static  void CreateCamera(T* cameraPtr, const char* cameraName);
 	// カメラを削除
 	static void DeleteCamera(const char* cameraName);
+	// 全カメラを削除
+	static void DeleteCameraAll();
 	// メインカメラをセット
 	static void SetPrimaryCamera(const char* cameraName);
 	// メインカメラのビュー行列取得

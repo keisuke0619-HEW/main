@@ -12,6 +12,8 @@ CObjectBase::CObjectBase(const char* src, float scale, bool isFlip)
     m_param.scale = { 1, 1, 1 };
     m_param.frame = 0;
     m_param.tag =   TAG_NONE;
+    m_param.name = "no_name";
+    m_param.isDestroy = false;
     // ƒ‚ƒfƒ‹î•ñ‚Ì“Ç‚Ýž‚Ý
     m_model.reset(new Model());
     m_model->Load(src, scale, isFlip);

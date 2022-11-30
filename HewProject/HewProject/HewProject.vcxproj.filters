@@ -22,6 +22,18 @@
     <Filter Include="システム\Manager">
       <UniqueIdentifier>{14949fde-b293-491a-8b85-313a8c153dc3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="シーンファイル">
+      <UniqueIdentifier>{c050624b-e6e9-40af-b980-5c180d2d0305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="シーンファイル\Base">
+      <UniqueIdentifier>{ffd64c46-3473-4b61-be2b-c95b34c2cfde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="シーンファイル\シーンファイル">
+      <UniqueIdentifier>{89549e7f-a1f1-4b89-a358-01eb061e6ffd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="シーンファイル\シーンシステム">
+      <UniqueIdentifier>{716f3ad3-456c-441c-8660-39cd41eb9756}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\System\BlendState.h">
@@ -97,6 +109,21 @@
       <Filter>システム\BaseClass</Filter>
     </ClInclude>
     <ClInclude Include="Source\System\BaseClass\DataPool.hpp">
+      <Filter>システム\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\BaseClass\SceneBase.hpp">
+      <Filter>シーンファイル\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\BaseClass\ISceneBase.hpp">
+      <Filter>シーンファイル\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\BaseClass\SceneManager.hpp">
+      <Filter>シーンファイル\シーンシステム</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\BaseClass\SceneTest.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\BaseClass\ObjectManager.hpp">
       <Filter>システム\Manager</Filter>
     </ClInclude>
   </ItemGroup>
@@ -178,6 +205,15 @@
     </ClCompile>
     <ClCompile Include="Source\System\CreatorUnique.cpp">
       <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\BaseClass\SceneManager.cpp">
+      <Filter>シーンファイル\シーンシステム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\BaseClass\SceneBase.cpp">
+      <Filter>シーンファイル\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\BaseClass\SceneTest.cpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

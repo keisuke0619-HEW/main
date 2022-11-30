@@ -1,6 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
-
+#include <memory>
 enum EObjectTag
 {
 	TAG_NONE,
@@ -27,8 +27,10 @@ struct TObjectParam
 	EObjectTag tag;
 	// 生成からの経過フレーム
 	int frame;
-	//// モデルオブジェクトのスタティックロードをするか（高度）
-	//bool isStaticModel;
+	// 名前
+	std::string name;
+	// 削除フラグ
+	bool isDestroy;
 };
 
 /// <summary>
@@ -36,6 +38,9 @@ struct TObjectParam
 /// </summary>
 class IObjectToManager
 {
+public:
+	using Ptr = std::shared_ptr<IObjectToManager>;
+	using Ref = std::weak_ptr<IObjectToManager>;
 public:
 	virtual void BaseUpdate() = 0;
 	virtual void BaseDraw() = 0;
