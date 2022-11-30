@@ -3,7 +3,7 @@
 #include <Camera.hpp>
 
 CPlayer::CPlayer()
-	: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f)
+	: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f, false, "Player")
 {
 	m_param.tag = TAG_PLAYER;
 }
@@ -15,6 +15,8 @@ CPlayer::~CPlayer()
 void CPlayer::Update()
 {
 	Move();
+	if (IsKeyTrigger('U'))
+		Destroy();
 }
 
 void CPlayer::Move()

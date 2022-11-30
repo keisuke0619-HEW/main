@@ -1,14 +1,14 @@
 #include "PlayerCamera.hpp"
 #include <Input.h>
-
+#include <SceneBase.hpp>
 #define IF_MIN(v, x) v = (v) < (x) ? (x) : (v)
 #define IF_MAX(v, x) v = (v) > (x) ? (x) : (v)
 #define SET_VAR_RANGE(var, min, max) IF_MIN(var, min); IF_MAX(var, max)
 
-CPlayerCamera::CPlayerCamera(std::shared_ptr<CPlayer> player)
+CPlayerCamera::CPlayerCamera()
 	:CCameraBase()
 {
-	m_target = player;
+	m_target = CSceneBase::GetObjList().lock()->FindTag(TAG_PLAYER);
 }
 
 CPlayerCamera::~CPlayerCamera()
@@ -25,8 +25,11 @@ void CPlayerCamera::Update()
 
 	SET_VAR_RANGE(m_radY, -3.1415f / 2, 3.1415f / 2);
 
-	m_data.look = m_target->GetParam().pos;//GetPos();
-	m_data.look.y += 1.5f;
+	if (m_target.expired() == false)
+	{
+		m_data.look = m_target.lock()->GetParam().pos;
+		m_data.look.y += 1.5f;
+	}
 
 	m_data.pos.x = cosf(m_radY) * sinf(m_radXZ) * m_distance + m_data.look.x;
 	m_data.pos.y = sinf(m_radY) * m_distance + m_data.look.y;

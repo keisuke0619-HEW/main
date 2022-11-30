@@ -4,6 +4,10 @@
 class CObjectManager
 {
 public:
+	static void CallDestroy();
+private:
+	static bool m_isCallDestroy;
+public:
 	CObjectManager();
 	~CObjectManager();
 
@@ -11,6 +15,9 @@ public:
 	void DrawAll();
 
 	void DestroyUpdate();
+	void Add(IObjectToManager* obj);
+	IObjectToManager::Ptr FindTag(EObjectTag tag);
+	IObjectToManager::Ptr FindName(std::string name);
 	
 private:
 	std::list<IObjectToManager::Ptr> m_obj;

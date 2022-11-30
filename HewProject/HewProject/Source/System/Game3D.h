@@ -1,13 +1,9 @@
 #ifndef __GAME_3D_H__
 #define __GAME_3D_H__
 
-#include "Model.h"
 #include <memory>
-#include <ConstantBuffer.h>
-#include <Camera.hpp>
+#include <SceneManager.hpp>
 
-#include <Stage00.hpp>
-#include <Player.hpp>
 class Game3D
 {
 public:
@@ -16,13 +12,19 @@ public:
 
 	void Update();
 	void Draw();
+
+
 private:
-	std::unique_ptr<Model> m_model;
-	std::shared_ptr<CPlayer> m_player;
-	std::unique_ptr<CStage00> m_stage;
+	//std::unique_ptr<Model> m_model;
+	//std::shared_ptr<CPlayer> m_player;
 
 
 	void SwapCamera();
+
+	std::unique_ptr<CSceneManager> m_scenes;
+
+
+
 };
 
 #endif // __GAME_3D_H__

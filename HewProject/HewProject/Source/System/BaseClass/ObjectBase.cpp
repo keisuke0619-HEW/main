@@ -1,8 +1,10 @@
 #include "ObjectBase.hpp"
 #include <Camera.hpp>
 #include <DebugWindow.hpp>
+#include <ObjectManager.hpp>
+
 #define AddVector3(v1, v2) v1.x += v2.x; v1.y += v2.y; v1.z += v2.z;
-CObjectBase::CObjectBase(const char* src, float scale, bool isFlip)
+CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string name)
 {
     // ƒƒ“ƒo•Ï”‚Ì‰Šú‰»
     m_param.pos =   { 3, 0, 0 };
@@ -12,7 +14,7 @@ CObjectBase::CObjectBase(const char* src, float scale, bool isFlip)
     m_param.scale = { 1, 1, 1 };
     m_param.frame = 0;
     m_param.tag =   TAG_NONE;
-    m_param.name = "no_name";
+    m_param.name = name;
     m_param.isDestroy = false;
     // ƒ‚ƒfƒ‹î•ñ‚Ì“Ç‚Ýž‚Ý
     m_model.reset(new Model());
@@ -80,4 +82,10 @@ void CObjectBase::Draw()
 
     m_model->Draw();
 
+}
+
+void CObjectBase::Destroy()
+{
+    m_param.isDestroy = true;
+    CObjectManager::CallDestroy();
 }

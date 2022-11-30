@@ -16,7 +16,8 @@ void CCameraBase::DeleteCamera(const char* cameraName)
 }
 void CCameraBase::DeleteCameraAll()
 {
-    m_cameraMap.clear();
+    if(m_cameraMap.size() != 0)
+        m_cameraMap.clear();
 }
 void CCameraBase::SetPrimaryCamera(const char* cameraName)
 {

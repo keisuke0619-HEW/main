@@ -1,14 +1,14 @@
 #pragma once
 #include <Camera.hpp>
 #include <memory>
-#include <Player.hpp>
+#include <ObjectToManagerInterface.hpp>
 class CPlayerCamera : public CCameraBase
 {
 public:
-	CPlayerCamera(std::shared_ptr<CPlayer> player);
+	CPlayerCamera();
 	~CPlayerCamera();
 
 	void Update() override;
 private:
-	std::shared_ptr<CPlayer> m_target;
+	std::weak_ptr<IObjectToManager> m_target;
 };

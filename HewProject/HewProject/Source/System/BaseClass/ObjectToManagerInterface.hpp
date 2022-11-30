@@ -1,6 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
 #include <memory>
+#include <string>
 enum EObjectTag
 {
 	TAG_NONE,

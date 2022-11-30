@@ -1,9 +1,13 @@
 #pragma once
 #include <ISceneBase.hpp>
 #include <Camera.hpp>
-
-class CSceneBase : IScene
+#include <ObjectManager.hpp>
+#include <memory>
+class CSceneBase : public IScene
 {
+public:
+	static std::weak_ptr<CObjectManager> GetObjList();
+
 public:
 	CSceneBase();
 	virtual ~CSceneBase();
@@ -11,9 +15,13 @@ public:
 	virtual void BaseUpdate() override;
 	virtual void BaseDraw() override;
 protected:
+	virtual void PreUpdate();
 	virtual void Update() = 0;
+	virtual void PreDraw();
 	virtual void Draw();
 
-	int m_frame;
 
+	int m_frame;
+	static std::shared_ptr<CObjectManager> m_obj;
+//private:
 };

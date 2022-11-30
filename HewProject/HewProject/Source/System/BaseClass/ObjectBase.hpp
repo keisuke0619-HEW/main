@@ -7,11 +7,11 @@
 /// <summary>
 /// すべての3Dオブジェクトの基底となるクラス
 /// </summary>
-class CObjectBase : IObjectToManager
+class CObjectBase : public IObjectToManager
 {
 public:
 	// 基底コンストラクタ
-	CObjectBase(const char* src, float scale = 1.0f, bool isFlip = false);
+	CObjectBase(const char* src, float scale = 1.0f, bool isFlip = false, std::string name = "no_name");
 	// 仮想デストラクタ
 	virtual ~CObjectBase();
 
@@ -27,6 +27,7 @@ public:
 	// 毎フレームの描画処理（デフォルト設定を使う場合は実装不要）
 	virtual void Draw();
 
+	void Destroy();
 protected:
 	// オブジェクト情報
 	TObjectParam m_param;

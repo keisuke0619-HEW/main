@@ -1,6 +1,7 @@
 #include "Stage00.hpp"
 #include <Geometory.h>
 #include <math.h>
+#include <Camera.hpp>
 CStage00::CStage00()
 	:m_pBlocks(nullptr)
 	,m_blockNum(7)
@@ -10,28 +11,6 @@ CStage00::CStage00()
 	m_pBlocks[0].pos = { 4.5f, 0.5f, 4.0f };
 	m_pBlocks[0].size = { 9, 1, 8 };
 	m_pBlocks[0].rot = { 0, 0, 0 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	m_pBlocks[1].pos = { 8.0f, 1.5f, 4.0f };
 	m_pBlocks[1].size = { 2, 1, 4 };
 	m_pBlocks[1].rot = { 0, 0, 0 };
@@ -69,6 +48,7 @@ void CStage00::Update()
 
 void CStage00::Draw()
 {
+	SetGeometoryVPMatrix(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
 	for (int i = 0; i < m_blockNum; i++)
 	{
 		SetGeometoryTranslate(m_pBlocks[i].pos.x, m_pBlocks[i].pos.y, m_pBlocks[i].pos.z);

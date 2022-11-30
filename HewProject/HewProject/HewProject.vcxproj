@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectXTex\Texture.cpp" />
+    <ClCompile Include="Source\Scene\BaseClass\ObjectManager.cpp" />
     <ClCompile Include="Source\Scene\BaseClass\SceneBase.cpp" />
     <ClCompile Include="Source\Scene\BaseClass\SceneManager.cpp" />
     <ClCompile Include="Source\Scene\BaseClass\SceneTest.cpp" />
