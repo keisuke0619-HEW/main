@@ -16,7 +16,7 @@ float Easing::OutSine(float x)
 
 float Easing::InOutSine(float x)
 {
-    return 0.0f;
+    return -(cosf(PI * x) - 1) / 2;
 }
 
 float Easing::InCubic(float x)

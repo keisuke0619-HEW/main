@@ -129,6 +129,9 @@
     <ClInclude Include="Source\System\Game3D.h">
       <Filter>システム</Filter>
     </ClInclude>
+    <ClInclude Include="Source\System\Easing.hpp">
+      <Filter>システム\Other</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -220,6 +223,9 @@
     </ClCompile>
     <ClCompile Include="Source\System\Game3D.cpp">
       <Filter>システム</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Easing.cpp">
+      <Filter>システム\Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

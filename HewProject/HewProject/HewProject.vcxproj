@@ -38,6 +38,7 @@
     <ClInclude Include="Source\System\DebugCamera.hpp" />
     <ClInclude Include="Source\System\DebugWindow.hpp" />
     <ClInclude Include="Source\System\DirectX.h" />
+    <ClInclude Include="Source\System\Easing.hpp" />
     <ClInclude Include="Source\System\Game3D.h" />
     <ClInclude Include="Source\System\Geometory.h" />
     <ClInclude Include="Source\System\Input.h" />
@@ -71,6 +72,7 @@
     <ClCompile Include="Source\System\DebugCamera.cpp" />
     <ClCompile Include="Source\System\DebugWindow.cpp" />
     <ClCompile Include="Source\System\DirectX.cpp" />
+    <ClCompile Include="Source\System\Easing.cpp" />
     <ClCompile Include="Source\System\Game3D.cpp" />
     <ClCompile Include="Source\System\Geometory.cpp" />
     <ClCompile Include="Source\System\Input.cpp" />
