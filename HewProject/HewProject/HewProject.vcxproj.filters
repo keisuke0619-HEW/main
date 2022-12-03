@@ -37,6 +37,12 @@
     <Filter Include="システム\Other">
       <UniqueIdentifier>{3abef65e-1391-4ee9-80da-fc27a3af035d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="プロトタイプ用">
+      <UniqueIdentifier>{a61cc566-8608-475d-8664-d4b85ed7ddfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="プロトタイプ用\Stage">
+      <UniqueIdentifier>{889185aa-c4b7-4a06-a9fd-7fce54ec3562}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\System\BaseClass\ObjectToManagerInterface.hpp">
@@ -131,6 +137,9 @@
     </ClInclude>
     <ClInclude Include="Source\System\Easing.hpp">
       <Filter>システム\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Prot\ProtStage.hpp">
+      <Filter>プロトタイプ用\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -227,9 +236,15 @@
     <ClCompile Include="Source\System\Easing.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Prot\ProtStage.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ModelVS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="Source\Prot\GeometoryColorPS.hlsl">
       <Filter>リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>

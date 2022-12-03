@@ -40,9 +40,13 @@ MeshBuffer* g_pGeometoryCapsule;
 MeshBuffer* g_pGeometoryCone;
 VertexShader* g_pGeometoryVS;
 PixelShader* g_pGeometoryPS;
+PixelShader* g_pGeometoryColorPS;
+ConstantBuffer* g_pGeometoryColorCB;
 ConstantBuffer* g_pGeometoryWVP;
 DirectX::XMFLOAT4X4 g_geometoryMat[3];
 DirectX::XMFLOAT3 g_geometoryTransform[3];
+
+bool g_isGeometoryColor;
 
 HRESULT InitGeometory()
 {
@@ -53,6 +57,7 @@ HRESULT InitGeometory()
 	CreateGeometoryCylinder();
 	CreateGeometoryCapsule();
 	CreateGeometoryCone();
+	g_isGeometoryColor = true;
 	return S_OK;
 }
 void UninitGeometory()
@@ -63,6 +68,8 @@ void UninitGeometory()
 	GEOMETORY_SAFE_DELETE(g_pGeometorySphere);
 	GEOMETORY_SAFE_DELETE(g_pGeometoryBox);
 	GEOMETORY_SAFE_DELETE(g_pGeometoryPS);
+	GEOMETORY_SAFE_DELETE(g_pGeometoryColorPS);
+	GEOMETORY_SAFE_DELETE(g_pGeometoryColorCB);
 	GEOMETORY_SAFE_DELETE(g_pGeometoryVS);
 }
 void SetGeometoryTranslate(float x, float y, float z)
@@ -86,7 +93,15 @@ void DrawBox()
 {
 	UpdateGeometoryMatrix();
 	g_pGeometoryVS->Bind();
-	g_pGeometoryPS->Bind();
+	if (g_isGeometoryColor == false)
+	{
+		g_pGeometoryPS->Bind();
+	}
+	else
+	{
+		g_pGeometoryColorPS->Bind();
+	}
+
 	g_pGeometoryWVP->BindVS(0);
 	g_pGeometoryBox->Draw();
 }
@@ -119,6 +134,14 @@ void DrawCapsule()
 }
 void DrawArrow()
 {
+}
+
+void SetColorPS(bool isUse, float r, float g, float b, float a, float x, float y )
+{
+	g_isGeometoryColor = isUse;
+	TGeometoryColor color = { r,g, b, a, x, y, 0, 0};
+	g_pGeometoryColorCB->Write(&color);
+	g_pGeometoryColorCB->BindPS(0);
 }
 
 
@@ -472,6 +495,7 @@ struct PS_IN {
 	float2 uv : TEXCOORD0;
 	float4 wPos : TEXCOORD1;	
 };
+
 float4 main(PS_IN pin) : SV_TARGET
 {
 	float4 color = float4(1,1,1,1);
@@ -492,6 +516,12 @@ float4 main(PS_IN pin) : SV_TARGET
 	g_pGeometoryPS = new PixelShader();
 	_ASSERT_EXPR(SUCCEEDED(g_pGeometoryPS->Compile(GeometoryPS)),
 		L"create failed geometory pixel shader.");
+	g_pGeometoryColorPS = new PixelShader();
+	// Ž©ì
+	g_pGeometoryColorPS->Load("Assets/Shader/GeometoryColorPS.cso");
+
+	g_pGeometoryColorCB = new ConstantBuffer();
+	g_pGeometoryColorCB->Create(sizeof(TGeometoryColor));
 }
 void CreateGeometoryConstantBuffer()
 {

@@ -31,6 +31,8 @@ void CPlayer::Move()
 	if (IsKeyPress('A'))vMove = DirectX::XMVectorSubtract(vMove, vSide);
 	if (IsKeyPress('D'))vMove = DirectX::XMVectorAdd(vMove, vSide);
 
+	if (IsKeyPress(VK_CONTROL))
+		vMove = DirectX::XMVectorScale(vMove, 5.0f);
 	// è„â∫èàóù
 	DirectX::XMFLOAT3 up = { 0, 1, 0 };
 	auto vUp = DirectX::XMLoadFloat3(&up);
