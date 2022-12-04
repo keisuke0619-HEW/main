@@ -43,6 +43,9 @@
     <Filter Include="プロトタイプ用\Stage">
       <UniqueIdentifier>{889185aa-c4b7-4a06-a9fd-7fce54ec3562}</UniqueIdentifier>
     </Filter>
+    <Filter Include="プロトタイプ用\Object">
+      <UniqueIdentifier>{a0a210b3-e854-4a9a-b6b7-b7159066aca9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\System\BaseClass\ObjectToManagerInterface.hpp">
@@ -141,6 +144,12 @@
     <ClInclude Include="Source\Prot\ProtStage.hpp">
       <Filter>プロトタイプ用\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Prot\ProtEnemy.hpp">
+      <Filter>プロトタイプ用\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Prot\ProtEnemyManager.hpp">
+      <Filter>プロトタイプ用\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -237,7 +246,13 @@
       <Filter>システム\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\Prot\ProtStage.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>プロトタイプ用\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Prot\ProtEnemy.cpp">
+      <Filter>プロトタイプ用\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Prot\ProtEnemyManager.cpp">
+      <Filter>プロトタイプ用\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

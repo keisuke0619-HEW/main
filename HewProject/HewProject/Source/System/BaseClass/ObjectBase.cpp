@@ -36,10 +36,6 @@ CObjectBase::~CObjectBase()
 void CObjectBase::BaseUpdate()
 {
     Update();
-    CDebugWindow::Print(ShimizuKeisuke, "Move", m_param.move);
-    AddVector3(m_param.move, m_param.accel);
-    AddVector3(m_param.pos, m_param.move);
-    CDebugWindow::Print(ShimizuKeisuke, "Pos", m_param.pos);
     m_param.frame++;
 }
 
@@ -87,4 +83,9 @@ void CObjectBase::Destroy()
 {
     m_param.isDestroy = true;
     CObjectManager::CallDestroy();
+    Finalize();
+}
+
+void CObjectBase::Finalize()
+{
 }

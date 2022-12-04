@@ -7,7 +7,7 @@
 /// <summary>
 /// すべての3Dオブジェクトの基底となるクラス
 /// </summary>
-class CObjectBase : public IObjectToManager
+class CObjectBase : public IObjectBase
 {
 public:
 	// 基底コンストラクタ
@@ -29,6 +29,9 @@ public:
 
 	void Destroy();
 protected:
+	// 削除の際に呼び出される
+	virtual void Finalize();
+
 	// オブジェクト情報
 	TObjectParam m_param;
 	// モデル情報

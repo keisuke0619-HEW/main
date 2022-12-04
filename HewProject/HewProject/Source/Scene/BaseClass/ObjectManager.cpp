@@ -47,12 +47,14 @@ void CObjectManager::DestroyUpdate()
 	m_isCallDestroy = false;
 }
 
-void CObjectManager::Add(IObjectToManager* obj)
+std::weak_ptr<IObjectBase> CObjectManager::Add(IObjectBase* obj)
 {
-	m_obj.push_back(std::shared_ptr<IObjectToManager>(obj));
+	auto smartObj = std::shared_ptr<IObjectBase>(obj);
+	m_obj.push_back(smartObj);
+	return smartObj;
 }
 
-IObjectToManager::Ptr CObjectManager::FindTag(EObjectTag tag)
+IObjectBase::Ptr CObjectManager::FindTag(EObjectTag tag)
 {
 	for (auto itr = m_obj.begin(); itr != m_obj.end(); itr++)
 	{
@@ -62,7 +64,7 @@ IObjectToManager::Ptr CObjectManager::FindTag(EObjectTag tag)
 	return nullptr;
 }
 
-IObjectToManager::Ptr CObjectManager::FindName(std::string name)
+IObjectBase::Ptr CObjectManager::FindName(std::string name)
 {
 	for (auto itr = m_obj.begin(); itr != m_obj.end(); itr++)
 	{

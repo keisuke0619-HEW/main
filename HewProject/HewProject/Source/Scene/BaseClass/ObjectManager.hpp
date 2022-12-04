@@ -15,10 +15,10 @@ public:
 	void DrawAll();
 
 	void DestroyUpdate();
-	void Add(IObjectToManager* obj);
-	IObjectToManager::Ptr FindTag(EObjectTag tag);
-	IObjectToManager::Ptr FindName(std::string name);
+	std::weak_ptr<IObjectBase> Add(IObjectBase* obj);
+	IObjectBase::Ptr FindTag(EObjectTag tag);
+	IObjectBase::Ptr FindName(std::string name);
 	
 private:
-	std::list<IObjectToManager::Ptr> m_obj;
+	std::list<IObjectBase::Ptr> m_obj;
 };

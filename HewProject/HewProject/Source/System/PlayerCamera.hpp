@@ -10,5 +10,5 @@ public:
 
 	void Update() override;
 private:
-	std::weak_ptr<IObjectToManager> m_target;
+	std::weak_ptr<IObjectBase> m_target;
 };

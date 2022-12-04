@@ -37,16 +37,16 @@ struct TObjectParam
 /// <summary>
 /// オブジェクトとマネージャーをつなぐインタフェースクラス（よくわかってない）
 /// </summary>
-class IObjectToManager
+class IObjectBase
 {
 public:
-	using Ptr = std::shared_ptr<IObjectToManager>;
-	using Ref = std::weak_ptr<IObjectToManager>;
+	using Ptr = std::shared_ptr<IObjectBase>;
+	using Ref = std::weak_ptr<IObjectBase>;
 public:
 	virtual void BaseUpdate() = 0;
 	virtual void BaseDraw() = 0;
 	virtual TObjectParam GetParam() = 0;
 
-	virtual ~IObjectToManager() {}
+	virtual ~IObjectBase() {}
 
 };
