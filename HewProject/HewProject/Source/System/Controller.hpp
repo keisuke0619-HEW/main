@@ -1,5 +1,5 @@
 #pragma once
-
+#include <DirectXMath.h>
 namespace Controller
 {
 	enum ControllerID
@@ -23,7 +23,6 @@ namespace Controller
 	};
 
 
-
 	void ControllerUpdate();
 
 	// 押された瞬間
@@ -32,4 +31,9 @@ namespace Controller
 	bool GetKeyPress(ControllerID);
 	// 離された瞬間
 	bool GetKeyRelease(ControllerID);
+	// 左スティック
+	DirectX::XMFLOAT3 GetLeftStick();
+	// 右スティック
+	DirectX::XMFLOAT3 GetRightStick();
+
 }

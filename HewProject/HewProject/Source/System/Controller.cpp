@@ -24,3 +24,13 @@ bool Controller::GetKeyRelease(ControllerID)
 {
     return false;
 }
+
+DirectX::XMFLOAT3 Controller::GetLeftStick()
+{
+    return DirectX::XMFLOAT3();
+}
+
+DirectX::XMFLOAT3 Controller::GetRightStick()
+{
+    return DirectX::XMFLOAT3();
+}
