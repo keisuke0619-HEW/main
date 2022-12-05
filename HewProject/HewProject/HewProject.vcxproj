@@ -38,6 +38,7 @@
     <ClInclude Include="Source\System\BlendState.h" />
     <ClInclude Include="Source\System\Camera.hpp" />
     <ClInclude Include="Source\System\ConstantBuffer.h" />
+    <ClInclude Include="Source\System\Controller.hpp" />
     <ClInclude Include="Source\System\DebugCamera.hpp" />
     <ClInclude Include="Source\System\DebugWindow.hpp" />
     <ClInclude Include="Source\System\DirectX.h" />
@@ -74,6 +75,7 @@
     <ClCompile Include="Source\System\BlendState.cpp" />
     <ClCompile Include="Source\System\Camera.cpp" />
     <ClCompile Include="Source\System\ConstantBuffer.cpp" />
+    <ClCompile Include="Source\System\Controller.cpp" />
     <ClCompile Include="Source\System\CreatorUnique.cpp" />
     <ClCompile Include="Source\System\DebugCamera.cpp" />
     <ClCompile Include="Source\System\DebugWindow.cpp" />
