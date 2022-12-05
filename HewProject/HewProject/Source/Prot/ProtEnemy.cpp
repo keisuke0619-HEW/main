@@ -4,7 +4,7 @@
 // “–‚½‚è”»’è‚ÍŒã‚Å•t‚¯‚Ü‚·B
 
 CProtEnemy::CProtEnemy()
-	: CObjectBase("Assets/MagicaBoxelModel/PlaneBox.obj")
+	: CObjectBase("Assets/Box.fbx", 0.2f)
 	, m_move(0.008f)
 	, m_distance(4.f)
 	, m_cnt(0)
