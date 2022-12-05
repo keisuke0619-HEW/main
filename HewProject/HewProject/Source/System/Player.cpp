@@ -1,7 +1,7 @@
 #include "Player.hpp"
 #include <Input.h>
 #include <Camera.hpp>
-
+#include <DebugWindow.hpp>
 CPlayer::CPlayer()
 	: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f, false, "Player")
 {

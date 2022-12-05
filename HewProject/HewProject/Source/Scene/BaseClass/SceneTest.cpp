@@ -3,9 +3,11 @@
 #include <PlayerCamera.hpp>
 #include <DebugCamera.hpp>
 #include <Input.h>
+#include <ProtEnemy.hpp>
 CSceneTest::CSceneTest()
 {
 	m_obj->Add(new CPlayer());
+	m_obj->Add(new CProtEnemy());
 	CCameraBase::CreateCamera(new CDebugCamera(), "Debug");
 	CCameraBase::CreateCamera(new CPlayerCamera(), "Player");
 	m_stage.reset(new CProtScene());
