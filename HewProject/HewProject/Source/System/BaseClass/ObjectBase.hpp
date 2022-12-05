@@ -1,5 +1,5 @@
 #pragma once
-#include <ObjectToManagerInterface.hpp>
+#include <IObjectBase.hpp>
 #include <memory>
 #include <Model.h>
 #include <ConstantBuffer.h>
@@ -19,6 +19,9 @@ public:
 	void BaseUpdate()override final;
 	// システムから呼び出されるドロー
 	void BaseDraw() override final;
+	// オブジェクトと衝突していたら呼び出される
+	void OnCollision(Ptr collisionObj) override;
+	
 	// パラメータ取得
 	TObjectParam GetParam() override final;
 

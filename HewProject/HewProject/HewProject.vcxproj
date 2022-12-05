@@ -34,7 +34,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Source\System\BaseClass\ObjectBase.hpp" />
-    <ClInclude Include="Source\System\BaseClass\ObjectToManagerInterface.hpp" />
+    <ClInclude Include="Source\System\BaseClass\IObjectBase.hpp" />
     <ClInclude Include="Source\System\BlendState.h" />
     <ClInclude Include="Source\System\Camera.hpp" />
     <ClInclude Include="Source\System\CollisionBase.hpp" />
@@ -75,6 +75,7 @@
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp" />
     <ClCompile Include="Source\System\BlendState.cpp" />
     <ClCompile Include="Source\System\Camera.cpp" />
+    <ClCompile Include="Source\System\CollisionBase.cpp" />
     <ClCompile Include="Source\System\ConstantBuffer.cpp" />
     <ClCompile Include="Source\System\Controller.cpp" />
     <ClCompile Include="Source\System\CreatorUnique.cpp" />

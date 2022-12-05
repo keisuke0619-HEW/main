@@ -2,7 +2,6 @@
 #include <Camera.hpp>
 #include <DebugWindow.hpp>
 #include <ObjectManager.hpp>
-
 #define AddVector3(v1, v2) v1.x += v2.x; v1.y += v2.y; v1.z += v2.z;
 CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string name)
 {
@@ -45,6 +44,10 @@ void CObjectBase::BaseUpdate()
 void CObjectBase::BaseDraw()
 {
     Draw();
+}
+
+void CObjectBase::OnCollision(Ptr collisionObj)
+{
 }
 
 TObjectParam CObjectBase::GetParam()

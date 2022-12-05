@@ -1,4 +1,5 @@
 #pragma once
+#include <IObjectBase.hpp>
 
 enum ECollisionType
 {
@@ -8,3 +9,13 @@ enum ECollisionType
 	// 新たに当たり判定の種類を作る場合はここに追加する。
 };
 
+namespace Utility
+{
+	/// <summary>
+	/// オブジェクト１と２が衝突していたらTrueを返す
+	/// </summary>
+	/// <param name="obj1">オブジェクト１のデータ</param>
+	/// <param name="obj2">オブジェクト２のデータ</param>
+	/// <returns>当たっていたらTrue・当たっていなかったらFalse</returns>
+	bool IsCollision(TObjectParam obj1, TObjectParam obj2);
+}

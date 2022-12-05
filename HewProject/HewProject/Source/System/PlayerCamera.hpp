@@ -1,7 +1,7 @@
 #pragma once
 #include <Camera.hpp>
 #include <memory>
-#include <ObjectToManagerInterface.hpp>
+#include <IObjectBase.hpp>
 class CPlayerCamera : public CCameraBase
 {
 public:

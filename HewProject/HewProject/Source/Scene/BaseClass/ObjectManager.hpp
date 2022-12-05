@@ -1,6 +1,6 @@
 #pragma once
 #include <list>
-#include <ObjectToManagerInterface.hpp>
+#include <IObjectBase.hpp>
 class CObjectManager
 {
 public:

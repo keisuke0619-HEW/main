@@ -1,6 +1,6 @@
 #pragma once
 #include <ObjectBase.hpp>
-#include <ObjectToManagerInterface.hpp>
+#include <IObjectBase.hpp>
 #include <memory>
 class CProtEnemy : public CObjectBase
 {

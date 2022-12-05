@@ -49,6 +49,7 @@ public:
 public:
 	virtual void BaseUpdate() = 0;
 	virtual void BaseDraw() = 0;
+	virtual void OnCollision(Ptr collisionObj) = 0;
 	virtual TObjectParam GetParam() = 0;
 
 	virtual ~IObjectBase() {}

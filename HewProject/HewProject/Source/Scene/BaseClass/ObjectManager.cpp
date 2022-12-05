@@ -1,5 +1,5 @@
 #include "ObjectManager.hpp"
-
+#include <CollisionBase.hpp>
 bool CObjectManager::m_isCallDestroy;
 
 void CObjectManager::CallDestroy()
@@ -22,21 +22,27 @@ void CObjectManager::UpdateAll()
 	{
 		(*itr)->BaseUpdate();
 		auto collisionType = (*itr)->GetParam().collisionType;
-		// 当たり判定を使用するなら
-		if (collisionType != COLLISION_NONE)
+		// 当たり判定を使用しないオブジェクトならここで次へ
+		if (collisionType == COLLISION_NONE)
+			continue;
+
+		// 自身より後ろをすべて探索
+		for (auto colItr = itr; itr != m_obj.end(); colItr++)
 		{
-			// 自身より後ろをすべて探索
-			for (auto colItr = itr; itr != m_obj.end(); colItr++)
+			auto colObjType = (*colItr)->GetParam().collisionType;
+			// 当たり判定を使用しないなら次へ
+			if (colObjType != COLLISION_NONE)
+				continue;
+
+			// ここで当たり判定をとる。
+			bool isCollision = Utility::IsCollision((*itr)->GetParam(), (*colItr)->GetParam());
+			if (isCollision)
 			{
-				auto colObjType = (*colItr)->GetParam().collisionType;
-				// 後ろのオブジェクトも当たり判定を使用するなら
-				if (colObjType != COLLISION_NONE)
-				{
-					// ここで当たり判定をとる。
-
-				}
-
+				// 当たっていたらそれぞれの仮想関数
+				(*itr)->OnCollision((*colItr));
+				(*colItr)->OnCollision((*itr));
 			}
+			
 		}
 	}
 }

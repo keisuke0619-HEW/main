@@ -1,6 +1,6 @@
 #pragma once
 #include <SceneBase.hpp>
-#include <ObjectToManagerInterface.hpp>
+#include <IObjectBase.hpp>
 #define PROT_ENEMY_MAX (3)
 class CProtEnemyManager
 {
