@@ -1,5 +1,5 @@
 #pragma once
-#pragma comment (lib, "winmm.lib")
+#include <Windows.h>
 #include <DirectXMath.h>
 #include <Xinput.h>
 
