@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Easing
+namespace Utility
 {
 	 
 	float InSine(float level);

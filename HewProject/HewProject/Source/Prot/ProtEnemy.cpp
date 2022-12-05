@@ -78,16 +78,16 @@ void CProtEnemy::Move()
 		switch (m_randNum)
 		{
 		case(0):
-			m_param.pos.x += m_move * Easing::InOutSine(m_cnt / 60.f);
+			m_param.pos.x += m_move * Utility::InOutSine(m_cnt / 60.f);
 			break;
 		case(1):
-			m_param.pos.x -= m_move * Easing::InOutSine(m_cnt / 60.f);
+			m_param.pos.x -= m_move * Utility::InOutSine(m_cnt / 60.f);
 			break;
 		case(2):
-			m_param.pos.z += m_move * Easing::InOutSine(m_cnt / 60.f);
+			m_param.pos.z += m_move * Utility::InOutSine(m_cnt / 60.f);
 			break;
 		case(3):
-			m_param.pos.z -= m_move * Easing::InOutSine(m_cnt / 60.f);
+			m_param.pos.z -= m_move * Utility::InOutSine(m_cnt / 60.f);
 			break;
 		default:
 			break;

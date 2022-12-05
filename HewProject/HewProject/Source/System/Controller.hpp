@@ -1,6 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
-namespace Controller
+namespace Utility
 {
 	enum ControllerID
 	{

@@ -37,6 +37,7 @@
     <ClInclude Include="Source\System\BaseClass\ObjectToManagerInterface.hpp" />
     <ClInclude Include="Source\System\BlendState.h" />
     <ClInclude Include="Source\System\Camera.hpp" />
+    <ClInclude Include="Source\System\CollisionBase.hpp" />
     <ClInclude Include="Source\System\ConstantBuffer.h" />
     <ClInclude Include="Source\System\Controller.hpp" />
     <ClInclude Include="Source\System\DebugCamera.hpp" />

@@ -1,5 +1,6 @@
 #pragma once
 #include <DirectXMath.h>
+#include <CollisionBase.hpp>
 #include <memory>
 #include <string>
 enum EObjectTag
@@ -32,6 +33,9 @@ struct TObjectParam
 	std::string name;
 	// íœƒtƒ‰ƒO
 	bool isDestroy;
+	// “–‚½‚è”»’èİ’è
+	ECollisionType collisionType;
+
 };
 
 /// <summary>

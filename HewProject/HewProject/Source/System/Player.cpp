@@ -27,10 +27,10 @@ void CPlayer::Move()
 	auto vFront = CCameraBase::GetPrimaryFrontHorizontal();
 	auto vSide = CCameraBase::GetPrimaryRightHorizontal();
 	auto vMove = DirectX::XMVectorZero();
-	if (Controller::GetKeyPress(Controller::UP))vMove = DirectX::XMVectorAdd(vMove, vFront);
-	if (Controller::GetKeyPress(Controller::DOWN))vMove = DirectX::XMVectorSubtract(vMove, vFront);
-	if (Controller::GetKeyPress(Controller::LEFT))vMove = DirectX::XMVectorSubtract(vMove, vSide);
-	if (Controller::GetKeyPress(Controller::RIGHT))vMove = DirectX::XMVectorAdd(vMove, vSide);
+	if (Utility::GetKeyPress(Utility::UP))vMove = DirectX::XMVectorAdd(vMove, vFront);
+	if (Utility::GetKeyPress(Utility::DOWN))vMove = DirectX::XMVectorSubtract(vMove, vFront);
+	if (Utility::GetKeyPress(Utility::LEFT))vMove = DirectX::XMVectorSubtract(vMove, vSide);
+	if (Utility::GetKeyPress(Utility::RIGHT))vMove = DirectX::XMVectorAdd(vMove, vSide);
 
 	if (IsKeyPress(VK_CONTROL))
 		vMove = DirectX::XMVectorScale(vMove, 5.0f);

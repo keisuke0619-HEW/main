@@ -21,6 +21,23 @@ void CObjectManager::UpdateAll()
 	for (auto itr = m_obj.begin(); itr != m_obj.end(); itr++)
 	{
 		(*itr)->BaseUpdate();
+		auto collisionType = (*itr)->GetParam().collisionType;
+		// 当たり判定を使用するなら
+		if (collisionType != COLLISION_NONE)
+		{
+			// 自身より後ろをすべて探索
+			for (auto colItr = itr; itr != m_obj.end(); colItr++)
+			{
+				auto colObjType = (*colItr)->GetParam().collisionType;
+				// 後ろのオブジェクトも当たり判定を使用するなら
+				if (colObjType != COLLISION_NONE)
+				{
+					// ここで当たり判定をとる。
+
+				}
+
+			}
+		}
 	}
 }
 
