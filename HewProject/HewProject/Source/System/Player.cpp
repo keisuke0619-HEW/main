@@ -2,6 +2,7 @@
 #include <Input.h>
 #include <Camera.hpp>
 #include <DebugWindow.hpp>
+#include <Controller.hpp>
 CPlayer::CPlayer()
 	: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f, false, "Player")
 {
@@ -26,10 +27,10 @@ void CPlayer::Move()
 	auto vFront = CCameraBase::GetPrimaryFrontHorizontal();
 	auto vSide = CCameraBase::GetPrimaryRightHorizontal();
 	auto vMove = DirectX::XMVectorZero();
-	if (IsKeyPress('W'))vMove = DirectX::XMVectorAdd(vMove, vFront);
-	if (IsKeyPress('S'))vMove = DirectX::XMVectorSubtract(vMove, vFront);
-	if (IsKeyPress('A'))vMove = DirectX::XMVectorSubtract(vMove, vSide);
-	if (IsKeyPress('D'))vMove = DirectX::XMVectorAdd(vMove, vSide);
+	if (Controller::GetKeyPress(Controller::UP))vMove = DirectX::XMVectorAdd(vMove, vFront);
+	if (Controller::GetKeyPress(Controller::DOWN))vMove = DirectX::XMVectorSubtract(vMove, vFront);
+	if (Controller::GetKeyPress(Controller::LEFT))vMove = DirectX::XMVectorSubtract(vMove, vSide);
+	if (Controller::GetKeyPress(Controller::RIGHT))vMove = DirectX::XMVectorAdd(vMove, vSide);
 
 	if (IsKeyPress(VK_CONTROL))
 		vMove = DirectX::XMVectorScale(vMove, 5.0f);
