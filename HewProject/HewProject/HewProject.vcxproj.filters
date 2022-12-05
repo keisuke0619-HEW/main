@@ -150,6 +150,9 @@
     <ClInclude Include="Source\Prot\ProtEnemyManager.hpp">
       <Filter>プロトタイプ用\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Source\System\Controller.hpp">
+      <Filter>システム\Other</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -253,6 +256,9 @@
     </ClCompile>
     <ClCompile Include="Source\Prot\ProtEnemyManager.cpp">
       <Filter>プロトタイプ用\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Controller.cpp">
+      <Filter>システム\Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
