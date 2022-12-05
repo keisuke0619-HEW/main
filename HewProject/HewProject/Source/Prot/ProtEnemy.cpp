@@ -5,6 +5,10 @@
 
 CProtEnemy::CProtEnemy()
 	: CObjectBase("Assets/MagicaBoxelModel/PlaneBox.obj")
+	, m_move(0.008f)
+	, m_distance(4.f)
+	, m_cnt(0)
+	, m_randNum(0)
 {
 	// オブジェクトのリストを取得
 	auto objList = CSceneBase::GetObjList();
@@ -36,18 +40,67 @@ void CProtEnemy::Update()
 // いーじんぐを使用。
 void CProtEnemy::Move()
 {
+	
+	
 	// いーじんぐ使用方法（例）
 	// Easing::InOutSine(level);
 
 	// プレイヤーとの距離を取得
-	
+	auto playerPos = m_player.lock()->GetParam().pos;
+	// プレイヤーとエネミーの位置情報
+	DirectX::XMVECTOR enemy = DirectX::XMLoadFloat3(&m_param.pos);	// エネミーのposを入れる
+	DirectX::XMVECTOR player = DirectX::XMLoadFloat3(&playerPos);	// プレイヤーのposを入れる
+
+	// 距離を計算
+	DirectX::XMVECTOR distance = DirectX::XMVectorSubtract(player, enemy);
+
+	// float3に変換して格納
+	DirectX::XMFLOAT3 movePos;
+	DirectX::XMStoreFloat3(&movePos, distance);
+
+
 	// もしプレイヤーとの距離が一定以下だったら
+	if (fabsf(movePos.x) <= m_distance && fabsf(movePos.y) <= m_distance && fabsf(movePos.z) <= m_distance)
+	{
+		// プレイヤーを目標にする
+		m_param.pos.x += movePos.x * m_move; // エネミーのposを使う
+		m_param.pos.y += movePos.y * m_move;
+		m_param.pos.z += movePos.z * m_move;
+	}
+	else
+	{
+		// ランダムで移動する
+		if (m_cnt % 60 == 0)
+		{
+			m_randNum = rand() % 4;
+		
+		}
+		switch (m_randNum)
+		{
+		case(0):
+			m_param.pos.x += m_move * Easing::InOutSine(m_cnt / 60.f);
+			break;
+		case(1):
+			m_param.pos.x -= m_move * Easing::InOutSine(m_cnt / 60.f);
+			break;
+		case(2):
+			m_param.pos.z += m_move * Easing::InOutSine(m_cnt / 60.f);
+			break;
+		case(3):
+			m_param.pos.z -= m_move * Easing::InOutSine(m_cnt / 60.f);
+			break;
+		default:
+			break;
+		}
+	}
 
-	// プレイヤーを目標にする
-
-	// 違ったら
-
-	// ランダム移動
+	// カウントを増やす
+	
+	m_cnt++;
+	if (m_cnt > 60)
+	{
+		m_cnt = 0;
+	}
 }
 
 // 死亡時に勝手に呼ばれます。
