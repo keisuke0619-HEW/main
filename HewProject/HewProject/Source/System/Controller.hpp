@@ -1,5 +1,8 @@
 #pragma once
+#pragma comment (lib, "winmm.lib")
 #include <DirectXMath.h>
+#include <Xinput.h>
+
 namespace Utility
 {
 	enum ControllerID
@@ -21,7 +24,6 @@ namespace Utility
 		START,
 		BACK,
 	};
-
 
 	void ControllerUpdate();
 
