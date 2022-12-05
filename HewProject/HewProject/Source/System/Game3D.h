@@ -19,7 +19,7 @@ private:
 	//std::shared_ptr<CPlayer> m_player;
 
 
-	void SwapCamera();
+	//void SwapCamera();
 
 	std::unique_ptr<CSceneManager> m_scenes;
 

@@ -1,5 +1,6 @@
 #include "Game3D.h"
 #include <DebugWindow.hpp>
+#include <Controller.hpp>
 //--- Scenes ---//
 #include <SceneTest.hpp>
 
@@ -16,6 +17,7 @@ Game3D::~Game3D()
 
 void Game3D::Update()
 {
+	Controller::ControllerUpdate();
 	m_scenes->Update();
 }
 void Game3D::Draw()
