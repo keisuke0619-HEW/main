@@ -1,4 +1,5 @@
 #pragma once
+#pragma comment(lib, "Xinput.lib")
 #include <Windows.h>
 #include <DirectXMath.h>
 #include <Xinput.h>
@@ -28,11 +29,11 @@ namespace Utility
 	void ControllerUpdate();
 
 	// 押された瞬間
-	bool GetKeyTrigger(ControllerID);
+	bool GetKeyTrigger(unsigned id);
 	// 押されている間
-	bool GetKeyPress(ControllerID);
+	bool GetKeyPress(unsigned id);
 	// 離された瞬間
-	bool GetKeyRelease(ControllerID);
+	bool GetKeyRelease(unsigned id);
 	// 左スティック
 	DirectX::XMFLOAT3 GetLeftStick();
 	// 右スティック
