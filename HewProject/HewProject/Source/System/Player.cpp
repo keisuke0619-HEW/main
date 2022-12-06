@@ -35,6 +35,14 @@ void CPlayer::Move()
 		vMove = DirectX::XMVectorSubtract(vMove, vSide);
 	if (Utility::GetKeyPress(Utility::RIGHT))
 		vMove = DirectX::XMVectorAdd(vMove, vSide);
+	if (IsKeyPress('W'))
+		vMove = DirectX::XMVectorAdd(vMove, vFront);
+	if (IsKeyPress('S'))
+		vMove = DirectX::XMVectorSubtract(vMove, vFront);
+	if (IsKeyPress('A'))
+		vMove = DirectX::XMVectorSubtract(vMove, vSide);
+	if (IsKeyPress('D'))
+		vMove = DirectX::XMVectorAdd(vMove, vSide);
 
 	if (IsKeyPress(VK_CONTROL))
 		vMove = DirectX::XMVectorScale(vMove, 5.0f);

@@ -18,6 +18,7 @@ CProtScene::CProtScene()
 		fread(&m_stageData, sizeof(StageData), 1, fp);
 		fclose(fp);
 	}
+	m_terrain = new CTerrainBase("Assets/Data/TestTerrain.dat", 100, 100);
 }
 
 CProtScene::~CProtScene()
@@ -32,12 +33,12 @@ void CProtScene::Update()
 void CProtScene::Draw()
 {
 	// ステージのドロー
-	SetGeometoryVPMatrix(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
+	/*SetGeometoryVPMatrix(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
 	SetGeometoryTranslate(0,0,0);
 	SetGeometoryScaling(m_stageData.sizeX,1, m_stageData.sizeZ);
 	SetGeometoryRotation(0,0,0);
 	SetColorPS(true, 0.7f, 0.7f, 0.7f, 0, m_stageData.sizeX, m_stageData.sizeZ);
-	DrawBox();
+	DrawBox();*/
 
 	const float wallHeight = 10.0f;
 

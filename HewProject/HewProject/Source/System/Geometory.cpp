@@ -632,17 +632,6 @@ void SetPolygon(std::shared_ptr<GeometoryVertex>* vtxBuffer, std::shared_ptr<int
 	*vtxNumBuf = vtxNum;
 	*idxNumBuf = idxNum;
 
-	//debagu
-	{
-		FILE* fp = fopen("vtxData.csv", "wt");
-		fprintf(fp, "ID,X,Y,U,V\n");
-		for (int i = 0; i < vtxNum; i++)
-		{
-			fprintf(fp, "%d,%f,%f,%f,%f\n", i, vtx.get()[i].pos[0], vtx.get()[i].pos[1],  vtx.get()[i].uv[0], vtx.get()[i].uv[1]);
-		}
-		fclose(fp);
-	}
-
 
 	//// ’¸“_î•ñ
 	//const int vtxNum = level * level;

@@ -1,4 +1,5 @@
 #pragma once
+#include <TerrainBase.hpp>
 
 class CProtScene
 {
@@ -18,4 +19,5 @@ public:
 	void Draw();
 private:
 	StageData m_stageData;
+	CTerrainBase* m_terrain;
 };
