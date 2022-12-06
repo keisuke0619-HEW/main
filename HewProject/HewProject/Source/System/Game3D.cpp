@@ -1,6 +1,8 @@
 #include "Game3D.h"
 #include <DebugWindow.hpp>
 #include <Controller.hpp>
+#include <Sprite.h>
+
 //--- Scenes ---//
 #include <SceneTest.hpp>
 
@@ -9,9 +11,11 @@ Game3D::Game3D()
 	m_scenes.reset(new CSceneManager());
 	m_scenes->SetScene(new CSceneTest());
 	CDebugWindow::Create();
+	Sprite::Init();
 }
 Game3D::~Game3D()
 {
+	Sprite::Uninit();
 	CDebugWindow::Close();
 }
 

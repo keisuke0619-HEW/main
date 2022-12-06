@@ -3,7 +3,6 @@
 
 #include <memory>
 #include <SceneManager.hpp>
-
 class Game3D
 {
 public:
