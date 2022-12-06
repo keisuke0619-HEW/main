@@ -45,6 +45,7 @@
     <ClInclude Include="Source\System\DirectX.h" />
     <ClInclude Include="Source\System\Easing.hpp" />
     <ClInclude Include="Source\System\Game3D.h" />
+    <ClInclude Include="Source\System\GameUI.h" />
     <ClInclude Include="Source\System\Geometory.h" />
     <ClInclude Include="Source\System\Input.h" />
     <ClInclude Include="Source\System\macro.hpp" />
@@ -55,6 +56,7 @@
     <ClInclude Include="Source\System\PlayerCamera.hpp" />
     <ClInclude Include="Source\System\SamplerState.h" />
     <ClInclude Include="Source\System\Shader.h" />
+    <ClInclude Include="Source\System\Sprite.h" />
     <ClInclude Include="Source\System\Stage00.hpp" />
     <ClInclude Include="Source\System\Timer.h" />
     <ClInclude Include="Source\System\WinUtil.h" />
@@ -84,6 +86,7 @@
     <ClCompile Include="Source\System\DirectX.cpp" />
     <ClCompile Include="Source\System\Easing.cpp" />
     <ClCompile Include="Source\System\Game3D.cpp" />
+    <ClCompile Include="Source\System\GameUI.cpp" />
     <ClCompile Include="Source\System\Geometory.cpp" />
     <ClCompile Include="Source\System\Input.cpp" />
     <ClCompile Include="Source\System\macro.cpp" />
@@ -95,6 +98,7 @@
     <ClCompile Include="Source\System\PlayerCamera.cpp" />
     <ClCompile Include="Source\System\SamplerState.cpp" />
     <ClCompile Include="Source\System\Shader.cpp" />
+    <ClCompile Include="Source\System\Sprite.cpp" />
     <ClCompile Include="Source\System\Stage00.cpp" />
     <ClCompile Include="Source\System\Startup.cpp" />
     <ClCompile Include="Source\System\Timer.cpp" />

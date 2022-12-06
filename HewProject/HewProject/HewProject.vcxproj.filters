@@ -156,6 +156,12 @@
     <ClInclude Include="Source\System\CollisionBase.hpp">
       <Filter>システム\Other</Filter>
     </ClInclude>
+    <ClInclude Include="Source\System\Sprite.h">
+      <Filter>システム\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\GameUI.h">
+      <Filter>システム\Other</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -265,6 +271,12 @@
     </ClCompile>
     <ClCompile Include="Source\System\CollisionBase.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Sprite.cpp">
+      <Filter>システム\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\GameUI.cpp">
+      <Filter>システム\Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
