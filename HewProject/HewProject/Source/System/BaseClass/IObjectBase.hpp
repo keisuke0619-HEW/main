@@ -19,6 +19,11 @@ enum ECollisionType
 	// 新たに当たり判定の種類を作る場合はここに追加する。
 };
 
+union UCollisionData
+{
+	float sphireRadius;	// 球の半径
+	float boxScale[3];	// 箱のスケールXYZ
+};
 struct TObjectParam
 {
 	// オブジェクト座標
@@ -41,7 +46,8 @@ struct TObjectParam
 	bool isDestroy;
 	// 当たり判定設定
 	ECollisionType collisionType;
-
+	// 当たり判定データ
+	UCollisionData collisionData;
 };
 
 /// <summary>

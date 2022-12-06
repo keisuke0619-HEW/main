@@ -4,7 +4,7 @@ CProtEnemyManager::CProtEnemyManager()
 {
 	// オブジェクトリストを格納
 	m_objList = CSceneBase::GetObjList();
-	// オブジェクトリストが死んでいなかったら
+	// オブジェクトリストが死んでいなかったら(NULLチェックもどきだよ.expired)
 	if (m_objList.expired() == false)
 	{
 		// 最大数までループ
@@ -20,10 +20,20 @@ CProtEnemyManager::CProtEnemyManager()
 void CProtEnemyManager::Update()
 {
 	// 現在のオブジェクトの数がマックス以下だったら１秒後に新しいオブジェクトを生成
-
-	// オブジェクト０番が死んでいたらというif文
-	if (m_objects[0].expired() == true)
+	if (m_objList.expired() ==true)
 	{
-		// 死んでいたら中に入る
+		return;
 	}
+	// オブジェクト０番が死んでいたらというif文
+	for (int i = 0; i < PROT_ENEMY_MAX; i++)
+	{
+		if (m_objects[i].expired() == true)
+		{
+			// 死んでいたら中に入る
+			m_objects[i] = m_objList.lock()->Add(new CProtEnemy());
+		}
+	}
+	
+	
+
 }
