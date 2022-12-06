@@ -1,59 +1,96 @@
 #include "Controller.hpp"
 
 // コントローラとキーボードどちらも動くようにしておいてください。
-
+namespace Utility
+{
+	int g_PadID = -1;
+	XINPUT_STATE g_keyState;
+	XINPUT_STATE g_keyStateOld;
+}
 
 
 // コントローラーを使用するために必要そうなことをここに書く。
 // 毎フレームのアップデートの前に呼ばれる
 void Utility::ControllerUpdate()
 {
-	////ゲームパッドの状態を取得
-	//XINPUT_STATE state;
-	//XInputGetState(0, &state);
-	//int iPad_left = 0, iPad_right = 0, iPad_up = 0, iPad_down = 0;
-	//int iPad_leftshoulder = 0, iPad_rightshoulder = 0;
-	//int iPad_A = 0, iPad_B = 0, iPad_X = 0, iPad_Y = 0;
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) iPad_left = 1;//ゲームパッド十字キー左
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) iPad_right = 1;//ゲームパッド十字キー右
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) iPad_up = 1;//ゲームパッド十字キー上
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) iPad_down = 1;//ゲームパッド十字キー下
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) iPad_leftshoulder = 1;//ゲームパッドL
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER) iPad_rightshoulder = 1;//ゲームパッドR
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_A) iPad_A = 1;//ゲームパッドA
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_B) iPad_B = 1;//ゲームパッドB
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_X) iPad_X = 1;//ゲームパッドX
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y) iPad_Y = 1;//ゲームパッドY
-	////ゲームパッドアナログスティックのデッドゾーン処理
-	//if ((state.Gamepad.sThumbLX < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE && state.Gamepad.sThumbLX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) &&
-	//	(state.Gamepad.sThumbLY < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE && state.Gamepad.sThumbLY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
-	//{
-	//	state.Gamepad.sThumbLX = 0;
-	//	state.Gamepad.sThumbLY = 0;
-	//}
+	//ゲームパッドの状態を取得
+	XINPUT_STATE state;
+	XInputGetState(0, &state);
+
+	g_keyStateOld = g_keyState;
+	XInputGetState(0, &g_keyState);
+
+	DWORD dwResult = XInputGetState(0, &state);
+	if (dwResult == ERROR_SUCCESS)
+	{
+		// Controller is connected
+		// 接続されている
+	}
+	else
+	{
+		// Controller is not connected
+		// 接続されていない
+	}
+
+
+	/*g_PadID = -1;
+	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_A)
+		g_PadID = 0;
+	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_B)
+		g_PadID = 1;
+	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_X)
+		g_PadID = 2;
+	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y)
+		g_PadID = 3;
+	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP)	
+		g_PadID = 4;
+	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT)	
+		g_PadID = 5;
+	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN)	
+		g_PadID = 6;
+	if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT)	
+		g_PadID = 7;*/
 }
 // 押された瞬間だけTrue
-bool Utility::GetKeyTrigger(ControllerID)
+bool Utility::GetKeyTrigger(unsigned id)
 {
-    return false;
+	bool now = g_keyState.Gamepad.wButtons & id;
+	bool old = g_keyStateOld.Gamepad.wButtons & id;
+	return now && !old;
+	return false;
 }
 // 押している間True
-bool Utility::GetKeyPress(ControllerID)
+bool Utility::GetKeyPress(unsigned id)
 {
-    return false;
+	return g_keyState.Gamepad.wButtons & id;
+	/*if (g_PadID == id)
+	{
+		return true;
+	}
+	return false;*/
 }
 // 離された瞬間だけTrue
-bool Utility::GetKeyRelease(ControllerID)
+bool Utility::GetKeyRelease(unsigned id)
 {
-    return false;
+	bool now = g_keyState.Gamepad.wButtons & id;
+	bool old = g_keyStateOld.Gamepad.wButtons & id;
+	return old && !now;
 }
 
 DirectX::XMFLOAT3 Utility::GetLeftStick()
 {
-    return DirectX::XMFLOAT3();
+	DirectX::XMFLOAT3 stick = {};
+	stick.x = g_keyState.Gamepad.sThumbLX / (float)0x7fff;
+	stick.y = g_keyState.Gamepad.sThumbLY / (float)0x7fff;
+	stick.z = 0;
+	return stick;
 }
 
 DirectX::XMFLOAT3 Utility::GetRightStick()
 {
-    return DirectX::XMFLOAT3();
+	DirectX::XMFLOAT3 stick = {};
+	stick.x = g_keyState.Gamepad.sThumbRX / (float)0x7fff;
+	stick.y = g_keyState.Gamepad.sThumbRY / (float)0x7fff;
+	stick.z = 0;
+	return stick;
 }
