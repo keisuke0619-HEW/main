@@ -10,4 +10,7 @@ namespace Utility
 	/// <param name="obj2">オブジェクト２のデータ</param>
 	/// <returns>当たっていたらTrue・当たっていなかったらFalse</returns>
 	bool IsCollision(TObjectParam obj1, TObjectParam obj2);
+	bool IsCollisionCircle(TObjectParam obj1, TObjectParam obj2, float Rad1, float Rad2);
+	bool IsCollisionBox(TObjectParam obj1, TObjectParam obj2, TObjectParam objSize1, TObjectParam objSize2);
+
 }
