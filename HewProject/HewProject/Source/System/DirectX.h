@@ -14,4 +14,5 @@ void UninitDX();
 void BeginDrawDX();
 void EndDrawDX();
 
+void EnableDepth(bool enable);
 #endif // __DIRECTX_H__

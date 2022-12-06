@@ -162,6 +162,9 @@
     <ClInclude Include="Source\System\GameUI.h">
       <Filter>システム\Other</Filter>
     </ClInclude>
+    <ClInclude Include="Source\System\BaseClass\Billboard.h">
+      <Filter>システム\BaseClass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -277,6 +280,9 @@
     </ClCompile>
     <ClCompile Include="Source\System\GameUI.cpp">
       <Filter>システム\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\BaseClass\Billboard.cpp">
+      <Filter>システム\BaseClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
