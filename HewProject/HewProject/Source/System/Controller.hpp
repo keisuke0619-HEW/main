@@ -8,22 +8,20 @@ namespace Utility
 {
 	enum ControllerID
 	{
-		A,
-		B,
-		X,
-		Y,
-		UP,
-		RIGHT,
-		DOWN,
-		LEFT,
-		RB,
-		RT,
-		RSTICK,
-		LB,
-		LT,
-		LSTICK,
-		START,
-		BACK,
+		A = XINPUT_GAMEPAD_A,
+		B = XINPUT_GAMEPAD_B,
+		X = XINPUT_GAMEPAD_X,
+		Y = XINPUT_GAMEPAD_Y,
+		UP = XINPUT_GAMEPAD_DPAD_UP,
+		RIGHT = XINPUT_GAMEPAD_DPAD_RIGHT,
+		DOWN = XINPUT_GAMEPAD_DPAD_DOWN,
+		LEFT = XINPUT_GAMEPAD_DPAD_LEFT,
+		RB = XINPUT_GAMEPAD_RIGHT_SHOULDER,
+		RSTICK = XINPUT_GAMEPAD_RIGHT_THUMB,
+		LB = XINPUT_GAMEPAD_LEFT_SHOULDER, 
+		LSTICK = XINPUT_GAMEPAD_LEFT_THUMB,
+		START = XINPUT_GAMEPAD_START,
+		BACK = XINPUT_GAMEPAD_BACK,
 	};
 
 	void ControllerUpdate();
@@ -35,8 +33,8 @@ namespace Utility
 	// 離された瞬間
 	bool GetKeyRelease(unsigned id);
 	// 左スティック
-	DirectX::XMFLOAT3 GetLeftStick();
+	DirectX::XMFLOAT3 GetStickLeft();
 	// 右スティック
-	DirectX::XMFLOAT3 GetRightStick();
+	DirectX::XMFLOAT3 GetStickRight();
 
 }
