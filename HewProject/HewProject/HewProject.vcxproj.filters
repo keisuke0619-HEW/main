@@ -165,6 +165,9 @@
     <ClInclude Include="Source\System\BaseClass\Billboard.h">
       <Filter>システム\BaseClass</Filter>
     </ClInclude>
+    <ClInclude Include="Source\System\BaseClass\TerrainBase.hpp">
+      <Filter>システム\BaseClass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -272,9 +275,6 @@
     <ClCompile Include="Source\System\Controller.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\CollisionBase.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Source\System\Sprite.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
@@ -282,6 +282,12 @@
       <Filter>システム\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\BaseClass\Billboard.cpp">
+      <Filter>システム\BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\BaseClass\TerrainBase.cpp">
+      <Filter>システム\BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\CollisionBase.cpp">
       <Filter>システム\BaseClass</Filter>
     </ClCompile>
   </ItemGroup>
