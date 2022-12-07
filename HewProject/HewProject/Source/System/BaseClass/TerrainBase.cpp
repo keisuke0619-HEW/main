@@ -25,10 +25,12 @@ CTerrainBase::~CTerrainBase()
 
 void CTerrainBase::Update()
 {
+
 }
 
 void CTerrainBase::Draw()
 {
+
 }
 
 bool CTerrainBase::LoadTerrain(const char* src)
