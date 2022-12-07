@@ -18,6 +18,8 @@ CPlayerCamera::~CPlayerCamera()
 void CPlayerCamera::Update()
 {
 	const float MOVE_SPEED = 1.5f * 3.14f / 180;
+	const float LOOK_OFFSET_X = 0.5f;
+	const float LOOK_OFFSET_Y = 1.5f;
 	if(IsKeyPress(VK_UP))	m_radY += MOVE_SPEED;
 	if(IsKeyPress(VK_DOWN))	m_radY -= MOVE_SPEED;
 	if(IsKeyPress(VK_RIGHT))m_radXZ += MOVE_SPEED;
@@ -28,7 +30,9 @@ void CPlayerCamera::Update()
 	if (m_target.expired() == false)
 	{
 		m_data.look = m_target.lock()->GetParam().pos;
-		m_data.look.y += 1.5f;
+		m_data.look.y += LOOK_OFFSET_Y;
+		m_data.look.x += sinf(m_radXZ - 3.14f / 2) * LOOK_OFFSET_X;
+		m_data.look.z += cosf(m_radXZ - 3.14f / 2) * LOOK_OFFSET_X;
 	}
 
 	m_data.pos.x = cosf(m_radY) * sinf(m_radXZ) * m_distance + m_data.look.x;

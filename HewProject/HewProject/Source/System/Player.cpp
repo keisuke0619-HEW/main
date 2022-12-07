@@ -18,12 +18,16 @@ CPlayer::~CPlayer()
 void CPlayer::Update()
 {
 	Move();
+	m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
 	if (IsKeyTrigger('U'))
 		Destroy();
 }
 
 void CPlayer::Move()
 {
+	if (IsKeyTrigger(VK_SPACE))
+		CDebugWindow::Print(ShimizuKeisuke, "param", m_param.frame);
+
 	const float MOVE_SPEED = 0.1f;
 	const float MOVE_GRAVITY = 0.05f;
 
@@ -78,13 +82,14 @@ void CPlayer::Move()
 		m_param.pos.y = 0.5f;
 		m_param.move.y = 0;
 		m_gra = 0;
-		CDebugWindow::Print(ShimizuKeisuke, "param", m_param.frame);
 		m_isGround = true;
 	}
 	if (m_isGround)
 	{
-		if (IsKeyTrigger(VK_SPACE))m_gra = -2;
-		m_isGround = false;
+		if (IsKeyPress(VK_SPACE))
+		{
+			m_gra = -2;
+			m_isGround = false;
+		}
 	}
-
 }
