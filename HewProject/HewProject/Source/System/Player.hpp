@@ -11,4 +11,6 @@ public:
 
 private:
 	void Move();
+	float m_gra;
+	bool m_isGround;
 };
