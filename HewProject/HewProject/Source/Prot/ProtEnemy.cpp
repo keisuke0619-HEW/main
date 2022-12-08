@@ -1,14 +1,17 @@
 #include "ProtEnemy.hpp"
 #include <Easing.hpp>
 #include <SceneBase.hpp>
+#include <Controller.hpp>
+#include <Camera.hpp>
 // 当たり判定は後で付けます。
 
 CProtEnemy::CProtEnemy()
 	: CObjectBase("Assets/Box.fbx", 0.2f)
-	, m_move(0.008f)
+	, m_move(0.05f)
 	, m_distance(4.f)
 	, m_cnt(0)
 	, m_randNum(0)
+	, m_target(DirectX::XMFLOAT3(0,0,0))
 {
 	// オブジェクトのリストを取得
 	auto objList = CSceneBase::GetObjList();
@@ -17,6 +20,8 @@ CProtEnemy::CProtEnemy()
 	m_param.pos.x = (rand() % 100) / 10.0f;
 	m_param.pos.y = 1.0f;
 	m_param.pos.z = (rand() % 100) / 10.0f;
+	m_billboard.reset(new CBillboard("Assets/Img/White.png"));
+	m_billboard->SetSize({ 2.5f, 2.0f });
 }
 
 CProtEnemy::~CProtEnemy()
@@ -32,24 +37,33 @@ void CProtEnemy::Update()
 		auto objList = CSceneBase::GetObjList();
 		m_player = objList.lock()->FindTag(TAG_PLAYER);
 	}
+	if (Utility::GetKeyTrigger(Utility::Key_U))
+		Destroy();
 	// 移動るーちん
 	Move();
+	m_billboard->SetPos(m_param.pos);
+}
+
+void CProtEnemy::Draw()
+{
+	m_billboard->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
+	m_billboard->Draw(true, true);
+	CObjectBase::Draw();
 }
 
 // 移動ルーチン。Excelを参考に作成
 // いーじんぐを使用。
 void CProtEnemy::Move()
 {
-	
-	
 	// いーじんぐ使用方法（例）
 	// Easing::InOutSine(level);
 
 	// プレイヤーとの距離を取得
-	auto playerPos = m_player.lock()->GetParam().pos;
+	if(m_player.expired() == false)
+		m_target = m_player.lock()->GetParam().pos;
 	// プレイヤーとエネミーの位置情報
 	DirectX::XMVECTOR enemy = DirectX::XMLoadFloat3(&m_param.pos);	// エネミーのposを入れる
-	DirectX::XMVECTOR player = DirectX::XMLoadFloat3(&playerPos);	// プレイヤーのposを入れる
+	DirectX::XMVECTOR player = DirectX::XMLoadFloat3(&m_target);	// プレイヤーのposを入れる
 
 	// 距離を計算
 	DirectX::XMVECTOR distance = DirectX::XMVectorSubtract(player, enemy);
@@ -63,9 +77,9 @@ void CProtEnemy::Move()
 	if (fabsf(movePos.x) <= m_distance && fabsf(movePos.y) <= m_distance && fabsf(movePos.z) <= m_distance)
 	{
 		// プレイヤーを目標にする
-		m_param.pos.x += movePos.x * m_move; // エネミーのposを使う
-		m_param.pos.y += movePos.y * m_move;
-		m_param.pos.z += movePos.z * m_move;
+		m_param.pos.x += movePos.x * m_move / 2; // エネミーのposを使う
+		m_param.pos.y += movePos.y * m_move / 2;
+		m_param.pos.z += movePos.z * m_move / 2;
 	}
 	else
 	{

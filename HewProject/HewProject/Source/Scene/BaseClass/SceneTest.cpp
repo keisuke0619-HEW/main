@@ -7,7 +7,6 @@
 CSceneTest::CSceneTest()
 {
 	m_obj->Add(new CPlayer());
-	m_obj->Add(new CProtEnemy());
 	CCameraBase::CreateCamera(new CDebugCamera(), "Debug");
 	CCameraBase::CreateCamera(new CPlayerCamera(), "Player");
 	m_stage.reset(new CProtScene());
@@ -19,6 +18,7 @@ CSceneTest::~CSceneTest()
 
 void CSceneTest::Update()
 {
+	m_stage->Update();
 }
 
 void CSceneTest::Draw()

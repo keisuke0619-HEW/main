@@ -1,6 +1,7 @@
 #pragma once
 #include <TerrainBase.hpp>
-
+#include <ProtEnemyManager.hpp>
+#include <memory>
 class CProtScene
 {
 public:
@@ -20,4 +21,5 @@ public:
 private:
 	StageData m_stageData;
 	CTerrainBase* m_terrain;
+	std::unique_ptr<CProtEnemyManager> m_enemyManager;
 };
