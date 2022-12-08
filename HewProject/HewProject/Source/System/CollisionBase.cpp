@@ -52,10 +52,19 @@ bool Utility::IsCollisionBoxNoRotation(TObjectParam obj1, TObjectParam obj2)
 	B.depth = obj2.collisionData.boxScale[2];
 	// AとBを使って０８番「当たり判定」プリントを参考に。
 
-
-
-
-
+	if (A.x + A.width * 0.5f >= B.x - B.width * 0.5f &&
+		A.x - A.width * 0.5f <= B.x + B.width * 0.5f)
+	{
+		if (A.y + A.height * 0.5f >= B.y - B.height * 0.5f &&
+			A.y - A.height * 0.5f <= B.y + B.height * 0.5f)
+		{
+			if (A.z + A.depth * 0.5f >= B.z - B.depth * 0.5f &&
+				A.z - A.depth * 0.5f <= B.z + B.depth * 0.5f)
+			{
+				return true;
+			}
+		}
+	}
 
 	return false;
 }
@@ -71,8 +80,8 @@ bool Utility::IsCollisionBoxNoRotation(TObjectParam obj1, TObjectParam obj2)
 //		if ((obj2.pos.z - halfSize2.z < obj1.pos.z + halfSize1.z) &&
 //			(obj1.pos.z - halfSize1.z < obj2.pos.z + halfSize2.z))
 //		{
-//			if ((obj2.pos.y - halfSize2.y < obj1.pos.z + halfSize1.z) &&
-//				(obj1.pos.y - halfSize1.y < obj2.pos.z + halfSize2.z))
+//			if ((obj2.pos.y - halfSize2.y < obj1.pos.y + halfSize1.y) &&
+//				(obj1.pos.y - halfSize1.y < obj2.pos.y + halfSize2.y))
 //			{
 //				return true;
 //			}
