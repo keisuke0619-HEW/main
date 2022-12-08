@@ -40,8 +40,6 @@ void CProtEnemy::Update()
 // いーじんぐを使用。
 void CProtEnemy::Move()
 {
-	
-	
 	// いーじんぐ使用方法（例）
 	// Easing::InOutSine(level);
 
