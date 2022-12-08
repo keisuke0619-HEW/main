@@ -5,8 +5,6 @@ namespace Utility
     XINPUT_STATE g_keyStateOld;
     
     int g_cameraSpeed;
-	/*ControllerID g_controllerID;
-	KeyboardID	 g_keyboardID;*/
 }
 
 
@@ -23,6 +21,13 @@ void Utility::ControllerUpdate()
 
 bool Utility::GetKeyTrigger(ControllerID id)
 {
+#ifdef _USE_KEYBOARD_
+	if (id >= Key_A && id <= Key_END)
+	{
+		char Word = Utility::CheckWord(id);
+		return IsKeyTrigger(Word);
+	}
+#endif // _USE_KEYBOARD_
     bool now = g_keyState.Gamepad.wButtons & id;
     bool old = g_keyStateOld.Gamepad.wButtons & id;
     return now && !old;
@@ -51,6 +56,13 @@ bool Utility::GetKeyPress(ControllerID id)
 
 bool Utility::GetKeyRelease(ControllerID id)
 {
+#ifdef _USE_KEYBOARD_
+	if (id >= Key_A && id <= Key_END)
+	{
+		char Word = Utility::CheckWord(id);
+		return IsKeyRelease(Word);
+	}
+#endif // _USE_KEYBOARD_
     bool now = g_keyState.Gamepad.wButtons & id;
     bool old = g_keyStateOld.Gamepad.wButtons & id;
     return old && !now;
@@ -93,7 +105,8 @@ char Utility::CheckWord(unsigned id)
 	char Keyboard[256] = {
         'A','B', 'C', 'D','E','F', 'G', 'H','I','J', 'K', 'L','M','N', 'O', 'P',
 		'Q','R', 'S', 'T','U','V','W', 'X', 'Y','Z','1','2', '3', '4', '5', '6', '7', '8', '9', '0',
-        VK_UP, VK_RIGHT, VK_DOWN, VK_LEFT,
+        VK_UP, VK_RIGHT, VK_DOWN, VK_LEFT ,VK_BACK ,VK_TAB ,VK_CLEAR ,VK_RETURN ,VK_SHIFT, VK_CONTROL,
+		VK_ESCAPE, VK_SPACE, 
     };
 	return Keyboard[id - Key_A];
 }

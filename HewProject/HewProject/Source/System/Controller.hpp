@@ -65,6 +65,14 @@ namespace Utility
 		Key_Right,
 		Key_Down,
 		Key_Left,
+		Key_BACK,
+		Key_TAB,
+		Key_CLEAR,
+		Key_RETURN,
+		Key_SHIFT,
+		Key_Ctrl,
+		Key_ESCAPE,
+		Key_SPACE,
 
 
 
