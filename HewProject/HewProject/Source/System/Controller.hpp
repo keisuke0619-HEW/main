@@ -6,6 +6,7 @@
 #include "Input.h"
 
 #define _USE_KEYBOARD_
+#define  INPUT_RT_LT (127)
 namespace Utility
 {
 	enum ControllerID
@@ -24,6 +25,8 @@ namespace Utility
 		LSTICK = XINPUT_GAMEPAD_LEFT_THUMB,
 		START = XINPUT_GAMEPAD_START,
 		BACK = XINPUT_GAMEPAD_BACK,
+		RT, 
+		LT, 
 
 		Key_A = 4097,
 		Key_B,

@@ -28,6 +28,23 @@ bool Utility::GetKeyTrigger(ControllerID id)
 		return IsKeyTrigger(Word);
 	}
 #endif // _USE_KEYBOARD_
+	/*if (id == RT || id == LT)
+	{
+		int InputNum_LT = g_keyState.Gamepad.bLeftTrigger;
+		int InputNum_RT = g_keyState.Gamepad.bRightTrigger;
+		if (InputNum_LT >= INPUT_RT_LT || InputNum_RT >= INPUT_RT_LT)
+		{
+			bool now = g_keyState.Gamepad.bLeftTrigger;
+			bool now = g_keyState.Gamepad.bRightTrigger;
+			bool old = g_keyStateOld.Gamepad.bLeftTrigger;
+			bool old = g_keyStateOld.Gamepad.bRightTrigger;
+			if (now && !old)
+			{
+				return true;
+			}
+		}
+	}*/
+
     bool now = g_keyState.Gamepad.wButtons & id;
     bool old = g_keyStateOld.Gamepad.wButtons & id;
     return now && !old;
@@ -46,8 +63,16 @@ bool Utility::GetKeyPress(ControllerID id)
 		char Word = Utility::CheckWord(id);
 		return IsKeyPress(Word);
 	}
-	else
 #endif // _USE_KEYBOARD_
+	if (id == RT || id == LT)
+	{
+		int InputNum_LT = g_keyState.Gamepad.bLeftTrigger;
+		int InputNum_RT = g_keyState.Gamepad.bRightTrigger;
+		if (InputNum_LT >= INPUT_RT_LT || InputNum_RT >= INPUT_RT_LT)
+		{
+			return true;
+		}
+	}
 	return g_keyState.Gamepad.wButtons & id;
 }
 
