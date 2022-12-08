@@ -1,6 +1,7 @@
 #include "ProtEnemy.hpp"
 #include <Easing.hpp>
 #include <SceneBase.hpp>
+#include <Controller.hpp>
 // 当たり判定は後で付けます。
 
 CProtEnemy::CProtEnemy()
@@ -9,6 +10,7 @@ CProtEnemy::CProtEnemy()
 	, m_distance(4.f)
 	, m_cnt(0)
 	, m_randNum(0)
+	, m_target(DirectX::XMFLOAT3(0,0,0))
 {
 	// オブジェクトのリストを取得
 	auto objList = CSceneBase::GetObjList();
@@ -32,6 +34,8 @@ void CProtEnemy::Update()
 		auto objList = CSceneBase::GetObjList();
 		m_player = objList.lock()->FindTag(TAG_PLAYER);
 	}
+	if (Utility::GetKeyTrigger(Utility::Key_U))
+		Destroy();
 	// 移動るーちん
 	Move();
 }
@@ -44,10 +48,11 @@ void CProtEnemy::Move()
 	// Easing::InOutSine(level);
 
 	// プレイヤーとの距離を取得
-	auto playerPos = m_player.lock()->GetParam().pos;
+	if(m_player.expired() == false)
+		m_target = m_player.lock()->GetParam().pos;
 	// プレイヤーとエネミーの位置情報
 	DirectX::XMVECTOR enemy = DirectX::XMLoadFloat3(&m_param.pos);	// エネミーのposを入れる
-	DirectX::XMVECTOR player = DirectX::XMLoadFloat3(&playerPos);	// プレイヤーのposを入れる
+	DirectX::XMVECTOR player = DirectX::XMLoadFloat3(&m_target);	// プレイヤーのposを入れる
 
 	// 距離を計算
 	DirectX::XMVECTOR distance = DirectX::XMVectorSubtract(player, enemy);

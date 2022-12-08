@@ -5,6 +5,7 @@
 #include <Xinput.h>
 #include "Input.h"
 
+#define _USE_KEYBOARD_
 namespace Utility
 {
 	enum ControllerID
@@ -24,7 +25,7 @@ namespace Utility
 		START = XINPUT_GAMEPAD_START,
 		BACK = XINPUT_GAMEPAD_BACK,
 
-		Key_A,
+		Key_A = 4097,
 		Key_B,
 		Key_C,
 		Key_D,
@@ -60,23 +61,41 @@ namespace Utility
 		Key_8,
 		Key_9,
 		Key_0,
+		Key_Up,
+		Key_Right,
+		Key_Down,
+		Key_Left,
+		Key_BACK,
+		Key_TAB,
+		Key_CLEAR,
+		Key_RETURN,
+		Key_SHIFT,
+		Key_Ctrl,
+		Key_ESCAPE,
+		Key_SPACE,
+
+
 
 		Key_END,
 	};
 
 
+	void ControllerInit();
+
 	void ControllerUpdate();
 
 	// 押された瞬間
-	bool GetKeyTrigger(unsigned id);
+	bool GetKeyTrigger(ControllerID id);
 	// 押されている間
-	bool GetKeyPress(unsigned id);
+	bool GetKeyPress(ControllerID id);
 	// 離された瞬間
-	bool GetKeyRelease(unsigned id);
+	bool GetKeyRelease(ControllerID id);
 	// 左スティック
 	DirectX::XMFLOAT3 GetStickLeft();
 	// 右スティック
 	DirectX::XMFLOAT3 GetStickRight();
+
+	int GetCameraSpeed();
 
 	// 入力したキーの判定
 	char CheckWord(unsigned id);

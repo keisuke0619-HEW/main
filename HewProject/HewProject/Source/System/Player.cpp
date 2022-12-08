@@ -1,5 +1,4 @@
 #include "Player.hpp"
-#include <Input.h>
 #include <Camera.hpp>
 #include <DebugWindow.hpp>
 #include <Controller.hpp>
@@ -19,15 +18,12 @@ void CPlayer::Update()
 {
 	Move();
 	m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
-	if (IsKeyTrigger('U'))
-		Destroy();
+	//if (IsKeyTrigger('U'))
+	//	Destroy();
 }
 
 void CPlayer::Move()
 {
-	if (IsKeyTrigger(VK_SPACE))
-		CDebugWindow::Print(ShimizuKeisuke, "param", m_param.frame);
-
 	const float MOVE_SPEED = 0.1f;
 	const float MOVE_GRAVITY = 0.05f;
 
@@ -39,16 +35,6 @@ void CPlayer::Move()
 	
 	m_gra += MOVE_GRAVITY;
 	vMove = DirectX::XMVectorAdd(vMove, vGra);
-
-	if (Utility::GetKeyPress(Utility::UP))
-		vMove = DirectX::XMVectorAdd(vMove, vFront);
-	if (Utility::GetKeyPress(Utility::DOWN))
-		vMove = DirectX::XMVectorSubtract(vMove, vFront);
-	if (Utility::GetKeyPress(Utility::LEFT))
-		vMove = DirectX::XMVectorSubtract(vMove, vSide);
-	if (Utility::GetKeyPress(Utility::RIGHT))
-		vMove = DirectX::XMVectorAdd(vMove, vSide);
-
 	if (Utility::GetKeyPress(Utility::Key_W))
 		vMove = DirectX::XMVectorAdd(vMove, vFront);
 	if (Utility::GetKeyPress(Utility::Key_S))
@@ -57,21 +43,17 @@ void CPlayer::Move()
 		vMove = DirectX::XMVectorSubtract(vMove, vSide);
 	if (Utility::GetKeyPress(Utility::Key_D))
 		vMove = DirectX::XMVectorAdd(vMove, vSide);
-	/*if (IsKeyPress('W'))
-		vMove = DirectX::XMVectorAdd(vMove, vFront);
-	if (IsKeyPress('S'))
-		vMove = DirectX::XMVectorSubtract(vMove, vFront);
-	if (IsKeyPress('A'))
-		vMove = DirectX::XMVectorSubtract(vMove, vSide);
-	if (IsKeyPress('D'))
-		vMove = DirectX::XMVectorAdd(vMove, vSide);*/
-
+	vFront = DirectX::XMVectorScale(vFront, Utility::GetStickLeft().y);
+	vSide = DirectX::XMVectorScale(vSide, Utility::GetStickLeft().x);
+	vMove = DirectX::XMVectorAdd(vMove, vFront);
+	vMove = DirectX::XMVectorAdd(vMove, vSide);
+#ifdef _DEBUG
 	if (IsKeyPress(VK_CONTROL))
 		vMove = DirectX::XMVectorScale(vMove, 5.0f);
+#endif // _DEBUG
 	// è„â∫èàóù
 	DirectX::XMFLOAT3 up = { 0, 1, 0 };
 	auto vUp = DirectX::XMLoadFloat3(&up);
-	if (IsKeyPress(VK_SHIFT))vMove = DirectX::XMVectorSubtract(vMove, vUp);
 	vMove = DirectX::XMVectorScale(vMove, MOVE_SPEED);
 
 	DirectX::XMStoreFloat3(&m_param.move, vMove);
@@ -86,7 +68,14 @@ void CPlayer::Move()
 	}
 	if (m_isGround)
 	{
+#ifdef _USE_KEYBOARD_
 		if (IsKeyPress(VK_SPACE))
+		{
+			m_gra = -2;
+			m_isGround = false;
+		}
+#endif // _USE_KEYBOARD_
+		if (Utility::GetKeyPress(Utility::A))
 		{
 			m_gra = -2;
 			m_isGround = false;
