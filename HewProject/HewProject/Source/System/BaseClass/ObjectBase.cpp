@@ -16,9 +16,9 @@ CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string 
     m_param.name = name;
     m_param.isDestroy = false;
     m_param.collisionType = COLLISION_NONE;
-    m_param.collisionData.boxScale[0] = 0;
-    m_param.collisionData.boxScale[1] = 0;
-    m_param.collisionData.boxScale[2] = 0;
+    m_param.collisionData.boxScale.x = 0;
+    m_param.collisionData.boxScale.y = 0;
+    m_param.collisionData.boxScale.z = 0;
 
     // ÉÇÉfÉãèÓïÒÇÃì«Ç›çûÇ›
     m_model.reset(new Model());
