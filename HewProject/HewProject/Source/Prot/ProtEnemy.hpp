@@ -2,6 +2,9 @@
 #include <ObjectBase.hpp>
 #include <IObjectBase.hpp>
 #include <memory>
+
+#include <Billboard.h>
+
 class CProtEnemy : public CObjectBase
 {
 public:
@@ -9,7 +12,7 @@ public:
 	~CProtEnemy();
 
 	void Update() override;
-
+	void Draw() override;
 private:
 	void Move();
 	void Finalize() override;
@@ -23,4 +26,6 @@ private:
 	int m_cnt;			// ランダム移動で使う(移動する方向を変える間隔)
 	int m_randNum;		// ランダム移動で使う(移動する方向を決める)
 	DirectX::XMFLOAT3 m_target;
+
+	std::unique_ptr<CBillboard> m_billboard;	// ビルボード
 };

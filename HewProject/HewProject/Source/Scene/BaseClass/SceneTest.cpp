@@ -18,6 +18,7 @@ CSceneTest::~CSceneTest()
 
 void CSceneTest::Update()
 {
+	m_stage->Update();
 }
 
 void CSceneTest::Draw()

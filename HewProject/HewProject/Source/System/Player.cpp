@@ -8,6 +8,7 @@ CPlayer::CPlayer()
 	m_param.tag = TAG_PLAYER;
 	m_gra = 0;
 	m_isGround = true;
+	m_beamSize = 0;
 }
 
 CPlayer::~CPlayer()
@@ -17,9 +18,18 @@ CPlayer::~CPlayer()
 void CPlayer::Update()
 {
 	Move();
+	Beam();
 	m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
+
 	//if (IsKeyTrigger('U'))
 	//	Destroy();
+}
+
+void CPlayer::Draw()
+{
+	CObjectBase::Draw();
+	if(m_beam)
+		m_beam->Draw();
 }
 
 void CPlayer::Move()
@@ -81,4 +91,25 @@ void CPlayer::Move()
 			m_isGround = false;
 		}
 	}
+}
+
+void CPlayer::Beam()
+{
+	const float maxBeamSize = 3.0f;
+	const float addBeamSize = 0.05f;
+	// RT�ɕύX
+	if (Utility::GetKeyPress(Utility::RB) || Utility::GetKeyPress(Utility::Key_B))
+	{
+		m_beamSize += m_beamSize < maxBeamSize ? addBeamSize : 0;
+	}
+	else
+	{
+		if (m_beamSize > 1.0f)
+		{
+			m_beam.reset(new CBeam(m_param.pos, CCameraBase::GetPrimaryFront(), m_beamSize));
+		}
+		m_beamSize = 0.0f;
+	}
+	if(m_beam)
+		m_beam->Update();
 }

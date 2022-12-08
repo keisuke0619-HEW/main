@@ -2,11 +2,12 @@
 #include <Easing.hpp>
 #include <SceneBase.hpp>
 #include <Controller.hpp>
+#include <Camera.hpp>
 // 当たり判定は後で付けます。
 
 CProtEnemy::CProtEnemy()
 	: CObjectBase("Assets/Box.fbx", 0.2f)
-	, m_move(0.008f)
+	, m_move(0.05f)
 	, m_distance(4.f)
 	, m_cnt(0)
 	, m_randNum(0)
@@ -19,6 +20,8 @@ CProtEnemy::CProtEnemy()
 	m_param.pos.x = (rand() % 100) / 10.0f;
 	m_param.pos.y = 1.0f;
 	m_param.pos.z = (rand() % 100) / 10.0f;
+	m_billboard.reset(new CBillboard("Assets/Img/White.png"));
+	m_billboard->SetSize({ 2.5f, 2.0f });
 }
 
 CProtEnemy::~CProtEnemy()
@@ -38,6 +41,14 @@ void CProtEnemy::Update()
 		Destroy();
 	// 移動るーちん
 	Move();
+	m_billboard->SetPos(m_param.pos);
+}
+
+void CProtEnemy::Draw()
+{
+	m_billboard->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
+	m_billboard->Draw(true, true);
+	CObjectBase::Draw();
 }
 
 // 移動ルーチン。Excelを参考に作成
@@ -68,9 +79,9 @@ void CProtEnemy::Move()
 	if (fabsf(movePos.x) <= m_distance && fabsf(movePos.y) <= m_distance && fabsf(movePos.z) <= m_distance)
 	{
 		// プレイヤーを目標にする
-		m_param.pos.x += movePos.x * m_move; // エネミーのposを使う
-		m_param.pos.y += movePos.y * m_move;
-		m_param.pos.z += movePos.z * m_move;
+		m_param.pos.x += movePos.x * m_move / 2; // エネミーのposを使う
+		m_param.pos.y += movePos.y * m_move / 2;
+		m_param.pos.z += movePos.z * m_move / 2;
 	}
 	else
 	{
