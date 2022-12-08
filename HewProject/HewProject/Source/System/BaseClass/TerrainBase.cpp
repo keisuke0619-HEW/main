@@ -60,7 +60,7 @@ void CTerrainBase::SetTerrainVertex()
 	// 頂点情報
 	// インデックス情報
 	const int idxNum = 10;//3 * (m_data.gridX - 1) * (m_data.gridY - 1) * 2;
-	std::unique_ptr<int> idx;
+	int* idx;
 
 	//--- 頂点設定 ---//
 	m_vtx = new TerrainVertex[m_data.count];
@@ -90,7 +90,7 @@ void CTerrainBase::SetTerrainVertex()
 			idxX = 1;
 			idxY = 0;
 		}
-		idx.get()[i] = m_data.gridX * idxY + idxX;		// エラー
+		idx[i] = m_data.gridX * idxY + idxX;		// エラー
 		if (i < idxNum / 2)
 		{
 			switch (i % 3)
@@ -140,9 +140,12 @@ void CTerrainBase::SetTerrainVertex()
 	desc.pVtx = m_vtx;
 	desc.vtxCount = m_data.count;
 	desc.vtxSize = sizeof(TerrainVertex);
-	desc.pIdx = idx.get();
+	desc.pIdx = idx;
 	desc.idxCount = idxNum;
 	desc.idxSize = sizeof(int);
 	desc.topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	m_mesh.reset(new MeshBuffer(desc));
+
+
+	delete idx;
 }
