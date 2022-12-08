@@ -13,7 +13,7 @@ CTerrainBase::CTerrainBase(const char* src, float width, float depth)
 	m_colorCB.reset(new ConstantBuffer());
 	m_wvp->Create(sizeof(m_geometoryMat));
 	m_colorCB->Create(sizeof(m_terrainColor));
-	m_vtx = new TerrainVertex[m_data.count];
+	
 
 }
 
@@ -31,6 +31,10 @@ void CTerrainBase::Update()
 void CTerrainBase::Draw()
 {
 
+	(*m_vs).Bind();
+	(*m_ps).Bind();
+	(*m_wvp).BindVS(0);
+	(*m_mesh).Draw();
 }
 
 bool CTerrainBase::LoadTerrain(const char* src)
@@ -55,13 +59,26 @@ void CTerrainBase::SetTerrainVertex()
 {
 	// 頂点情報
 	// インデックス情報
-	const int idxNum = 3 * (m_data.gridX - 1) * (m_data.gridY - 1) * 2;
+	const int idxNum = 10;//3 * (m_data.gridX - 1) * (m_data.gridY - 1) * 2;
 	std::unique_ptr<int> idx;
 
 	//--- 頂点設定 ---//
+	m_vtx = new TerrainVertex[m_data.count];
+
 	for (int i = 0; i < m_data.count; i++)
 	{
-		(m_vtx[i]) = { {(0.5f - (float)(i % m_data.gridX) / (m_data.gridX - 1)), (0.5f - (float)(i / m_data.gridX) / (m_data.gridX - 1)), 0}, {(float)(i % m_data.gridX) / (m_data.gridX - 1),(float)(i / m_data.gridX) / (m_data.gridX - 1)} };
+		m_vtx[i] =
+		{
+			{
+				0.5f - ((float)(i % m_data.gridX) / (m_data.gridX - 1)),
+				0.5f - ((float)(i / m_data.gridX) / (m_data.gridX - 1)),
+				0.0f
+			},
+			{
+				(float)(i % m_data.gridX) / (m_data.gridX - 1),
+				(float)(i / m_data.gridX) / (m_data.gridX - 1)
+			}
+		};
 	}
 	//--- インデックス設定 ---//
 	int idxX = 0;
@@ -73,7 +90,7 @@ void CTerrainBase::SetTerrainVertex()
 			idxX = 1;
 			idxY = 0;
 		}
-		idx.get()[i] = m_data.gridX * idxY + idxX;
+		idx.get()[i] = m_data.gridX * idxY + idxX;		// エラー
 		if (i < idxNum / 2)
 		{
 			switch (i % 3)
@@ -128,6 +145,4 @@ void CTerrainBase::SetTerrainVertex()
 	desc.idxSize = sizeof(int);
 	desc.topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	m_mesh.reset(new MeshBuffer(desc));
-
-
 }

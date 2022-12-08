@@ -59,6 +59,7 @@
     <ClInclude Include="Source\System\PlayerCamera.hpp" />
     <ClInclude Include="Source\System\SamplerState.h" />
     <ClInclude Include="Source\System\Shader.h" />
+    <ClInclude Include="Source\System\Sound.h" />
     <ClInclude Include="Source\System\Sprite.h" />
     <ClInclude Include="Source\System\Stage00.hpp" />
     <ClInclude Include="Source\System\Timer.h" />
@@ -104,6 +105,7 @@
     <ClCompile Include="Source\System\PlayerCamera.cpp" />
     <ClCompile Include="Source\System\SamplerState.cpp" />
     <ClCompile Include="Source\System\Shader.cpp" />
+    <ClCompile Include="Source\System\Sound.cpp" />
     <ClCompile Include="Source\System\Sprite.cpp" />
     <ClCompile Include="Source\System\Stage00.cpp" />
     <ClCompile Include="Source\System\Startup.cpp" />

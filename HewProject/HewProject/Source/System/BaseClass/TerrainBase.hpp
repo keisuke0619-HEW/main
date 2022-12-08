@@ -41,7 +41,6 @@ private:
 	float m_width;
 	float m_depth;
 
-
 	DirectX::XMFLOAT4X4 m_geometoryMat[3];
 	TGeometoryColor m_terrainColor;
 	std::unique_ptr<MeshBuffer> m_mesh;
@@ -50,6 +49,4 @@ private:
 	std::unique_ptr<ConstantBuffer> m_wvp;
 	std::unique_ptr<ConstantBuffer> m_colorCB;
 	TerrainVertex* m_vtx;
-
-
 };

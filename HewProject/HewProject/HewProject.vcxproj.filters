@@ -168,7 +168,11 @@
     <ClInclude Include="Source\System\BaseClass\TerrainBase.hpp">
       <Filter>システム\BaseClass</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Source\System\Beam.hpp">
+=======
+    <ClInclude Include="Source\System\Sound.h">
+>>>>>>> f16ebb4c9ab12876d7d7e478861371e6df3a26c2
       <Filter>システム\Other</Filter>
     </ClInclude>
   </ItemGroup>
@@ -293,8 +297,13 @@
     <ClCompile Include="Source\System\CollisionBase.cpp">
       <Filter>システム\BaseClass</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Source\System\Beam.cpp">
       <Filter>ソース ファイル</Filter>
+=======
+    <ClCompile Include="Source\System\Sound.cpp">
+      <Filter>システム\Other</Filter>
+>>>>>>> f16ebb4c9ab12876d7d7e478861371e6df3a26c2
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

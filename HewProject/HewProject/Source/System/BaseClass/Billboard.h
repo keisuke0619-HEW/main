@@ -14,8 +14,10 @@ public:
 	// 概要 : 2D描画
 	// 戻値 : なし
 	// 引数 : bool BillOnOff				: ビルボードのオンオフ
+	//		  falseにして角度を設定したい場合はSetRotationを呼ぶ
 	//		  bool enable					: 深度バッファのなんとか(flaseにすると表示された画像が手前に描画される)
-	void Draw(bool BillOnOff, bool enable);
+	//		  falseにするときはSetPlayerrPosを呼ぶ
+	void Draw(bool BillOnOff = true, bool enable = true);
 
 	// 概要 : カメラのビューとプロジェクション行列を設定
 	//		: Drawの直前で呼んでください
@@ -34,7 +36,7 @@ public:
 	// 戻値 : なし
 	// 引数 : DirectX::XMFLOAT3 Playerpos	: プレイヤーのpos(画像との距離に使う)
 	//		  float distance				: 画像が手前に描画されるようになる距離 
-	void SetPlayerrPos(DirectX::XMFLOAT3 playerPos, float distance);
+	void SetPlayerrPos(DirectX::XMFLOAT3 playerPos, float distance = 4.f);
 
 	// 概要 : 画像のサイズの設定
 	// 戻値 : なし

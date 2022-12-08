@@ -50,19 +50,22 @@ void CProtScene::Draw()
 	SetGeometoryRotation(0,0,3.14f / 2);
 	SetColorPS(true, 0.3f, 0.76f, 1.0f, 0, wallHeight, m_stageData.sizeX);
 	DrawBox();
+
 	SetGeometoryTranslate(-m_stageData.sizeX / 2 - 0.5f, wallHeight / 2 + 0.5f,0);
 	SetGeometoryRotation(0,0,3.14f / 2);
 	DrawBox();
+
 	SetGeometoryTranslate(0, wallHeight / 2 + 0.5f, m_stageData.sizeZ / 2 + 0.5f);
 	SetGeometoryScaling(m_stageData.sizeX + 2,1, wallHeight);
 	SetGeometoryRotation(3.14f / 2,0,0);
 	SetColorPS(true, 0.3f, 0.76f, 1.0f, 0, m_stageData.sizeX, wallHeight);
 	DrawBox();
+
 	SetGeometoryTranslate(0, wallHeight / 2 + 0.5f, -m_stageData.sizeZ / 2 - 0.5f);
 	SetGeometoryRotation(3.14f / 2,0,0);
 	DrawBox();
 
-
+	//m_terrain->Draw();
 
 
 	SetColorPS(false);
