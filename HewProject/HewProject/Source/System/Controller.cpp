@@ -59,8 +59,8 @@ DirectX::XMFLOAT3 Utility::GetStickLeft()
 {
     const float NULL_LEVEL = 0.1f;
     DirectX::XMFLOAT3 stick = {};
-    stick.x = g_keyState.Gamepad.sThumbRX / (float)0x7fff;
-    stick.y = g_keyState.Gamepad.sThumbRY / (float)0x7fff;
+    stick.x = g_keyState.Gamepad.sThumbLX / (float)0x7fff;
+    stick.y = g_keyState.Gamepad.sThumbLY / (float)0x7fff;
     stick.z = 0;
     if (fabsf(stick.x) < NULL_LEVEL)
         stick.x = 0;

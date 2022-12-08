@@ -22,4 +22,5 @@ private:
 
 	int m_cnt;			// ランダム移動で使う(移動する方向を変える間隔)
 	int m_randNum;		// ランダム移動で使う(移動する方向を決める)
+	DirectX::XMFLOAT3 m_target;
 };

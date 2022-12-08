@@ -18,8 +18,8 @@ void CPlayer::Update()
 {
 	Move();
 	m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
-	if (IsKeyTrigger('U'))
-		Destroy();
+	//if (IsKeyTrigger('U'))
+	//	Destroy();
 }
 
 void CPlayer::Move()
