@@ -22,8 +22,9 @@ enum ECollisionType
 union UCollisionData
 {
 	float sphireRadius;	// 球の半径
-	float boxScale[3];	// 箱のスケールXYZ
+	DirectX::XMFLOAT3 boxScale;	// 箱のスケールXYZ
 };
+
 struct TObjectParam
 {
 	// オブジェクト座標
