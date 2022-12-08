@@ -1,59 +1,137 @@
 #include "Controller.hpp"
+namespace Utility
+{
+    XINPUT_STATE g_keyState;
+    XINPUT_STATE g_keyStateOld;
+    
+    int g_cameraSpeed;
+}
 
-// コントローラとキーボードどちらも動くようにしておいてください。
 
+void Utility::ControllerInit()
+{
+    g_cameraSpeed = 10;
+}
 
-
-// コントローラーを使用するために必要そうなことをここに書く。
-// 毎フレームのアップデートの前に呼ばれる
 void Utility::ControllerUpdate()
 {
-	////ゲームパッドの状態を取得
-	//XINPUT_STATE state;
-	//XInputGetState(0, &state);
-	//int iPad_left = 0, iPad_right = 0, iPad_up = 0, iPad_down = 0;
-	//int iPad_leftshoulder = 0, iPad_rightshoulder = 0;
-	//int iPad_A = 0, iPad_B = 0, iPad_X = 0, iPad_Y = 0;
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_LEFT) iPad_left = 1;//ゲームパッド十字キー左
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_RIGHT) iPad_right = 1;//ゲームパッド十字キー右
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_UP) iPad_up = 1;//ゲームパッド十字キー上
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_DPAD_DOWN) iPad_down = 1;//ゲームパッド十字キー下
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_LEFT_SHOULDER) iPad_leftshoulder = 1;//ゲームパッドL
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_RIGHT_SHOULDER) iPad_rightshoulder = 1;//ゲームパッドR
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_A) iPad_A = 1;//ゲームパッドA
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_B) iPad_B = 1;//ゲームパッドB
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_X) iPad_X = 1;//ゲームパッドX
-	//if (state.Gamepad.wButtons & XINPUT_GAMEPAD_Y) iPad_Y = 1;//ゲームパッドY
-	////ゲームパッドアナログスティックのデッドゾーン処理
-	//if ((state.Gamepad.sThumbLX < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE && state.Gamepad.sThumbLX > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE) &&
-	//	(state.Gamepad.sThumbLY < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE && state.Gamepad.sThumbLY > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE))
-	//{
-	//	state.Gamepad.sThumbLX = 0;
-	//	state.Gamepad.sThumbLY = 0;
-	//}
-}
-// 押された瞬間だけTrue
-bool Utility::GetKeyTrigger(ControllerID)
-{
-    return false;
-}
-// 押している間True
-bool Utility::GetKeyPress(ControllerID)
-{
-    return false;
-}
-// 離された瞬間だけTrue
-bool Utility::GetKeyRelease(ControllerID)
-{
-    return false;
+    g_keyStateOld = g_keyState;
+    XInputGetState(0, &g_keyState);
 }
 
-DirectX::XMFLOAT3 Utility::GetLeftStick()
+bool Utility::GetKeyTrigger(ControllerID id)
 {
-    return DirectX::XMFLOAT3();
+#ifdef _USE_KEYBOARD_
+	if (id >= Key_A && id <= Key_END)
+	{
+		char Word = Utility::CheckWord(id);
+		return IsKeyTrigger(Word);
+	}
+#endif // _USE_KEYBOARD_
+	/*if (id == RT || id == LT)
+	{
+		int InputNum_LT = g_keyState.Gamepad.bLeftTrigger;
+		int InputNum_RT = g_keyState.Gamepad.bRightTrigger;
+		if (InputNum_LT >= INPUT_RT_LT || InputNum_RT >= INPUT_RT_LT)
+		{
+			bool now = g_keyState.Gamepad.bLeftTrigger;
+			bool now = g_keyState.Gamepad.bRightTrigger;
+			bool old = g_keyStateOld.Gamepad.bLeftTrigger;
+			bool old = g_keyStateOld.Gamepad.bRightTrigger;
+			if (now && !old)
+			{
+				return true;
+			}
+		}
+	}*/
+
+    bool now = g_keyState.Gamepad.wButtons & id;
+    bool old = g_keyStateOld.Gamepad.wButtons & id;
+    return now && !old;
 }
 
-DirectX::XMFLOAT3 Utility::GetRightStick()
+
+
+// キーボード処理部分は #ifdef _USE_KEYBOARD_ でラッピングしてください。
+// VK_SPACEなども使えるようにしてください。
+// おそらくチェックワードと列挙にそれぞれVK_〇〇とKey_〇〇を追加すればいけます。
+bool Utility::GetKeyPress(ControllerID id)
 {
-    return DirectX::XMFLOAT3();
+#ifdef _USE_KEYBOARD_
+	if (id >= Key_A && id <= Key_END)
+	{
+		char Word = Utility::CheckWord(id);
+		return IsKeyPress(Word);
+	}
+#endif // _USE_KEYBOARD_
+	if (id == RT || id == LT)
+	{
+		int InputNum_LT = g_keyState.Gamepad.bLeftTrigger;
+		int InputNum_RT = g_keyState.Gamepad.bRightTrigger;
+		if (InputNum_LT >= INPUT_RT_LT || InputNum_RT >= INPUT_RT_LT)
+		{
+			return true;
+		}
+	}
+	return g_keyState.Gamepad.wButtons & id;
+}
+
+
+
+
+bool Utility::GetKeyRelease(ControllerID id)
+{
+#ifdef _USE_KEYBOARD_
+	if (id >= Key_A && id <= Key_END)
+	{
+		char Word = Utility::CheckWord(id);
+		return IsKeyRelease(Word);
+	}
+#endif // _USE_KEYBOARD_
+    bool now = g_keyState.Gamepad.wButtons & id;
+    bool old = g_keyStateOld.Gamepad.wButtons & id;
+    return old && !now;
+}
+DirectX::XMFLOAT3 Utility::GetStickLeft()
+{
+    const float NULL_LEVEL = 0.1f;
+    DirectX::XMFLOAT3 stick = {};
+    stick.x = g_keyState.Gamepad.sThumbLX / (float)0x7fff;
+    stick.y = g_keyState.Gamepad.sThumbLY / (float)0x7fff;
+    stick.z = 0;
+    if (fabsf(stick.x) < NULL_LEVEL)
+        stick.x = 0;
+    if (fabsf(stick.y) < NULL_LEVEL)
+        stick.y = 0;
+    return stick;
+}
+
+DirectX::XMFLOAT3 Utility::GetStickRight()
+{
+    const float NULL_LEVEL = 0.1f;
+    DirectX::XMFLOAT3 stick = {};
+    stick.x = g_keyState.Gamepad.sThumbRX / (float)0x7fff;
+    stick.y = g_keyState.Gamepad.sThumbRY / (float)0x7fff;
+    stick.z = 0;
+    if (fabsf(stick.x) < NULL_LEVEL)
+        stick.x = 0;
+    if (fabsf(stick.y) < NULL_LEVEL)
+        stick.y = 0;
+    return stick;
+}
+
+int Utility::GetCameraSpeed()
+{
+    return g_cameraSpeed;
+}
+
+char Utility::CheckWord(unsigned id)
+{
+	char Keyboard[256] = {
+        'A','B', 'C', 'D','E','F', 'G', 'H','I','J', 'K', 'L','M','N', 'O', 'P',
+		'Q','R', 'S', 'T','U','V','W', 'X', 'Y','Z','1','2', '3', '4', '5', '6', '7', '8', '9', '0',
+        VK_UP, VK_RIGHT, VK_DOWN, VK_LEFT ,VK_BACK ,VK_TAB ,VK_CLEAR ,VK_RETURN ,VK_SHIFT, VK_CONTROL,
+		VK_ESCAPE, VK_SPACE, 
+    };
+	return Keyboard[id - Key_A];
 }

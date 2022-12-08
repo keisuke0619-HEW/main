@@ -131,6 +131,11 @@ void DrawCone()
 }
 void DrawCapsule()
 {
+	UpdateGeometoryMatrix();
+	g_pGeometoryVS->Bind();
+	g_pGeometoryPS->Bind();
+	g_pGeometoryWVP->BindVS(0);
+	g_pGeometoryCapsule->Draw();
 }
 void DrawArrow()
 {
@@ -460,6 +465,60 @@ void CreateGeometoryCone()
 }
 void CreateGeometoryCapsule()
 {
+	GeometoryVertex vtx[] =
+	{
+		// -z
+		{{-0.5f, 1.0f,-0.5f}, {0.0f, 0.0f}},
+		{{ 0.5f, 1.0f,-0.5f}, {1.0f, 0.0f}},
+		{{-0.5f, 0.0f,-0.5f}, {0.0f, 1.0f}},
+		{{ 0.5f, 0.0f,-0.5f}, {1.0f, 1.0f}},
+		// +z
+		{{ 0.5f, 1.0f, 0.5f}, {0.0f, 0.0f}},
+		{{-0.5f, 1.0f, 0.5f}, {1.0f, 0.0f}},
+		{{ 0.5f, 0.0f, 0.5f}, {0.0f, 1.0f}},
+		{{-0.5f, 0.0f, 0.5f}, {1.0f, 1.0f}},
+		// -x
+		{{-0.5f, 1.0f, 0.5f}, {0.0f, 0.0f}},
+		{{-0.5f, 1.0f,-0.5f}, {1.0f, 0.0f}},
+		{{-0.5f, 0.0f, 0.5f}, {0.0f, 1.0f}},
+		{{-0.5f, 0.0f,-0.5f}, {1.0f, 1.0f}},
+		// +x
+		{{ 0.5f, 1.0f,-0.5f}, {0.0f, 0.0f}},
+		{{ 0.5f, 1.0f, 0.5f}, {1.0f, 0.0f}},
+		{{ 0.5f, 0.0f,-0.5f}, {0.0f, 1.0f}},
+		{{ 0.5f, 0.0f, 0.5f}, {1.0f, 1.0f}},
+		// -y
+		{{-0.5f, 0.0f,-0.5f}, {0.0f, 0.0f}},
+		{{ 0.5f, 0.0f,-0.5f}, {1.0f, 0.0f}},
+		{{-0.5f, 0.0f, 0.5f}, {0.0f, 1.0f}},
+		{{ 0.5f, 0.0f, 0.5f}, {1.0f, 1.0f}},
+		// +y
+		{{-0.5f, 1.0f, 0.5f}, {0.0f, 0.0f}},
+		{{ 0.5f, 1.0f, 0.5f}, {1.0f, 0.0f}},
+		{{-0.5f, 1.0f,-0.5f}, {0.0f, 1.0f}},
+		{{ 0.5f, 1.0f,-0.5f}, {1.0f, 1.0f}},
+	};
+	int idx[] =
+	{
+		0,1,2, 1,3,2,// -z
+		4,5,6, 6,5,7,// +z
+		8,9,10, 10,9,11,// -x
+		12,13,14, 14,13,15,// +x
+		16,17,18, 18,17,19,// -y
+		20,21,22, 22,21,23,// +y
+	};
+
+	int men = 6;
+	MeshBuffer::Description desc = {};
+	desc.pVtx = vtx;
+	desc.vtxCount = 4 * 6;
+	desc.vtxSize = sizeof(GeometoryVertex);
+	desc.pIdx = idx;
+	desc.idxCount = 6 * men;
+	desc.idxSize = sizeof(int);
+	desc.topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	g_pGeometoryCapsule = new MeshBuffer(desc);
+
 }
 
 void CreateGeometoryShader()
@@ -631,17 +690,6 @@ void SetPolygon(std::shared_ptr<GeometoryVertex>* vtxBuffer, std::shared_ptr<int
 	*idxBuffer = idx;
 	*vtxNumBuf = vtxNum;
 	*idxNumBuf = idxNum;
-
-	//debagu
-	{
-		FILE* fp = fopen("vtxData.csv", "wt");
-		fprintf(fp, "ID,X,Y,U,V\n");
-		for (int i = 0; i < vtxNum; i++)
-		{
-			fprintf(fp, "%d,%f,%f,%f,%f\n", i, vtx.get()[i].pos[0], vtx.get()[i].pos[1],  vtx.get()[i].uv[0], vtx.get()[i].uv[1]);
-		}
-		fclose(fp);
-	}
 
 
 	//// ’¸“_î•ñ

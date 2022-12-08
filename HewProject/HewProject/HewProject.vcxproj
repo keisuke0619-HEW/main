@@ -29,12 +29,15 @@
     <ClInclude Include="Source\Scene\BaseClass\SceneBase.hpp" />
     <ClInclude Include="Source\Scene\BaseClass\SceneManager.hpp" />
     <ClInclude Include="Source\Scene\BaseClass\SceneTest.hpp" />
+    <ClInclude Include="Source\System\BaseClass\Billboard.h" />
     <ClInclude Include="Source\System\BaseClass\DataPool.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Source\System\BaseClass\ObjectBase.hpp" />
     <ClInclude Include="Source\System\BaseClass\IObjectBase.hpp" />
+    <ClInclude Include="Source\System\BaseClass\TerrainBase.hpp" />
+    <ClInclude Include="Source\System\Beam.hpp" />
     <ClInclude Include="Source\System\BlendState.h" />
     <ClInclude Include="Source\System\Camera.hpp" />
     <ClInclude Include="Source\System\CollisionBase.hpp" />
@@ -56,6 +59,7 @@
     <ClInclude Include="Source\System\PlayerCamera.hpp" />
     <ClInclude Include="Source\System\SamplerState.h" />
     <ClInclude Include="Source\System\Shader.h" />
+    <ClInclude Include="Source\System\Sound.h" />
     <ClInclude Include="Source\System\Sprite.h" />
     <ClInclude Include="Source\System\Stage00.hpp" />
     <ClInclude Include="Source\System\Timer.h" />
@@ -70,11 +74,14 @@
     <ClCompile Include="Source\Scene\BaseClass\SceneBase.cpp" />
     <ClCompile Include="Source\Scene\BaseClass\SceneManager.cpp" />
     <ClCompile Include="Source\Scene\BaseClass\SceneTest.cpp" />
+    <ClCompile Include="Source\System\BaseClass\Billboard.cpp" />
     <ClCompile Include="Source\System\BaseClass\DataPool.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp" />
+    <ClCompile Include="Source\System\BaseClass\TerrainBase.cpp" />
+    <ClCompile Include="Source\System\Beam.cpp" />
     <ClCompile Include="Source\System\BlendState.cpp" />
     <ClCompile Include="Source\System\Camera.cpp" />
     <ClCompile Include="Source\System\CollisionBase.cpp" />
@@ -98,6 +105,7 @@
     <ClCompile Include="Source\System\PlayerCamera.cpp" />
     <ClCompile Include="Source\System\SamplerState.cpp" />
     <ClCompile Include="Source\System\Shader.cpp" />
+    <ClCompile Include="Source\System\Sound.cpp" />
     <ClCompile Include="Source\System\Sprite.cpp" />
     <ClCompile Include="Source\System\Stage00.cpp" />
     <ClCompile Include="Source\System\Startup.cpp" />

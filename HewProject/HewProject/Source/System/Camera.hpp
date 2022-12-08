@@ -61,7 +61,8 @@ public:
 	static DirectX::XMVECTOR GetPrimaryRightHorizontal();
 	// メインカメラの上向き単位ベクトル（水平）
 	static DirectX::XMVECTOR GetPrimaryUpHorizontal();
-
+	// メインカメラのRadXZを取得
+	static float GetPrimaryRadXZ();
 
 
 private:

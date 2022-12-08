@@ -146,6 +146,11 @@ DirectX::XMVECTOR CCameraBase::GetPrimaryUpHorizontal()
 
 }
 
+float CCameraBase::GetPrimaryRadXZ()
+{
+    return m_cameraMap[m_primaryCameraName]->m_radXZ;
+}
+
 
 
 
@@ -153,8 +158,8 @@ DirectX::XMVECTOR CCameraBase::GetPrimaryUpHorizontal()
 //------------ dynamic ----------------//
 CCameraBase::CCameraBase()
     :m_distance(5)
-    ,m_radXZ(2.5f)
-    ,m_radY (0.7f)
+    ,m_radXZ(3.14f)
+    ,m_radY (0.1f)
     ,m_up(0,1,0)
     ,m_fovY(60.0f * 3.1415f / 180)
     ,m_aspect(16.0f / 9.0f)

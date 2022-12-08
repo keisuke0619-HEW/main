@@ -12,6 +12,7 @@ Game3D::Game3D()
 	m_scenes->SetScene(new CSceneTest());
 	CDebugWindow::Create();
 	Sprite::Init();
+	Utility::ControllerInit();
 }
 Game3D::~Game3D()
 {
