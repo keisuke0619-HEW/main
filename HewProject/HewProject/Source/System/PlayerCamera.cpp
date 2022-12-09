@@ -42,6 +42,4 @@ void CPlayerCamera::Update()
 	m_data.pos.x = cosf(m_radY) * sinf(m_radXZ) * m_distance + m_data.look.x;
 	m_data.pos.y = sinf(m_radY) * m_distance + m_data.look.y;
 	m_data.pos.z = cosf(m_radY) * cosf(m_radXZ) * m_distance + m_data.look.z;
-
-
 }

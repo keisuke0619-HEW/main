@@ -22,7 +22,8 @@ CProtEnemy::CProtEnemy()
 	m_param.pos.y = 1.0f;
 	m_param.pos.z = (rand() % 100) / 10.0f;
 	m_param.collisionType = COLLISION_BOX;
-	m_param.collisionData.boxScale = { 1,1,1 };
+	m_param.collisionData.box.boxPos = m_param.pos;
+	m_param.collisionData.box.boxScale = { 1,1,1 };
 	m_startPos = m_param.pos;
 }
 
@@ -41,6 +42,7 @@ void CProtEnemy::Update()
 	}
 	// à⁄ìÆÇÈÅ[ÇøÇÒ
 	Move();
+	m_param.collisionData.box.boxPos = m_param.pos;
 }
 
 void CProtEnemy::Draw()

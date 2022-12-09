@@ -91,8 +91,8 @@ bool Utility::IsCollision(TObjectParam obj1, TObjectParam obj2)
 
 bool Utility::IsCollisionBoxNoRotation(TObjectParam obj1, TObjectParam obj2)
 {
-	Box Box1 = { obj1.pos, obj1.collisionData.boxScale };
-	Box Box2 = { obj2.pos, obj2.collisionData.boxScale };
+	Box Box1 = { obj1.pos, obj1.collisionData.box.boxScale };
+	Box Box2 = { obj2.pos, obj2.collisionData.box.boxScale };
 
 	// AとBを使って０８番「当たり判定」プリントを参考に。
 
@@ -124,8 +124,8 @@ bool Utility::IsIncludPoint(DirectX::XMFLOAT3 point, TObjectParam obj)
 	case COLLISION_BOX:
 		ray.collisionType = COLLISION_RAY;
 		ray.collisionData.ray.rayStart = point;
-		ray.collisionData.ray.rayDirection = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&obj.pos), DirectX::XMLoadFloat3(&ray.collisionData.ray.rayStart)));
-		DirectX::XMStoreFloat(&ray.collisionData.ray.rayLength, DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&obj.pos), DirectX::XMLoadFloat3(&ray.collisionData.ray.rayStart)));
+		ray.collisionData.ray.rayDirection = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&obj.collisionData.box.boxPos), DirectX::XMLoadFloat3(&ray.collisionData.ray.rayStart)));
+		DirectX::XMStoreFloat(&ray.collisionData.ray.rayLength, DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&obj.collisionData.box.boxPos), DirectX::XMLoadFloat3(&ray.collisionData.ray.rayStart)));
 
 		if (Utility::IsCollisionBoxRay(obj, ray))
 		{
@@ -151,14 +151,14 @@ bool Utility::IsCollisionBox(TObjectParam obj1, TObjectParam obj2)
 	DirectX::XMFLOAT3 half[2] =
 	{
 		{
-			obj1.collisionData.boxScale.x * 0.5f,
-			obj1.collisionData.boxScale.y * 0.5f,
-			obj1.collisionData.boxScale.z * 0.5f
+			obj1.collisionData.box.boxScale.x * 0.5f,
+			obj1.collisionData.box.boxScale.y * 0.5f,
+			obj1.collisionData.box.boxScale.z * 0.5f
 		},
 		{
-			obj2.collisionData.boxScale.x * 0.5f,
-			obj2.collisionData.boxScale.y * 0.5f,
-			obj2.collisionData.boxScale.z * 0.5f
+			obj2.collisionData.box.boxScale.x * 0.5f,
+			obj2.collisionData.box.boxScale.y * 0.5f,
+			obj2.collisionData.box.boxScale.z * 0.5f
 		}
 	};
 
@@ -194,7 +194,7 @@ bool Utility::IsCollisionBox(TObjectParam obj1, TObjectParam obj2)
 		);
 
 		pos = DirectX::XMVector3TransformCoord(pos, DirectX::XMMatrixRotationX(obj1.rot.x) * DirectX::XMMatrixRotationY(obj1.rot.y) *  DirectX::XMMatrixRotationZ(obj1.rot.z));
-		DirectX::XMStoreFloat3(&vtx[0][i], DirectX::XMVectorAdd(pos, DirectX::XMLoadFloat3(&obj1.pos)));
+		DirectX::XMStoreFloat3(&vtx[0][i], DirectX::XMVectorAdd(pos, DirectX::XMLoadFloat3(&obj1.collisionData.box.boxPos)));
 
 		pos = DirectX::XMVectorSet(
 			half[1].x * 0.5f * vtx[1][i].x,
@@ -204,16 +204,16 @@ bool Utility::IsCollisionBox(TObjectParam obj1, TObjectParam obj2)
 		);
 
 		pos = DirectX::XMVector3TransformCoord(pos, DirectX::XMMatrixRotationX(obj2.rot.x) * DirectX::XMMatrixRotationY(obj2.rot.y) *  DirectX::XMMatrixRotationZ(obj2.rot.z));
-		DirectX::XMStoreFloat3(&vtx[1][i], DirectX::XMVectorAdd(pos, DirectX::XMLoadFloat3(&obj2.pos)));
+		DirectX::XMStoreFloat3(&vtx[1][i], DirectX::XMVectorAdd(pos, DirectX::XMLoadFloat3(&obj2.collisionData.box.boxPos)));
 
 		ray[0][i].collisionData.ray.rayStart = obj1.pos;
 		ray[1][i].collisionData.ray.rayStart = obj2.pos;
 
-		ray[0][i].collisionData.ray.rayDirection = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&vtx[0][i]), DirectX::XMLoadFloat3(&obj1.pos)));
-		ray[1][i].collisionData.ray.rayDirection = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&vtx[1][i]), DirectX::XMLoadFloat3(&obj2.pos)));
+		ray[0][i].collisionData.ray.rayDirection = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&vtx[0][i]), DirectX::XMLoadFloat3(&obj1.collisionData.box.boxPos)));
+		ray[1][i].collisionData.ray.rayDirection = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&vtx[1][i]), DirectX::XMLoadFloat3(&obj2.collisionData.box.boxPos)));
 
-		DirectX::XMStoreFloat(&ray[0][i].collisionData.ray.rayLength, DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&vtx[0][i]), DirectX::XMLoadFloat3(&obj1.pos)));
-		DirectX::XMStoreFloat(&ray[1][i].collisionData.ray.rayLength, DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&vtx[1][i]), DirectX::XMLoadFloat3(&obj2.pos)));
+		DirectX::XMStoreFloat(&ray[0][i].collisionData.ray.rayLength, DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&vtx[0][i]), DirectX::XMLoadFloat3(&obj1.collisionData.box.boxPos)));
+		DirectX::XMStoreFloat(&ray[1][i].collisionData.ray.rayLength, DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&vtx[1][i]), DirectX::XMLoadFloat3(&obj2.collisionData.box.boxPos)));
 	}
 
 	for (int i = 0; i < 8; i++)
@@ -256,13 +256,13 @@ bool Utility::IsCollisionBoxShpire(TObjectParam obj1, TObjectParam obj2)
 	for (int i = 0; i < 8; i++)
 	{
 		DirectX::XMVECTOR pos = DirectX::XMVectorSet(
-			obj1.collisionData.boxScale.x * 0.5f * vtx[i].x,
-			obj1.collisionData.boxScale.y * 0.5f * vtx[i].y,
-			obj1.collisionData.boxScale.z * 0.5f * vtx[i].z,
+			obj1.collisionData.box.boxScale.x * 0.5f * vtx[i].x,
+			obj1.collisionData.box.boxScale.y * 0.5f * vtx[i].y,
+			obj1.collisionData.box.boxScale.z * 0.5f * vtx[i].z,
 			0.0f
 		);
 		pos = DirectX::XMVector3TransformCoord(pos, DirectX::XMMatrixRotationX(obj1.rot.x) * DirectX::XMMatrixRotationY(obj1.rot.y) *  DirectX::XMMatrixRotationZ(obj1.rot.z));
-		DirectX::XMStoreFloat3(&vtx[i], DirectX::XMVectorAdd(pos, DirectX::XMLoadFloat3(&obj1.pos)));
+		DirectX::XMStoreFloat3(&vtx[i], DirectX::XMVectorAdd(pos, DirectX::XMLoadFloat3(&obj1.collisionData.box.boxPos)));
 	}
 
 	// 1
@@ -388,13 +388,13 @@ bool Utility::IsCollisionBoxRay(TObjectParam obj1, TObjectParam obj2)
 	for (int i = 0; i < 8; i++)
 	{
 		DirectX::XMVECTOR pos = DirectX::XMVectorSet(
-			obj1.collisionData.boxScale.x * 0.5f * vtx[i].x,
-			obj1.collisionData.boxScale.y * 0.5f * vtx[i].y,
-			obj1.collisionData.boxScale.z * 0.5f * vtx[i].z,
+			obj1.collisionData.box.boxScale.x * 0.5f * vtx[i].x,
+			obj1.collisionData.box.boxScale.y * 0.5f * vtx[i].y,
+			obj1.collisionData.box.boxScale.z * 0.5f * vtx[i].z,
 			0.0f
 		);
 		pos = DirectX::XMVector3TransformCoord(pos, DirectX::XMMatrixRotationX(obj1.rot.x) * DirectX::XMMatrixRotationY(obj1.rot.y) *  DirectX::XMMatrixRotationZ(obj1.rot.z));
-		DirectX::XMStoreFloat3(&vtx[i], DirectX::XMVectorAdd(pos, DirectX::XMLoadFloat3(&obj1.pos)));
+		DirectX::XMStoreFloat3(&vtx[i], DirectX::XMVectorAdd(pos, DirectX::XMLoadFloat3(&obj1.collisionData.box.boxPos)));
 	}
 
 	DirectX::XMVECTOR v;
@@ -697,13 +697,13 @@ DirectX::XMFLOAT3 Utility::GetTargetBox(TObjectParam obj1, TObjectParam obj2)
 	for (int i = 0; i < 8; i++)
 	{
 		DirectX::XMVECTOR pos = DirectX::XMVectorSet(
-			obj1.collisionData.boxScale.x * 0.5f * vtx[i].x,
-			obj1.collisionData.boxScale.y * 0.5f * vtx[i].y,
-			obj1.collisionData.boxScale.z * 0.5f * vtx[i].z,
+			obj1.collisionData.box.boxScale.x * 0.5f * vtx[i].x,
+			obj1.collisionData.box.boxScale.y * 0.5f * vtx[i].y,
+			obj1.collisionData.box.boxScale.z * 0.5f * vtx[i].z,
 			0.0f
 		);
 		pos = DirectX::XMVector3TransformCoord(pos, DirectX::XMMatrixRotationX(obj1.rot.x) * DirectX::XMMatrixRotationY(obj1.rot.y) *  DirectX::XMMatrixRotationZ(obj1.rot.z));
-		DirectX::XMStoreFloat3(&vtx[i], DirectX::XMVectorAdd(pos, DirectX::XMLoadFloat3(&obj1.pos)));
+		DirectX::XMStoreFloat3(&vtx[i], DirectX::XMVectorAdd(pos, DirectX::XMLoadFloat3(&obj1.collisionData.box.boxPos)));
 	}
 
 	DirectX::XMVECTOR v;

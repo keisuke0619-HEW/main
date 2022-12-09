@@ -10,7 +10,8 @@ CPlayer::CPlayer()
 	m_isGround = true;
 	m_beamSize = 0;
 	m_param.collisionType = COLLISION_BOX;
-	m_param.collisionData.boxScale = { 1, 2, 1 };
+	m_param.collisionData.box.boxPos = m_param.pos;
+	m_param.collisionData.box.boxScale = { 1, 2, 1 };
 }
 
 CPlayer::~CPlayer()
@@ -22,7 +23,7 @@ void CPlayer::Update()
 	Move();
 	Beam();
 	m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
-
+	m_param.collisionData.box.boxPos = m_param.pos;
 	//if (IsKeyTrigger('U'))
 	//	Destroy();
 }

@@ -1,5 +1,6 @@
 #include "ObjectManager.hpp"
 #include <CollisionBase.hpp>
+
 bool CObjectManager::m_isCallDestroy;
 
 void CObjectManager::CallDestroy()
@@ -42,9 +43,25 @@ void CObjectManager::UpdateAll()
 				(*itr)->OnCollision((*colItr));
 				(*colItr)->OnCollision((*itr));
 			}
-			
 		}
 	}
+
+	//(仮)
+	//for (auto itr = m_obj.begin(); itr != m_obj.end(); itr++)
+	//{
+	//	auto collisionType = (*itr)->GetParam().collisionType;
+	//	// 当たり判定を使用しないオブジェクトならここで次へ
+	//	if (collisionType == COLLISION_NONE)
+	//		continue;
+	//	bool isCollision = Utility::IsCollision((*itr)->GetParam(), CameraRay);
+	//	if (isCollision)
+	//	{
+	//		// DirectX::XMFLOAT3 target = Utility::GetTargetBox((*itr)->GetParam(), CameraRay);
+	//		//
+	//		//	当たっていたらプレイヤーのビームにtargetを送る(未実装)
+	//		//
+	//	}
+	//}
 }
 
 void CObjectManager::DrawAll()
