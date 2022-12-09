@@ -108,7 +108,7 @@ void CPlayer::Beam()
 	{
 		if (m_beamSize > 1.0f)
 		{
-			m_beam.reset(new CBeam(m_param.pos, CCameraBase::GetPrimaryFront(), m_beamSize));
+			m_beam.reset(new CBeam(m_param.pos, {0, 0, 0}, m_beamSize));
 		}
 		m_beamSize = 0.0f;
 	}

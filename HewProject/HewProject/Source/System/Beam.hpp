@@ -3,7 +3,7 @@
 class CBeam
 {
 public:
-	CBeam(DirectX::XMFLOAT3 pos, DirectX::XMVECTOR direction, float size = 1.0f);
+	CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size = 1.0f);
 	~CBeam();
 
 	void Update();
@@ -13,7 +13,7 @@ private:
 	float m_size;
 	float m_time;
 	DirectX::XMFLOAT3 m_pos;
-	DirectX::XMVECTOR m_direction;
+	DirectX::XMFLOAT3 m_target;
 
 
 };

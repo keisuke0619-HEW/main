@@ -1,10 +1,10 @@
 #include "Beam.hpp"
 #include <Geometory.h>
 #include <DebugWindow.hpp>
-CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMVECTOR direction, float size)
+CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 {
 	m_pos = pos;
-	m_direction = direction;
+	m_target = target;
 	m_size = size;
 }
 
@@ -18,8 +18,8 @@ void CBeam::Update()
 
 void CBeam::Draw()
 {
-	// m_directionに向きの単位ベクトルが格納されています。
-	// そのベクトルからXYZ軸それぞれの角度を求めて変数rotに格納してください
+	// 発射起点がm_posに、ターゲット座標がm_targetに入っています。
+	// それらの変数から軸の回転を求めてrotにぶち込んでください。
 	DirectX::XMFLOAT3 rot = {};
 
 
