@@ -21,11 +21,25 @@ enum ECollisionType
 	// 新たに当たり判定の種類を作る場合はここに追加する。
 };
 
+struct RayData
+{
+	DirectX::XMFLOAT3 rayStart;		// レイの開始点
+	DirectX::XMVECTOR rayDirection;	// レイの方向
+	float rayLength;				// レイの長さ
+};
+
+struct PlaneData
+{
+	DirectX::XMFLOAT3 planeNormal;	// 面の法線
+	DirectX::XMFLOAT3 planeVtx[4];	// 面の頂点座標
+};
+
 union UCollisionData
 {
 	float sphireRadius;	// 球の半径
 	DirectX::XMFLOAT3 boxScale;	// 箱のスケールXYZ
-	
+	RayData ray;	// レイの情報
+	PlaneData plane;	// 面の情報
 };
 
 struct TObjectParam

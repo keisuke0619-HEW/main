@@ -83,7 +83,7 @@ namespace Utility
 	bool IsCollisionShpirePlane(TObjectParam obj1, TObjectParam obj2);
 
 	/// オブジェクト(Ray)とオブジェクト(Ray)の当たり判定
-	///
+	bool IsCollisionRay(TObjectParam obj1, TObjectParam obj2);
 
 	/// オブジェクト(Ray)とオブジェクト(Plane)の当たり判定
 	bool IsCollisionRayPlane(TObjectParam obj1, TObjectParam obj2); //
