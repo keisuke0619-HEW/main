@@ -1,6 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
-class CBeam
+#include "BaseClass/ObjectBase.hpp"
+class CBeam : public CObjectBase
 {
 public:
 	CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size = 1.0f);
