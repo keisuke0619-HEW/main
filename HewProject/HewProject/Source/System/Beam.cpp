@@ -5,7 +5,7 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	: CObjectBase("Assets/Box.fbx")
 {
 	m_pos = pos;
-	m_target = target;
+	m_target = DirectX::XMFLOAT3(0.0f,0.0f,0.0f);//target;
 	m_size = size;
 }
 
@@ -21,18 +21,30 @@ void CBeam::Draw()
 {
 	// 発射起点がm_posに、ターゲット座標がm_targetに入っています。
 	// それらの変数から軸の回転を求めてrotにぶち込んでください。
+
 	DirectX::XMFLOAT3 rot = {};
 
 	// よくわかんないやつ
+	DirectX::XMFLOAT3 O = { 0.0f, 0.0f, 0.0f };
+	DirectX::XMVECTOR vO = DirectX::XMLoadFloat3(&O);
+	DirectX::XMFLOAT3 X = { 1.0f, 0.0f, 0.0f };
+	DirectX::XMVECTOR vX = DirectX::XMLoadFloat3(&X);
+	DirectX::XMFLOAT3 Y = { 0.0f, 1.0f, 0.0f };
+	DirectX::XMVECTOR vY = DirectX::XMLoadFloat3(&Y);
+	DirectX::XMFLOAT3 Z = { 0.0f, 0.0f, 1.0f };
+	DirectX::XMVECTOR vZ = DirectX::XMLoadFloat3(&Z);
 
-	//DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_pos);
-	//DirectX::XMVECTOR vTarget = DirectX::XMLoadFloat3(&m_target);
+	DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_pos);
+	DirectX::XMVECTOR vTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_target), vPos));
+	DirectX::XMVECTOR vToTarget = DirectX::XMVectorAdd(vTarget, vO);
 
-	//DirectX::XMVECTOR vPosToTarget = DirectX::XMVectorSubtract(vTarget, vPos);
+	DirectX::XMFLOAT3 ToTarget;
 
-	//DirectX::XMFLOAT3 PosToTarget;
+	DirectX::XMStoreFloat3(&ToTarget, vToTarget);
 
-	//DirectX::XMStoreFloat3(&PosToTarget, vPosToTarget);
+	rot.x = atan2f(ToTarget.y, ToTarget.z);
+	rot.y = atan2f(ToTarget.z, ToTarget.x);
+	rot.z = atan2f(ToTarget.y, ToTarget.x);
 
 	//
 	//DirectX::XMFLOAT3 base = PosToTarget;
