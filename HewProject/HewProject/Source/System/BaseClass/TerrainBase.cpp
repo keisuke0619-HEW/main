@@ -60,7 +60,7 @@ void CTerrainBase::SetTerrainVertex()
 	// 頂点情報
 	// インデックス情報
 	const int idxNum = 10;//3 * (m_data.gridX - 1) * (m_data.gridY - 1) * 2;
-	int* idx;
+	int* idx = new int[idxNum];
 
 	//--- 頂点設定 ---//
 	m_vtx = new TerrainVertex[m_data.count];
@@ -147,5 +147,5 @@ void CTerrainBase::SetTerrainVertex()
 	m_mesh.reset(new MeshBuffer(desc));
 
 
-	delete idx;
+	delete[] idx;
 }
