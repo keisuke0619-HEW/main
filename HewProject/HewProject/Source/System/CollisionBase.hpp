@@ -44,13 +44,6 @@ namespace Utility
 	/// <returns>当たっていたらTrue・当たっていなかったらFalse</returns>
 	bool IsCollision(TObjectParam obj1, TObjectParam obj2);
 	
-	/// <summary>
-	/// オブジェクト１と２が衝突していたらTrueを返す
-	/// </summary>
-	/// <param name="obj1">オブジェクト１のデータ</param>
-	/// <param name="obj2">オブジェクト２のデータ</param>
-	/// <returns>当たっていたらTrue・当たっていなかったらFalse</returns>
-	bool IsCollisionShpire(TObjectParam obj1, TObjectParam obj2);
 
 	/// <summary>
 	/// オブジェクト１と２が衝突していたらTrueを返す
@@ -59,22 +52,42 @@ namespace Utility
 	/// <param name="obj2">オブジェクト２のデータ</param>
 	/// <returns>当たっていたらTrue・当たっていなかったらFalse</returns>
 	bool IsCollisionBoxNoRotation(TObjectParam obj1, TObjectParam obj2);
-	
 
-
-	/// pointがオブジェクトの内部にあるか
+	/// pointがオブジェクト(Box,Shpire)の内部にあるか
 	bool IsIncludPoint(DirectX::XMFLOAT3 point, TObjectParam obj);
-
-	/// 線と面の当たり判定
-	bool IsCollisionRayPlane(Ray ray, Plane plane);
-
-	/// レイとオブジェクト(Box)の当たり判定
-	bool IsCollisionRayBox(Ray ray, TObjectParam obj);
-
+	
 	/// オブジェクト(Box)とオブジェクト(Box)の当たり判定
 	bool IsCollisionBox(TObjectParam obj1, TObjectParam obj2);
 
-	/// オブジェクト(Shpire)とオブジェクト(Box)の当たり判定
-	bool IsCollisionShpireBox(TObjectParam obj1, TObjectParam obj2);
+	/// オブジェクト(Box)とオブジェクト(Shpire)の当たり判定
+	bool IsCollisionBoxShpire(TObjectParam obj1, TObjectParam obj2);
 
+	/// オブジェクト(Box)とオブジェクト(Ray)の当たり判定
+	bool IsCollisionBoxRay(TObjectParam obj1, TObjectParam obj2); //
+
+	/// オブジェクト(Box)とオブジェクト(Plane)の当たり判定
+	bool IsCollisionBoxPlane(TObjectParam obj1, TObjectParam obj2);	//
+
+	/// <summary>
+	/// オブジェクト１と２が衝突していたらTrueを返す
+	/// </summary>
+	/// <param name="obj1">オブジェクト１のデータ</param>
+	/// <param name="obj2">オブジェクト２のデータ</param>
+	/// <returns>当たっていたらTrue・当たっていなかったらFalse</returns>
+	bool IsCollisionShpire(TObjectParam obj1, TObjectParam obj2);
+ 
+	/// オブジェクト(Shpire)とオブジェクト(Ray)の当たり判定
+	bool IsCollisionShpireRay(TObjectParam obj1, TObjectParam obj2);
+
+	/// オブジェクト(Shpire)とオブジェクト(Plane)の当たり判定
+	bool IsCollisionShpirePlane(TObjectParam obj1, TObjectParam obj2);
+
+	/// オブジェクト(Ray)とオブジェクト(Ray)の当たり判定
+	///
+
+	/// オブジェクト(Ray)とオブジェクト(Plane)の当たり判定
+	bool IsCollisionRayPlane(TObjectParam obj1, TObjectParam obj2); //
+
+	/// オブジェクト(Plane)とオブジェクト(Plane)の当たり判定
+	bool IsCollisionPlane(TObjectParam obj1, TObjectParam obj2); //
 }
