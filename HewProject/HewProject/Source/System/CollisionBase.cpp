@@ -1,6 +1,5 @@
 #include "CollisionBase.hpp"
 
-/// 完了
 bool Utility::IsCollision(TObjectParam obj1, TObjectParam obj2)
 {
     // 引数として渡されたデータをもとに当たり判定をとる。
@@ -90,7 +89,6 @@ bool Utility::IsCollision(TObjectParam obj1, TObjectParam obj2)
 	}
 }
 
-/// 完了
 bool Utility::IsCollisionBoxNoRotation(TObjectParam obj1, TObjectParam obj2)
 {
 	Box Box1 = { obj1.pos, obj1.collisionData.boxScale };
@@ -115,7 +113,7 @@ bool Utility::IsCollisionBoxNoRotation(TObjectParam obj1, TObjectParam obj2)
 	return false;
 }
 
-/// 完了
+
 bool Utility::IsIncludPoint(DirectX::XMFLOAT3 point, TObjectParam obj)
 {
 	/// レイの作成
@@ -148,7 +146,6 @@ bool Utility::IsIncludPoint(DirectX::XMFLOAT3 point, TObjectParam obj)
 	return false;
 }
 
-/// 完了
 bool Utility::IsCollisionBox(TObjectParam obj1, TObjectParam obj2)
 {
 	DirectX::XMFLOAT3 half[2] =
@@ -236,7 +233,6 @@ bool Utility::IsCollisionBox(TObjectParam obj1, TObjectParam obj2)
 	return false;
 }
 
-/// 完了
 bool Utility::IsCollisionBoxShpire(TObjectParam obj1, TObjectParam obj2)
 {
 	TObjectParam ray;
@@ -380,7 +376,6 @@ bool Utility::IsCollisionBoxShpire(TObjectParam obj1, TObjectParam obj2)
 	return false;
 }
 
-/// 完了
 bool Utility::IsCollisionBoxRay(TObjectParam obj1, TObjectParam obj2)
 {
 	DirectX::XMFLOAT3 vtx[8] =
@@ -540,7 +535,6 @@ bool Utility::IsCollisionBoxPlane(TObjectParam obj1, TObjectParam obj2)
 	return false;
 }
 
-/// 完了
 bool Utility::IsCollisionShpire(TObjectParam obj1, TObjectParam obj2)
 {
     if ((obj1.pos.x - obj2.pos.x) * (obj1.pos.x - obj2.pos.x) +
@@ -554,7 +548,6 @@ bool Utility::IsCollisionShpire(TObjectParam obj1, TObjectParam obj2)
 	return false;
 }
 
-/// 完了
 bool Utility::IsCollisionShpireRay(TObjectParam obj1, TObjectParam obj2)
 {
 	float A; // (vRay)の長さ
@@ -594,7 +587,6 @@ bool Utility::IsCollisionRay(TObjectParam obj1, TObjectParam obj2)
 	return false;
 }
 
-/// 完了
 bool Utility::IsCollisionRayPlane(TObjectParam obj1, TObjectParam obj2)
 {
 	DirectX::XMVECTOR vRayStart = DirectX::XMLoadFloat3(&obj1.collisionData.ray.rayStart);
@@ -691,4 +683,182 @@ bool Utility::IsCollisionRayPlane(TObjectParam obj1, TObjectParam obj2)
 bool Utility::IsCollisionPlane(TObjectParam obj1, TObjectParam obj2)
 {
 	return false;
+}
+
+DirectX::XMFLOAT3 Utility::GetTargetBox(TObjectParam obj1, TObjectParam obj2)
+{
+	DirectX::XMFLOAT3 vtx[8] =
+	{
+		DirectX::XMFLOAT3(-1,1,1),DirectX::XMFLOAT3(1,1,1),DirectX::XMFLOAT3(-1,1,-1),
+		DirectX::XMFLOAT3(1,1,-1),DirectX::XMFLOAT3(-1,-1,1),DirectX::XMFLOAT3(1,-1,1),
+		DirectX::XMFLOAT3(-1,-1,-1),DirectX::XMFLOAT3(1,-1,-1)
+	};
+
+	for (int i = 0; i < 8; i++)
+	{
+		DirectX::XMVECTOR pos = DirectX::XMVectorSet(
+			obj1.collisionData.boxScale.x * 0.5f * vtx[i].x,
+			obj1.collisionData.boxScale.y * 0.5f * vtx[i].y,
+			obj1.collisionData.boxScale.z * 0.5f * vtx[i].z,
+			0.0f
+		);
+		pos = DirectX::XMVector3TransformCoord(pos, DirectX::XMMatrixRotationX(obj1.rot.x) * DirectX::XMMatrixRotationY(obj1.rot.y) *  DirectX::XMMatrixRotationZ(obj1.rot.z));
+		DirectX::XMStoreFloat3(&vtx[i], DirectX::XMVectorAdd(pos, DirectX::XMLoadFloat3(&obj1.pos)));
+	}
+
+	DirectX::XMVECTOR v;
+	DirectX::XMMATRIX Rx;
+	DirectX::XMMATRIX Ry;
+	DirectX::XMMATRIX Rz;
+
+	TObjectParam plane;
+	plane = obj1;
+	plane.collisionType = COLLISION_PLANE;
+
+	// 上
+	plane.collisionData.plane.planeNormal = DirectX::XMFLOAT3(0.0f, 1.0f, 0.0f);
+	v = DirectX::XMLoadFloat3(&plane.collisionData.plane.planeNormal);
+	Rx = DirectX::XMMatrixRotationX(obj1.rot.x);
+	Ry = DirectX::XMMatrixRotationY(obj1.rot.y);
+	Rz = DirectX::XMMatrixRotationZ(obj1.rot.z);
+	v = DirectX::XMVector3TransformCoord(v, Rx * Ry * Rz);
+	v = DirectX::XMVector3Normalize(v);
+	DirectX::XMStoreFloat3(&plane.collisionData.plane.planeNormal, v);
+
+	plane.collisionData.plane.planeVtx[0] = vtx[0];
+	plane.collisionData.plane.planeVtx[1] = vtx[1];
+	plane.collisionData.plane.planeVtx[2] = vtx[2];
+	plane.collisionData.plane.planeVtx[3] = vtx[3];
+
+	if (Utility::IsCollisionRayPlane(obj2, plane))
+	{
+		return Utility::GetTargetPlane(obj2, plane);
+	}
+
+	// 下
+	plane.collisionData.plane.planeNormal = DirectX::XMFLOAT3(0.0f, -1.0f, 0.0f);
+	v = DirectX::XMLoadFloat3(&plane.collisionData.plane.planeNormal);
+	Rx = DirectX::XMMatrixRotationX(obj1.rot.x);
+	Ry = DirectX::XMMatrixRotationY(obj1.rot.y);
+	Rz = DirectX::XMMatrixRotationZ(obj1.rot.z);
+	v = DirectX::XMVector3TransformCoord(v, Rx * Ry * Rz);
+	v = DirectX::XMVector3Normalize(v);
+	DirectX::XMStoreFloat3(&plane.collisionData.plane.planeNormal, v);
+
+	plane.collisionData.plane.planeVtx[0] = vtx[6];
+	plane.collisionData.plane.planeVtx[1] = vtx[7];
+	plane.collisionData.plane.planeVtx[2] = vtx[4];
+	plane.collisionData.plane.planeVtx[3] = vtx[5];
+
+	if (Utility::IsCollisionRayPlane(obj2, plane))
+	{
+		return Utility::GetTargetPlane(obj2, plane);
+	}
+
+	// 前
+	plane.collisionData.plane.planeNormal = DirectX::XMFLOAT3(0.0f, 0.0f, -1.0f);
+	v = DirectX::XMLoadFloat3(&plane.collisionData.plane.planeNormal);
+	Rx = DirectX::XMMatrixRotationX(obj1.rot.x);
+	Ry = DirectX::XMMatrixRotationY(obj1.rot.y);
+	Rz = DirectX::XMMatrixRotationZ(obj1.rot.z);
+	v = DirectX::XMVector3TransformCoord(v, Rx * Ry * Rz);
+	v = DirectX::XMVector3Normalize(v);
+	DirectX::XMStoreFloat3(&plane.collisionData.plane.planeNormal, v);
+
+	plane.collisionData.plane.planeVtx[0] = vtx[2];
+	plane.collisionData.plane.planeVtx[1] = vtx[3];
+	plane.collisionData.plane.planeVtx[2] = vtx[6];
+	plane.collisionData.plane.planeVtx[3] = vtx[7];
+
+	if (Utility::IsCollisionRayPlane(obj2, plane))
+	{
+		return Utility::GetTargetPlane(obj2, plane);
+	}
+
+	// 後
+	plane.collisionData.plane.planeNormal = DirectX::XMFLOAT3(0.0f, 0.0f, 1.0f);
+	v = DirectX::XMLoadFloat3(&plane.collisionData.plane.planeNormal);
+	Rx = DirectX::XMMatrixRotationX(obj1.rot.x);
+	Ry = DirectX::XMMatrixRotationY(obj1.rot.y);
+	Rz = DirectX::XMMatrixRotationZ(obj1.rot.z);
+	v = DirectX::XMVector3TransformCoord(v, Rx * Ry * Rz);
+	v = DirectX::XMVector3Normalize(v);
+	DirectX::XMStoreFloat3(&plane.collisionData.plane.planeNormal, v);
+
+	plane.collisionData.plane.planeVtx[0] = vtx[1];
+	plane.collisionData.plane.planeVtx[1] = vtx[0];
+	plane.collisionData.plane.planeVtx[2] = vtx[5];
+	plane.collisionData.plane.planeVtx[3] = vtx[4];
+
+	if (Utility::IsCollisionRayPlane(obj2, plane))
+	{
+		return Utility::GetTargetPlane(obj2, plane);
+	}
+
+	// 左
+	plane.collisionData.plane.planeNormal = DirectX::XMFLOAT3(-1.0f, 0.0f, 0.0f);
+	v = DirectX::XMLoadFloat3(&plane.collisionData.plane.planeNormal);
+	Rx = DirectX::XMMatrixRotationX(obj1.rot.x);
+	Ry = DirectX::XMMatrixRotationY(obj1.rot.y);
+	Rz = DirectX::XMMatrixRotationZ(obj1.rot.z);
+	v = DirectX::XMVector3TransformCoord(v, Rx * Ry * Rz);
+	v = DirectX::XMVector3Normalize(v);
+	DirectX::XMStoreFloat3(&plane.collisionData.plane.planeNormal, v);
+
+	plane.collisionData.plane.planeVtx[0] = vtx[0];
+	plane.collisionData.plane.planeVtx[1] = vtx[2];
+	plane.collisionData.plane.planeVtx[2] = vtx[4];
+	plane.collisionData.plane.planeVtx[3] = vtx[6];
+
+	if (Utility::IsCollisionRayPlane(obj2, plane))
+	{
+		return Utility::GetTargetPlane(obj2, plane);
+	}
+
+	// 右
+	plane.collisionData.plane.planeNormal = DirectX::XMFLOAT3(1.0f, 0.0f, 0.0f);
+	v = DirectX::XMLoadFloat3(&plane.collisionData.plane.planeNormal);
+	Rx = DirectX::XMMatrixRotationX(obj1.rot.x);
+	Ry = DirectX::XMMatrixRotationY(obj1.rot.y);
+	Rz = DirectX::XMMatrixRotationZ(obj1.rot.z);
+	v = DirectX::XMVector3TransformCoord(v, Rx * Ry * Rz);
+	v = DirectX::XMVector3Normalize(v);
+	DirectX::XMStoreFloat3(&plane.collisionData.plane.planeNormal, v);
+
+	plane.collisionData.plane.planeVtx[0] = vtx[3];
+	plane.collisionData.plane.planeVtx[1] = vtx[1];
+	plane.collisionData.plane.planeVtx[2] = vtx[7];
+	plane.collisionData.plane.planeVtx[3] = vtx[5];
+
+	if (Utility::IsCollisionRayPlane(obj2, plane))
+	{
+		return Utility::GetTargetPlane(obj2, plane);
+	}
+}
+
+DirectX::XMFLOAT3 Utility::GetTargetPlane(TObjectParam obj1, TObjectParam obj2)
+{
+	DirectX::XMVECTOR vRayStart = DirectX::XMLoadFloat3(&obj1.collisionData.ray.rayStart);
+	DirectX::XMVECTOR vRayN = obj1.collisionData.ray.rayDirection;
+	DirectX::XMVECTOR vPlaneN = DirectX::XMLoadFloat3(&obj2.collisionData.plane.planeNormal);
+	DirectX::XMVECTOR vPlanePos = DirectX::XMLoadFloat3(&obj2.collisionData.plane.planeVtx[0]);
+	vRayN = DirectX::XMVector3Normalize(vRayN);
+	vPlaneN = DirectX::XMVector3Normalize(vPlaneN);
+
+	//	1)平面から始点までの距離
+	float P1;
+	DirectX::XMVECTOR vToStart = DirectX::XMVectorSubtract(vRayStart, vPlanePos);
+	DirectX::XMStoreFloat(&P1, DirectX::XMVector3Dot(vPlaneN, vToStart));
+
+	//	2)終点から平面までの距離
+	float P2;
+	DirectX::XMVECTOR vToEnd = DirectX::XMVectorScale(vRayN, obj1.collisionData.ray.rayLength);
+	vToEnd = DirectX::XMVectorAdd(vToEnd, vToStart);
+	DirectX::XMStoreFloat(&P2, DirectX::XMVector3Dot(vPlaneN, vToEnd));
+
+	DirectX::XMFLOAT3 point;
+	float dist = obj1.collisionData.ray.rayLength *(P1 / (P1 - P2));
+	DirectX::XMStoreFloat3(&point, DirectX::XMVectorAdd(DirectX::XMVectorScale(vRayN, dist), vRayStart));
+
+	return point;
 }
