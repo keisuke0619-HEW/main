@@ -27,11 +27,11 @@ void CObjectManager::UpdateAll()
 			continue;
 
 		// 自身より後ろをすべて探索
-		for (auto colItr = itr; itr != m_obj.end(); colItr++)
+		for (auto colItr = itr; colItr != m_obj.end(); colItr++)
 		{
 			auto colObjType = (*colItr)->GetParam().collisionType;
 			// 当たり判定を使用しないなら次へ
-			if (colObjType != COLLISION_NONE)
+			if (colObjType == COLLISION_NONE)
 				continue;
 
 			// ここで当たり判定をとる。

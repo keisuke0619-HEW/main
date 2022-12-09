@@ -9,6 +9,8 @@ CPlayer::CPlayer()
 	m_gra = 0;
 	m_isGround = true;
 	m_beamSize = 0;
+	m_param.collisionType = COLLISION_BOX;
+	m_param.collisionData.boxScale = { 1, 2, 1 };
 }
 
 CPlayer::~CPlayer()
@@ -36,15 +38,15 @@ void CPlayer::Move()
 {
 	const float MOVE_SPEED = 0.1f;
 	const float MOVE_GRAVITY = 0.05f;
-
+	const float GRAVITY_MAX = 0.4f;
 	auto vFront = CCameraBase::GetPrimaryFrontHorizontal();
 	auto vSide = CCameraBase::GetPrimaryRightHorizontal();
 	auto fGra = DirectX::XMFLOAT3(0, -m_gra, 0);
 	auto vGra = DirectX::XMLoadFloat3(&fGra);
 	auto vMove = DirectX::XMVectorZero();
 	
-	m_gra += MOVE_GRAVITY;
-	vMove = DirectX::XMVectorAdd(vMove, vGra);
+	m_gra += m_gra < GRAVITY_MAX ? MOVE_GRAVITY : 0;
+
 	if (Utility::GetKeyPress(Utility::Key_W))
 		vMove = DirectX::XMVectorAdd(vMove, vFront);
 	if (Utility::GetKeyPress(Utility::Key_S))
@@ -53,6 +55,8 @@ void CPlayer::Move()
 		vMove = DirectX::XMVectorSubtract(vMove, vSide);
 	if (Utility::GetKeyPress(Utility::Key_D))
 		vMove = DirectX::XMVectorAdd(vMove, vSide);
+	vMove = DirectX::XMVector3Normalize(vMove);
+	vMove = DirectX::XMVectorAdd(vMove, vGra);
 	vFront = DirectX::XMVectorScale(vFront, Utility::GetStickLeft().y);
 	vSide = DirectX::XMVectorScale(vSide, Utility::GetStickLeft().x);
 	vMove = DirectX::XMVectorAdd(vMove, vFront);
@@ -78,13 +82,11 @@ void CPlayer::Move()
 	}
 	if (m_isGround)
 	{
-#ifdef _USE_KEYBOARD_
-		if (IsKeyPress(VK_SPACE))
+		if (Utility::GetKeyPress(Utility::Key_SPACE))
 		{
 			m_gra = -2;
 			m_isGround = false;
 		}
-#endif // _USE_KEYBOARD_
 		if (Utility::GetKeyPress(Utility::A))
 		{
 			m_gra = -2;

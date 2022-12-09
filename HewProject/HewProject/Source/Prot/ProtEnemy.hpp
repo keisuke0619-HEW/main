@@ -16,6 +16,7 @@ public:
 private:
 	void Move();
 	void Finalize() override;
+	void OnCollision(Ptr obj) override;
 
 	IObjectBase::Ref m_player;
 
@@ -27,5 +28,4 @@ private:
 	int m_randNum;		// ランダム移動で使う(移動する方向を決める)
 	DirectX::XMFLOAT3 m_target;
 
-	std::unique_ptr<CBillboard> m_billboard;	// ビルボード
 };

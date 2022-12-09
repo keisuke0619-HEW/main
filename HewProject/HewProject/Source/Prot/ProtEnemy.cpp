@@ -20,8 +20,8 @@ CProtEnemy::CProtEnemy()
 	m_param.pos.x = (rand() % 100) / 10.0f;
 	m_param.pos.y = 1.0f;
 	m_param.pos.z = (rand() % 100) / 10.0f;
-	m_billboard.reset(new CBillboard("Assets/Img/White.png"));
-	m_billboard->SetSize({ 2.5f, 2.0f });
+	m_param.collisionType = COLLISION_BOX;
+	m_param.collisionData.boxScale = { 1,1,1 };
 }
 
 CProtEnemy::~CProtEnemy()
@@ -41,13 +41,10 @@ void CProtEnemy::Update()
 		Destroy();
 	// 移動るーちん
 	Move();
-	m_billboard->SetPos(m_param.pos);
 }
 
 void CProtEnemy::Draw()
 {
-	m_billboard->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
-	m_billboard->Draw(true, true);
 	CObjectBase::Draw();
 }
 
@@ -122,4 +119,12 @@ void CProtEnemy::Finalize()
 {
 	// マネージャに死んだことを伝える
 
+}
+
+void CProtEnemy::OnCollision(Ptr obj)
+{
+	if (obj->GetParam().tag == TAG_PLAYER)
+	{
+		Destroy();
+	}
 }
