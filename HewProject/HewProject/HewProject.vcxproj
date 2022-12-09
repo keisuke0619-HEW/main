@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Blend.hpp" />
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
     <ClInclude Include="Source\Prot\ProtEnemy.hpp" />
@@ -66,6 +67,7 @@
     <ClInclude Include="Source\System\WinUtil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Blend.cpp" />
     <ClCompile Include="DirectXTex\Texture.cpp" />
     <ClCompile Include="Source\Prot\ProtEnemy.cpp" />
     <ClCompile Include="Source\Prot\ProtEnemyManager.cpp" />
