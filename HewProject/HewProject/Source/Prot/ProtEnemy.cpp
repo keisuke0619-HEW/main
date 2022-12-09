@@ -3,10 +3,11 @@
 #include <SceneBase.hpp>
 #include <Controller.hpp>
 #include <Camera.hpp>
+#include <Blend.hpp>
 // 当たり判定は後で付けます。
 
 CProtEnemy::CProtEnemy()
-	: CObjectBase("Assets/Box.fbx", 0.2f)
+	: CObjectBase("Assets/Box.fbx", 0.4f)
 	, m_move(0.05f)
 	, m_distance(4.f)
 	, m_cnt(0)
@@ -22,6 +23,7 @@ CProtEnemy::CProtEnemy()
 	m_param.pos.z = (rand() % 100) / 10.0f;
 	m_param.collisionType = COLLISION_BOX;
 	m_param.collisionData.boxScale = { 1,1,1 };
+	m_startPos = m_param.pos;
 }
 
 CProtEnemy::~CProtEnemy()
@@ -37,15 +39,15 @@ void CProtEnemy::Update()
 		auto objList = CSceneBase::GetObjList();
 		m_player = objList.lock()->FindTag(TAG_PLAYER);
 	}
-	if (Utility::GetKeyTrigger(Utility::Key_U))
-		Destroy();
 	// 移動るーちん
 	Move();
 }
 
 void CProtEnemy::Draw()
 {
+	Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
+	Utility::SetBlendState(BLEND_ALPHA);
 }
 
 // 移動ルーチン。Excelを参考に作成
@@ -77,40 +79,20 @@ void CProtEnemy::Move()
 		m_param.pos.x += movePos.x * m_move / 2; // エネミーのposを使う
 		m_param.pos.y += movePos.y * m_move / 2;
 		m_param.pos.z += movePos.z * m_move / 2;
+		m_param.frame = 0;
 	}
 	else
 	{
-		// ランダムで移動する
-		if (m_cnt % 60 == 0)
+		if (m_param.frame % 300 == 0)
 		{
-			m_randNum = rand() % 4;
-		
+			m_randTarget = { (float)(rand() % 30), 0.5f, (float)(rand() % 30) };
+			m_startPos = m_param.pos;
 		}
-		switch (m_randNum)
-		{
-		case(0):
-			m_param.pos.x += m_move * Utility::InOutSine(m_cnt / 60.f);
-			break;
-		case(1):
-			m_param.pos.x -= m_move * Utility::InOutSine(m_cnt / 60.f);
-			break;
-		case(2):
-			m_param.pos.z += m_move * Utility::InOutSine(m_cnt / 60.f);
-			break;
-		case(3):
-			m_param.pos.z -= m_move * Utility::InOutSine(m_cnt / 60.f);
-			break;
-		default:
-			break;
-		}
-	}
-
-	// カウントを増やす
-	
-	m_cnt++;
-	if (m_cnt > 60)
-	{
-		m_cnt = 0;
+		m_param.move = {
+			(m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
+			(m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
+			(m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
+		};
 	}
 }
 
