@@ -16,6 +16,8 @@ enum ECollisionType
 	COLLISION_NONE,		// 当たり判定を使用しない
 	COLLISION_BOX,		// 箱の当たり判定
 	COLLISION_SPHIRE,	// 球の当たり判定
+	COLLISION_RAY,		// レイの当たり判定
+	COLLISION_PLANE,	// 板の当たり判定
 	// 新たに当たり判定の種類を作る場合はここに追加する。
 };
 
@@ -23,6 +25,7 @@ union UCollisionData
 {
 	float sphireRadius;	// 球の半径
 	DirectX::XMFLOAT3 boxScale;	// 箱のスケールXYZ
+	
 };
 
 struct TObjectParam

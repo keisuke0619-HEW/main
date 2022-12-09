@@ -100,7 +100,7 @@ void CPlayer::Beam()
 	const float maxBeamSize = 3.0f;
 	const float addBeamSize = 0.05f;
 	// RT�ɕύX
-	if (Utility::GetKeyPress(Utility::RB) || Utility::GetKeyPress(Utility::Key_B))
+	if (Utility::GetKeyPress(Utility::RT) || Utility::GetKeyPress(Utility::Key_B))
 	{
 		m_beamSize += m_beamSize < maxBeamSize ? addBeamSize : 0;
 	}

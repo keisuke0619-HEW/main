@@ -37,8 +37,6 @@ void CProtEnemy::Update()
 		auto objList = CSceneBase::GetObjList();
 		m_player = objList.lock()->FindTag(TAG_PLAYER);
 	}
-	if (Utility::GetKeyTrigger(Utility::Key_U))
-		Destroy();
 	// ˆÚ“®‚é[‚¿‚ñ
 	Move();
 }
