@@ -3,6 +3,7 @@
 #include <SceneBase.hpp>
 #include <Controller.hpp>
 #include <Camera.hpp>
+#include <Blend.hpp>
 // 当たり判定は後で付けます。
 
 CProtEnemy::CProtEnemy()
@@ -44,7 +45,9 @@ void CProtEnemy::Update()
 
 void CProtEnemy::Draw()
 {
+	Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
+	Utility::SetBlendState(BLEND_ALPHA);
 }
 
 // 移動ルーチン。Excelを参考に作成
