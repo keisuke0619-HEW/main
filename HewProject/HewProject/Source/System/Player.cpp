@@ -109,10 +109,15 @@ void CPlayer::Beam()
 	{
 		if (m_beamSize > 1.0f)
 		{
-			m_beam.reset(new CBeam(m_param.pos, {0, 0, 0}, m_beamSize));
+			m_beam.reset(new CBeam(m_param.pos, m_beamTarget, m_beamSize));
 		}
 		m_beamSize = 0.0f;
 	}
 	if(m_beam)
 		m_beam->Update();
+}
+
+void CPlayer::SetTarget(DirectX::XMFLOAT3 target)
+{
+	m_beamTarget = target;
 }
