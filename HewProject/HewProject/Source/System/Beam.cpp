@@ -7,6 +7,8 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	m_pos = pos;
 	m_target = target;
 	m_size = size;
+
+	m_time = 1.0f;
 }
 
 CBeam::~CBeam()
@@ -15,6 +17,7 @@ CBeam::~CBeam()
 
 void CBeam::Update()
 {
+
 }
 
 void CBeam::Draw()
@@ -32,13 +35,15 @@ void CBeam::Draw()
 
 	DirectX::XMStoreFloat3(&ToTarget, vToTarget);
 
-	rot.x = atan2f(sqrtf(ToTarget.z * ToTarget.z + ToTarget.x * ToTarget.x), ToTarget.y);// 90 * 3.14159f / 180.0f;
+	rot.x = atan2f(sqrtf(ToTarget.z * ToTarget.z + ToTarget.x * ToTarget.x), ToTarget.y);
 	rot.y = atan2f(ToTarget.x, ToTarget.z);
 	rot.z = 0;
 
 	SetGeometoryTranslate(m_pos.x, m_pos.y, m_pos.z);
 	SetGeometoryRotation(rot.x, rot.y, rot.z);
 	SetGeometoryScaling(m_size, 10000, m_size);
+
+	m_time -= 1.0f / 60.0f;
 
 	DrawCapsule();
 }

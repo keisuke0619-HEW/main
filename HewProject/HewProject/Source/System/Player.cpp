@@ -2,6 +2,7 @@
 #include <Camera.hpp>
 #include <DebugWindow.hpp>
 #include <Controller.hpp>
+#include <Camera.hpp>
 CPlayer::CPlayer()
 	: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f, false, "Player")
 {
@@ -109,10 +110,20 @@ void CPlayer::Beam()
 	{
 		if (m_beamSize > 1.0f)
 		{
-			m_beam.reset(new CBeam(m_param.pos, {0, 0, 0}, m_beamSize));
+			// ‚Æ‚è‚ ‚¦‚¸Œ©‚Ä‚¢‚é•ûŒü‚É‘Å‚Â
+			DirectX::XMFLOAT3 CameraPos = CCameraBase::GetDataFromTag("Player").pos;
+			DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
+			DirectX::XMVECTOR CameraRay = DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&CameraLook), DirectX::XMLoadFloat3(&CameraPos));
+			CameraRay = DirectX::XMVectorScale(CameraRay, 2.0f);
+			DirectX::XMStoreFloat3(&m_beamTarget,DirectX::XMVectorAdd(CameraRay, DirectX::XMLoadFloat3(&CameraLook)));
+			m_beamTarget.y -= CameraPos.y - CameraLook.y;
+			// ƒr[ƒ€¶¬
+			m_beam.reset(new CBeam(m_param.pos, m_beamTarget, m_beamSize));
 		}
 		m_beamSize = 0.0f;
 	}
-	if(m_beam)
+	if (m_beam)
+	{
 		m_beam->Update();
+	}
 }

@@ -15,6 +15,7 @@ CPlayerCamera::CPlayerCamera()
 
 CPlayerCamera::~CPlayerCamera()
 {
+
 }
 
 void CPlayerCamera::Update()

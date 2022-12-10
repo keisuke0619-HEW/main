@@ -82,11 +82,13 @@ class IObjectBase
 public:
 	using Ptr = std::shared_ptr<IObjectBase>;
 	using Ref = std::weak_ptr<IObjectBase>;
+	
 public:
 	virtual void BaseUpdate() = 0;
 	virtual void BaseDraw() = 0;
 	virtual void OnCollision(Ptr collisionObj) = 0;
 	virtual TObjectParam GetParam() = 0;
+	
 
 	virtual ~IObjectBase() {}
 

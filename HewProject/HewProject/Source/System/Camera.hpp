@@ -17,7 +17,6 @@ class CCameraBase
 public:
 	struct Data
 	{
-
 		DirectX::XMFLOAT3 pos;
 		DirectX::XMFLOAT3 look;
 	};
