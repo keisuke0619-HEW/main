@@ -3,6 +3,7 @@
 #include <DebugWindow.hpp>
 #include <Controller.hpp>
 #include <Camera.hpp>
+#include <SceneBase.hpp>
 CPlayer::CPlayer()
 	: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f, false, "Player")
 {
@@ -32,8 +33,8 @@ void CPlayer::Update()
 void CPlayer::Draw()
 {
 	CObjectBase::Draw();
-	if(m_beam)
-		m_beam->Draw();
+	//if(m_beam)
+	//	m_beam->Draw();
 }
 
 void CPlayer::Move()
@@ -117,15 +118,19 @@ void CPlayer::Beam()
 			CameraRay = DirectX::XMVectorScale(CameraRay, 2.0f);
 			DirectX::XMStoreFloat3(&m_beamTarget,DirectX::XMVectorAdd(CameraRay, DirectX::XMLoadFloat3(&CameraLook)));
 			m_beamTarget.y -= CameraPos.y - CameraLook.y;
+			
 			// ƒr[ƒ€¶¬
-			m_beam.reset(new CBeam(m_param.pos, m_beamTarget, m_beamSize));
+			auto beamPos = m_param.pos;
+			beamPos.y += 1.0f;
+			CSceneBase::GetObjList().lock()->Add(new CBeam(beamPos, m_beamTarget, m_beamSize));
+			//m_beam.reset(new CBeam(m_param.pos, m_beamTarget, m_beamSize));
 		}
 		m_beamSize = 0.0f;
 	}
-	if (m_beam)
-	{
-		m_beam->Update();
-	}
+	//if (m_beam)
+	//{
+	//	m_beam->Update();
+	//}
 }
 
 void CPlayer::SetTarget(DirectX::XMFLOAT3 target)

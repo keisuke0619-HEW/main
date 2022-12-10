@@ -133,7 +133,14 @@ void DrawCapsule()
 {
 	UpdateGeometoryMatrix();
 	g_pGeometoryVS->Bind();
-	g_pGeometoryPS->Bind();
+	if (g_isGeometoryColor == false)
+	{
+		g_pGeometoryPS->Bind();
+	}
+	else
+	{
+		g_pGeometoryColorPS->Bind();
+	}
 	g_pGeometoryWVP->BindVS(0);
 	g_pGeometoryCapsule->Draw();
 }

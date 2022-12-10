@@ -1,14 +1,16 @@
 #include "Beam.hpp"
 #include <Geometory.h>
 #include <DebugWindow.hpp>
+#include <Easing.hpp>
 CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	: CObjectBase("Assets/Box.fbx")
 {
 	m_pos = pos;
 	m_target = target;
-	m_size = size;
+	m_size = 0;
 
-	m_time = 1.0f;
+	m_maxSize = size;
+	m_time = 2.0f;
 }
 
 CBeam::~CBeam()
@@ -17,7 +19,17 @@ CBeam::~CBeam()
 
 void CBeam::Update()
 {
-
+	const int beamGrowFrame = 60 * 1;
+	const int beamDeadFrame = 60 * 3;
+	if (m_param.frame < beamGrowFrame)
+	{
+		m_size = m_maxSize * Utility::OutQuad((float)m_param.frame / beamGrowFrame);// += m_maxSize / beamGrowFrame;
+	}
+	if (m_param.frame >= beamDeadFrame)
+	{
+		Destroy();
+	}
+	CDebugWindow::Print(ShimizuKeisuke, "size", m_size);
 }
 
 void CBeam::Draw()
@@ -45,10 +57,7 @@ void CBeam::Draw()
 
 	m_time -= 1.0f / 60.0f;
 
+	
+	SetColorPS(true, 0.3f, 0.76f, 1.0f, 0.5f, 1, 1);
 	DrawCapsule();
-}
-
-bool CBeam::GetIsDestroy()
-{
-	return m_time <= 0.0f;
 }

@@ -9,9 +9,9 @@ public:
 
 	void Update();
 	void Draw();
-	bool GetIsDestroy();
 private:
 	float m_size;
+	float m_maxSize;
 	float m_time;
 	DirectX::XMFLOAT3 m_pos;
 	DirectX::XMFLOAT3 m_target;
