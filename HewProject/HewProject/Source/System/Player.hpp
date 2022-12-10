@@ -11,6 +11,7 @@ public:
 
 	void Update() override;
 	void Draw() override;
+	void SetTarget(DirectX::XMFLOAT3 target);
 private:
 	float m_gra;		// d—Í
 	bool m_isGround;	// ’n‚É‘«‚Â‚¢‚Ä‚éH

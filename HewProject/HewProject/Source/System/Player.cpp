@@ -127,3 +127,8 @@ void CPlayer::Beam()
 		m_beam->Update();
 	}
 }
+
+void CPlayer::SetTarget(DirectX::XMFLOAT3 target)
+{
+	m_beamTarget = target;
+}
