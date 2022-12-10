@@ -11,6 +11,9 @@ void CObjectManager::CallDestroy()
 
 CObjectManager::CObjectManager()
 {
+#ifdef CRITICAL_LOW_FPS_TEMPORARY_RESPONSE
+	m_frame = 0;
+#endif // CRITICAL_LOW_FPS_TEMPORARY_RESPONSE
 
 }
 
@@ -30,6 +33,11 @@ void CObjectManager::UpdateAll()
 	for (auto itr = m_obj.begin(); itr != m_obj.end(); itr++)
 	{
 		(*itr)->BaseUpdate();
+#ifdef CRITICAL_LOW_FPS_TEMPORARY_RESPONSE
+		if (m_frame % 5 != 0)
+			continue;
+#endif // CRITICAL_LOW_FPS_TEMPORARY_RESPONSE
+
 		auto collisionType = (*itr)->GetParam().collisionType;
 		// 当たり判定を使用しないオブジェクトならここで次へ
 		if (collisionType == COLLISION_NONE)
@@ -71,6 +79,10 @@ void CObjectManager::UpdateAll()
 	//}
 
 	//CObjectManager::FindTag(TAG_PLAYER)->GetParam().target = cameraLook;
+#ifdef CRITICAL_LOW_FPS_TEMPORARY_RESPONSE
+	m_frame++;
+#endif // CRITICAL_LOW_FPS_TEMPORARY_RESPONSE
+
 }
 
 void CObjectManager::DrawAll()

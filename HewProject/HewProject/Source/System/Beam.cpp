@@ -29,7 +29,6 @@ void CBeam::Update()
 	{
 		Destroy();
 	}
-	CDebugWindow::Print(ShimizuKeisuke, "size", m_size);
 }
 
 void CBeam::Draw()
