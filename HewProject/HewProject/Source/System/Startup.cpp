@@ -4,7 +4,7 @@
 
 
 //--- ’è”’è‹`
-const char* APP_TITLE = "DX2D";
+const char* APP_TITLE = "It's so CHARGE BEAM -AX218-";
 const Frame DEFAULT_FPS = 60;
 
 /*
