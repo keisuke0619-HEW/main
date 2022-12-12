@@ -4,6 +4,7 @@
 #include <Controller.hpp>
 #include <Camera.hpp>
 #include <SceneBase.hpp>
+#include <Billboard.h>
 CPlayer::CPlayer()
 	: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f, false, "Player")
 {
@@ -14,6 +15,7 @@ CPlayer::CPlayer()
 	m_param.collisionType = COLLISION_BOX;
 	m_param.collisionData.box.boxPos = m_param.pos;
 	m_param.collisionData.box.boxScale = { 1, 2, 1 };
+	m_playerUI.reset(new CPlayerUI());
 }
 
 CPlayer::~CPlayer()
@@ -26,13 +28,16 @@ void CPlayer::Update()
 	Beam();
 	m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
 	m_param.collisionData.box.boxPos = m_param.pos;
+
+	m_playerUI->Update();
 	//if (IsKeyTrigger('U'))
 	//	Destroy();
 }
 
 void CPlayer::Draw()
 {
-	CObjectBase::Draw();
+	//CObjectBase::Draw();
+	m_playerUI->Draw();
 	//if(m_beam)
 	//	m_beam->Draw();
 }

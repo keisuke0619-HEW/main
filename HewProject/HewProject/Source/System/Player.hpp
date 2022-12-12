@@ -2,7 +2,7 @@
 #include <ObjectBase.hpp>
 #include <Beam.hpp>
 #include <memory>
-
+#include <PlayerUI.hpp>
 class CPlayer : public CObjectBase
 {
 public:
@@ -18,7 +18,7 @@ private:
 	float m_beamSize;	// ビームのサイズ
 	DirectX::XMFLOAT3 m_beamTarget; // ビームの方向
 	//std::unique_ptr<CBeam> m_beam;	// ビーム本体
-
+	std::unique_ptr<CPlayerUI> m_playerUI;	// プレイヤーのUI
 	void Move();
 	void Beam();
 };

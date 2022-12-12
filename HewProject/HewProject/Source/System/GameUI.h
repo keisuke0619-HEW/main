@@ -4,9 +4,11 @@
 #include "DirectX.h"
 #include "Sprite.h"
 #include "DirectXTex/Texture.h"
-
+#include <memory>
 class CGameUI
 {
+public:
+	using Ptr = std::shared_ptr<CGameUI>;
 public:
 	CGameUI(const char*);
 	~CGameUI();

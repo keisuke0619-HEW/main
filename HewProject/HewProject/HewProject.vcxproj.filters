@@ -308,6 +308,12 @@
     <ClCompile Include="Blend.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Source\System\BaseClass\PlayerUI.hpp">
+      <Filter>システム\BaseClass</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ModelVS.hlsl">

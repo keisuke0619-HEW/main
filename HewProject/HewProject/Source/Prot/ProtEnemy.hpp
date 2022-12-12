@@ -30,4 +30,5 @@ private:
 	DirectX::XMFLOAT3 m_randTarget;
 	DirectX::XMFLOAT3 m_startPos;
 
+	CBillboard* m_bill;
 };

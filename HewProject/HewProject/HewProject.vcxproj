@@ -82,6 +82,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp" />
+    <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp" />
+    <ClCompile Include="Source\System\BaseClass\PlayerUI.hpp" />
     <ClCompile Include="Source\System\BaseClass\TerrainBase.cpp" />
     <ClCompile Include="Source\System\Beam.cpp" />
     <ClCompile Include="Source\System\BlendState.cpp" />
