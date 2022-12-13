@@ -3,6 +3,7 @@
 #include <Controller.hpp>
 #include <Sprite.h>
 #include <Blend.hpp>
+#include <SamplerState.h>
 
 //--- Scenes ---//
 #include <SceneTest.hpp>
@@ -16,6 +17,9 @@ Game3D::Game3D()
 	Utility::InitBlendState();
 	Utility::SetBlendState(BLEND_ALPHA);
 	Utility::ControllerInit();
+	auto sp = new SamplerState();
+	sp->Create(D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
+
 }
 Game3D::~Game3D()
 {

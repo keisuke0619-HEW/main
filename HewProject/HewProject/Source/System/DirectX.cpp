@@ -162,13 +162,7 @@ void EndDrawDX()
 
 void EnableDepth(bool enable)
 {
-	if (enable)
-	{
-		g_pContext->OMSetRenderTargets(1, &g_pRTV, g_pDSV);
-	}
-	else
-	{
-		g_pContext->OMSetRenderTargets(1, &g_pRTV, nullptr);
-	}
+	g_pContext->OMSetRenderTargets(1, &g_pRTV, enable ? g_pDSV : NULL);
+	return;
 }
 

@@ -3,9 +3,9 @@
 CPlayerUI::CPlayerUI()
 {
 	// ここでUIのスプライトを生成
-	auto tmp = AddList(new CGameUI("Assets/Img/crosshear.png"));
+	auto tmp = AddList(new CGameUI("Assets/Img/crosshair.png"));
 	tmp->SetPos({ 640, 360 });
-	tmp->SetSize({ 64, -64 });
+	tmp->SetSize({ 640, -640 });
 
 
 
@@ -24,13 +24,11 @@ void CPlayerUI::Update()
 
 void CPlayerUI::Draw()
 {
-	Utility::SetBlendState(BLEND_ADD);
 	// すべてのスプライトを更新
 	for (auto itr = m_spriteList.begin(); itr != m_spriteList.end(); itr++)
 	{
 		(*itr)->Draw();
 	}
-	Utility::SetBlendState(BLEND_ALPHA);
 }
 
 CGameUI::Ptr CPlayerUI::AddList(CGameUI* gameUI)
