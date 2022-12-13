@@ -1,8 +1,11 @@
 #include "Easing.hpp"
 #include <math.h>
 #include <macro.hpp>
+#include<Windows.h>
 
 // https://easings.net/ja
+
+
 
 float Utility::InSine(float x)
 {
@@ -133,7 +136,6 @@ float Utility::InOutBack(float x)
 {
 	const float c1 = 1.70158f;
 	const float c2 = c1 * 1.525f;
-
     return x < 0.5
 		? (powf(2 * x, 2) * ((c2 + 1) * 2 * x - c2)) / 2
 		: (powf(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2;
@@ -200,3 +202,4 @@ float Utility::InOutBounce(float x)
 		? (1 - OutBounce(1 - 2 * x)) / 2
 		: (1 + OutBounce(2 * x - 1)) / 2;
 }
+

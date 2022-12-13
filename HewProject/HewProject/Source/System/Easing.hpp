@@ -1,8 +1,7 @@
 #pragma once
-
 namespace Utility
 {
-	 
+	
 	float InSine(float level);
 	float OutSine(float level);
 	float InOutSine(float level);
@@ -33,7 +32,6 @@ namespace Utility
 	float InBounce(float level);
 	float OutBounce(float level);
 	float InOutBounce(float level);
-
 
 
 }
