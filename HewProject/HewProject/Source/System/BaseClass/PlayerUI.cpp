@@ -7,9 +7,15 @@ CPlayerUI::CPlayerUI()
 	tmp->SetPos({ 640, 360 });
 	tmp->SetSize({ 64, -64 });
 
+	// 体力ゲージ
+	auto tmphp = AddList(new CGameUI("Assets/Img/HP.png"));
+	tmphp->SetPos({ 320,660 });
+	tmphp->SetSize({ 640, -40 });
 
-
-
+	// チャージゲージ
+	auto tmpchg = AddList(new CGameUI("Assets/Img/Charge2.png"));
+	tmpchg->SetPos({ 213, 700 });
+	tmpchg->SetSize({ 427, -40 });
 }
 
 CPlayerUI::~CPlayerUI()
@@ -29,6 +35,16 @@ void CPlayerUI::Draw()
 	{
 		(*itr)->Draw();
 	}
+}
+
+void CPlayerUI::SetLife(float)
+{
+
+}
+
+void CPlayerUI::SetCharge(float)
+{
+	
 }
 
 CGameUI::Ptr CPlayerUI::AddList(CGameUI* gameUI)
