@@ -1,4 +1,4 @@
-#include "ProtEnemy.hpp"
+#include"ProtEnemyBoss.hpp"
 #include <Easing.hpp>
 #include <SceneBase.hpp>
 #include <Controller.hpp>
@@ -6,13 +6,13 @@
 #include <Blend.hpp>
 // 当たり判定は後で付けます。
 
-CProtEnemy::CProtEnemy()
+CProtEnemyBoss::CProtEnemyBoss()
 	: CObjectBase("Assets/Box.fbx", 0.4f)
 	, m_move(0.05f)
 	, m_distance(4.0f)
 	, m_cnt(0)
 	, m_randNum(0)
-	, m_target(DirectX::XMFLOAT3(0,0,0))
+	, m_target(DirectX::XMFLOAT3(0, 0, 0))
 {
 	// オブジェクトのリストを取得
 	auto objList = CSceneBase::GetObjList();
@@ -26,15 +26,15 @@ CProtEnemy::CProtEnemy()
 	m_param.collisionData.box.boxScale = { 1,1,1 };
 	m_startPos = m_param.pos;
 
-	m_bill = new CBillboard("Assets/Img/enemy.png");
+	m_bill = new CBillboard("Assets/Img/Boss.png");
 }
 
-CProtEnemy::~CProtEnemy()
+CProtEnemyBoss::~CProtEnemyBoss()
 {
 
 }
 
-void CProtEnemy::Update()
+void CProtEnemyBoss::Update()
 {
 	// もしプレイヤーのオブジェクトが消えていたらもう一度取得
 	if (m_player.expired() == true)
@@ -47,7 +47,7 @@ void CProtEnemy::Update()
 	m_param.collisionData.box.boxPos = m_param.pos;
 }
 
-void CProtEnemy::Draw()
+void CProtEnemyBoss::Draw()
 {
 	m_bill->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
 	m_bill->SetPos(m_param.pos);
@@ -55,18 +55,17 @@ void CProtEnemy::Draw()
 	Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
 	Utility::SetBlendState(BLEND_ALPHA);
-
 }
 
 // 移動ルーチン。Excelを参考に作成
 // いーじんぐを使用。
-void CProtEnemy::Move()
+void CProtEnemyBoss::Move()
 {
 	// いーじんぐ使用方法（例）
 	// Easing::InOutSine(level);
 
 	// プレイヤーとの距離を取得
-	if(m_player.expired() == false)
+	if (m_player.expired() == false)
 		m_target = m_player.lock()->GetParam().pos;
 	// プレイヤーとエネミーの位置情報
 	DirectX::XMVECTOR enemy = DirectX::XMLoadFloat3(&m_param.pos);	// エネミーのposを入れる
@@ -109,13 +108,13 @@ void CProtEnemy::Move()
 }
 
 // 死亡時に勝手に呼ばれます。
-void CProtEnemy::Finalize()
+void CProtEnemyBoss::Finalize()
 {
 	// マネージャに死んだことを伝える
 
 }
 
-void CProtEnemy::OnCollision(Ptr obj)
+void CProtEnemyBoss::OnCollision(Ptr obj)
 {
 	if (obj->GetParam().tag == TAG_PLAYER)
 	{

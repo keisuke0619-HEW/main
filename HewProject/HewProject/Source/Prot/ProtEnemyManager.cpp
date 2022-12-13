@@ -1,9 +1,12 @@
 #include "ProtEnemyManager.hpp"
 #include <ProtEnemy.hpp>
+#include<ProtEnemyBoss.hpp>
 CProtEnemyManager::CProtEnemyManager()
 {
 	// オブジェクトリストを格納
 	m_objList = CSceneBase::GetObjList();
+	m_objListBoss = CSceneBase::GetObjList();
+
 	// オブジェクトリストが死んでいなかったら(NULLチェックもどきだよ.expired)
 	if (m_objList.expired() == false)
 	{
@@ -12,6 +15,16 @@ CProtEnemyManager::CProtEnemyManager()
 		{
 			// 敵を生成
 			m_objects[i] = m_objList.lock()->Add(new CProtEnemy());
+		}
+	}
+	//ボス生成
+	if (m_objListBoss.expired() == false)
+	{
+		// 最大数までループ
+		for (int i = 0; i < PROT_ENEMY_BOSS_MAX; i++)
+		{
+			// 敵を生成
+			m_objectsBoss[i] = m_objListBoss.lock()->Add(new CProtEnemyBoss());
 		}
 	}
 
@@ -33,7 +46,19 @@ void CProtEnemyManager::Update()
 			m_objects[i] = m_objList.lock()->Add(new CProtEnemy());
 		}
 	}
-	
-	
+	//ボス生成
+	// 現在のオブジェクトの数がマックス以下だったら１秒後に新しいオブジェクトを生成
+	if (m_objListBoss.expired() == true)
+	{
+		return;
+	}
+	for (int i = 0; i < PROT_ENEMY_BOSS_MAX; i++)
+	{
+		if (m_objectsBoss[i].expired() == true)
+		{
+			// 死んでいたら中に入る
+			m_objectsBoss[i] = m_objListBoss.lock()->Add(new CProtEnemyBoss());
+		}
+	}
 
 }
