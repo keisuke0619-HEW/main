@@ -79,32 +79,12 @@ void CProtEnemyBoss::Move()
 
 	DirectX::XMStoreFloat3(&movePos, distance);
 
-
-	// もしプレイヤーとの距離が一定以下だったら
-	if (fabsf(movePos.x) <= m_distance && fabsf(movePos.y) <= m_distance && fabsf(movePos.z) <= m_distance)
-	{
-		// プレイヤーを目標にする
-
-
-
+	//ボスに常に向かってくる
 		m_param.pos.x += movePos.x * m_move / 2; // エネミーのposを使う
 		m_param.pos.y += movePos.y * m_move / 2;
 		m_param.pos.z += movePos.z * m_move / 2;
 		m_param.frame = 0;
-	}
-	else
-	{
-		if (m_param.frame % 300 == 0)
-		{
-			m_randTarget = { (float)(rand() % 30), 0.5f, (float)(rand() % 30) };
-			m_startPos = m_param.pos;
-		}
-		m_param.move = {
-			(m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
-			(m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
-			(m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
-		};
-	}
+	
 }
 
 // 死亡時に勝手に呼ばれます。

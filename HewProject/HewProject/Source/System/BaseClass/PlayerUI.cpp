@@ -5,7 +5,7 @@ CPlayerUI::CPlayerUI()
 	// ここでUIのスプライトを生成
 	auto tmp = AddList(new CGameUI("Assets/Img/crosshair.png"));
 	tmp->SetPos({ 640, 360 });
-	tmp->SetSize({ 640, -640 });
+	tmp->SetSize({ 340, -340 });
 
 
 
