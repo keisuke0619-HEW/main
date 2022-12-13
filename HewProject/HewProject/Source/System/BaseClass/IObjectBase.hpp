@@ -8,6 +8,8 @@ enum EObjectTag
 	TAG_PLAYER,
 	TAG_CAMERA,
 	TAG_ENEMY,
+	TAG_BEAM,
+	TAG_SHOCK,	// 衝撃波
 	// 必要な場合はここにタグを追記する
 };
 
@@ -87,6 +89,7 @@ public:
 	virtual void BaseUpdate() = 0;
 	virtual void BaseDraw() = 0;
 	virtual void OnCollision(Ptr collisionObj) = 0;
+	virtual void OnCollisionTag(EObjectTag tag) = 0;
 	virtual TObjectParam GetParam() = 0;
 	
 

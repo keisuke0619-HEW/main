@@ -21,7 +21,8 @@ public:
 	void BaseDraw() override final;
 	// オブジェクトと衝突していたら呼び出される
 	void OnCollision(Ptr collisionObj) override;
-	
+	void OnCollisionTag(EObjectTag tag) override;
+
 	// パラメータ取得
 	TObjectParam GetParam() override final;
 

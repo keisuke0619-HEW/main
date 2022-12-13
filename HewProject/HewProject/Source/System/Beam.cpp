@@ -2,6 +2,8 @@
 #include <Geometory.h>
 #include <DebugWindow.hpp>
 #include <Easing.hpp>
+
+#include <SceneBase.hpp>
 CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	: CObjectBase("Assets/Box.fbx")
 {
@@ -29,6 +31,7 @@ void CBeam::Update()
 	{
 		Destroy();
 	}
+	Collision();
 }
 
 void CBeam::Draw()
@@ -61,33 +64,52 @@ void CBeam::Draw()
 	DrawCapsule();
 }
 
-bool CBeam::Collision(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
+void CBeam::Collision()
 {
-	m_enemyPos = pos;
-	m_enemyTarget = target;
-	m_enemySize = size;
 
-	DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_pos);
-	DirectX::XMVECTOR vTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_target), vPos));
-
-	DirectX::XMVECTOR vEnemyPos = DirectX::XMLoadFloat3(&m_enemyPos);
-	DirectX::XMVECTOR vEnemyTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_enemyTarget), vEnemyPos));
-
-
-	// ì‡êœÇÃåvéZ
-	DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);
-	
-	float rad;
-	DirectX::XMStoreFloat(&rad, vdot);
-
-	rad = acosf(rad);
-
-	if (rad <= 10) // ìGÇ∆ÉrÅ[ÉÄÇÃìñÇΩÇËîªíË
+	// ìGÇÃÉäÉXÉg
+	auto enemyList = CSceneBase::GetObjList().lock()->FindTagAll(TAG_ENEMY);
+	// ìGÇÃÉäÉXÉgëSíTçı
+	for (auto itr = enemyList.begin(); itr != enemyList.end(); itr++)
 	{
-		return true;
+		// ìGÇÃÉfÅ[É^äiî[
+		auto enemyParam = (*itr)->GetParam();
+
+		// ìGÇÃÉfÅ[É^ÇégÇ¡ÇƒÉGÉlÉ~Å[Ç∆ÇÃìñÇΩÇËîªíËÇÇ∆ÇÈ
+
+
+		// ìñÇΩÇ¡ÇƒÇ¢ÇΩÇÁÇ±ÇÍÇåƒÇ‘ÅBÇøÇ»Ç›Ç…ç°ÇÕTrueÇ»ÇÃÇ≈ÅAÉrÅ[ÉÄÇî≠éÀÇµÇΩÇæÇØÇ≈ëSïîéÄÇ…Ç‹Ç∑ÅB
+		if (true)
+		{
+			(*itr)->OnCollisionTag(TAG_BEAM);
+		}
 	}
-	else if(rad <= 20) // ìGÇ∆è’åÇîgÇÃìñÇΩÇËîªíË
-	{
-		return false;
-	}
+
+	//m_enemyPos = pos;
+	//m_enemyTarget = target;
+	//m_enemySize = size;
+
+	//DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_pos);
+	//DirectX::XMVECTOR vTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_target), vPos));
+
+	//DirectX::XMVECTOR vEnemyPos = DirectX::XMLoadFloat3(&m_enemyPos);
+	//DirectX::XMVECTOR vEnemyTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_enemyTarget), vEnemyPos));
+
+
+	//// ì‡êœÇÃåvéZ
+	//DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);
+	//
+	//float rad;
+	//DirectX::XMStoreFloat(&rad, vdot);
+
+	//rad = acosf(rad);
+
+	//if (rad <= 10) // ìGÇ∆ÉrÅ[ÉÄÇÃìñÇΩÇËîªíË
+	//{
+	//	return true;
+	//}
+	//else if(rad <= 20) // ìGÇ∆è’åÇîgÇÃìñÇΩÇËîªíË
+	//{
+	//	return false;
+	//}
 }

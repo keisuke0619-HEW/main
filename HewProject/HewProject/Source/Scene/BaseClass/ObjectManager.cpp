@@ -135,3 +135,16 @@ IObjectBase::Ptr CObjectManager::FindName(std::string name)
 	return nullptr;
 
 }
+
+std::list<IObjectBase::Ptr> CObjectManager::FindTagAll(EObjectTag tag)
+{
+	std::list<IObjectBase::Ptr> obj;
+	for (auto itr = m_obj.begin(); itr != m_obj.end(); itr++)
+	{
+		if ((*itr)->GetParam().tag == tag)
+		{
+			obj.push_back((*itr));
+		}
+	}
+	return obj;
+}

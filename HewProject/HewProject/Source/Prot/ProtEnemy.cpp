@@ -25,7 +25,7 @@ CProtEnemy::CProtEnemy()
 	m_param.collisionData.box.boxPos = m_param.pos;
 	m_param.collisionData.box.boxScale = { 1,1,1 };
 	m_startPos = m_param.pos;
-
+	m_param.tag = TAG_ENEMY;
 	m_bill = new CBillboard("Assets/Img/enemy.png");
 }
 
@@ -115,9 +115,9 @@ void CProtEnemy::Finalize()
 
 }
 
-void CProtEnemy::OnCollision(Ptr obj)
+void CProtEnemy::OnCollisionTag(EObjectTag tag)
 {
-	if (obj->GetParam().tag == TAG_PLAYER)
+	if (tag == TAG_BEAM)
 	{
 		Destroy();
 	}

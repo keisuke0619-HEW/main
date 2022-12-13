@@ -55,6 +55,10 @@ void CObjectBase::OnCollision(Ptr collisionObj)
 {
 }
 
+void CObjectBase::OnCollisionTag(EObjectTag tag)
+{
+}
+
 TObjectParam CObjectBase::GetParam()
 {
     return m_param;

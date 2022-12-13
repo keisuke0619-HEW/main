@@ -16,7 +16,7 @@ public:
 private:
 	void Move();
 	void Finalize() override;
-	void OnCollision(Ptr obj) override;
+	void OnCollisionTag(EObjectTag obj) override;
 
 	IObjectBase::Ref m_player;
 
