@@ -36,7 +36,7 @@ void CPlayer::Update()
 
 void CPlayer::Draw()
 {
-	//CObjectBase::Draw();
+	CObjectBase::Draw();
 	m_playerUI->Draw();
 	//if(m_beam)
 	//	m_beam->Draw();
