@@ -18,6 +18,7 @@ void Utility::InitBlendState()
 	blend.BlendOpAlpha = D3D11_BLEND_OP_ADD;
 	g_pBlend[BLEND_ALPHA] = new BlendState();
 	g_pBlend[BLEND_ALPHA]->Create(blend);
+	g_pBlend[BLEND_ALPHA]->Bind();
 	
 	blend.SrcBlend  = D3D11_BLEND_ONE;
 	blend.DestBlend = D3D11_BLEND_ONE;
@@ -31,7 +32,7 @@ void Utility::InitBlendState()
 
 void Utility::UninitBlendState()
 {
-	for (int i = 0; i < BLEND_ALPHA; i++)
+	for (int i = 0; i < BLEND_MAX; i++)
 	{
 		if (g_pBlend[i])delete g_pBlend[i];
 	}
