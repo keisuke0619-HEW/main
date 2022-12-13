@@ -60,3 +60,34 @@ void CBeam::Draw()
 	SetColorPS(true, 0.3f, 0.76f, 1.0f, 0.5f, 1, 1);
 	DrawCapsule();
 }
+
+bool CBeam::Collision(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
+{
+	m_enemyPos = pos;
+	m_enemyTarget = target;
+	m_enemySize = size;
+
+	DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_pos);
+	DirectX::XMVECTOR vTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_target), vPos));
+
+	DirectX::XMVECTOR vEnemyPos = DirectX::XMLoadFloat3(&m_enemyPos);
+	DirectX::XMVECTOR vEnemyTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_enemyTarget), vEnemyPos));
+
+
+	// ì‡êœÇÃåvéZ
+	DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);
+	
+	float rad;
+	DirectX::XMStoreFloat(&rad, vdot);
+
+	rad = acosf(rad);
+
+	if (rad <= 10) // ìGÇ∆ÉrÅ[ÉÄÇÃìñÇΩÇËîªíË
+	{
+		return true;
+	}
+	else if(rad <= 20) // ìGÇ∆è’åÇîgÇÃìñÇΩÇËîªíË
+	{
+		return false;
+	}
+}
