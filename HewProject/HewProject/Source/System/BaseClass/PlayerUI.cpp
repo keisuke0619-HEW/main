@@ -5,7 +5,7 @@ CPlayerUI::CPlayerUI()
 	// ここでUIのスプライトを生成
 	auto tmp = AddList(new CGameUI("Assets/Img/white.png"));
 	tmp->SetPos({ 640, 360 });
-	tmp->SetSize({ 64, 64 });
+	tmp->SetSize({ 64, -64 });
 
 
 
