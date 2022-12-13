@@ -42,9 +42,9 @@ void CGameUI::Draw()
 	Sprite::SetProjection(fProj);
 	Sprite::SetSize(m_size); // YŽ²‚Ì’l‚ð-‚É‚·‚é‚Æ”½“]
 	Sprite::SetTexture(m_pPicture);
-	EnableDepth(false);
+	//EnableDepth(false);
 	Sprite::Draw();
-	EnableDepth(true);
+	//EnableDepth(true);
 }
 
 void CGameUI::SetPos(DirectX::XMFLOAT2 pos)
