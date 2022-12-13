@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <Geometory.h>
 #include <Camera.hpp>
+#include <DirectX.h>
 // Stage00.cppを参考にジオメトリーで作成
 CProtScene::CProtScene()
 {
@@ -34,6 +35,7 @@ void CProtScene::Update()
 
 void CProtScene::Draw()
 {
+	EnableDepth(true);
 	// ステージのドロー
 	SetGeometoryVPMatrix(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
 	SetGeometoryTranslate(0,0,0);

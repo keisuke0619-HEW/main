@@ -1,6 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
 #include "BaseClass/ObjectBase.hpp"
+
 class CBeam : public CObjectBase
 {
 public:
@@ -9,6 +10,7 @@ public:
 
 	void Update();
 	void Draw();
+	void Collision();
 private:
 	float m_size;
 	float m_maxSize;
@@ -16,5 +18,7 @@ private:
 	DirectX::XMFLOAT3 m_pos;
 	DirectX::XMFLOAT3 m_target;
 
-
+	float m_enemySize;
+	DirectX::XMFLOAT3 m_enemyPos;
+	DirectX::XMFLOAT3 m_enemyTarget;
 };

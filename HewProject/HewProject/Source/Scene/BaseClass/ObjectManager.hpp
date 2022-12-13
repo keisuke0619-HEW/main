@@ -21,7 +21,7 @@ public:
 	std::weak_ptr<IObjectBase> Add(IObjectBase* obj);
 	IObjectBase::Ptr FindTag(EObjectTag tag);
 	IObjectBase::Ptr FindName(std::string name);
-	
+	std::list<IObjectBase::Ptr> FindTagAll(EObjectTag tag);
 private:
 	std::list<IObjectBase::Ptr> m_obj;
 #ifdef CRITICAL_LOW_FPS_TEMPORARY_RESPONSE

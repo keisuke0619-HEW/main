@@ -177,6 +177,9 @@
     <ClInclude Include="Blend.hpp">
       <Filter>システム\Other</Filter>
     </ClInclude>
+    <ClInclude Include="ProtEnemyBoss.hpp">
+      <Filter>プロトタイプ用\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -313,6 +316,9 @@
     </ClCompile>
     <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ProtEnemyBoss.cpp">
+      <Filter>プロトタイプ用\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

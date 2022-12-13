@@ -2,6 +2,8 @@
 #include <Geometory.h>
 #include <DebugWindow.hpp>
 #include <Easing.hpp>
+
+#include <SceneBase.hpp>
 CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	: CObjectBase("Assets/Box.fbx")
 {
@@ -29,6 +31,7 @@ void CBeam::Update()
 	{
 		Destroy();
 	}
+	Collision();
 }
 
 void CBeam::Draw()
@@ -59,4 +62,54 @@ void CBeam::Draw()
 	
 	SetColorPS(true, 0.3f, 0.76f, 1.0f, 0.5f, 1, 1);
 	DrawCapsule();
+}
+
+void CBeam::Collision()
+{
+
+	// 敵のリスト
+	auto enemyList = CSceneBase::GetObjList().lock()->FindTagAll(TAG_ENEMY);
+	// 敵のリスト全探索
+	for (auto itr = enemyList.begin(); itr != enemyList.end(); itr++)
+	{
+		// 敵のデータ格納
+		auto enemyParam = (*itr)->GetParam();
+
+		// 敵のデータを使ってエネミーとの当たり判定をとる
+
+
+		// 当たっていたらこれを呼ぶ。ちなみに今はTrueなので、ビームを発射しただけで全部死にます。
+		if (true)
+		{
+			(*itr)->OnCollisionTag(TAG_BEAM);
+		}
+	}
+
+	//m_enemyPos = pos;
+	//m_enemyTarget = target;
+	//m_enemySize = size;
+
+	//DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_pos);
+	//DirectX::XMVECTOR vTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_target), vPos));
+
+	//DirectX::XMVECTOR vEnemyPos = DirectX::XMLoadFloat3(&m_enemyPos);
+	//DirectX::XMVECTOR vEnemyTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_enemyTarget), vEnemyPos));
+
+
+	//// 内積の計算
+	//DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);
+	//
+	//float rad;
+	//DirectX::XMStoreFloat(&rad, vdot);
+
+	//rad = acosf(rad);
+
+	//if (rad <= 10) // 敵とビームの当たり判定
+	//{
+	//	return true;
+	//}
+	//else if(rad <= 20) // 敵と衝撃波の当たり判定
+	//{
+	//	return false;
+	//}
 }

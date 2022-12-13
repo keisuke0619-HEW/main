@@ -5,18 +5,18 @@
 
 #include <Billboard.h>
 
-class CProtEnemy : public CObjectBase
+class CProtEnemyBoss : public CObjectBase
 {
 public:
-	CProtEnemy();
-	~CProtEnemy();
+	CProtEnemyBoss();
+	~CProtEnemyBoss();
 
 	void Update() override;
 	void Draw() override;
 private:
 	void Move();
 	void Finalize() override;
-	void OnCollisionTag(EObjectTag obj) override;
+	void OnCollision(Ptr obj) override;
 
 	IObjectBase::Ref m_player;
 

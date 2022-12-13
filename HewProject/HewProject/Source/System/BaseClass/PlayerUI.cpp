@@ -1,11 +1,11 @@
 #include "PlayerUI.hpp"
-
+#include <Blend.hpp>
 CPlayerUI::CPlayerUI()
 {
 	// ここでUIのスプライトを生成
-	auto tmp = AddList(new CGameUI("Assets/Img/white.png"));
+	auto tmp = AddList(new CGameUI("Assets/Img/crosshair.png"));
 	tmp->SetPos({ 640, 360 });
-	tmp->SetSize({ 64, -64 });
+	tmp->SetSize({ 340, -340 });
 
 	// 体力ゲージ
 	auto tmphp = AddList(new CGameUI("Assets/Img/HP.png"));
