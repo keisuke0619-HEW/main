@@ -25,6 +25,7 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_param.collisionData.box.boxPos = m_param.pos;
 	m_param.collisionData.box.boxScale = { 1,1,1 };
 	m_startPos = m_param.pos;
+	m_bassUI.reset(new CBassUI());
 
 	m_bill = new CBillboard("Assets/Img/Boss.png");
 }
@@ -45,6 +46,9 @@ void CProtEnemyBoss::Update()
 	// 移動るーちん
 	Move();
 	m_param.collisionData.box.boxPos = m_param.pos;
+
+	// ボスUIの更新
+	m_bassUI->Update();
 }
 
 void CProtEnemyBoss::Draw()
@@ -55,6 +59,9 @@ void CProtEnemyBoss::Draw()
 	Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
 	Utility::SetBlendState(BLEND_ALPHA);
+	
+	// ボスUIの描画
+	m_bassUI->Draw();
 }
 
 // 移動ルーチン。Excelを参考に作成

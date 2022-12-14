@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BassUI.h" />
     <ClInclude Include="Blend.hpp" />
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
@@ -68,6 +69,7 @@
     <ClInclude Include="Source\System\WinUtil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BassUI.cpp" />
     <ClCompile Include="Blend.cpp" />
     <ClCompile Include="DirectXTex\Texture.cpp" />
     <ClCompile Include="ProtEnemyBoss.cpp" />
