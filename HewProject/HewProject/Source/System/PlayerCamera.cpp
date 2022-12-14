@@ -23,10 +23,10 @@ void CPlayerCamera::Update()
 	const float MOVE_SPEED = 0.15f * 3.14f / 180;
 	const float LOOK_OFFSET_X = 0.5f;
 	const float LOOK_OFFSET_Y = 1.5f;
-	if(Utility::GetKeyPress(Utility::Key_Up))	m_radY += MOVE_SPEED  * Utility::GetCameraSpeed();
-	if(Utility::GetKeyPress(Utility::Key_Down))	m_radY -= MOVE_SPEED  * Utility::GetCameraSpeed();
-	if(Utility::GetKeyPress(Utility::Key_Right))m_radXZ += MOVE_SPEED * Utility::GetCameraSpeed();
-	if(Utility::GetKeyPress(Utility::Key_Left))	m_radXZ -= MOVE_SPEED * Utility::GetCameraSpeed();
+	if(Utility::GetKeyPress(Key_Up))	m_radY += MOVE_SPEED  * Utility::GetCameraSpeed();
+	if(Utility::GetKeyPress(Key_Down))	m_radY -= MOVE_SPEED  * Utility::GetCameraSpeed();
+	if(Utility::GetKeyPress(Key_Right))m_radXZ += MOVE_SPEED * Utility::GetCameraSpeed();
+	if(Utility::GetKeyPress(Key_Left))	m_radXZ -= MOVE_SPEED * Utility::GetCameraSpeed();
 	m_radY -= Utility::GetStickRight().y * MOVE_SPEED * Utility::GetCameraSpeed();
 	m_radXZ += Utility::GetStickRight().x * MOVE_SPEED * Utility::GetCameraSpeed();
 

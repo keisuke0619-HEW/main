@@ -55,13 +55,13 @@ void CPlayer::Move()
 	
 	m_gra += m_gra < GRAVITY_MAX ? MOVE_GRAVITY : 0;
 
-	if (Utility::GetKeyPress(Utility::Key_W))
+	if (Utility::GetKeyPress(Key_W))
 		vMove = DirectX::XMVectorAdd(vMove, vFront);
-	if (Utility::GetKeyPress(Utility::Key_S))
+	if (Utility::GetKeyPress(Key_S))
 		vMove = DirectX::XMVectorSubtract(vMove, vFront);
-	if (Utility::GetKeyPress(Utility::Key_A))
+	if (Utility::GetKeyPress(Key_A))
 		vMove = DirectX::XMVectorSubtract(vMove, vSide);
-	if (Utility::GetKeyPress(Utility::Key_D))
+	if (Utility::GetKeyPress(Key_D))
 		vMove = DirectX::XMVectorAdd(vMove, vSide);
 	vMove = DirectX::XMVector3Normalize(vMove);
 	vMove = DirectX::XMVectorAdd(vMove, vGra);
@@ -90,12 +90,12 @@ void CPlayer::Move()
 	}
 	if (m_isGround)
 	{
-		if (Utility::GetKeyPress(Utility::Key_SPACE))
+		if (Utility::GetKeyPress(Key_SPACE))
 		{
 			m_gra = -2;
 			m_isGround = false;
 		}
-		if (Utility::GetKeyPress(Utility::A))
+		if (Utility::GetKeyPress(A))
 		{
 			m_gra = -2;
 			m_isGround = false;
@@ -108,7 +108,7 @@ void CPlayer::Beam()
 	const float maxBeamSize = 3.0f;
 	const float addBeamSize = 0.05f;
 	// RT�ɕύX
-	if (Utility::GetKeyPress(Utility::RT) || Utility::GetKeyPress(Utility::Key_B))
+	if (Utility::GetKeyPress(RT) || Utility::GetKeyPress(Key_B))
 	{
 		m_beamSize += m_beamSize < maxBeamSize ? addBeamSize : 0;
 	}
