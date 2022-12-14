@@ -5,12 +5,17 @@ namespace Utility
     XINPUT_STATE g_keyStateOld;
     
     int g_cameraSpeed;
+	ControllerID g_keyID[KeySet::KEY_SET_MAX];
 }
 
 
 void Utility::ControllerInit()
 {
     g_cameraSpeed = 10;
+	g_keyID[KeySet::BEAM] = ControllerID::RT;
+	g_keyID[KeySet::JUMP] = ControllerID::A;
+	g_keyID[KeySet::SELECT] = ControllerID::A;
+	g_keyID[KeySet::CANCEL] = ControllerID::B;
 }
 
 void Utility::ControllerUpdate()
@@ -18,6 +23,40 @@ void Utility::ControllerUpdate()
     g_keyStateOld = g_keyState;
     XInputGetState(0, &g_keyState);
 }
+
+
+
+//--- ここから実装 ---//
+bool Utility::GetKeyTrigger(KeySet key)
+{
+	// 例
+	return GetKeyTrigger(g_keyID[key]);
+}
+
+bool Utility::GetKeyPress(KeySet key)
+{
+	return false;
+}
+
+bool Utility::GetKeyRelease(KeySet key)
+{
+	return false;
+}
+
+void Utility::SetKeyBind(KeySet key, ControllerID id)
+{
+	// 15～18行目を参考に作成。１行で完成します。
+}
+//--- ここまで実装 ---//
+
+
+
+
+
+
+
+
+
 
 bool Utility::GetKeyTrigger(ControllerID id)
 {
@@ -49,9 +88,6 @@ bool Utility::GetKeyTrigger(ControllerID id)
     bool old = g_keyStateOld.Gamepad.wButtons & id;
     return now && !old;
 }
-
-
-
 // キーボード処理部分は #ifdef _USE_KEYBOARD_ でラッピングしてください。
 // VK_SPACEなども使えるようにしてください。
 // おそらくチェックワードと列挙にそれぞれVK_〇〇とKey_〇〇を追加すればいけます。
@@ -76,9 +112,6 @@ bool Utility::GetKeyPress(ControllerID id)
 	return g_keyState.Gamepad.wButtons & id;
 }
 
-
-
-
 bool Utility::GetKeyRelease(ControllerID id)
 {
 #ifdef _USE_KEYBOARD_
@@ -92,6 +125,7 @@ bool Utility::GetKeyRelease(ControllerID id)
     bool old = g_keyStateOld.Gamepad.wButtons & id;
     return old && !now;
 }
+
 DirectX::XMFLOAT3 Utility::GetStickLeft()
 {
     const float NULL_LEVEL = 0.1f;
