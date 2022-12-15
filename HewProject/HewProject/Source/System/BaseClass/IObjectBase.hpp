@@ -16,17 +16,16 @@ enum EObjectTag
 enum ECollisionType
 {
 	COLLISION_NONE,		// 当たり判定を使用しない
-	COLLISION_BOX,		// 箱の当たり判定
 	COLLISION_SPHIRE,	// 球の当たり判定
 	COLLISION_RAY,		// レイの当たり判定
 	COLLISION_PLANE,	// 板の当たり判定
 	// 新たに当たり判定の種類を作る場合はここに追加する。
 };
 
-struct BoxData
+struct SphireData
 {
-	DirectX::XMFLOAT3 boxPos;	// 箱の中心座標
-	DirectX::XMFLOAT3 boxScale;	// 箱のスケールXYZ
+	DirectX::XMFLOAT3 sphirePos;	// 球の中心
+	float sphireRadius;				// 球の半径
 };
 
 struct RayData
@@ -44,8 +43,7 @@ struct PlaneData
 
 union UCollisionData
 {
-	float sphireRadius;		// 球の半径
-	BoxData box;			// 箱の情報
+	SphireData sphire;		// 球の情報
 	RayData ray;			// レイの情報
 	PlaneData plane;		// 面の情報
 };
