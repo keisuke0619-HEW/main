@@ -12,9 +12,9 @@ CPlayer::CPlayer()
 	m_gra = 0;
 	m_isGround = true;
 	m_beamSize = 0;
-	m_param.collisionType = COLLISION_BOX;
-	m_param.collisionData.box.boxPos = m_param.pos;
-	m_param.collisionData.box.boxScale = { 1, 2, 1 };
+	m_param.collisionType = COLLISION_SPHIRE;
+	m_param.collisionData.sphire.sphirePos = m_param.pos;
+	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
 	m_playerUI.reset(new CPlayerUI());
 }
 
@@ -27,7 +27,7 @@ void CPlayer::Update()
 	Move();
 	Beam();
 	m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
-	m_param.collisionData.box.boxPos = m_param.pos;
+	m_param.collisionData.sphire.sphirePos = m_param.pos;
 
 	m_playerUI->Update();
 	//if (IsKeyTrigger('U'))
