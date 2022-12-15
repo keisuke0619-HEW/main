@@ -16,6 +16,7 @@ CPlayerUI::CPlayerUI()
 	auto tmpchg = AddList(new CGameUI("Assets/Img/Charge2.png"));
 	tmpchg->SetPos({ 213, 700 });
 	tmpchg->SetSize({ 427, -40 });
+
 }
 
 CPlayerUI::~CPlayerUI()

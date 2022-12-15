@@ -21,10 +21,11 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_param.pos.x = (rand() % 100) / 10.0f;
 	m_param.pos.y = 1.0f;
 	m_param.pos.z = (rand() % 100) / 10.0f;
-	m_param.collisionType = COLLISION_BOX;
-	m_param.collisionData.box.boxPos = m_param.pos;
-	m_param.collisionData.box.boxScale = { 1,1,1 };
+	m_param.collisionType = COLLISION_SPHIRE;
+	m_param.collisionData.sphire.sphirePos = m_param.pos;
+	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
 	m_startPos = m_param.pos;
+	m_bassUI.reset(new CBassUI());
 
 	m_bill = new CBillboard("Assets/Img/Boss.png");
 }
@@ -44,7 +45,10 @@ void CProtEnemyBoss::Update()
 	}
 	// 移動るーちん
 	Move();
-	m_param.collisionData.box.boxPos = m_param.pos;
+	m_param.collisionData.sphire.sphirePos = m_param.pos;
+
+	// ボスUIの更新
+	m_bassUI->Update();
 }
 
 void CProtEnemyBoss::Draw()
@@ -55,6 +59,9 @@ void CProtEnemyBoss::Draw()
 	Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
 	Utility::SetBlendState(BLEND_ALPHA);
+	
+	// ボスUIの描画
+	m_bassUI->Draw();
 }
 
 // 移動ルーチン。Excelを参考に作成
