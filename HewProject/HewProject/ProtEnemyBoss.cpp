@@ -24,6 +24,7 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_param.collisionType = COLLISION_BOX;
 	m_param.collisionData.box.boxPos = m_param.pos;
 	m_param.collisionData.box.boxScale = { 1,1,1 };
+	m_param.tag = TAG_ENEMY;
 	m_startPos = m_param.pos;
 
 	m_bill = new CBillboard("Assets/Img/Boss.png");
