@@ -52,9 +52,9 @@ void CProtEnemy::Draw()
 	m_bill->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
 	m_bill->SetPos(m_param.pos);
 	m_bill->Draw();
-	Utility::SetBlendState(BLEND_NONE);
+	//Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
-	Utility::SetBlendState(BLEND_ALPHA);
+	//Utility::SetBlendState(BLEND_ALPHA);
 
 }
 
@@ -122,3 +122,13 @@ void CProtEnemy::OnCollisionTag(EObjectTag tag)
 		Destroy();
 	}
 }
+
+void CProtEnemy::OnCollision(IObjectBase::Ptr obj)
+{
+	if (obj->GetParam().tag == TAG_PLAYER)
+	{
+		Destroy();
+	}
+}
+
+

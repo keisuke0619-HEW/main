@@ -53,14 +53,14 @@ void ProducePlane::SetRect(DirectX::XMFLOAT3 pos1, DirectX::XMFLOAT3 pos2,
 
 void ProducePlane::SetCenterPos(DirectX::XMFLOAT3 center, DirectX::XMFLOAT2 size, DirectX::XMFLOAT3 rot)
 {
-	PlaneVertex vtx[] = {
+	//PlaneVertex vtx[] = {
 
-	};
+	//};
 
-	//	中心点などを指定して描画
-	m_pPlane->centerpos = center;
-	m_pPlane->size = size;
-	m_pPlane->rot = rot;
+	////	中心点などを指定して描画
+	//m_pPlane->centerpos = center;
+	//m_pPlane->size = size;
+	//m_pPlane->rot = rot;
 
 
 

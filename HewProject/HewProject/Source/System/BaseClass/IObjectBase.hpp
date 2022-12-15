@@ -10,6 +10,7 @@ enum EObjectTag
 	TAG_ENEMY,
 	TAG_BEAM,
 	TAG_SHOCK,	// 衝撃波
+	TAG_STATIC_OBJECT,	// 移動しないオブジェクト（Static同士の判定はしない）
 	// 必要な場合はここにタグを追記する
 };
 

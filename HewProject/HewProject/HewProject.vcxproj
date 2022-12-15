@@ -41,6 +41,7 @@
     <ClInclude Include="Source\System\BaseClass\ObjectBase.hpp" />
     <ClInclude Include="Source\System\BaseClass\IObjectBase.hpp" />
     <ClInclude Include="Source\System\BaseClass\TerrainBase.hpp" />
+    <ClInclude Include="Source\System\BaseClass\UiBase.hpp" />
     <ClInclude Include="Source\System\Beam.hpp" />
     <ClInclude Include="Source\System\BlendState.h" />
     <ClInclude Include="Source\System\Camera.hpp" />
@@ -91,6 +92,7 @@
     <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp" />
     <ClCompile Include="Source\System\BaseClass\PlayerUI.hpp" />
     <ClCompile Include="Source\System\BaseClass\TerrainBase.cpp" />
+    <ClCompile Include="Source\System\BaseClass\UiBase.cpp" />
     <ClCompile Include="Source\System\Beam.cpp" />
     <ClCompile Include="Source\System\BlendState.cpp" />
     <ClCompile Include="Source\System\Camera.cpp" />
