@@ -31,21 +31,25 @@ bool Utility::GetKeyTrigger(KeySet key)
 {
 	// 例
 	return GetKeyTrigger(g_keyID[key]);
+	
 }
 
 bool Utility::GetKeyPress(KeySet key)
 {
-	return false;
+	return Utility::GetKeyPress(g_keyID[key]);
 }
 
 bool Utility::GetKeyRelease(KeySet key)
 {
-	return false;
+	return Utility::GetKeyRelease(g_keyID[key]);
 }
 
 void Utility::SetKeyBind(KeySet key, ControllerID id)
 {
 	// 15～18行目を参考に作成。１行で完成します。
+
+	g_keyID[key]	=	id;
+	
 }
 //--- ここまで実装 ---//
 
