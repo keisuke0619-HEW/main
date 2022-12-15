@@ -82,61 +82,31 @@ void CBeam::Collision()
 		// 敵のデータを使ってエネミーとの当たり判定をとる
 		m_enemyPos = enemyParam.pos;
 		DirectX::XMVECTOR vEnemyPos = DirectX::XMLoadFloat3(&m_enemyPos);
-		DirectX::XMVECTOR vEnemyTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(vEnemyPos, DirectX::XMLoadFloat3(&m_pos)));
+		DirectX::XMVECTOR vEnemyTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(vEnemyPos, DirectX::XMLoadFloat3(&m_pos))); // ビームの開始地から敵の位置の単位ベクトル
 
-		//// 内積の計算
+		// 内積の計算
 		DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);
 		
+		// ビームと敵の角度を計算
 		float rad;
 		DirectX::XMStoreFloat(&rad, vdot);
+		rad = acosf(rad);// *180 / 3.14f;
 
-		// ビームと敵の角度を計算
-		rad = acosf(rad) * 180 / 3.14f;
+		// ビームと敵との距離を計算
+		DirectX::XMVECTOR vEnemyToBeamDis = DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_pos),vEnemyPos);
+		float EnemyToBeamDis;
+		DirectX::XMStoreFloat(&EnemyToBeamDis, vEnemyToBeamDis);
+		float distance = sinf(rad) * EnemyToBeamDis;
 
-		// 当たり判定8のプリント性質3を利用して
-		// ビームの単位ベクトルとビームから敵のベクトルの内積取ることにより
-		// その内積の結果が敵とビームに対する垂直な距離になる
-		
-		//// ビームと敵との距離を計算
-		//float distance = sinf(rad);
+		// 絶対値  
+		float AbsoluteValue_EnemyDis = fabsf(distance);
+		float AbsoluteValue_BeamPos = fabsf(m_size);
+		float DisResult = enemyParam.collisionData.sphire.sphireRadius - (AbsoluteValue_EnemyDis - AbsoluteValue_BeamPos);
 
-		//DirectX::XMVECTOR vBeamPos = DirectX::XMLoadFloat3(&m_pos);
-
-		//float BeamPos;
-		//DirectX::XMStoreFloat(&BeamPos, vBeamPos);
-
-		// 当たっていたらこれを呼ぶ。ちなみに今はTrueなので、ビームを発射しただけで全部死にます。
-		if (rad <= 30)
+		// ビームと敵の当たり判定
+		if (DisResult > 0)
 		{
 			(*itr)->OnCollisionTag(TAG_BEAM);
 		}
 	}
-
-	//m_enemyPos = pos;
-	//m_enemyTarget = target;
-	//m_enemySize = size;
-
-	//DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_pos);
-	//DirectX::XMVECTOR vTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_target), vPos));
-
-	//DirectX::XMVECTOR vEnemyPos = DirectX::XMLoadFloat3(&m_enemyPos);
-	//DirectX::XMVECTOR vEnemyTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_enemyTarget), vEnemyPos));
-
-
-	//// 内積の計算
-	//DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);
-	//
-	//float rad;
-	//DirectX::XMStoreFloat(&rad, vdot);
-
-	//rad = acosf(rad);
-
-	//if (rad <= 10) // 敵とビームの当たり判定
-	//{
-	//	return true;
-	//}
-	//else if(rad <= 20) // 敵と衝撃波の当たり判定
-	//{
-	//	return false;
-	//}
 }
