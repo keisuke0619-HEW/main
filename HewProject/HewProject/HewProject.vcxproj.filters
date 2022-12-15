@@ -180,6 +180,15 @@
     <ClInclude Include="ProtEnemyBoss.hpp">
       <Filter>プロトタイプ用\Object</Filter>
     </ClInclude>
+    <ClInclude Include="BassUI.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ProducePlane.h">
+      <Filter>ソース ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\BaseClass\UiBase.hpp">
+      <Filter>システム\BaseClass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -319,6 +328,15 @@
     </ClCompile>
     <ClCompile Include="ProtEnemyBoss.cpp">
       <Filter>プロトタイプ用\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="BassUI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="ProducePlane.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\BaseClass\UiBase.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

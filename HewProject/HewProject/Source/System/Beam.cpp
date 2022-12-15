@@ -66,6 +66,10 @@ void CBeam::Draw()
 
 void CBeam::Collision()
 {
+	// プレイヤーのデータを取得
+	DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_pos);
+	DirectX::XMVECTOR vTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_target), vPos));
+
 
 	// 敵のリスト
 	auto enemyList = CSceneBase::GetObjList().lock()->FindTagAll(TAG_ENEMY);
@@ -76,10 +80,33 @@ void CBeam::Collision()
 		auto enemyParam = (*itr)->GetParam();
 
 		// 敵のデータを使ってエネミーとの当たり判定をとる
+		m_enemyPos = enemyParam.pos;
+		DirectX::XMVECTOR vEnemyPos = DirectX::XMLoadFloat3(&m_enemyPos);
+		DirectX::XMVECTOR vEnemyTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(vEnemyPos, DirectX::XMLoadFloat3(&m_pos)));
 
+		//// 内積の計算
+		DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);
+		
+		float rad;
+		DirectX::XMStoreFloat(&rad, vdot);
+
+		// ビームと敵の角度を計算
+		rad = acosf(rad) * 180 / 3.14f;
+
+		// 当たり判定8のプリント性質3を利用して
+		// ビームの単位ベクトルとビームから敵のベクトルの内積取ることにより
+		// その内積の結果が敵とビームに対する垂直な距離になる
+		
+		//// ビームと敵との距離を計算
+		//float distance = sinf(rad);
+
+		//DirectX::XMVECTOR vBeamPos = DirectX::XMLoadFloat3(&m_pos);
+
+		//float BeamPos;
+		//DirectX::XMStoreFloat(&BeamPos, vBeamPos);
 
 		// 当たっていたらこれを呼ぶ。ちなみに今はTrueなので、ビームを発射しただけで全部死にます。
-		if (true)
+		if (rad <= 30)
 		{
 			(*itr)->OnCollisionTag(TAG_BEAM);
 		}
