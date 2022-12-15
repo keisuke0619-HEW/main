@@ -24,8 +24,10 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_param.collisionType = COLLISION_SPHIRE;
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
 	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
+	m_param.tag = TAG_ENEMY;
 	m_startPos = m_param.pos;
 	m_bassUI.reset(new CBassUI());
+	
 
 	m_bill = new CBillboard("Assets/Img/Boss.png");
 }
