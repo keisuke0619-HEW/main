@@ -13,6 +13,9 @@ CProtEnemy::CProtEnemy()
 	, m_cnt(0)
 	, m_randNum(0)
 	, m_target(DirectX::XMFLOAT3(0,0,0))
+	, m_dontMove(false)
+	, m_blowAwayCountDown(0)
+	, m_blowAwayMove({0.f, 0.f, 0.f})
 {
 	// オブジェクトのリストを取得
 	auto objList = CSceneBase::GetObjList();
@@ -65,46 +68,64 @@ void CProtEnemy::Move()
 	// いーじんぐ使用方法（例）
 	// Easing::InOutSine(level);
 
-	// プレイヤーとの距離を取得
-	if(m_player.expired() == false)
-		m_target = m_player.lock()->GetParam().pos;
-	// プレイヤーとエネミーの位置情報
-	DirectX::XMVECTOR enemy = DirectX::XMLoadFloat3(&m_param.pos);	// エネミーのposを入れる
-	DirectX::XMVECTOR player = DirectX::XMLoadFloat3(&m_target);	// プレイヤーのposを入れる
-
-	// 距離を計算
-	DirectX::XMVECTOR distance = DirectX::XMVectorSubtract(player, enemy);
-	//distance = DirectX::XMVector3Normalize(distance);
-	// float3に変換して格納
-	DirectX::XMFLOAT3 movePos;
-
-	DirectX::XMStoreFloat3(&movePos, distance);
-
-
-	// もしプレイヤーとの距離が一定以下だったら
-	if (fabsf(movePos.x) <= m_distance && fabsf(movePos.y) <= m_distance && fabsf(movePos.z) <= m_distance)
+	// 衝撃波に当たって吹っ飛ぶときの移動
+	if (m_dontMove)
 	{
-		// プレイヤーを目標にする
+		m_param.pos.x += m_blowAwayMove.x * m_move * m_blowAwayCountDown; // この後ろにさらにビームの強さを付け加える
+		m_param.pos.y += m_blowAwayMove.y * m_move * m_blowAwayCountDown;
+		m_param.pos.z += m_blowAwayMove.z * m_move * m_blowAwayCountDown;
 
+		// カウントが0になっていたら吹っ飛びをやめる
+		if (m_blowAwayCountDown < 0)
+		{
+			m_dontMove = false;
+		}
 
-
-		m_param.pos.x += movePos.x * m_move / 2; // エネミーのposを使う
-		m_param.pos.y += movePos.y * m_move / 2;
-		m_param.pos.z += movePos.z * m_move / 2;
-		m_param.frame = 0;
+		// 吹っ飛ぶカウントダウン
+		m_blowAwayCountDown--;
 	}
+
+	// 衝撃波に当たってないときの移動(通常時の移動)
 	else
 	{
-		if (m_param.frame % 300 == 0)
+		// プレイヤーとの距離を取得
+		if (m_player.expired() == false)
+			m_target = m_player.lock()->GetParam().pos;
+		// プレイヤーとエネミーの位置情報
+		DirectX::XMVECTOR enemy = DirectX::XMLoadFloat3(&m_param.pos);	// エネミーのposを入れる
+		DirectX::XMVECTOR player = DirectX::XMLoadFloat3(&m_target);	// プレイヤーのposを入れる
+
+		// 距離を計算
+		DirectX::XMVECTOR distance = DirectX::XMVectorSubtract(player, enemy);
+		//distance = DirectX::XMVector3Normalize(distance);
+		// float3に変換して格納
+		DirectX::XMFLOAT3 movePos;
+
+		DirectX::XMStoreFloat3(&movePos, distance);
+
+
+		// もしプレイヤーとの距離が一定以下だったら
+		if (fabsf(movePos.x) <= m_distance && fabsf(movePos.y) <= m_distance && fabsf(movePos.z) <= m_distance)
 		{
-			m_randTarget = { (float)(rand() % 30), 0.5f, (float)(rand() % 30) };
-			m_startPos = m_param.pos;
+			// プレイヤーを目標にする
+			m_param.pos.x += movePos.x * m_move / 2; // エネミーのposを使う
+			m_param.pos.y += movePos.y * m_move / 2;
+			m_param.pos.z += movePos.z * m_move / 2;
+			m_param.frame = 0;
 		}
-		m_param.move = {
-			(m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
-			(m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
-			(m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
-		};
+		else
+		{
+			if (m_param.frame % 300 == 0)
+			{
+				m_randTarget = { (float)(rand() % 30), 0.5f, (float)(rand() % 30) };
+				m_startPos = m_param.pos;
+			}
+			m_param.move = {
+				(m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
+				(m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
+				(m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
+			};
+		}
 	}
 }
 
@@ -117,9 +138,22 @@ void CProtEnemy::Finalize()
 
 void CProtEnemy::OnCollisionTag(EObjectTag tag)
 {
+	
 	if (tag == TAG_BEAM)
 	{
 		Destroy();
+	}
+
+	if (tag == TAG_SHOCK && m_dontMove == false)
+	{
+		// 衝撃波に当たったら敵の移動を消す
+		m_dontMove = true;
+
+		// 吹っ飛ぶカウントを開始
+		m_blowAwayCountDown = m_blowAwayCount;
+
+		// カメラの向いてる方向を取得
+		DirectX::XMStoreFloat3(&m_blowAwayMove, CCameraBase::GetPrimaryFront());
 	}
 }
 
