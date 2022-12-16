@@ -311,20 +311,11 @@
     <ClCompile Include="Source\System\CollisionBase.cpp">
       <Filter>システム\BaseClass</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\Beam.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Source\System\Sound.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\BaseClass\PlayerUI.hpp">
       <Filter>システム\BaseClass</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\UiManager.cpp">
-      <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\BaseClass\BassUI.cpp">
       <Filter>システム\BaseClass</Filter>
@@ -337,6 +328,15 @@
     </ClCompile>
     <ClCompile Include="Source\System\ProducePlane.cpp">
       <Filter>システム\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp">
+      <Filter>システム\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Beam.cpp">
+      <Filter>システム\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\UiManager.cpp">
+      <Filter>システム\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
