@@ -26,9 +26,8 @@ void CPlayer::Update()
 {
 	Move();
 	Beam();
-	m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
+	//m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
-
 	m_playerUI->Update();
 	//if (IsKeyTrigger('U'))
 	//	Destroy();
