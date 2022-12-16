@@ -63,7 +63,7 @@ void CProtEnemyBoss::Draw()
 	//Utility::SetBlendState(BLEND_ALPHA);
 	
 	// ボスUIの描画
-	m_bassUI->Draw();
+	CObjectBase::Draw();
 }
 
 // 移動ルーチン。Excelを参考に作成
