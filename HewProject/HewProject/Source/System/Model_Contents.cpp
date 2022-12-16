@@ -122,11 +122,3 @@ void Model::Draw()
 		m_model.meshes[i].pMesh->Draw();
 	}
 }
-
-void Model::SetTranslate(float x, float y, float z)
-{
-}
-
-void Model::SetRotation(float x, float y, float z)
-{
-}
