@@ -19,11 +19,20 @@ CPlayerUI::CPlayerUI()
 	//tmphp->SetPos({ 320,660 });
 	//tmphp->SetSize({ 640, 40 });
 
+	auto tmphp = new CGameUI("Assets/Img/HP.png");
+	tmphp->SetPos({ 320,660 });
+	tmphp->SetSize({ 640, 40 });
+	CUIManager::GetIns()->Add(tmphp);
+
 	// チャージゲージ
 	//auto tmpchg = AddList(new CGameUI("Assets/Img/Charge2.png"));
 	//tmpchg->SetPos({ 213, 700 });
 	//tmpchg->SetSize({ 427, 40 });
 
+	auto tmpchg = new CGameUI("Assets/Img/Charge2.png");
+	tmpchg->SetPos({ 213, 700 });
+	tmpchg->SetSize({ 427, 40 });
+	CUIManager::GetIns()->Add(tmpchg);
 }
 
 CPlayerUI::~CPlayerUI()
