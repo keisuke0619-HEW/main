@@ -7,7 +7,7 @@ CBassUI::CBassUI()
 	// ‘Ì—ÍƒQ[ƒW
 	auto Basshp = AddList(new CGameUI("Assets/Img/BassHP.png"));
 	Basshp->SetPos({ 520, 20 });
-	Basshp->SetSize({ 1040, -40 });
+	Basshp->SetSize({ 1040, 40 });
 }
 
 CBassUI::~CBassUI()

@@ -186,8 +186,8 @@
     <ClInclude Include="ProducePlane.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\BaseClass\UiBase.hpp">
-      <Filter>システム\BaseClass</Filter>
+    <ClInclude Include="Source\System\UiManager.hpp">
+      <Filter>システム\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -335,7 +335,7 @@
     <ClCompile Include="ProducePlane.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\BaseClass\UiBase.cpp">
+    <ClCompile Include="Source\System\UiManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

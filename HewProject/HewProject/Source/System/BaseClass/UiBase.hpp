@@ -1,10 +1,15 @@
 #pragma once
 
-class CUiBase
+#include <memory>
+
+enum 
+class CUIBase
 {
 public:
-	CUiBase();
-	virtual ~CUiBase();
+	using Ptr = std::shared_ptr<CUIBase>;
+	using Ref = std::weak_ptr<CUIBase>;
+	CUIBase();
+	virtual ~CUIBase();
 
 	virtual void Update();
 	virtual void Draw();

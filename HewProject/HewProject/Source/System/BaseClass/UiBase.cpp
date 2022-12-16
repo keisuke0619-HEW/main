@@ -1,17 +1,17 @@
 #include "UiBase.hpp"
 
-CUiBase::CUiBase()
+CUIBase::CUIBase()
 {
 }
 
-CUiBase::~CUiBase()
+CUIBase::~CUIBase()
 {
 }
 
-void CUiBase::Update()
+void CUIBase::Update()
 {
 }
 
-void CUiBase::Draw()
+void CUIBase::Draw()
 {
 }
