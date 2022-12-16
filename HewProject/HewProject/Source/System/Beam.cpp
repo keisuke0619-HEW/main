@@ -101,12 +101,20 @@ void CBeam::Collision()
 		// â‘Î’l  
 		float AbsoluteValue_EnemyDis = fabsf(distance);
 		float AbsoluteValue_BeamPos = fabsf(m_size);
+		float AbsoluteValue_Shockwave = fabsf(m_size * 1.5f);
+
+		// “–‚½‚è”»’è‚ðŽæ‚é‚½‚ß‚ÌŒvŽZ
 		float DisResult = enemyParam.collisionData.sphire.sphireRadius - (AbsoluteValue_EnemyDis - AbsoluteValue_BeamPos);
+		float ShockwaveDisResult = enemyParam.collisionData.sphire.sphireRadius - (AbsoluteValue_EnemyDis - AbsoluteValue_Shockwave);
 
 		// ƒr[ƒ€‚Æ“G‚Ì“–‚½‚è”»’è
 		if (DisResult > 0)
 		{
 			(*itr)->OnCollisionTag(TAG_BEAM);
+		}
+		else if (ShockwaveDisResult > 0) // ÕŒ‚”g‚Æ“G‚Ì“–‚½‚è”»’è
+		{
+			(*itr)->OnCollisionTag(TAG_SHOCK);
 		}
 	}
 }
