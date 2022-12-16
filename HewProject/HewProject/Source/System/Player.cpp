@@ -112,6 +112,8 @@ void CPlayer::Beam()
 {
 	const float maxBeamSize = 3.0f;
 	const float addBeamSize = 0.05f;
+
+	m_playerUI->SetCharge(m_beamSize / maxBeamSize);
 	// RT�ɕύX
 	if (Utility::GetKeyPress(RT) || Utility::GetKeyPress(Key_B))
 	{
