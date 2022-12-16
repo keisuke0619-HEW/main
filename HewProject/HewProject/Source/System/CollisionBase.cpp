@@ -1,5 +1,7 @@
 #include "CollisionBase.hpp"
 
+// 完成
+// オブジェクト：オブジェクト
 bool Utility::IsCollision(TObjectParam obj1, TObjectParam obj2)
 {
     // 引数として渡されたデータをもとに当たり判定をとる。
@@ -61,6 +63,8 @@ bool Utility::IsCollision(TObjectParam obj1, TObjectParam obj2)
 	}
 }
 
+// 完成
+// 球：球
 bool Utility::IsCollisionShpire(TObjectParam obj1, TObjectParam obj2)
 {
     if ((obj1.pos.x - obj2.pos.x) * (obj1.pos.x - obj2.pos.x) +
@@ -75,6 +79,7 @@ bool Utility::IsCollisionShpire(TObjectParam obj1, TObjectParam obj2)
 }
 
 // 未完成
+// 球：レイ
 bool Utility::IsCollisionShpireRay(TObjectParam obj1, TObjectParam obj2)
 {
 	float A; // (vRay)の長さ
@@ -102,18 +107,22 @@ bool Utility::IsCollisionShpireRay(TObjectParam obj1, TObjectParam obj2)
 	return false;
 }
 
-/// 未実装
+// 未実装
+// 球：面
 bool Utility::IsCollisionShpirePlane(TObjectParam obj1, TObjectParam obj2)
 {
 	return false;
 }
 
-/// 未実装
+// 未実装
+// レイ：レイ
 bool Utility::IsCollisionRay(TObjectParam obj1, TObjectParam obj2)
 {
 	return false;
 }
 
+// 完成
+// レイ：面
 bool Utility::IsCollisionRayPlane(TObjectParam obj1, TObjectParam obj2)
 {
 	DirectX::XMVECTOR vRayStart = DirectX::XMLoadFloat3(&obj1.collisionData.ray.rayStart);
@@ -206,12 +215,15 @@ bool Utility::IsCollisionRayPlane(TObjectParam obj1, TObjectParam obj2)
 	return false;
 }
 
-/// 未実装
+// 未実装
+// 面：面
 bool Utility::IsCollisionPlane(TObjectParam obj1, TObjectParam obj2)
 {
 	return false;
 }
 
+// 
+// レイ：面
 DirectX::XMFLOAT3 Utility::GetTargetPlane(TObjectParam obj1, TObjectParam obj2)
 {
 	DirectX::XMVECTOR vRayStart = DirectX::XMLoadFloat3(&obj1.collisionData.ray.rayStart);
