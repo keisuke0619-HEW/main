@@ -4,6 +4,7 @@ CGameUI::CGameUI(const char* FileName)
 	: m_pos(0.f, 0.f)
 	, m_size(1.f, 1.f)
 	, m_sort(SORT_ORDER_DEFAULT)
+	, m_rot(3.14f)
 {
 	LoadTextureFromFile(FileName, &m_pPicture);
 }
@@ -63,7 +64,7 @@ void CGameUI::SetSize(DirectX::XMFLOAT2 size)
 
 void CGameUI::SetRotation(float degRot)
 {
-	m_rot = DirectX::XMConvertToRadians(degRot);
+	m_rot = DirectX::XMConvertToRadians(degRot + 180);
 }
 
 int CGameUI::GetSortID()
