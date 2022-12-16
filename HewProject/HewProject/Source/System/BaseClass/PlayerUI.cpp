@@ -46,12 +46,12 @@ void CPlayerUI::Update()
 }
 
 
-void CPlayerUI::SetLife(float)
+void CPlayerUI::SetLife(float Life)
 {
-
+	m_LifeUV = Life;
 }
 
-void CPlayerUI::SetCharge(float)
+void CPlayerUI::SetCharge(float Charge)
 {
-	
+	m_ChargeUV = Charge;
 }

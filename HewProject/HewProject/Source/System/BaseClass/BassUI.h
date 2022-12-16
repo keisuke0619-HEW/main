@@ -10,5 +10,6 @@ public:
 
 	void Update();
 	void SetLife(float);
-	void SetCharge(float);
+private:
+	float m_LifeUV;
 };

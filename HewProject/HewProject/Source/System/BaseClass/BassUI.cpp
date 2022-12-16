@@ -21,12 +21,7 @@ void CBassUI::Update()
 }
 
 
-void CBassUI::SetLife(float)
+void CBassUI::SetLife(float Life)
 {
-
-}
-
-void CBassUI::SetCharge(float)
-{
-
+	m_LifeUV = Life;
 }
