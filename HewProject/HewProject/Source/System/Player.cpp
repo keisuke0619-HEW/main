@@ -45,7 +45,10 @@ void CPlayer::Draw()
 	m_param.pos.y += 1.0f;
 	m_model->Step(1.0f / 60.0f);
 	CObjectBase::Draw();
-	m_param = param;
+	//m_playerUI->Draw();
+	//if(m_beam)
+	//	m_beam->Draw();
+	m_playerUI->SetLife(1);
 }
 
 void CPlayer::Move()
