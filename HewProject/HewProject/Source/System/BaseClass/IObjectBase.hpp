@@ -74,6 +74,8 @@ struct TObjectParam
 	ECollisionType collisionType;
 	// 当たり判定データ
 	UCollisionData collisionData;
+	// 描画のオフセット
+	DirectX::XMFLOAT3 drawOffset;
 };
 
 /// <summary>

@@ -6,7 +6,8 @@
 #include <SceneBase.hpp>
 #include <Billboard.h>
 CPlayer::CPlayer()
-	: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f, false, "Player")
+	: CObjectBase("Assets/Model/player.fbx", 0.08f, false, "Player")
+	//: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f, false, "Player")
 {
 	m_param.tag = TAG_PLAYER;
 	m_gra = 0;
@@ -31,7 +32,7 @@ void CPlayer::Update()
 {
 	Move();
 	Beam();
-	m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
+	//m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
 	m_playerUI->Update();
 	//if (IsKeyTrigger('U'))
@@ -40,11 +41,11 @@ void CPlayer::Update()
 
 void CPlayer::Draw()
 {
+	auto param = m_param;
+	m_param.pos.y += 1.0f;
 	m_model->Step(1.0f / 60.0f);
 	CObjectBase::Draw();
-	//m_playerUI->Draw();
-	//if(m_beam)
-	//	m_beam->Draw();
+	m_param = param;
 }
 
 void CPlayer::Move()
