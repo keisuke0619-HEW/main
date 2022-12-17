@@ -12,4 +12,7 @@ public:
 	void SetLife(float);
 private:
 	float m_LifeUV;
+	std::weak_ptr<CGameUI> m_lifeSprite;
+
+	void UpdateLife();
 };
