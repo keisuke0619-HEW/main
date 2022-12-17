@@ -18,6 +18,7 @@ CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string 
     m_param.collisionType = COLLISION_NONE;
 	m_param.collisionData.sphire.sphirePos = { 0 ,0, 0 };
     m_param.collisionData.sphire.sphireRadius = 0;
+    m_param.hp = 1.0f;
 
     // ƒ‚ƒfƒ‹î•ñ‚Ì“Ç‚İ‚İ
     m_model.reset(new Model());
@@ -41,6 +42,8 @@ void CObjectBase::BaseUpdate()
     Update();
     AddVector3(m_param.move, m_param.accel);
     AddVector3(m_param.pos, m_param.move);
+    if (m_param.hp <= 0.0f)
+        Destroy();
     m_param.frame++;
 }
 

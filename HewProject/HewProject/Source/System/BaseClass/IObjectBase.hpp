@@ -76,6 +76,8 @@ struct TObjectParam
 	UCollisionData collisionData;
 	// 描画のオフセット
 	DirectX::XMFLOAT3 drawOffset;
+	// 体力
+	float hp;
 };
 
 /// <summary>

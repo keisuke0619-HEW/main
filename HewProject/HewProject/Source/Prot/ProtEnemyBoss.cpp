@@ -8,7 +8,7 @@
 
 CProtEnemyBoss::CProtEnemyBoss()
 	: CObjectBase("Assets/Box.fbx", 0.4f)
-	, m_move(0.05f)
+	, m_move(0.005f)
 	, m_distance(4.0f)
 	, m_cnt(0)
 	, m_randNum(0)
@@ -70,9 +70,6 @@ void CProtEnemyBoss::Draw()
 // いーじんぐを使用。
 void CProtEnemyBoss::Move()
 {
-	// いーじんぐ使用方法（例）
-	// Easing::InOutSine(level);
-
 	// プレイヤーとの距離を取得
 	if (m_player.expired() == false)
 		m_target = m_player.lock()->GetParam().pos;
@@ -89,9 +86,9 @@ void CProtEnemyBoss::Move()
 	DirectX::XMStoreFloat3(&movePos, distance);
 
 	//ボスに常に向かってくる
-		m_param.pos.x += movePos.x * m_move / 2; // エネミーのposを使う
-		m_param.pos.y += movePos.y * m_move / 2;
-		m_param.pos.z += movePos.z * m_move / 2;
+		m_param.pos.x += movePos.x * m_move; // エネミーのposを使う
+		m_param.pos.y += movePos.y * m_move;
+		m_param.pos.z += movePos.z * m_move;
 		m_param.frame = 0;
 	
 }
@@ -105,8 +102,5 @@ void CProtEnemyBoss::Finalize()
 
 void CProtEnemyBoss::OnCollision(Ptr obj)
 {
-	if (obj->GetParam().tag == TAG_PLAYER)
-	{
-		Destroy();
-	}
+	
 }
