@@ -16,6 +16,11 @@ CPlayer::CPlayer()
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
 	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
 	m_playerUI.reset(new CPlayerUI());
+	Model::AnimeNo no = m_model->AddAnimation("Assets/unitychan/walk.fbx");
+	if (no == Model::ANIME_NONE)
+		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
+	m_model->Play(no, true);
+
 }
 
 CPlayer::~CPlayer()
@@ -28,7 +33,6 @@ void CPlayer::Update()
 	Beam();
 	m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
-
 	m_playerUI->Update();
 	//if (IsKeyTrigger('U'))
 	//	Destroy();
@@ -36,8 +40,9 @@ void CPlayer::Update()
 
 void CPlayer::Draw()
 {
+	m_model->Step(1.0f / 60.0f);
 	CObjectBase::Draw();
-	m_playerUI->Draw();
+	//m_playerUI->Draw();
 	//if(m_beam)
 	//	m_beam->Draw();
 }
@@ -107,6 +112,8 @@ void CPlayer::Beam()
 {
 	const float maxBeamSize = 3.0f;
 	const float addBeamSize = 0.05f;
+
+	m_playerUI->SetCharge(m_beamSize / maxBeamSize);
 	// RT�ɕύX
 	if (Utility::GetKeyPress(RT) || Utility::GetKeyPress(Key_B))
 	{

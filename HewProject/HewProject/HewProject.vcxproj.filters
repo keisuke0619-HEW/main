@@ -174,17 +174,20 @@
     <ClInclude Include="Source\System\Sound.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Blend.hpp">
+    <ClInclude Include="Source\System\UiManager.hpp">
+      <Filter>システム\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\BaseClass\BassUI.h">
+      <Filter>システム\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Blend.hpp">
       <Filter>システム\Other</Filter>
     </ClInclude>
-    <ClInclude Include="ProtEnemyBoss.hpp">
+    <ClInclude Include="Source\Prot\ProtEnemyBoss.hpp">
       <Filter>プロトタイプ用\Object</Filter>
     </ClInclude>
-    <ClInclude Include="BassUI.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="ProducePlane.h">
-      <Filter>ソース ファイル</Filter>
+    <ClInclude Include="Source\System\ProducePlane.h">
+      <Filter>システム\Other</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -308,29 +311,32 @@
     <ClCompile Include="Source\System\CollisionBase.cpp">
       <Filter>システム\BaseClass</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\Beam.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Source\System\Sound.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Blend.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\BaseClass\PlayerUI.hpp">
       <Filter>システム\BaseClass</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Source\System\BaseClass\BassUI.cpp">
+      <Filter>システム\BaseClass</Filter>
     </ClCompile>
-    <ClCompile Include="ProtEnemyBoss.cpp">
+    <ClCompile Include="Source\System\Blend.cpp">
+      <Filter>システム\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Prot\ProtEnemyBoss.cpp">
       <Filter>プロトタイプ用\Object</Filter>
     </ClCompile>
-    <ClCompile Include="BassUI.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Source\System\ProducePlane.cpp">
+      <Filter>システム\Other</Filter>
     </ClCompile>
-    <ClCompile Include="ProducePlane.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp">
+      <Filter>システム\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Beam.cpp">
+      <Filter>システム\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\UiManager.cpp">
+      <Filter>システム\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

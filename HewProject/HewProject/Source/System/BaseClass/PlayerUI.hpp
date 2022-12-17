@@ -2,6 +2,7 @@
 
 #include <list>
 #include <GameUI.h>
+#include <memory>
 class CPlayerUI
 {
 public:
@@ -9,10 +10,15 @@ public:
 	~CPlayerUI();
 
 	void Update();
-	void Draw();
 	void SetLife(float);
 	void SetCharge(float);
 private:
-	std::list<CGameUI::Ptr> m_spriteList;
-	CGameUI::Ptr AddList(CGameUI*);
+	float m_LifeUV;
+	float m_ChargeUV;
+	std::weak_ptr<CGameUI> m_lifeSprite;
+	std::weak_ptr<CGameUI> m_chargeSprite;
+	
+	void UpdateLife();
+	void UpdateCharge();
+
 };

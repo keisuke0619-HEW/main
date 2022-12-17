@@ -10,6 +10,7 @@ enum EObjectTag
 	TAG_ENEMY,
 	TAG_BEAM,
 	TAG_SHOCK,	// 衝撃波
+	TAG_STATIC_OBJECT,	// 移動しないオブジェクト（Static同士の判定はしない）
 	// 必要な場合はここにタグを追記する
 };
 
@@ -37,8 +38,9 @@ struct RayData
 
 struct PlaneData
 {
-	DirectX::XMFLOAT3 planeNormal;	// 面の法線
-	DirectX::XMFLOAT3 planeVtx[4];	// 面の頂点座標
+	DirectX::XMFLOAT3 planePos;		// 面の中心座標	()
+	DirectX::XMFLOAT2 planeSize;	// 面の横縦		(x:横,y:縦)
+	DirectX::XMFLOAT3 planeRot;		// 面の角度		(デフォルトは法線ベクトル上向き。軸回転。45°のときは 45 でOK)
 };
 
 union UCollisionData

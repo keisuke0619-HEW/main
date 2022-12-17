@@ -26,12 +26,12 @@ void CBeam::Update()
 	if (m_param.frame < beamGrowFrame)
 	{
 		m_size = m_maxSize * Utility::OutQuad((float)m_param.frame / beamGrowFrame);// += m_maxSize / beamGrowFrame;
+		Collision();
 	}
 	if (m_param.frame >= beamDeadFrame)
 	{
 		Destroy();
-	}
-	Collision();
+	}	
 }
 
 void CBeam::Draw()
@@ -56,7 +56,7 @@ void CBeam::Draw()
 	SetGeometoryTranslate(m_pos.x, m_pos.y, m_pos.z);
 	SetGeometoryRotation(rot.x, rot.y, rot.z);
 	SetGeometoryScaling(m_size, 10000, m_size);
-
+	//SetGeometoryScaling(1, 10000, 1);
 	m_time -= 1.0f / 60.0f;
 
 	
@@ -70,7 +70,6 @@ void CBeam::Collision()
 	DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_pos);
 	DirectX::XMVECTOR vTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_target), vPos));
 
-
 	// 敵のリスト
 	auto enemyList = CSceneBase::GetObjList().lock()->FindTagAll(TAG_ENEMY);
 	// 敵のリスト全探索
@@ -82,50 +81,39 @@ void CBeam::Collision()
 		// 敵のデータを使ってエネミーとの当たり判定をとる
 		m_enemyPos = enemyParam.pos;
 		DirectX::XMVECTOR vEnemyPos = DirectX::XMLoadFloat3(&m_enemyPos);
-		DirectX::XMVECTOR vEnemyTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_pos), vEnemyPos));
+		DirectX::XMVECTOR vEnemyTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(vEnemyPos, vPos)); // ビームの開始地から敵の位置の単位ベクトル
 
-		//// 内積の計算
+		// 内積の計算
 		DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);
 		
+		// ビームと敵の角度を計算
 		float rad;
 		DirectX::XMStoreFloat(&rad, vdot);
+		rad = acosf(rad);// *180 / 3.14f;
 
-		// ビームと敵の角度を計算
-		rad = acosf(rad) * 180 / 3.14f;
+		// ビームと敵との距離を計算
+		DirectX::XMVECTOR vEnemyToBeamDis = DirectX::XMVectorSubtract(vEnemyPos,vPos);
+		float EnemyToBeamDis;
+		DirectX::XMStoreFloat(&EnemyToBeamDis, vEnemyToBeamDis);
+		float distance = sinf(rad) * EnemyToBeamDis;
 
-		// 当たっていたらこれを呼ぶ。ちなみに今はTrueなので、ビームを発射しただけで全部死にます。
-		if (rad <= 30)
+		// 絶対値  
+		float AbsoluteValue_EnemyDis = fabsf(distance);
+		float AbsoluteValue_BeamPos = fabsf(m_size);
+		float AbsoluteValue_Shockwave = fabsf(m_size * 1.5f);
+
+		// 当たり判定を取るための計算
+		float DisResult = enemyParam.collisionData.sphire.sphireRadius - (AbsoluteValue_EnemyDis - AbsoluteValue_BeamPos);
+		float ShockwaveDisResult = enemyParam.collisionData.sphire.sphireRadius - (AbsoluteValue_EnemyDis - AbsoluteValue_Shockwave);
+
+		// ビームと敵の当たり判定
+		if (DisResult > 0)
 		{
 			(*itr)->OnCollisionTag(TAG_BEAM);
 		}
-		
+		else if (ShockwaveDisResult > 0) // 衝撃波と敵の当たり判定
+		{
+			(*itr)->OnCollisionTag(TAG_SHOCK);
+		}
 	}
-
-	//m_enemyPos = pos;
-	//m_enemyTarget = target;
-	//m_enemySize = size;
-
-	//DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_pos);
-	//DirectX::XMVECTOR vTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_target), vPos));
-
-	//DirectX::XMVECTOR vEnemyPos = DirectX::XMLoadFloat3(&m_enemyPos);
-	//DirectX::XMVECTOR vEnemyTarget = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&m_enemyTarget), vEnemyPos));
-
-
-	//// 内積の計算
-	//DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);
-	//
-	//float rad;
-	//DirectX::XMStoreFloat(&rad, vdot);
-
-	//rad = acosf(rad);
-
-	//if (rad <= 10) // 敵とビームの当たり判定
-	//{
-	//	return true;
-	//}
-	//else if(rad <= 20) // 敵と衝撃波の当たり判定
-	//{
-	//	return false;
-	//}
 }

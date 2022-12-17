@@ -1,4 +1,5 @@
 #include "SceneBase.hpp"
+#include <UiManager.hpp>
 std::shared_ptr<CObjectManager> CSceneBase::m_obj = nullptr;
 
 CSceneBase::CSceneBase()
@@ -20,6 +21,7 @@ void CSceneBase::BaseUpdate()
 	PreUpdate();
 	m_obj->UpdateAll();
 	Update();
+	CUIManager::GetIns()->UpdateAll();
 	CCameraBase::UpdatePrimary();
 	m_obj->DestroyUpdate();
 	m_frame++;
@@ -30,6 +32,7 @@ void CSceneBase::BaseDraw()
 	PreDraw();
 	m_obj->DrawAll();
 	Draw();
+	CUIManager::GetIns()->DrawAll();
 }
 
 void CSceneBase::PreUpdate()
