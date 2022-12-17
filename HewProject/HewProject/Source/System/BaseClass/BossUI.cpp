@@ -1,4 +1,4 @@
-#include "BassUI.h"
+#include "BossUI.h"
 #include <Blend.hpp>
 // 追加
 #include <UiManager.hpp>
@@ -7,7 +7,7 @@
 const DirectX::XMFLOAT2 BASS_UI_LIFE_CENTER = { 520, 20 };
 const DirectX::XMFLOAT2 BASS_UI_LIFE_SIZE = { 1040, 40 };
 
-CBassUI::CBassUI()
+CBossUI::CBossUI()
 {
 	// 変数初期化
 	m_LifeUV = 1;
@@ -18,24 +18,24 @@ CBassUI::CBassUI()
 	m_lifeSprite = CUIManager::GetIns()->Add(Basshp);
 }
 
-CBassUI::~CBassUI()
+CBossUI::~CBossUI()
 {
 	// リストの削除は不要です。
 }
 
-void CBassUI::Update()
+void CBossUI::Update()
 {
 	// ここでUIのスプライトを更新
 	UpdateLife();
 }
 
-void CBassUI::SetLife(float Life)
+void CBossUI::SetLife(float Life)
 {
 	m_LifeUV = Life > 1.0f ? 1.0f : Life < 0.0f ? 0.0f : Life;
 }
 
 // ライフゲージの更新
-void CBassUI::UpdateLife()
+void CBossUI::UpdateLife()
 {
 	// 中心座標を格納
 	auto center = BASS_UI_LIFE_CENTER;

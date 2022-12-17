@@ -4,7 +4,7 @@
 #include <memory>
 
 #include <Billboard.h>
-#include "BassUI.h"
+#include "BossUI.h"
 
 class CProtEnemyBoss : public CObjectBase
 {
@@ -30,7 +30,7 @@ private:
 	DirectX::XMFLOAT3 m_target;
 	DirectX::XMFLOAT3 m_randTarget;
 	DirectX::XMFLOAT3 m_startPos;
-	std::unique_ptr<CBassUI> m_bassUI;	// ボスのUI
+	std::unique_ptr<CBossUI> m_bossUI;	// ボスのUI
 
 	CBillboard* m_bill;
 };

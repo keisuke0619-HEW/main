@@ -48,7 +48,8 @@ void CPlayer::Draw()
 	//m_playerUI->Draw();
 	//if(m_beam)
 	//	m_beam->Draw();
-	m_playerUI->SetLife(1);
+	m_playerUI->SetLife(m_param.hp);
+	m_param = param;
 }
 
 void CPlayer::Move()

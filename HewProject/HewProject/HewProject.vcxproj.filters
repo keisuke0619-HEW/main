@@ -177,7 +177,7 @@
     <ClInclude Include="Source\System\UiManager.hpp">
       <Filter>システム\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\BaseClass\BassUI.h">
+    <ClInclude Include="Source\System\BaseClass\BossUI.h">
       <Filter>システム\BaseClass</Filter>
     </ClInclude>
     <ClInclude Include="Source\System\Blend.hpp">
@@ -317,7 +317,7 @@
     <ClCompile Include="Source\System\BaseClass\PlayerUI.hpp">
       <Filter>システム\BaseClass</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\BaseClass\BassUI.cpp">
+    <ClCompile Include="Source\System\BaseClass\BossUI.cpp">
       <Filter>システム\BaseClass</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\Blend.cpp">

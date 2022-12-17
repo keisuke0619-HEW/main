@@ -26,7 +26,7 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
 	m_param.tag = TAG_ENEMY;
 	m_startPos = m_param.pos;
-	m_bassUI.reset(new CBassUI());
+	m_bossUI.reset(new CBossUI());
 	
 
 	m_bill = new CBillboard("Assets/Img/Boss.png");
@@ -50,7 +50,8 @@ void CProtEnemyBoss::Update()
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
 
 	// ボスUIの更新
-	m_bassUI->Update();
+	m_bossUI->Update();
+	m_param.hp -= 0.001f;
 }
 
 void CProtEnemyBoss::Draw()
@@ -64,7 +65,7 @@ void CProtEnemyBoss::Draw()
 	
 	// ボスUIの描画
 	//CObjectBase::Draw();
-	m_bassUI->SetLife(0.5);
+	m_bossUI->SetLife(m_param.hp);
 }
 
 // 移動ルーチン。Excelを参考に作成

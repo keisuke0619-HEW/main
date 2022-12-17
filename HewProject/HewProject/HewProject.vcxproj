@@ -30,7 +30,7 @@
     <ClInclude Include="Source\Scene\BaseClass\SceneBase.hpp" />
     <ClInclude Include="Source\Scene\BaseClass\SceneManager.hpp" />
     <ClInclude Include="Source\Scene\BaseClass\SceneTest.hpp" />
-    <ClInclude Include="Source\System\BaseClass\BassUI.h" />
+    <ClInclude Include="Source\System\BaseClass\BossUI.h" />
     <ClInclude Include="Source\System\BaseClass\Billboard.h" />
     <ClInclude Include="Source\System\BaseClass\DataPool.hpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -80,7 +80,7 @@
     <ClCompile Include="Source\Scene\BaseClass\SceneBase.cpp" />
     <ClCompile Include="Source\Scene\BaseClass\SceneManager.cpp" />
     <ClCompile Include="Source\Scene\BaseClass\SceneTest.cpp" />
-    <ClCompile Include="Source\System\BaseClass\BassUI.cpp" />
+    <ClCompile Include="Source\System\BaseClass\BossUI.cpp" />
     <ClCompile Include="Source\System\BaseClass\Billboard.cpp" />
     <ClCompile Include="Source\System\BaseClass\DataPool.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>

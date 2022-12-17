@@ -2,11 +2,11 @@
 
 #include <list>
 #include <GameUI.h>
-class CBassUI
+class CBossUI
 {
 public:
-	CBassUI();
-	~CBassUI();
+	CBossUI();
+	~CBossUI();
 
 	void Update();
 	void SetLife(float);
