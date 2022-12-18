@@ -23,6 +23,7 @@
     <ClInclude Include="Blend.hpp" />
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
+    <ClInclude Include="MiniMap.h" />
     <ClInclude Include="ProducePlane.h" />
     <ClInclude Include="ProtEnemyBoss.hpp" />
     <ClInclude Include="Source\Prot\ProtEnemy.hpp" />
@@ -74,6 +75,7 @@
     <ClCompile Include="BassUI.cpp" />
     <ClCompile Include="Blend.cpp" />
     <ClCompile Include="DirectXTex\Texture.cpp" />
+    <ClCompile Include="MiniMap.cpp" />
     <ClCompile Include="ProducePlane.cpp" />
     <ClCompile Include="ProtEnemyBoss.cpp" />
     <ClCompile Include="Source\Prot\ProtEnemy.cpp" />

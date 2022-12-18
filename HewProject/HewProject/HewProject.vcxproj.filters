@@ -189,6 +189,9 @@
     <ClInclude Include="Source\System\UiManager.hpp">
       <Filter>システム\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="MiniMap.h">
+      <Filter>システム\Other</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -337,6 +340,9 @@
     </ClCompile>
     <ClCompile Include="Source\System\UiManager.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMap.cpp">
+      <Filter>システム\Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

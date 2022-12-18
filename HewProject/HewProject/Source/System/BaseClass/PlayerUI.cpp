@@ -14,6 +14,7 @@ CPlayerUI::CPlayerUI()
 	tmp->SetSize({ 340, 340 });
 	CUIManager::GetIns()->Add(tmp);
 
+	m_map = new CMiniMap;
 	// 体力ゲージ
 	//auto tmphp = AddList(new CGameUI("Assets/Img/HP.png"));
 	//tmphp->SetPos({ 320,660 });
@@ -34,6 +35,7 @@ CPlayerUI::~CPlayerUI()
 void CPlayerUI::Update()
 {
 	// ここでUIのスプライトを更新
+	m_map->Update();
 }
 
 
