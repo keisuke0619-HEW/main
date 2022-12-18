@@ -1,26 +1,6 @@
 #pragma once
 #include <IObjectBase.hpp>
 
-// データの取得
-struct Shpire
-{
-	DirectX::XMFLOAT3 pos;			//  中心座標
-	float radius;					//  半径
-};
-
-struct Plane
-{
-	DirectX::XMFLOAT3 normal;		//	面の法線
-	DirectX::XMFLOAT3 vtx[4];		//	頂点の座標
-};
-
-struct Ray
-{
-	DirectX::XMFLOAT3 start;		//	レイの開始点
-	DirectX::XMVECTOR direction;	//	レイの方向
-	float length;					//	レイの長さ
-};
-
 struct Triangle
 {
 	DirectX::XMFLOAT3 p[3];			// 三角形の座標

@@ -4,6 +4,9 @@ CGameUI::CGameUI(const char* FileName)
 	: m_pos(0.f, 0.f)
 	, m_size(1.f, 1.f)
 	, m_sort(SORT_ORDER_DEFAULT)
+	, m_rot(0.0f)
+	, m_uvPos({0,0})
+	, m_uvScale({1,1})
 {
 	LoadTextureFromFile(FileName, &m_pPicture);
 }
@@ -34,7 +37,7 @@ void CGameUI::Draw()
 
 	// ワールド行列で画面の表示位置を計算
 	DirectX::XMMATRIX T = DirectX::XMMatrixTranslation(m_pos.x, m_pos.y, 0.f);
-	DirectX::XMMATRIX R = DirectX::XMMatrixRotationZ(3.14f);
+	DirectX::XMMATRIX R = DirectX::XMMatrixRotationZ(m_rot);
 	DirectX::XMFLOAT4X4 fWorld;
 	DirectX::XMStoreFloat4x4(&fWorld, DirectX::XMMatrixTranspose(R * T));
 
@@ -46,9 +49,13 @@ void CGameUI::Draw()
 	tmpSize.y *= -1;
 	Sprite::SetSize(tmpSize);
 	Sprite::SetTexture(m_pPicture);
+	Sprite::SetUVPos(m_uvPos);
+	Sprite::SetUVScale(m_uvScale);
 	EnableDepth(false);
 	Sprite::Draw();
 	EnableDepth(true);
+	Sprite::SetUVPos({0,0});
+	Sprite::SetUVScale({1,1});
 }
 
 void CGameUI::SetPos(DirectX::XMFLOAT2 pos)
@@ -61,9 +68,24 @@ void CGameUI::SetSize(DirectX::XMFLOAT2 size)
 	m_size = size;
 }
 
+void CGameUI::SetUVPos(DirectX::XMFLOAT2 uv)
+{
+	m_uvPos = uv;
+}
+
+void CGameUI::SetUVScale(DirectX::XMFLOAT2 uv)
+{
+	m_uvScale = uv;
+}
+
 void CGameUI::SetRotation(float degRot)
 {
 	m_rot = DirectX::XMConvertToRadians(degRot);
+}
+
+DirectX::XMFLOAT2 CGameUI::GetSize()
+{
+	return m_size;
 }
 
 int CGameUI::GetSortID()

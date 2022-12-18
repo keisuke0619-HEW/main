@@ -37,10 +37,25 @@ public:
 	void SetSize(DirectX::XMFLOAT2 size);
 
 	/// <summary>
+	/// UVを設定
+	/// </summary>
+	/// <param name="uv">左上のUV座標</param>
+	void SetUVPos(DirectX::XMFLOAT2 uv);
+
+	/// <summary>
+	/// UVの大きさを設定
+	/// </summary>
+	/// <param name="uv">UVの大きさ</param>
+	void SetUVScale(DirectX::XMFLOAT2 uv);
+
+	/// <summary>
 	/// 回転を設定します。（度数法）
 	/// </summary>
 	/// <param name="rot">回転角度（度数法）</param>
 	void SetRotation(float degRot);
+	
+	DirectX::XMFLOAT2 GetSize();
+
 	int GetSortID();
 
 	void SetSortID(SortOrder order);
@@ -48,8 +63,11 @@ private:
 	ID3D11ShaderResourceView* m_pPicture;	// 画像
 	DirectX::XMFLOAT2 m_pos;				// 画像の座標(HPバーのように常に画面に張り付くように描画するのでZ軸はなし)
 	DirectX::XMFLOAT2 m_size;				// 画像のサイズ(Y軸の値を-にすると反転)
-	float m_rot;
-	SortOrder m_sort;
+	float m_rot;				// 回転
+	SortOrder m_sort;			// 描画順関連
+	DirectX::XMFLOAT2 m_uvPos;	// 左上のUV座標
+	DirectX::XMFLOAT2 m_uvScale;// 描画するUVの大きさ
+
 };
 #endif // ! __GAME_UI_H__
 

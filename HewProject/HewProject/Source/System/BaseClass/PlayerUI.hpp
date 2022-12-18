@@ -2,7 +2,7 @@
 
 #include <list>
 #include <GameUI.h>
-#include <MiniMap.h>
+#include <memory>
 class CPlayerUI
 {
 public:
@@ -13,5 +13,12 @@ public:
 	void SetLife(float);
 	void SetCharge(float);
 private:
-	CMiniMap* m_map;
+	float m_LifeUV;
+	float m_ChargeUV;
+	std::weak_ptr<CGameUI> m_lifeSprite;
+	std::weak_ptr<CGameUI> m_chargeSprite;
+	
+	void UpdateLife();
+	void UpdateCharge();
+
 };
