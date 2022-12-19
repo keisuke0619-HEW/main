@@ -51,7 +51,6 @@ void CProtEnemyBoss::Update()
 
 	// ボスUIの更新
 	m_bossUI->Update();
-	m_param.hp -= 0.001f;
 }
 
 void CProtEnemyBoss::Draw()
@@ -104,5 +103,18 @@ void CProtEnemyBoss::Finalize()
 
 void CProtEnemyBoss::OnCollision(Ptr obj)
 {
-	
+	//	けいすけに確認
+
+	//if (obj->GetParam().tag == TAG_BEAM)
+	//{
+	//	m_param.hp -= 0.001f;
+	//}
+}
+
+void CProtEnemyBoss::OnCollisionTag(EObjectTag tag)
+{
+	if (tag == TAG_BEAM)
+	{
+		m_param.hp -= 0.01f;
+	}
 }
