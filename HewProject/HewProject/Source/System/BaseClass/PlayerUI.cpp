@@ -6,8 +6,8 @@
 // ’è”’è‹`
 const DirectX::XMFLOAT2 PLAYER_UI_LIFE_CENTER = { 267, 621 };
 const DirectX::XMFLOAT2 PLAYER_UI_LIFE_SIZE = { 188, 57 };
-const DirectX::XMFLOAT2 PLAYER_UI_CHARGE_CENTER = { 240, 700 };
-const DirectX::XMFLOAT2 PLAYER_UI_CHARGE_SIZE =	{ 480, 40 };
+const DirectX::XMFLOAT2 PLAYER_UI_CHARGE_CENTER = { 309, 662 };
+const DirectX::XMFLOAT2 PLAYER_UI_CHARGE_SIZE =	{ 269, 10 };
 
 CPlayerUI::CPlayerUI()
 {
@@ -33,7 +33,7 @@ CPlayerUI::CPlayerUI()
 	bar->SetSize({ 448, 168 });
 	CUIManager::GetIns()->Add(bar);
 
-	// HPƒo[
+	// Ž•ŽÔ
 	auto haguruma = new CGameUI("Assets/Img/HPbar/UI bar_02_haguruma2.png");
 	haguruma->SetPos({ 94, 630 });
 	haguruma->SetSize({ 68, 68 });
