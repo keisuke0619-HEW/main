@@ -4,8 +4,8 @@
 #include <UiManager.hpp>
 
 // ’è”’è‹`
-const DirectX::XMFLOAT2 PLAYER_UI_LIFE_CENTER = { 267, 621 };
-const DirectX::XMFLOAT2 PLAYER_UI_LIFE_SIZE = { 188, 57 };
+const DirectX::XMFLOAT2 PLAYER_UI_LIFE_CENTER = { 307, 621 };
+const DirectX::XMFLOAT2 PLAYER_UI_LIFE_SIZE = { 269, 57 };
 const DirectX::XMFLOAT2 PLAYER_UI_CHARGE_CENTER = { 309, 662 };
 const DirectX::XMFLOAT2 PLAYER_UI_CHARGE_SIZE =	{ 269, 10 };
 
@@ -22,7 +22,7 @@ CPlayerUI::CPlayerUI()
 	CUIManager::GetIns()->Add(tmp);
 
 	// HP
-	auto tmphp = new CGameUI("Assets/Img/HPbar/UI bar_02_hittosiro.png");
+	auto tmphp = new CGameUI("Assets/Img/HPbar/HP.png");
 	tmphp->SetPos(PLAYER_UI_LIFE_CENTER);
 	tmphp->SetSize(PLAYER_UI_LIFE_SIZE);
 	m_lifeSprite = CUIManager::GetIns()->Add(tmphp);
