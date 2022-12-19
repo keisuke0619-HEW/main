@@ -83,9 +83,22 @@ void CPlayer::Move()
 	if (IsKeyPress(VK_CONTROL))
 		vMove = DirectX::XMVectorScale(vMove, 5.0f);
 #endif // _DEBUG
+
 	// ã‰ºˆ—
 	DirectX::XMFLOAT3 up = { 0, 1, 0 };
 	auto vUp = DirectX::XMLoadFloat3(&up);
+
+	// ‰ñ“]ˆ—
+	DirectX::XMFLOAT3 Move;
+	DirectX::XMStoreFloat3(&Move, vMove);
+	Move.y = 0.0f;
+	
+	if (fabsf(Move.x) + fabsf(Move.z) > 0.0f)
+	{
+		float rot = atan2f(Move.z, Move.x);
+		m_param.rot.y = (90.0f * 3.14159f / 180.0f) - rot;
+	}
+
 	vMove = DirectX::XMVectorScale(vMove, MOVE_SPEED);
 
 	DirectX::XMStoreFloat3(&m_param.move, vMove);
@@ -110,6 +123,23 @@ void CPlayer::Move()
 			m_gra = -2;
 			m_isGround = false;
 		}
+	}
+
+	if (m_param.pos.x > 34.0f)
+	{
+		m_param.pos.x = 34.0f;
+	}
+	if (m_param.pos.x < -34.0f)
+	{
+		m_param.pos.x = -34.0f;
+	}
+	if (m_param.pos.z > 34.0f)
+	{
+		m_param.pos.z = 34.0f;
+	}
+	if (m_param.pos.z < -34.0f)
+	{
+		m_param.pos.z = -34.0f;
 	}
 }
 
