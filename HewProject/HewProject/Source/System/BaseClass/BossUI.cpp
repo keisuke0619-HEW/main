@@ -4,18 +4,32 @@
 #include <UiManager.hpp>
 
 // 定数定義
-const DirectX::XMFLOAT2 BASS_UI_LIFE_CENTER = { 520, 20 };
-const DirectX::XMFLOAT2 BASS_UI_LIFE_SIZE = { 1040, 40 };
+const DirectX::XMFLOAT2 BASS_UI_LIFE_CENTER = { 360, 80 };
+const DirectX::XMFLOAT2 BASS_UI_LIFE_SIZE = { 683, 19 };// 945, 18
 
 CBossUI::CBossUI()
 {
 	// 変数初期化
 	m_LifeUV = 1;
 
-	auto Basshp = new CGameUI("Assets/Img/BassHP.png");
+	// ↓HPバーとアイコンの差は20がちょうどいいかな？
+	// ライフゲージ
+	auto Basshp = new CGameUI("Assets/Img/Boss/UI bar_boss1.png");
 	Basshp->SetPos(BASS_UI_LIFE_CENTER);
 	Basshp->SetSize(BASS_UI_LIFE_SIZE);
 	m_lifeSprite = CUIManager::GetIns()->Add(Basshp);
+
+	// バー
+	auto Bossbar2 = new CGameUI("Assets/Img/Boss/UI bar_boss2.png");
+	Bossbar2->SetPos({ 360, 80 });
+	Bossbar2->SetSize({ 705, 27 });// 960, 20
+	CUIManager::GetIns()->Add(Bossbar2);
+
+	// ボスアイコン
+	auto Bossbar3 = new CGameUI("Assets/Img/Boss/UI bar_boss3.png");
+	Bossbar3->SetPos({ 340, 60 });
+	Bossbar3->SetSize({ 660, 110 });
+	CUIManager::GetIns()->Add(Bossbar3);
 }
 
 CBossUI::~CBossUI()

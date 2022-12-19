@@ -4,8 +4,8 @@
 #include <UiManager.hpp>
 
 // 定数定義
-const DirectX::XMFLOAT2 PLAYER_UI_LIFE_CENTER = { 320, 660 };
-const DirectX::XMFLOAT2 PLAYER_UI_LIFE_SIZE = { 640, 40 };
+const DirectX::XMFLOAT2 PLAYER_UI_LIFE_CENTER = { 267, 621 };
+const DirectX::XMFLOAT2 PLAYER_UI_LIFE_SIZE = { 188, 57 };
 const DirectX::XMFLOAT2 PLAYER_UI_CHARGE_CENTER = { 240, 700 };
 const DirectX::XMFLOAT2 PLAYER_UI_CHARGE_SIZE =	{ 480, 40 };
 
@@ -16,16 +16,28 @@ CPlayerUI::CPlayerUI()
 	m_ChargeUV = 1;
 
 	// ここでUIのスプライトを生成
-	auto tmp = new CGameUI("Assets/Img/crosshair.png");
+	auto tmp = new CGameUI("Assets/Img/Reticle/UI　Reticle3.png");
 	tmp->SetPos({ 640, 360 });
 	tmp->SetSize({ 340, 340 });
 	CUIManager::GetIns()->Add(tmp);
 
-	// ライフゲージ
-	auto tmphp = new CGameUI("Assets/Img/HP.png");
+	// HP
+	auto tmphp = new CGameUI("Assets/Img/HPbar/UI bar_02_hittosiro.png");
 	tmphp->SetPos(PLAYER_UI_LIFE_CENTER);
 	tmphp->SetSize(PLAYER_UI_LIFE_SIZE);
 	m_lifeSprite = CUIManager::GetIns()->Add(tmphp);
+
+	// HPバー
+	auto bar = new CGameUI("Assets/Img/HPbar/UI hitpoint①.png");
+	bar->SetPos({ 234, 630 });
+	bar->SetSize({ 448, 168 });
+	CUIManager::GetIns()->Add(bar);
+
+	// HPバー
+	auto haguruma = new CGameUI("Assets/Img/HPbar/UI bar_02_haguruma2.png");
+	haguruma->SetPos({ 94, 630 });
+	haguruma->SetSize({ 68, 68 });
+	CUIManager::GetIns()->Add(haguruma);
 
 	// チャージゲージ
 	auto tmpchg = new CGameUI("Assets/Img/Charge2.png");
