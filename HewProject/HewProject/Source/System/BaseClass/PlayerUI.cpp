@@ -16,9 +16,9 @@ CPlayerUI::CPlayerUI()
 	m_ChargeUV = 1;
 
 	// ここでUIのスプライトを生成
-	auto tmp = new CGameUI("Assets/Img/Reticle/UI　Reticle3.png");
+	auto tmp = new CGameUI("Assets/Img/Reticle/UI　Reticle4.png");
 	tmp->SetPos({ 640, 360 });
-	tmp->SetSize({ 340, 340 });
+	tmp->SetSize({ 32,32 });
 	CUIManager::GetIns()->Add(tmp);
 
 	// HP

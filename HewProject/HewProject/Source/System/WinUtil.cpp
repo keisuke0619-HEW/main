@@ -74,6 +74,7 @@ AppState UpdateWindow()
 	// メッセージの処理
 	TranslateMessage(&message);
 	DispatchMessage(&message);
+
 	return APP_STATE_MESSAGE;
 }
 
