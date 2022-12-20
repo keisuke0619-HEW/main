@@ -31,6 +31,7 @@ CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string 
     m_model->SetVertexShader(m_vs.get());
     m_wvp.reset(new ConstantBuffer());
     m_wvp->Create(sizeof(DirectX::XMFLOAT4X4) * 3);
+
 }
 
 CObjectBase::~CObjectBase()
