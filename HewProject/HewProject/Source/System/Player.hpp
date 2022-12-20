@@ -12,10 +12,12 @@ public:
 	void Update() override;
 	void Draw() override;
 	void SetTarget(DirectX::XMFLOAT3 target);
+	void OnCollision(IObjectBase::Ptr obj) override;
 private:
 	float m_gra;		// 重力
 	bool m_isGround;	// 地に足ついてる？
 	float m_beamSize;	// ビームのサイズ
+	int m_InvincibleTime;	// 無敵時間
 	DirectX::XMFLOAT3 m_beamTarget; // ビームの方向
 	//std::unique_ptr<CBeam> m_beam;	// ビーム本体
 	std::unique_ptr<CPlayerUI> m_playerUI;	// プレイヤーのUI

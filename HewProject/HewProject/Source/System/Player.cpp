@@ -13,6 +13,7 @@ CPlayer::CPlayer()
 	m_gra = 0;
 	m_isGround = true;
 	m_beamSize = 0;
+	m_InvincibleTime = 0;
 	m_param.collisionType = COLLISION_SPHIRE;
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
 	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
@@ -32,9 +33,11 @@ void CPlayer::Update()
 {
 	Move();
 	Beam();
+	m_InvincibleTime--;
 	//m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
 	m_playerUI->Update();
+	
 	//if (IsKeyTrigger('U'))
 	//	Destroy();
 }
@@ -183,4 +186,22 @@ void CPlayer::Beam()
 void CPlayer::SetTarget(DirectX::XMFLOAT3 target)
 {
 	m_beamTarget = target;
+}
+
+void CPlayer::OnCollision(IObjectBase::Ptr obj)
+{
+	if (m_InvincibleTime < 0)
+	{
+
+		if (obj->GetParam().tag == TAG_ENEMY)
+		{
+			m_InvincibleTime = 120;
+
+			m_param.hp -= 0.1f;
+			if (m_param.hp <= 0.0f)
+			{
+				//Destroy();
+			}
+		}
+	}
 }
