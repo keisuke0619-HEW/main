@@ -8,7 +8,7 @@
 
 CProtEnemyBoss::CProtEnemyBoss()
 	: CObjectBase("Assets/Box.fbx", 0.4f)
-	, m_move(0.005f)
+	, m_move(0.01f)
 	, m_distance(4.0f)
 	, m_cnt(0)
 	, m_randNum(0)
@@ -48,6 +48,9 @@ void CProtEnemyBoss::Update()
 	// 移動るーちん
 	Move();
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
+	
+	if(m_param.pos.y < 1.3f)
+		m_param.pos.y = 1.3f;
 
 	// ボスUIの更新
 	m_bossUI->Update();
@@ -80,7 +83,7 @@ void CProtEnemyBoss::Move()
 
 	// 距離を計算
 	DirectX::XMVECTOR distance = DirectX::XMVectorSubtract(player, enemy);
-	//distance = DirectX::XMVector3Normalize(distance);
+	distance = DirectX::XMVector3Normalize(distance);
 	// float3に変換して格納
 	DirectX::XMFLOAT3 movePos;
 
@@ -115,6 +118,6 @@ void CProtEnemyBoss::OnCollisionTag(EObjectTag tag)
 {
 	if (tag == TAG_BEAM)
 	{
-		m_param.hp -= 0.01f;
+		m_param.hp -= 0.005f;
 	}
 }
