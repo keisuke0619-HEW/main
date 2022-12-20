@@ -64,7 +64,10 @@
     <ClInclude Include="Source\System\ProducePlane.h" />
     <ClInclude Include="Source\System\SamplerState.h" />
     <ClInclude Include="Source\System\Shader.h" />
-    <ClInclude Include="Source\System\Sound.h" />
+    <ClInclude Include="Source\System\Sound.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Source\System\Sprite.h" />
     <ClInclude Include="Source\System\Stage00.hpp" />
     <ClInclude Include="Source\System\Timer.h" />
@@ -118,7 +121,10 @@
     <ClCompile Include="Source\System\ProducePlane.cpp" />
     <ClCompile Include="Source\System\SamplerState.cpp" />
     <ClCompile Include="Source\System\Shader.cpp" />
-    <ClCompile Include="Source\System\Sound.cpp" />
+    <ClCompile Include="Source\System\Sound.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Source\System\Sprite.cpp" />
     <ClCompile Include="Source\System\Stage00.cpp" />
     <ClCompile Include="Source\System\Startup.cpp" />

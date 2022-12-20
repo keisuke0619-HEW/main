@@ -7,6 +7,7 @@ CProtEnemyManager::CProtEnemyManager()
 	m_objList = CSceneBase::GetObjList();
 	m_objListBoss = CSceneBase::GetObjList();
 
+	m_frame = 0;
 	// オブジェクトリストが死んでいなかったら(NULLチェックもどきだよ.expired)
 	if (m_objList.expired() == false)
 	{
@@ -37,13 +38,16 @@ void CProtEnemyManager::Update()
 	{
 		return;
 	}
-	// オブジェクト０番が死んでいたらというif文
-	for (int i = 0; i < PROT_ENEMY_MAX; i++)
+	if (m_frame % (60 * 5) == 0)
 	{
-		if (m_objects[i].expired() == true)
+		// オブジェクト０番が死んでいたらというif文
+		for (int i = 0; i < PROT_ENEMY_MAX; i++)
 		{
-			// 死んでいたら中に入る
-			m_objects[i] = m_objList.lock()->Add(new CProtEnemy());
+			if (m_objects[i].expired() == true)
+			{
+				// 死んでいたら中に入る
+				m_objects[i] = m_objList.lock()->Add(new CProtEnemy());
+			}
 		}
 	}
 	//ボス生成
@@ -61,4 +65,5 @@ void CProtEnemyManager::Update()
 		}
 	}
 
+	m_frame++;
 }

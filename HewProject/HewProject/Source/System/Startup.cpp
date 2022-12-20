@@ -19,7 +19,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	InitTimer(DEFAULT_FPS);
 	Init();
 
-
 	//--- ウィンドウの管理
 	AppState state = APP_STATE_MESSAGE;
 	while (state != APP_STATE_QUIT)
@@ -27,6 +26,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		state = UpdateWindow();
 		if (state == APP_STATE_WAIT && UpdateTimer())
 		{
+
 			Update(GetDeltaTime());
 			Draw();
 		}

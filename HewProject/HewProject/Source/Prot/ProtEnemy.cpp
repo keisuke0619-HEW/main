@@ -9,7 +9,7 @@
 CProtEnemy::CProtEnemy()
 	: CObjectBase("Assets/Box.fbx", 0.4f)
 	, m_move(0.05f)
-	, m_distance(4.0f)
+	, m_distance(8.0f)
 	, m_cnt(0)
 	, m_randNum(0)
 	, m_target(DirectX::XMFLOAT3(0,0,0))
@@ -30,6 +30,7 @@ CProtEnemy::CProtEnemy()
 	m_startPos = m_param.pos;
 	m_param.tag = TAG_ENEMY;
 	m_bill = new CBillboard("Assets/Img/enemy.png");
+	m_pPolyline = new GeometoryPolyline(30);
 }
 
 CProtEnemy::~CProtEnemy()
@@ -39,6 +40,8 @@ CProtEnemy::~CProtEnemy()
 
 void CProtEnemy::Update()
 {
+	
+
 	// もしプレイヤーのオブジェクトが消えていたらもう一度取得
 	if (m_player.expired() == true)
 	{
@@ -48,16 +51,35 @@ void CProtEnemy::Update()
 	// 移動るーちん
 	Move();
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
+	if (m_param.pos.y < 1.3f)
+	{
+		m_param.pos.y = 1.3f;
+	}
 }
 
 void CProtEnemy::Draw()
 {
+
 	m_bill->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
 	m_bill->SetPos(m_param.pos);
 	m_bill->Draw();
 	//Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
 	//Utility::SetBlendState(BLEND_ALPHA);
+	//奇跡の追加
+	GeometoryPolyline::Point point = {};
+	//ポリライン
+	auto fCamPos = CCameraBase::GetPrimaryData().pos;
+	
+	DirectX::XMVECTOR vCamPos = DirectX::XMLoadFloat3(&fCamPos);
+	DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&CProtEnemy::m_param.pos);
+	DirectX::XMStoreFloat3(&point.normal, DirectX::XMVectorSubtract(vCamPos, vPos));
+	point.pos = CProtEnemy::m_param.pos;
+	point.width = 200.0f;
+	m_pPolyline->PushPoint(point);
+	m_pPolyline->SetView(CCameraBase::GetPrimaryViewMatrix());
+	m_pPolyline->SetProjection(CCameraBase::GetPrimaryProjectionMatrix());
+	m_pPolyline->Draw();
 
 }
 
@@ -107,6 +129,10 @@ void CProtEnemy::Move()
 		// もしプレイヤーとの距離が一定以下だったら
 		if (fabsf(movePos.x) <= m_distance && fabsf(movePos.y) <= m_distance && fabsf(movePos.z) <= m_distance)
 		{
+			// 正規化して速さを一定にする
+			distance = DirectX::XMLoadFloat3(&movePos);
+			distance = DirectX::XMVector3Normalize(distance);
+			DirectX::XMStoreFloat3(&movePos, distance);
 			// プレイヤーを目標にする
 			m_param.pos.x += movePos.x * m_move / 2; // エネミーのposを使う
 			m_param.pos.y += movePos.y * m_move / 2;
