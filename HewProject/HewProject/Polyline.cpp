@@ -49,7 +49,12 @@ float4 main(PS_IN pin) : SV_TARGET {
 	m_pVertices = new Vertex[vtxNum];
 	for (int i = 0; i < vtxNum; ++i)
 	{
-		m_pVertices[i].uv = DirectX::XMFLOAT2(i / (vtxNum - 1.0f), 0.0f);
+		m_pVertices[i].uv = 
+		DirectX::XMFLOAT2(i / (vtxNum - 1.0f),
+			i%2);
+		m_pVertices[i].color =
+			DirectX::XMFLOAT4(1.0f, 1.0f,
+				1.0f, 1.0f);
 	}
 
 	MeshBuffer::Description desc = {};
@@ -163,21 +168,27 @@ void GeometoryPolyline::CalcVertex()
 	vCross = DirectX::XMVector3Normalize(vCross);
 	//垂直なベクトルから頂点計算
 	DirectX::XMStoreFloat3(&m_pVertices[0].pos,
-		DirectX::XMVectorAdd(vCenter, DirectX::XMVectorScale(vCross, m_points[0].width*-0.5f)));
+		DirectX::XMVectorAdd(vCenter,
+			DirectX::XMVectorScale(vCross, 
+				m_points[0].width*-0.5f)));
 
 	DirectX::XMStoreFloat3(&m_pVertices[1].pos,
-		DirectX::XMVectorAdd(vCenter, DirectX::XMVectorScale(vCross, m_points[0].width*0.5f)));
+		DirectX::XMVectorAdd(vCenter,
+			DirectX::XMVectorScale(vCross, 
+				m_points[0].width*0.5f)));
 
 	//中間地点の計算
 	DirectX::XMVECTOR vPrev = vCenter;
 	vCenter = vNext;
 	for (int i = 0; i < m_points.size() - 1; ++i)
 	{
-		vNext = DirectX::XMLoadFloat3(&m_points[i + 1].pos);
+		vNext = DirectX::XMLoadFloat3
+		(&m_points[i + 1].pos);
 		//正規化
-		vVec = DirectX::XMVectorSubtract(vNext, vPrev);
-		vNormal = DirectX::XMLoadFloat3(
-			&m_points[i].normal);
+		vVec = DirectX::XMVectorSubtract
+		(vNext, vPrev);
+		vNormal = DirectX::XMLoadFloat3
+		(&m_points[i].normal);
 		//外積
 		vCross = DirectX::XMVector3Cross(vVec, vNormal);
 		vCross = DirectX::XMVector3Normalize(vCross);
@@ -210,7 +221,8 @@ void GeometoryPolyline::CalcVertex()
 
 	DirectX::XMStoreFloat3(
 		&m_pVertices[m_points.size() * 2 - 1].pos,
-		DirectX::XMVectorAdd(vCenter, DirectX::XMVectorScale(vCross, m_points.back().width*0.5f)));
-
+		DirectX::XMVectorAdd(vCenter, DirectX::XMVectorScale(vCross, m_points.back().width *  0.5f))
+	);
+	
 
 }
