@@ -9,33 +9,6 @@ ProducePlane::ProducePlane(const char* FileName)
 	,m_IsDarw(true)
 {
 	LoadTextureFromFile(FileName, &m_pPicture);
-	//m_pConstantWVP = new ConstantBuffer;
-	//m_pConstantWVP->Create(sizeof(m_PlaneMat));
-
-	//// 定数バッファ作成
-	//m_pConstant = new ConstantBuffer();
-	//m_pConstant->Create(sizeof(UVPos));
-
-	//PlaneVertex vtx[] = {
-	//{ {-0.5f, 0.5f, 0.0f}, { 0.0f, 0.0f} },
-	//{ { 0.5f, 0.5f, 0.0f}, { 1.0f, 0.0f} },
-	//{ {-0.5f,-0.5f, 0.0f}, { 0.0f, 1.0f} },
-	//{ { 0.5f,-0.5f, 0.0f}, { 1.0f, 1.0f} }
-	//};
-	//int idx[] =
-	//{
-	//	0,1,2, 1,3,2
-	//};
-
-	//MeshBuffer::Description desc;
-	//desc.pVtx = vtx;
-	//desc.vtxCount = 4;
-	//desc.vtxSize = sizeof(PlaneVertex);
-	//desc.pIdx = idx;
-	//desc.idxCount = 6;
-	//desc.idxSize = sizeof(int);
-	//desc.topology = D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	//m_pProducePlane = new MeshBuffer(desc);
 }
 
 ProducePlane::~ProducePlane()
@@ -48,9 +21,9 @@ void ProducePlane::Draw()
 	if (m_IsDarw == true)
 	{
 		// ビュー行列セット
-		Sprite::SetView(m_view);
+		Sprite::SetView(CCameraBase::GetPrimaryViewMatrix());
 		// プロジェクション行列セット
-		Sprite::SetProjection(m_proj);
+		Sprite::SetProjection(CCameraBase::GetPrimaryProjectionMatrix());
 
 		// ワールド行列
 		DirectX::XMFLOAT4X4 world;
@@ -94,35 +67,16 @@ void ProducePlane::SetProducePlaneInformation(DirectX::XMFLOAT3 center, DirectX:
 	m_pos.z = center.z;
 
 	// 画像のサイズを設定
-	m_size.x = size.x * 10;
-	m_size.y = size.y * 10;
+	m_size.x = size.x;
+	m_size.y = size.y;
 
 	// 画像の角度を設定
-	m_rot.x = rot.x;
-	m_rot.y = rot.y;
-	m_rot.z = rot.z;
-
-	//PlaneVertex vtx[] = {
-
-	//};
-
-	////	中心点などを指定して描画
-	//m_pPlane->centerpos = center;
-	//m_pPlane->size = size;
-	//m_pPlane->rot = rot;
-
-
-
-	//->Draw();
+	m_rot.x = DirectX::XMConvertToRadians(rot.x);
+	m_rot.y = DirectX::XMConvertToRadians(rot.y);
+	m_rot.z = DirectX::XMConvertToRadians(rot.z);
 }
 
 void ProducePlane::SetEnable(bool isDraw)
 {
 	m_IsDarw = isDraw;
-}
-
-void ProducePlane::SetPosViewProj(DirectX::XMFLOAT4X4 view, DirectX::XMFLOAT4X4 proj)
-{
-	m_view = view;
-	m_proj = proj;
 }

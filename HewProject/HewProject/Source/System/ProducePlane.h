@@ -33,7 +33,6 @@ public:
 	void SetProducePlaneInformation(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 size, DirectX::XMFLOAT3 rot);// •`‰æ‚É•K—v‚Èî•ñ‚ğİ’è
 	void SetEnable(bool isDraw);// •`‰æ‚·‚é‚©
 
-	void SetPosViewProj(DirectX::XMFLOAT4X4 view, DirectX::XMFLOAT4X4 proj);
 private:
 	ID3D11ShaderResourceView* m_pPicture;	// ‰æ‘œ
 	DirectX::XMFLOAT3 m_pos;				// ‰æ‘œ‚ÌÀ•W

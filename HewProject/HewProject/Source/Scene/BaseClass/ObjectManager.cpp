@@ -23,12 +23,12 @@ CObjectManager::~CObjectManager()
 
 void CObjectManager::UpdateAll()
 {
-	TObjectParam CameraRay;
-	CameraRay.collisionType = COLLISION_RAY;
-	CameraRay.collisionData.ray.rayStart = CCameraBase::GetDataFromTag("Player").pos;
-	DirectX::XMFLOAT3 cameraLook = CCameraBase::GetDataFromTag("Player").look;
-	CameraRay.collisionData.ray.rayDirection = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&cameraLook),DirectX::XMLoadFloat3(&CameraRay.collisionData.ray.rayStart)));
-	CameraRay.collisionData.ray.rayLength = 100;
+	//TObjectParam CameraRay;
+	//CameraRay.collisionType = COLLISION_RAY;
+	//CameraRay.collisionData.ray.rayStart = CCameraBase::GetDataFromTag("Player").pos;
+	//DirectX::XMFLOAT3 cameraLook = CCameraBase::GetDataFromTag("Player").look;
+	//CameraRay.collisionData.ray.rayDirection = DirectX::XMVector3Normalize(DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&cameraLook),DirectX::XMLoadFloat3(&CameraRay.collisionData.ray.rayStart)));
+	//CameraRay.collisionData.ray.rayLength = 100;
 
 	for (auto itr = m_obj.begin(); itr != m_obj.end(); itr++)
 	{

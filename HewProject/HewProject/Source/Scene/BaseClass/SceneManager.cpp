@@ -1,10 +1,27 @@
 #include "SceneManager.hpp"
 
+// ÉVÅ[Éì
+#include <SceneTest.hpp>
+#include <SceneTitle.hpp>
+
 std::unique_ptr<IScene> CSceneManager::m_scene;
 
-void CSceneManager::SetScene(IScene* scene)
+void CSceneManager::SetScene(ESceneID ID)
 {
-	m_scene.reset(scene);
+	CCameraBase::DeleteCameraAll();
+	switch (ID)
+	{
+	case SCENE_TITLE:
+		m_scene.reset(new CSceneTitle());
+		break;
+	case SCENE_STAGE01:
+		m_scene.reset(new CSceneTest());
+		break;
+	case SCENE_RESULT:
+		break;
+	default:
+		break;
+	}
 }
 
 void CSceneManager::Update()

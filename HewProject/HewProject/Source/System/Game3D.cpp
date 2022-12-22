@@ -6,12 +6,11 @@
 #include <SamplerState.h>
 
 //--- Scenes ---//
-#include <SceneTest.hpp>
 
 Game3D::Game3D()
 {
 	m_scenes.reset(new CSceneManager());
-	m_scenes->SetScene(new CSceneTest());
+	m_scenes->SetScene(SCENE_TITLE);
 	CDebugWindow::Create();
 	Sprite::Init();
 	Utility::InitBlendState();

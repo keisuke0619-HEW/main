@@ -4,6 +4,7 @@
 #include <Geometory.h>
 #include <Camera.hpp>
 #include <DirectX.h>
+
 // Stage00.cppを参考にジオメトリーで作成
 CProtScene::CProtScene()
 {
@@ -21,10 +22,15 @@ CProtScene::CProtScene()
 	}
 	m_terrain = new CTerrainBase("Assets/Data/TestTerrain.dat", 100, 100);
 	m_enemyManager.reset(new CProtEnemyManager());
+	
+	m_producePlane = new ProducePlane("Assets/Img/Boss.png");
+	m_producePlane->SetProducePlaneInformation({ 0,0.5f,0 }, { 70, 70, 0 }, { 90,0,0 });
+
 }
 
 CProtScene::~CProtScene()
 {
+	delete m_producePlane;
 }
 
 void CProtScene::Update()
@@ -35,6 +41,11 @@ void CProtScene::Update()
 
 void CProtScene::Draw()
 {
+	m_producePlane->Draw();
+
+
+
+
 	EnableDepth(true);
 	// ステージのドロー
 	SetGeometoryVPMatrix(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
@@ -42,7 +53,7 @@ void CProtScene::Draw()
 	SetGeometoryScaling(m_stageData.sizeX,1, m_stageData.sizeZ);
 	SetGeometoryRotation(0,0,0);
 	SetColorPS(true, 0.7f, 0.7f, 0.7f, 1, m_stageData.sizeX, m_stageData.sizeZ);
-	DrawBox();
+	//DrawBox();
 
 
 	// 壁

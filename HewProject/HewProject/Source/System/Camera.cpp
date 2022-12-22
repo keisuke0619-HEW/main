@@ -1,7 +1,7 @@
 #include "Camera.hpp"
 
 std::map<const char*, CCameraBase::Ptr> CCameraBase::m_cameraMap;
-const char* CCameraBase::m_primaryCameraName = "Player";
+const char* CCameraBase::m_primaryCameraName = "Debug";
 
 void CCameraBase::DeleteCamera(const char* cameraName)
 {

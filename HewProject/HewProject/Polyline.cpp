@@ -182,6 +182,8 @@ void GeometoryPolyline::CalcVertex()
 	vCenter = vNext;
 	for (int i = 0; i < m_points.size() - 1; ++i)
 	{
+		DirectX::XMFLOAT3 debugpos;
+		DirectX::XMStoreFloat3(&debugpos, vCenter);
 		vNext = DirectX::XMLoadFloat3
 		(&m_points[i + 1].pos);
 		//³‹K‰»

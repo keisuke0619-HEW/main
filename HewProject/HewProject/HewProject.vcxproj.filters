@@ -192,6 +192,9 @@
     <ClInclude Include="Polyline.h">
       <Filter>システム\Other</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\SceneTitle.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -344,12 +347,18 @@
     <ClCompile Include="Polyline.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Scene\SceneTitle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ModelVS.hlsl">
       <Filter>リソース ファイル</Filter>
     </FxCompile>
     <FxCompile Include="Source\Prot\GeometoryColorPS.hlsl">
+      <Filter>リソース ファイル</Filter>
+    </FxCompile>
+    <FxCompile Include="ColorPS.hlsl">
       <Filter>リソース ファイル</Filter>
     </FxCompile>
   </ItemGroup>

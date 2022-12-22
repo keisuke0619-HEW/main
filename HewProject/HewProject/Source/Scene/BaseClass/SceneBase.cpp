@@ -13,7 +13,6 @@ CSceneBase::CSceneBase()
 
 CSceneBase::~CSceneBase()
 {
-	CCameraBase::DeleteCameraAll();
 }
 
 void CSceneBase::BaseUpdate()

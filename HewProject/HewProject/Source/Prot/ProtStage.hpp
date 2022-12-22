@@ -2,6 +2,8 @@
 #include <TerrainBase.hpp>
 #include <ProtEnemyManager.hpp>
 #include <memory>
+#include <ProducePlane.h>
+
 class CProtScene
 {
 public:
@@ -22,4 +24,5 @@ private:
 	StageData m_stageData;
 	CTerrainBase* m_terrain;
 	std::unique_ptr<CProtEnemyManager> m_enemyManager;
+	ProducePlane* m_producePlane;
 };

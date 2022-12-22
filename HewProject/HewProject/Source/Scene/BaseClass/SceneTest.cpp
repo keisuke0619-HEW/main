@@ -9,6 +9,7 @@ CSceneTest::CSceneTest()
 	m_obj->Add(new CPlayer());
 	CCameraBase::CreateCamera(new CDebugCamera(), "Debug");
 	CCameraBase::CreateCamera(new CPlayerCamera(), "Player");
+	CCameraBase::SetPrimaryCamera("Player");
 	m_stage.reset(new CProtScene());
 }
 
