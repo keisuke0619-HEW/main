@@ -16,6 +16,7 @@ CProtEnemy::CProtEnemy()
 	, m_dontMove(false)
 	, m_blowAwayCountDown(0)
 	, m_blowAwayMove({0.f, 0.f, 0.f})
+	, m_ActionNum(0)
 {
 	// オブジェクトのリストを取得
 	auto objList = CSceneBase::GetObjList();
@@ -125,10 +126,37 @@ void CProtEnemy::Move()
 
 		DirectX::XMStoreFloat3(&movePos, distance);
 
-
-		// もしプレイヤーとの距離が一定以下だったら
-		if (fabsf(movePos.x) <= m_distance && fabsf(movePos.y) <= m_distance && fabsf(movePos.z) <= m_distance)
+		if (m_param.frame % 300 == 0)
 		{
+			m_ActionNum = rand() % 100;
+		}
+
+		if (0 <= m_ActionNum && m_ActionNum <= 39)	//	40%でプレイヤーへ
+		{
+			m_ActionNum = 1;
+		}
+		else
+		{
+			if (40 <= m_ActionNum <= 64)	//	25%で右
+			{
+				m_ActionNum = 2;
+			}
+			else
+			{
+				if (65 <= m_ActionNum <= 89)	//	25%で左
+				{
+					m_ActionNum = 3;
+				}
+				else	//残りの10%でプレイヤーとは逆へ
+				{
+					m_ActionNum = 4;
+				}
+			}
+		}
+
+		switch (m_ActionNum)
+		{
+		case 1:
 			// 正規化して速さを一定にする
 			distance = DirectX::XMLoadFloat3(&movePos);
 			distance = DirectX::XMVector3Normalize(distance);
@@ -138,20 +166,53 @@ void CProtEnemy::Move()
 			m_param.pos.y += movePos.y * m_move / 2;
 			m_param.pos.z += movePos.z * m_move / 2;
 			m_param.frame = 0;
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		case 4:
+			// 正規化して速さを一定にする
+			distance = DirectX::XMLoadFloat3(&movePos);
+			distance = DirectX::XMVector3Normalize(distance);
+			DirectX::XMStoreFloat3(&movePos, distance);
+			// プレイヤーを目標にする
+			m_param.pos.x -= movePos.x * m_move / 2; // エネミーのposを使う
+			m_param.pos.y -= movePos.y * m_move / 2;
+			m_param.pos.z -= movePos.z * m_move / 2;
+			m_param.frame = 0;
+			break;
+		default:
+			break;
 		}
-		else
-		{
-			if (m_param.frame % 300 == 0)
-			{
-				m_randTarget = { (float)(rand() % 30), 0.5f, (float)(rand() % 30) };
-				m_startPos = m_param.pos;
-			}
-			m_param.move = {
-				(m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
-				(m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
-				(m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
-			};
-		}
+
+
+		//// もしプレイヤーとの距離が一定以下だったら
+		//if (fabsf(movePos.x) <= m_distance && fabsf(movePos.y) <= m_distance && fabsf(movePos.z) <= m_distance)
+		//{
+		//	// 正規化して速さを一定にする
+		//	distance = DirectX::XMLoadFloat3(&movePos);
+		//	distance = DirectX::XMVector3Normalize(distance);
+		//	DirectX::XMStoreFloat3(&movePos, distance);
+		//	// プレイヤーを目標にする
+		//	m_param.pos.x += movePos.x * m_move / 2; // エネミーのposを使う
+		//	m_param.pos.y += movePos.y * m_move / 2;
+		//	m_param.pos.z += movePos.z * m_move / 2;
+		//	m_param.frame = 0;
+		//}
+		//else
+		//{
+		//	if (m_param.frame % 300 == 0)
+		//	{
+		//		m_randTarget = { (float)(rand() % 30), 0.5f, (float)(rand() % 30) };
+		//		m_startPos = m_param.pos;
+		//	}
+		//	m_param.move = {
+		//		(m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.x + (m_randTarget.x - m_startPos.x) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
+		//		(m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.y + (m_randTarget.y - m_startPos.y) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
+		//		(m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine((m_param.frame % 300) / 300.0f)) - (m_startPos.z + (m_randTarget.z - m_startPos.z) * Utility::InOutSine(((m_param.frame % 300) - 1) / 300.0f)),
+		//	};
+		//}
 	}
 }
 

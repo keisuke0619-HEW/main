@@ -28,6 +28,8 @@ private:
 	float m_move;		// エネミーの速度
 	float m_distance;	// どのくらいプレイヤーとエネミーが近づいたら追尾するかの距離
 
+	int m_ActionNum;		//	移動乱数用の変数
+
 	int m_cnt;			// ランダム移動で使う(移動する方向を変える間隔)
 	int m_randNum;		// ランダム移動で使う(移動する方向を決める)
 	bool m_dontMove;	// エネミーの動きを止める
