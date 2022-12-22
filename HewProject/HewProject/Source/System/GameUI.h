@@ -54,6 +54,7 @@ public:
 	/// <param name="rot">回転角度（度数法）</param>
 	void SetRotation(float degRot);
 	
+	void SetColor(float r, float g, float b, float a);
 	DirectX::XMFLOAT2 GetSize();
 
 	int GetSortID();
@@ -67,7 +68,7 @@ private:
 	SortOrder m_sort;			// 描画順関連
 	DirectX::XMFLOAT2 m_uvPos;	// 左上のUV座標
 	DirectX::XMFLOAT2 m_uvScale;// 描画するUVの大きさ
-
+	DirectX::XMFLOAT4 m_color;
 };
 #endif // ! __GAME_UI_H__
 

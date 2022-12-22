@@ -15,11 +15,14 @@ CPlayerUI::CPlayerUI()
 	m_LifeUV = 1;
 	m_ChargeUV = 1;
 
-	// ここでUIのスプライトを生成
-	auto tmp = new CGameUI("Assets/Img/Reticle/UI　Reticle4.png");
-	tmp->SetPos({ 640, 360 });
-	tmp->SetSize({ 32,32 });
-	CUIManager::GetIns()->Add(tmp);
+	// 定義したメンバ変数に変更。
+	m_reticle = new CGameUI("Assets/Img/Reticle/UI　Reticle4.png");
+	m_reticle->SetPos({ 640, 360 });
+	m_reticle->SetSize({ 32,32 });
+	CUIManager::GetIns()->Add(m_reticle);
+	
+	//// メンバの色を変更
+	//m_reticle->SetColor(1, 0, 0, 1);
 
 	// HP
 	auto tmphp = new CGameUI("Assets/Img/HPbar/HP.png");

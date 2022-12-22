@@ -17,7 +17,9 @@ private:
 	float m_ChargeUV;
 	std::weak_ptr<CGameUI> m_lifeSprite;
 	std::weak_ptr<CGameUI> m_chargeSprite;
-	
+
+	CGameUI* m_reticle;	// スプライトを格納するメンバ変数を定義
+
 	void UpdateLife();
 	void UpdateCharge();
 

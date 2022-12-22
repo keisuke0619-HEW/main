@@ -7,6 +7,7 @@ CGameUI::CGameUI(const char* FileName)
 	, m_rot(0.0f)
 	, m_uvPos({0,0})
 	, m_uvScale({1,1})
+	, m_color({1,1,1,1})
 {
 	LoadTextureFromFile(FileName, &m_pPicture);
 }
@@ -51,11 +52,13 @@ void CGameUI::Draw()
 	Sprite::SetTexture(m_pPicture);
 	Sprite::SetUVPos(m_uvPos);
 	Sprite::SetUVScale(m_uvScale);
+	Sprite::SetColor(m_color);
 	EnableDepth(false);
 	Sprite::Draw();
 	EnableDepth(true);
 	Sprite::SetUVPos({0,0});
 	Sprite::SetUVScale({1,1});
+	Sprite::SetColor({ 1,1,1,1 });
 }
 
 void CGameUI::SetPos(DirectX::XMFLOAT2 pos)
@@ -81,6 +84,11 @@ void CGameUI::SetUVScale(DirectX::XMFLOAT2 uv)
 void CGameUI::SetRotation(float degRot)
 {
 	m_rot = DirectX::XMConvertToRadians(degRot);
+}
+
+void CGameUI::SetColor(float r, float g, float b, float a)
+{
+	m_color = { r,g,b,a };
 }
 
 DirectX::XMFLOAT2 CGameUI::GetSize()
