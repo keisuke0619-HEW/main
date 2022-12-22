@@ -20,9 +20,8 @@ CPlayerUI::CPlayerUI()
 	m_reticle->SetPos({ 640, 360 });
 	m_reticle->SetSize({ 32,32 });
 	CUIManager::GetIns()->Add(m_reticle);
-	
 	//// ƒƒ“ƒo‚ÌF‚ð•ÏX
-	//m_reticle->SetColor(1, 0, 0, 1);
+	m_reticle->SetColor(1, 0, 0, 1);
 
 	// HP
 	auto tmphp = new CGameUI("Assets/Img/HPbar/HP.png");
