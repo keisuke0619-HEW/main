@@ -14,25 +14,22 @@ CBossUI::CBossUI()
 
 	// ↓HPバーとアイコンの差は20がちょうどいいかな？
 	// ライフゲージ
-	m_bosshp = new CGameUI("Assets/Img/Boss/UI bar_boss1.png");
-	m_bosshp->SetPos(BASS_UI_LIFE_CENTER);
-	m_bosshp->SetSize(BASS_UI_LIFE_SIZE);
-	m_lifeSprite = CUIManager::GetIns()->Add(m_bosshp);
-	m_bosshp->SetColor(1, 0, 0, 1);
+	m_lifeSprite = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Boss/UI bar_boss1.png"));
+	m_lifeSprite.lock()->SetPos(BASS_UI_LIFE_CENTER);
+	m_lifeSprite.lock()->SetSize(BASS_UI_LIFE_SIZE);
+	m_lifeSprite.lock()->SetColor(1, 0, 0, 1);
 
 	// バー
-	m_bossbar = new CGameUI("Assets/Img/Boss/UI bar_boss2.png");
-	m_bossbar->SetPos({ 360, 80 });
-	m_bossbar->SetSize({ 705, 27 });// 960, 20
-	CUIManager::GetIns()->Add(m_bossbar);
-	m_bossbar->SetColor(1, 1, 1, 1);
+	m_bossbar = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Boss/UI bar_boss2.png"));
+	m_bossbar.lock()->SetPos({ 360, 80 });
+	m_bossbar.lock()->SetSize({ 705, 27 });// 960, 20
+	m_bossbar.lock()->SetColor(1, 1, 1, 1);
 
 	// ボスアイコン
-	m_bossicon = new CGameUI("Assets/Img/Boss/UI bar_boss3.png");
-	m_bossicon->SetPos({ 340, 60 });
-	m_bossicon->SetSize({ 660, 110 });
-	CUIManager::GetIns()->Add(m_bossicon);
-	m_bossicon->SetColor(1, 1, 1, 1);
+	m_bossicon = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Boss/UI bar_boss3.png"));
+	m_bossicon.lock()->SetPos({ 340, 60 });
+	m_bossicon.lock()->SetSize({ 660, 110 });
+	m_bossicon.lock()->SetColor(1, 1, 1, 1);
 }
 
 CBossUI::~CBossUI()

@@ -12,11 +12,10 @@ public:
 	void SetLife(float);
 private:
 	float m_LifeUV;
-	std::weak_ptr<CGameUI> m_lifeSprite;
+	CGameUI::Ref m_lifeSprite;
 
-	CGameUI* m_bosshp;
-	CGameUI* m_bossbar;
-	CGameUI* m_bossicon;
+	CGameUI::Ref m_bossbar;
+	CGameUI::Ref m_bossicon;
 
 	void UpdateLife();
 };
