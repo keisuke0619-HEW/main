@@ -24,28 +24,32 @@ CPlayerUI::CPlayerUI()
 	m_reticle->SetColor(1, 0, 0, 1);
 
 	// HP
-	auto tmphp = new CGameUI("Assets/Img/HPbar/HP.png");
-	tmphp->SetPos(PLAYER_UI_LIFE_CENTER);
-	tmphp->SetSize(PLAYER_UI_LIFE_SIZE);
-	m_lifeSprite = CUIManager::GetIns()->Add(tmphp);
+	m_hp = new CGameUI("Assets/Img/HPbar/HP.png");
+	m_hp->SetPos(PLAYER_UI_LIFE_CENTER);
+	m_hp->SetSize(PLAYER_UI_LIFE_SIZE);
+	m_lifeSprite = CUIManager::GetIns()->Add(m_hp);
+	m_hp->SetColor(0, 1, 0, 1);
 
-	// HPバー
-	auto bar = new CGameUI("Assets/Img/HPbar/UI hitpoint①.png");
-	bar->SetPos({ 234, 630 });
-	bar->SetSize({ 448, 168 });
-	CUIManager::GetIns()->Add(bar);
+	// HPバー外枠
+	m_hpbar = new CGameUI("Assets/Img/HPbar/UI hitpoint①.png");
+	m_hpbar->SetPos({ 234, 630 });
+	m_hpbar->SetSize({ 448, 168 });
+	CUIManager::GetIns()->Add(m_hpbar);
+	m_hpbar->SetColor(0, 1, 1, 1);
 
 	// 歯車
-	auto haguruma = new CGameUI("Assets/Img/HPbar/UI bar_02_haguruma2.png");
-	haguruma->SetPos({ 94, 630 });
-	haguruma->SetSize({ 68, 68 });
-	CUIManager::GetIns()->Add(haguruma);
+	m_haguruma = new CGameUI("Assets/Img/HPbar/UI bar_02_haguruma2.png");
+	m_haguruma->SetPos({ 94, 630 });
+	m_haguruma->SetSize({ 68, 68 });
+	CUIManager::GetIns()->Add(m_haguruma);
+	m_haguruma->SetColor(0, 1, 1, 1);
 
 	// チャージゲージ
-	auto tmpchg = new CGameUI("Assets/Img/Charge2.png");
-	tmpchg->SetPos(PLAYER_UI_CHARGE_CENTER);
-	tmpchg->SetSize(PLAYER_UI_CHARGE_SIZE);
-	m_chargeSprite = CUIManager::GetIns()->Add(tmpchg);
+	m_charge = new CGameUI("Assets/Img/Charge2.png");
+	m_charge->SetPos(PLAYER_UI_CHARGE_CENTER);
+	m_charge->SetSize(PLAYER_UI_CHARGE_SIZE);
+	m_chargeSprite = CUIManager::GetIns()->Add(m_charge);
+	m_charge->SetColor(0, 1, 1, 1);
 }
 
 CPlayerUI::~CPlayerUI()
