@@ -91,6 +91,16 @@ void CGameUI::SetColor(float r, float g, float b, float a)
 	m_color = { r,g,b,a };
 }
 
+void CGameUI::SetColor255(int r, int g, int b, int a)
+{
+	m_color = {
+		r / 255.f,
+		g / 255.f,
+		b / 255.f,
+		a / 255.f,
+	};
+}
+
 DirectX::XMFLOAT2 CGameUI::GetSize()
 {
 	return m_size;

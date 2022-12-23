@@ -54,7 +54,8 @@ public:
 	/// <param name="rot">回転角度（度数法）</param>
 	void SetRotation(float degRot);
 	
-	void SetColor(float r, float g, float b, float a);
+	void SetColor(float r, float g, float b, float a = 1.0f);
+	void SetColor255(int r, int g, int b, int a = 255);
 	DirectX::XMFLOAT2 GetSize();
 
 	int GetSortID();
