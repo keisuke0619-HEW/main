@@ -5,7 +5,7 @@ std::shared_ptr<CObjectManager> CSceneBase::m_obj = nullptr;
 CSceneBase::CSceneBase()
 {
 	m_frame = 0;
-	if (m_obj == nullptr)
+	if (true)//m_obj == nullptr)
 	{
 		m_obj.reset(new CObjectManager());
 	}
@@ -32,6 +32,11 @@ void CSceneBase::BaseDraw()
 	m_obj->DrawAll();
 	Draw();
 	CUIManager::GetIns()->DrawAll();
+}
+
+void CSceneBase::Uninit()
+{
+	CUIManager::GetIns()->DeleteAll();
 }
 
 void CSceneBase::PreUpdate()

@@ -13,7 +13,8 @@ public:
 	void DrawAll();
 
 	CGameUI::Ref Add(CGameUI*, SortOrder order = SORT_ORDER_DEFAULT);
-
+	void Delete(CGameUI::Ref ref);
+	void DeleteAll();
 private:
 	static CUIManager* m_ins;
 	CUIManager();

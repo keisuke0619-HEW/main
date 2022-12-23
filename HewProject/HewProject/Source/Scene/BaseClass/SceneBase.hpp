@@ -14,6 +14,7 @@ public:
 
 	virtual void BaseUpdate() override;
 	virtual void BaseDraw() override;
+	virtual void Uninit() override;
 protected:
 	virtual void PreUpdate();
 	virtual void Update() = 0;

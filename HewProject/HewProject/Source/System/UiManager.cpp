@@ -49,6 +49,18 @@ CGameUI::Ref CUIManager::Add(CGameUI* obj, SortOrder order)
     return ptr;
 }
 
+void CUIManager::Delete(CGameUI::Ref ref)
+{
+}
+
+void CUIManager::DeleteAll()
+{
+    if (m_ins)
+        delete m_ins;
+    m_ins = new CUIManager();
+}
+
 CUIManager::CUIManager()
 {
+    
 }

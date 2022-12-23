@@ -10,6 +10,8 @@ std::unique_ptr<IScene> CSceneManager::m_scene;
 void CSceneManager::SetScene(ESceneID ID)
 {
 	CCameraBase::DeleteCameraAll();
+	if(m_scene)
+		m_scene->Uninit();
 	switch (ID)
 	{
 	case SCENE_TITLE:

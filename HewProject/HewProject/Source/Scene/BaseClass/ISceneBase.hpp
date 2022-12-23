@@ -8,4 +8,5 @@ public:
 
 	virtual void BaseUpdate() = 0;
 	virtual void BaseDraw() = 0;
+	virtual void Uninit() = 0;
 };

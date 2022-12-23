@@ -92,6 +92,11 @@ void CPlayerUI::UpdateLife()
 	m_lifeSprite.lock()->SetUVScale({ m_LifeUV, 1 });
 	// 計算した横幅を登録。
 	m_lifeSprite.lock()->SetSize(size);
+
+	// 回転
+	static int hagurumaAngle = 0;
+	m_haguruma->SetRotation(hagurumaAngle);
+	hagurumaAngle += 1;
 }
 
 // チャージゲージの更新
