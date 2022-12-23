@@ -2,10 +2,16 @@
 #include <SceneManager.hpp>
 #include <DebugCamera.hpp>
 #include <Controller.hpp>
+#include <UiManager.hpp>
 CSceneResult::CSceneResult()
 {
 	CCameraBase::CreateCamera(new CDebugCamera(), "Debug");
 	CCameraBase::SetPrimaryCamera("Debug");
+	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/resultSceneUI.png"));
+	m_ResultUI.lock()->SetSize({ 1200.f, 600.f });
+	m_ResultUI.lock()->SetPos({ 640.f, 360.f });
+
+	
 }
 
 CSceneResult::~CSceneResult()
