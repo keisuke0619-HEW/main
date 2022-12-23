@@ -32,6 +32,8 @@ public:
 		DirectX::XMFLOAT3 pos3, DirectX::XMFLOAT3 pos4);//矩形を選択して四角形を設定
 	void SetProducePlaneInformation(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 size, DirectX::XMFLOAT3 rot);// 描画に必要な情報を設定
 	void SetEnable(bool isDraw);// 描画するか
+	void SetColor(float r, float g, float b, float a = 255);
+	void SetColor255(int r, int g, int b, int a = 255);
 
 private:
 	ID3D11ShaderResourceView* m_pPicture;	// 画像
@@ -40,6 +42,7 @@ private:
 	DirectX::XMFLOAT3 m_rot;				// 画像の角度
 	DirectX::XMFLOAT4X4 m_view;				// ビュー行列
 	DirectX::XMFLOAT4X4 m_proj;				// プロジェクション行列
+	DirectX::XMFLOAT4 m_color;
 
 	MeshBuffer* m_pProducePlane;
 	ConstantBuffer* m_pConstant;

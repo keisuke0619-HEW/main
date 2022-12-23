@@ -5,6 +5,7 @@
 #include <Camera.hpp>
 #include <SceneBase.hpp>
 #include <Billboard.h>
+#include <SceneManager.hpp>
 CPlayer::CPlayer()
 	: CObjectBase("Assets/Model/player.fbx", 0.08f, false, "Player")
 	//: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f, false, "Player")
@@ -227,6 +228,7 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 			m_param.hp -= 0.1f;
 			if (m_param.hp <= 0.0f)
 			{
+				CSceneManager::SetScene(SCENE_RESULT);
 				//Destroy();
 			}
 		}

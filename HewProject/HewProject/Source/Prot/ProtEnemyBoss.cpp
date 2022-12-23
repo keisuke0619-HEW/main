@@ -4,6 +4,7 @@
 #include <Controller.hpp>
 #include <Camera.hpp>
 #include <Blend.hpp>
+#include <SceneManager.hpp>
 // ìñÇΩÇËîªíËÇÕå„Ç≈ïtÇØÇ‹Ç∑ÅB
 
 CProtEnemyBoss::CProtEnemyBoss()
@@ -119,5 +120,9 @@ void CProtEnemyBoss::OnCollisionTag(EObjectTag tag)
 	if (tag == TAG_BEAM)
 	{
 		m_param.hp -= 0.005f;
+		if (m_param.hp <= 0.0f)
+		{
+			CSceneManager::SetScene(SCENE_RESULT);
+		}
 	}
 }

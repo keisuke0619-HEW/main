@@ -44,8 +44,10 @@ void ProducePlane::Draw()
 		// サイズ
 		//Sprite::SetSize(m_size);	// これいる？　分からん
 
+		Sprite::SetColor(m_color);
 		// 描画
 		Sprite::Draw();
+		Sprite::SetColor({ 1,1,1,1 });
 	}
 	/*DirectX::XMStoreFloat4x4(&m_PlaneMat[0], DirectX::XMMatrixIdentity());
 	m_PlaneMat[1] = CCameraBase::GetPrimaryViewMatrix();
@@ -79,4 +81,20 @@ void ProducePlane::SetProducePlaneInformation(DirectX::XMFLOAT3 center, DirectX:
 void ProducePlane::SetEnable(bool isDraw)
 {
 	m_IsDarw = isDraw;
+}
+
+void ProducePlane::SetColor(float r, float g, float b, float a)
+{
+	m_color = { r, g, b, a };
+}
+
+void ProducePlane::SetColor255(int r, int g, int b, int a)
+{
+	m_color =
+	{
+		r / 255.f,
+		g / 255.f,
+		b / 255.f,
+		a / 255.f,
+	};
 }
