@@ -19,3 +19,5 @@ void CSceneTitle::Update()
 		CSceneManager::SetScene(SCENE_STAGE01);
 	}
 }
+
+
