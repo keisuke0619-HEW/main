@@ -122,7 +122,8 @@ void CProtEnemyBoss::OnCollisionTag(EObjectTag tag)
 		m_param.hp -= 0.005f;
 		if (m_param.hp <= 0.0f)
 		{
-			CSceneManager::SetScene(SCENE_RESULT);
+			//CSceneManager::SetScene(SCENE_RESULT);
+			//CObjectManager::NoDestroy();
 		}
 	}
 }

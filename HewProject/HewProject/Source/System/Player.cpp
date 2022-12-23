@@ -228,7 +228,7 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 			m_param.hp -= 0.1f;
 			if (m_param.hp <= 0.0f)
 			{
-				CSceneManager::SetScene(SCENE_RESULT);
+				//CSceneManager::SetScene(SCENE_RESULT);
 				//Destroy();
 			}
 		}

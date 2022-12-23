@@ -25,7 +25,7 @@ CProtScene::CProtScene()
 	
 	m_producePlane = new ProducePlane("Assets/Img/White.png");
 	m_producePlane->SetProducePlaneInformation({ 0,0.5f,0 }, { 70, 70, 0 }, { 90,0,0 });
-	m_producePlane->SetColor(0.7f, 0.7f, 0.7f, 1);
+	m_producePlane->SetColor(0.3f, 0.3f, 0.3f, 1);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -54,43 +54,4 @@ void CProtScene::Draw()
 	{
 		m_wall[i]->Draw();
 	}
-	return;
-
-
-	EnableDepth(true);
-	// ステージのドロー
-	SetGeometoryVPMatrix(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
-	SetGeometoryTranslate(0,0,0);
-	SetGeometoryScaling(m_stageData.sizeX,1, m_stageData.sizeZ);
-	SetGeometoryRotation(0,0,0);
-	SetColorPS(true, 0.7f, 0.7f, 0.7f, 1, m_stageData.sizeX, m_stageData.sizeZ);
-	//DrawBox();
-
-
-	// 壁
-	const float wallHeight = 10.0f;
-	SetGeometoryTranslate(m_stageData.sizeX / 2 + 0.5f, wallHeight / 2 + 0.5f,0);
-	SetGeometoryScaling(wallHeight,1,m_stageData.sizeZ + 2);
-	SetGeometoryRotation(0,0,3.14f / 2);
-	SetColorPS(true, 0.3f, 0.76f, 1.0f, 0.5f, wallHeight, m_stageData.sizeX);
-	DrawBox();
-
-	SetGeometoryTranslate(-m_stageData.sizeX / 2 - 0.5f, wallHeight / 2 + 0.5f,0);
-	SetGeometoryRotation(0,0,3.14f / 2);
-	DrawBox();
-
-	SetGeometoryTranslate(0, wallHeight / 2 + 0.5f, m_stageData.sizeZ / 2 + 0.5f);
-	SetGeometoryScaling(m_stageData.sizeX + 2,1, wallHeight);
-	SetGeometoryRotation(3.14f / 2,0,0);
-	SetColorPS(true, 0.3f, 0.76f, 1.0f, 0.5f, m_stageData.sizeX, wallHeight);
-	DrawBox();
-
-	SetGeometoryTranslate(0, wallHeight / 2 + 0.5f, -m_stageData.sizeZ / 2 - 0.5f);
-	SetGeometoryRotation(3.14f / 2,0,0);
-	DrawBox();
-
-	//m_terrain->Draw();
-
-
-	SetColorPS(false);
 }

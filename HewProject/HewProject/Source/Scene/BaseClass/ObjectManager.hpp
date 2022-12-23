@@ -8,6 +8,7 @@ class CObjectManager
 {
 public:
 	static void CallDestroy();
+	static void NoDestroy();
 private:
 	static bool m_isCallDestroy;
 public:
@@ -16,6 +17,7 @@ public:
 
 	void UpdateAll();
 	void DrawAll();
+
 
 	void DestroyUpdate();
 	std::weak_ptr<IObjectBase> Add(IObjectBase* obj);

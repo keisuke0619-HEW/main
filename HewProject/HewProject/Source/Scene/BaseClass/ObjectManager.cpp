@@ -93,6 +93,11 @@ void CObjectManager::DrawAll()
 	}
 }
 
+void CObjectManager::NoDestroy()
+{
+	m_isCallDestroy = false;
+}
+
 void CObjectManager::DestroyUpdate()
 {
 	if (m_isCallDestroy == false)

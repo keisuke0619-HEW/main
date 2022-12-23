@@ -38,6 +38,7 @@ void CBeam::Draw()
 {
 	// 発射起点がm_posに、ターゲット座標がm_targetに入っています。
 	// それらの変数から軸の回転を求めてrotにぶち込みました。
+	SetGeometoryVPMatrix(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
 
 	DirectX::XMFLOAT3 rot = {};
 
@@ -60,7 +61,7 @@ void CBeam::Draw()
 	m_time -= 1.0f / 60.0f;
 
 	
-	SetColorPS(true, 0.3f, 0.76f, 1.0f, 0.5f, 1, 1);
+	SetColorPS(true, 0.3f, 0.56f, 1.0f, 0.5f, 1, 1);
 	DrawCapsule();
 }
 
