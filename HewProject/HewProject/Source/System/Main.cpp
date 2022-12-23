@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Game3D.h"
 #include "Geometory.h"
+#include "Sound.h"
 
 #include <DebugWindow.hpp>
 
@@ -42,11 +43,16 @@ void Init()
 	{
 		Error("geometory initialize failed.");
 	}
+	if (FAILED(InitSound()))
+	{
+		Error("sound initialize failed.");
+	}
 	g_pGame = new Game3D();
 }
 void Uninit()
 {
 	delete g_pGame;
+	UninitSound();
 	UninitGeometory();
 	UninitInput();
 	UninitTexture();

@@ -23,6 +23,16 @@ CPlayer::CPlayer()
 		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
 	m_model->Play(no, true);
 
+	// âπÉfÅ[É^ÇÃì«Ç›çûÇ›
+	m_pChargeSE = CreateSound("Assets/Sound/Charge.wav", true);
+	if (m_pChargeSE == nullptr)
+	{
+
+	}
+	m_pBeamSE = CreateSound("Assets/Sound/Beam.wav", false);
+	m_isSE = false;
+	
+
 }
 
 CPlayer::~CPlayer()
@@ -156,6 +166,14 @@ void CPlayer::Beam()
 	if (Utility::GetKeyPress(RT) || Utility::GetKeyPress(Key_B))
 	{
 		m_beamSize += m_beamSize < maxBeamSize ? addBeamSize : 0;
+		// seçƒê∂
+		if (m_isSE == false)
+		{
+			m_pSESource = StartSound(m_pChargeSE);
+			m_pSESource->SetVolume(0.3f);
+			m_isSE = true;
+		}
+		
 	}
 	else
 	{
@@ -174,6 +192,15 @@ void CPlayer::Beam()
 			beamPos.y += 1.0f;
 			CSceneBase::GetObjList().lock()->Add(new CBeam(beamPos, m_beamTarget, m_beamSize));
 			//m_beam.reset(new CBeam(m_param.pos, m_beamTarget, m_beamSize));
+			// seçƒê∂
+			if (m_isSE == true)
+			{
+				m_pSESource->Stop();
+				m_pSESource = StartSound(m_pBeamSE);
+				m_pSESource->SetVolume(0.3f);
+				m_isSE = false;
+			}
+			
 		}
 		m_beamSize = 0.0f;
 	}

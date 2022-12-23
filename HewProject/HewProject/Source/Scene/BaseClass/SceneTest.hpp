@@ -2,6 +2,7 @@
 #include <SceneBase.hpp>
 //#include <Stage00.hpp>
 #include <ProtStage.hpp>
+#include <Sound.h>
 class CSceneTest : public CSceneBase
 {
 public:
@@ -13,4 +14,6 @@ public:
 private:
 	//std::unique_ptr<CStage00> m_stage;
 	std::unique_ptr<CProtScene> m_stage;
+	XAUDIO2_BUFFER* m_pBGM;
+	IXAudio2SourceVoice* m_pBGMSource;
 };

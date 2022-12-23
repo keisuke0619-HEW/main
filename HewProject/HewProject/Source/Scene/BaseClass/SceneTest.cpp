@@ -13,6 +13,12 @@ CSceneTest::CSceneTest()
 	CCameraBase::CreateCamera(new CPlayerCamera(), "Player");
 	CCameraBase::SetPrimaryCamera("Player");
 	m_stage.reset(new CProtScene());
+	// ‰¹ƒf[ƒ^‚Ì“Ç‚Ýž‚Ý
+	m_pBGM = CreateSound("Assets/Sound/BGM.wav", true);
+	// BGM‚ÌÄ¶
+	m_pBGMSource = StartSound(m_pBGM);
+	m_pBGMSource->SetVolume(0.05f);	// 1‚ªÅ‘å
+
 }
 
 CSceneTest::~CSceneTest()
@@ -24,6 +30,7 @@ void CSceneTest::Update()
 	m_stage->Update();
 	if (Utility::GetKeyTrigger(Key_RETURN))
 	{
+		m_pBGMSource->Stop();
 		CSceneManager::SetScene(SCENE_RESULT);
 	}
 }
