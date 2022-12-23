@@ -51,6 +51,7 @@ CGameUI::Ref CUIManager::Add(CGameUI* obj, SortOrder order)
 
 void CUIManager::Delete(CGameUI::Ref ref)
 {
+    m_list.remove(ref.lock());
 }
 
 void CUIManager::DeleteAll()
