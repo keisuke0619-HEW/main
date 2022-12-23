@@ -22,6 +22,7 @@
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
     <ClInclude Include="Polyline.h" />
+    <ClInclude Include="SceneResult.hpp" />
     <ClInclude Include="Source\Prot\ProtEnemy.hpp" />
     <ClInclude Include="Source\Prot\ProtEnemyBoss.hpp" />
     <ClInclude Include="Source\Prot\ProtEnemyManager.hpp" />
@@ -78,6 +79,7 @@
   <ItemGroup>
     <ClCompile Include="DirectXTex\Texture.cpp" />
     <ClCompile Include="Polyline.cpp" />
+    <ClCompile Include="SceneResult.cpp" />
     <ClCompile Include="Source\Prot\ProtEnemy.cpp" />
     <ClCompile Include="Source\Prot\ProtEnemyBoss.cpp" />
     <ClCompile Include="Source\Prot\ProtEnemyManager.cpp" />
