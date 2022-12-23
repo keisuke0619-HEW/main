@@ -16,40 +16,34 @@ CPlayerUI::CPlayerUI()
 	m_ChargeUV = 1;
 
 	// 定義したメンバ変数に変更。
-	m_reticle = new CGameUI("Assets/Img/Reticle/UI　Reticle4.png");
-	m_reticle->SetPos({ 640, 360 });
-	m_reticle->SetSize({ 32,32 });
-	CUIManager::GetIns()->Add(m_reticle);
-	//// メンバの色を変更
-	m_reticle->SetColor(1, 0, 0, 1);
+	m_reticle = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Reticle/UI　Reticle4.png"));
+	m_reticle.lock()->SetPos({ 640, 360 });
+	m_reticle.lock()->SetSize({ 32,32 });
+	m_reticle.lock()->SetColor(1, 0, 0, 1);
 
 	// HP
-	m_hp = new CGameUI("Assets/Img/HPbar/HP.png");
-	m_hp->SetPos(PLAYER_UI_LIFE_CENTER);
-	m_hp->SetSize(PLAYER_UI_LIFE_SIZE);
-	m_lifeSprite = CUIManager::GetIns()->Add(m_hp);
-	m_hp->SetColor(0, 1, 0, 1);
+	m_lifeSprite = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/HPbar/HP.png"));;
+	m_lifeSprite.lock()->SetPos(PLAYER_UI_LIFE_CENTER);
+	m_lifeSprite.lock()->SetSize(PLAYER_UI_LIFE_SIZE);
+	m_lifeSprite.lock()->SetColor(0, 1, 0, 1);
 
 	// HPバー外枠
-	m_hpbar = new CGameUI("Assets/Img/HPbar/UI hitpoint①.png");
-	m_hpbar->SetPos({ 234, 630 });
-	m_hpbar->SetSize({ 448, 168 });
-	CUIManager::GetIns()->Add(m_hpbar);
-	m_hpbar->SetColor(0, 1, 1, 1);
+	m_hpbar = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/HPbar/UI hitpoint①.png"));
+	m_hpbar.lock()->SetPos({ 234, 630 });
+	m_hpbar.lock()->SetSize({ 448, 168 });
+	m_hpbar.lock()->SetColor(0, 1, 1, 1);
 
 	// 歯車
-	m_haguruma = new CGameUI("Assets/Img/HPbar/UI bar_02_haguruma2.png");
-	m_haguruma->SetPos({ 94, 630 });
-	m_haguruma->SetSize({ 68, 68 });
-	CUIManager::GetIns()->Add(m_haguruma);
-	m_haguruma->SetColor(0, 1, 1, 1);
+	m_haguruma = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/HPbar/UI bar_02_haguruma2.png"));
+	m_haguruma.lock()->SetPos({ 94, 630 });
+	m_haguruma.lock()->SetSize({ 68, 68 });
+	m_haguruma.lock()->SetColor(0, 1, 1, 1);
 
 	// チャージゲージ
-	m_charge = new CGameUI("Assets/Img/Charge2.png");
-	m_charge->SetPos(PLAYER_UI_CHARGE_CENTER);
-	m_charge->SetSize(PLAYER_UI_CHARGE_SIZE);
-	m_chargeSprite = CUIManager::GetIns()->Add(m_charge);
-	m_charge->SetColor(0, 1, 1, 1);
+	m_chargeSprite = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Charge2.png"));
+	m_chargeSprite.lock()->SetPos(PLAYER_UI_CHARGE_CENTER);
+	m_chargeSprite.lock()->SetSize(PLAYER_UI_CHARGE_SIZE);
+	m_chargeSprite.lock()->SetColor(0, 1, 1, 1);
 }
 
 CPlayerUI::~CPlayerUI()
@@ -95,7 +89,7 @@ void CPlayerUI::UpdateLife()
 
 	// 回転
 	static int hagurumaAngle = 0;
-	m_haguruma->SetRotation(hagurumaAngle);
+	m_haguruma.lock()->SetRotation(hagurumaAngle);
 	hagurumaAngle += 1;
 }
 
