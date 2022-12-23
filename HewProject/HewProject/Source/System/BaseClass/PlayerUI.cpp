@@ -25,19 +25,19 @@ CPlayerUI::CPlayerUI()
 	m_lifeSprite = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/HPbar/HP.png"));;
 	m_lifeSprite.lock()->SetPos(PLAYER_UI_LIFE_CENTER);
 	m_lifeSprite.lock()->SetSize(PLAYER_UI_LIFE_SIZE);
-	m_lifeSprite.lock()->SetColor(0, 1, 0, 1);
+	m_lifeSprite.lock()->SetColor(0.376f, 0.698f, 0.753f, 0.8f);
 
 	// HPバー外枠
 	m_hpbar = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/HPbar/UI hitpoint①.png"));
 	m_hpbar.lock()->SetPos({ 234, 630 });
 	m_hpbar.lock()->SetSize({ 448, 168 });
-	m_hpbar.lock()->SetColor(0, 1, 1, 1);
+	m_hpbar.lock()->SetColor(0.376f, 0.698f, 0.753f, 0.8f);
 
 	// 歯車
 	m_haguruma = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/HPbar/UI bar_02_haguruma2.png"));
 	m_haguruma.lock()->SetPos({ 94, 630 });
 	m_haguruma.lock()->SetSize({ 68, 68 });
-	m_haguruma.lock()->SetColor(0, 1, 1, 1);
+	m_haguruma.lock()->SetColor(0.376f, 0.698f, 0.753f, 0.8f);
 
 	// チャージゲージ
 	m_chargeSprite = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Charge2.png"));

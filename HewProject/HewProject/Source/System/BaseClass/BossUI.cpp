@@ -17,13 +17,13 @@ CBossUI::CBossUI()
 	m_lifeSprite = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Boss/UI bar_boss1.png"));
 	m_lifeSprite.lock()->SetPos(BASS_UI_LIFE_CENTER);
 	m_lifeSprite.lock()->SetSize(BASS_UI_LIFE_SIZE);
-	m_lifeSprite.lock()->SetColor(1, 0, 0, 1);
+	m_lifeSprite.lock()->SetColor(0.404f, 0.772f, 0.847f, 1);
 
 	// バー
 	m_bossbar = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Boss/UI bar_boss2.png"));
 	m_bossbar.lock()->SetPos({ 360, 80 });
 	m_bossbar.lock()->SetSize({ 705, 27 });// 960, 20
-	m_bossbar.lock()->SetColor(1, 1, 1, 1);
+	m_bossbar.lock()->SetColor(0.404f, 0.772f, 0.847f, 1);
 
 	// ボスアイコン
 	m_bossicon = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Boss/UI bar_boss3.png"));
