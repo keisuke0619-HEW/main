@@ -100,7 +100,7 @@ void CBeam::Collision()
 		// â‘Î’l  
 		float AbsoluteValue_EnemyDis = fabsf(distance);
 		float AbsoluteValue_BeamPos = fabsf(m_size);
-		float AbsoluteValue_Shockwave = fabsf(m_size * 1.5f);
+		float AbsoluteValue_Shockwave = fabsf(m_size * 2.0f);
 
 		// “–‚½‚è”»’è‚ğæ‚é‚½‚ß‚ÌŒvZ
 		float DisResult = enemyParam.collisionData.sphire.sphireRadius - (AbsoluteValue_EnemyDis - AbsoluteValue_BeamPos);
