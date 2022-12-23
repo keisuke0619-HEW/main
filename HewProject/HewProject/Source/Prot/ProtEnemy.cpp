@@ -126,7 +126,7 @@ void CProtEnemy::Move()
 
 		DirectX::XMStoreFloat3(&movePos, distance);
 
-		if (m_param.frame % 300 == 0)
+		if (m_param.frame % 120 == 0)
 		{
 			m_ActionNum = rand() % 100;
 		}
@@ -154,6 +154,9 @@ void CProtEnemy::Move()
 			}
 		}
 
+		DirectX::XMVECTOR move;
+		DirectX::XMFLOAT3 Move;
+
 		switch (m_ActionNum)
 		{
 		case 1:
@@ -168,8 +171,23 @@ void CProtEnemy::Move()
 			m_param.frame = 0;
 			break;
 		case 2:
+			distance = DirectX::XMVector3Normalize(distance);
+			move = DirectX::XMVector3TransformCoord(distance, DirectX::XMMatrixRotationY(90.0f * 3.14f / 180.0f));
+			DirectX::XMStoreFloat3(&Move, move);
+			m_param.pos.x += Move.x;
+			m_param.pos.y += Move.y;
+			m_param.pos.z += Move.z;
+			m_param.frame = 0;
 			break;
+
 		case 3:
+			distance = DirectX::XMVector3Normalize(distance);
+			move = DirectX::XMVector3TransformCoord(distance, DirectX::XMMatrixRotationY(-90.0f * 3.14f / 180.0f));
+			DirectX::XMStoreFloat3(&Move, move);
+			m_param.pos.x += Move.x;
+			m_param.pos.y += Move.y;
+			m_param.pos.z += Move.z;
+			m_param.frame = 0;
 			break;
 		case 4:
 			// ê≥ãKâªÇµÇƒë¨Ç≥ÇàÍíËÇ…Ç∑ÇÈ
