@@ -159,7 +159,7 @@ void CPlayer::Move()
 void CPlayer::Beam()
 {
 	const float maxBeamSize = 3.0f;
-	const float addBeamSize = 0.05f;
+	const float addBeamSize = 0.025f;
 
 	m_playerUI->SetCharge(m_beamSize / maxBeamSize);
 	// RT�ɕύX
