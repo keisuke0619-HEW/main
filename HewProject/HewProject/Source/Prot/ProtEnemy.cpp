@@ -16,7 +16,7 @@ CProtEnemy::CProtEnemy()
 	, m_dontMove(false)
 	, m_blowAwayCountDown(0)
 	, m_blowAwayMove({0.f, 0.f, 0.f})
-	, m_ActionNum(0)
+	, m_ActionNum(rand() % 4 + 1)
 {
 	// オブジェクトのリストを取得
 	auto objList = CSceneBase::GetObjList();
@@ -41,7 +41,7 @@ CProtEnemy::~CProtEnemy()
 
 void CProtEnemy::Update()
 {
-	
+	m_param.frame++;
 
 	// もしプレイヤーのオブジェクトが消えていたらもう一度取得
 	if (m_player.expired() == true)
@@ -120,88 +120,77 @@ void CProtEnemy::Move()
 
 		// 距離を計算
 		DirectX::XMVECTOR distance = DirectX::XMVectorSubtract(player, enemy);
-		//distance = DirectX::XMVector3Normalize(distance);
+		distance = DirectX::XMVector3Normalize(distance);
+
 		// float3に変換して格納
 		DirectX::XMFLOAT3 movePos;
 
 		DirectX::XMStoreFloat3(&movePos, distance);
+		
+		DirectX::XMVECTOR move;
 
-		if (m_param.frame % 300 == 0)
+		// 移動方向切り替え
+		if (m_param.frame / 300 > 0)
 		{
 			m_ActionNum = rand() % 100;
-		}
 
-		if (0 <= m_ActionNum && m_ActionNum <= 39)	//	40%でプレイヤーへ
-		{
-			m_ActionNum = 1;
-		}
-		else
-		{
-			if (40 <= m_ActionNum <= 64)	//	25%で右
+			if (0 <= m_ActionNum && m_ActionNum <= 39)	//	40%でプレイヤーへ
 			{
-				m_ActionNum = 2;
+				m_ActionNum = 1;
 			}
 			else
 			{
-				if (65 <= m_ActionNum <= 89)	//	25%で左
+				if (40 <= m_ActionNum && m_ActionNum <= 64)	//	25%で右
 				{
-					m_ActionNum = 3;
+					m_ActionNum = 2;
 				}
-				else	//残りの10%でプレイヤーとは逆へ
+				else
 				{
-					m_ActionNum = 4;
+					if (65 <= m_ActionNum && m_ActionNum <= 89)	//	25%で左
+					{
+						m_ActionNum = 3;
+					}
+					else	//残りの10%でプレイヤーとは逆へ
+					{
+						m_ActionNum = 4;
+					}
 				}
 			}
-		}
+			
+			switch (m_ActionNum)
+			{
+			case 1:
+				// 正規化して速さを一定にする
+				distance = DirectX::XMLoadFloat3(&movePos);
+				distance = DirectX::XMVector3Normalize(distance);
+				DirectX::XMStoreFloat3(&movePos, distance);
+				break;
+			case 2:
+				distance = DirectX::XMVector3Normalize(distance);
+				move = DirectX::XMVector3TransformCoord(distance, DirectX::XMMatrixRotationY(90.0f * 3.14f / 180.0f));
+				DirectX::XMStoreFloat3(&movePos, move);
+				break;
+			case 3:
+				distance = DirectX::XMVector3Normalize(distance);
+				move = DirectX::XMVector3TransformCoord(distance, DirectX::XMMatrixRotationY(-90.0f * 3.14f / 180.0f));
+				DirectX::XMStoreFloat3(&movePos, move);
+				break;
+			case 4:
+				// 正規化して速さを一定にする
+				distance = DirectX::XMLoadFloat3(&movePos);
+				distance = DirectX::XMVector3Normalize(distance);
+				DirectX::XMStoreFloat3(&movePos, distance);
+				break;
+			default:
+				break;
+			}
 
-		DirectX::XMVECTOR move;
+			m_param.frame = 0;
+		}		
 
-		switch (m_ActionNum)
-		{
-		case 1:
-			// 正規化して速さを一定にする
-			distance = DirectX::XMLoadFloat3(&movePos);
-			distance = DirectX::XMVector3Normalize(distance);
-			DirectX::XMStoreFloat3(&movePos, distance);
-			// プレイヤーを目標にする
-			m_param.pos.x += movePos.x * m_move / 2; // エネミーのposを使う
-			m_param.pos.y += movePos.y * m_move / 2;
-			m_param.pos.z += movePos.z * m_move / 2;
-			m_param.frame = 0;
-			break;
-		case 2:
-			distance = DirectX::XMVector3Normalize(distance);
-			move = DirectX::XMVector3TransformCoord(distance, DirectX::XMMatrixRotationY(90.0f * 3.14f / 180.0f));
-			DirectX::XMStoreFloat3(&movePos, move);
-			m_param.pos.x += movePos.x;
-			m_param.pos.y += movePos.y;
-			m_param.pos.z += movePos.z;
-			m_param.frame = 0;
-			break;
-		case 3:
-			distance = DirectX::XMVector3Normalize(distance);
-			move = DirectX::XMVector3TransformCoord(distance, DirectX::XMMatrixRotationY(-90.0f * 3.14f / 180.0f));
-			DirectX::XMStoreFloat3(&movePos, move);
-			m_param.pos.x += movePos.x;
-			m_param.pos.y += movePos.y;
-			m_param.pos.z += movePos.z;
-			m_param.frame = 0;
-			break;
-		case 4:
-			// 正規化して速さを一定にする
-			distance = DirectX::XMLoadFloat3(&movePos);
-			distance = DirectX::XMVector3Normalize(distance);
-			DirectX::XMStoreFloat3(&movePos, distance);
-			// プレイヤーを目標にする
-			m_param.pos.x -= movePos.x * m_move / 2; // エネミーのposを使う
-			m_param.pos.y -= movePos.y * m_move / 2;
-			m_param.pos.z -= movePos.z * m_move / 2;
-			m_param.frame = 0;
-			break;
-		default:
-			break;
-		}
-
+		// 移動
+		m_param.pos.x += movePos.x * m_move; // エネミーのposを使う
+		m_param.pos.z += movePos.z * m_move;
 
 		//// もしプレイヤーとの距離が一定以下だったら
 		//if (fabsf(movePos.x) <= m_distance && fabsf(movePos.y) <= m_distance && fabsf(movePos.z) <= m_distance)
