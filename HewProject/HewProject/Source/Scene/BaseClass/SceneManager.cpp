@@ -1,5 +1,5 @@
 #include "SceneManager.hpp"
-
+#include <Camera.hpp>
 // ƒV[ƒ“
 #include <SceneTest.hpp>
 #include <SceneTitle.hpp>

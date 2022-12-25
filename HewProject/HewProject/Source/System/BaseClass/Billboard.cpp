@@ -27,7 +27,6 @@ void CBillboard::Draw(bool BillOnOff, bool enable)
 	// ワールド行列
 	DirectX::XMMATRIX T = DirectX::XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);
 	DirectX::XMFLOAT4X4 world;
-
 	// ビルボードオン
 	if (BillOnOff)
 	{
@@ -57,6 +56,7 @@ void CBillboard::Draw(bool BillOnOff, bool enable)
 	Sprite::SetTexture(m_pPicture);
 	// サイズ
 	Sprite::SetSize(m_size);
+	
 
 
 

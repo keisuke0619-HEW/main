@@ -2,7 +2,7 @@
 #include <Geometory.h>
 #include <DebugWindow.hpp>
 #include <Easing.hpp>
-
+#include <Camera.hpp>
 #include <SceneBase.hpp>
 CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	: CObjectBase("Assets/Box.fbx")

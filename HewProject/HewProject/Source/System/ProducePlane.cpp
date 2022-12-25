@@ -42,7 +42,7 @@ void ProducePlane::Draw()
 		// テクスチャセット
 		Sprite::SetTexture(m_pPicture);
 		// サイズ
-		//Sprite::SetSize(m_size);	// これいる？　分からん
+		Sprite::SetSize({ m_size.x, m_size.y });	// これいる？　分からん
 
 		Sprite::SetColor(m_color);
 		// 描画
