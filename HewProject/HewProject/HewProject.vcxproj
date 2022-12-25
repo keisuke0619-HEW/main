@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
+    <ClInclude Include="OverlayWindowBase.hpp" />
     <ClInclude Include="Polyline.h" />
     <ClInclude Include="SceneResult.hpp" />
     <ClInclude Include="Source\Prot\ProtEnemy.hpp" />
@@ -78,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DirectXTex\Texture.cpp" />
+    <ClCompile Include="OverlayWindowBase.cpp" />
     <ClCompile Include="Polyline.cpp" />
     <ClCompile Include="SceneResult.cpp" />
     <ClCompile Include="Source\Prot\ProtEnemy.cpp" />
