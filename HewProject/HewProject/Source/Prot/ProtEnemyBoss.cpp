@@ -8,7 +8,7 @@
 // “–‚½‚è”»’è‚ÍŒã‚Å•t‚¯‚Ü‚·B
 
 CProtEnemyBoss::CProtEnemyBoss()
-	: CObjectBase("Assets/Box.fbx", 0.4f)
+	: CObjectBase("Assets/Model/bosu.fbx", 0.1f)
 	, m_move(0.01f)
 	, m_distance(4.0f)
 	, m_cnt(0)
@@ -29,8 +29,8 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_startPos = m_param.pos;
 	m_bossUI.reset(new CBossUI());
 	
-
-	m_bill = new CBillboard("Assets/Img/Boss.png");
+	m_param.drawOffset = { 0,1.2f,0 };
+	//m_bill = new CBillboard("Assets/Img/Boss.png");
 }
 
 CProtEnemyBoss::~CProtEnemyBoss()
@@ -59,9 +59,9 @@ void CProtEnemyBoss::Update()
 
 void CProtEnemyBoss::Draw()
 {
-	m_bill->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
-	m_bill->SetPos(m_param.pos);
-	m_bill->Draw();
+	//m_bill->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
+	//m_bill->SetPos(m_param.pos);
+	//m_bill->Draw();
 	//Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
 	//Utility::SetBlendState(BLEND_ALPHA);
@@ -95,6 +95,15 @@ void CProtEnemyBoss::Move()
 		m_param.pos.y += movePos.y * m_move;
 		m_param.pos.z += movePos.z * m_move;
 		m_param.frame = 0;
+
+		DirectX::XMFLOAT3 Move;
+		DirectX::XMStoreFloat3(&Move, distance);
+		Move.y = 0.0f;
+		if (fabsf(Move.x) + fabsf(Move.z) > 0.0f)
+		{
+			float rot = atan2f(Move.z, Move.x);
+			m_param.rot.y = DirectX::XMConvertToRadians(90.f) - rot;
+		}
 	
 }
 

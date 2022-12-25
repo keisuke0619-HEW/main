@@ -32,5 +32,5 @@ private:
 	DirectX::XMFLOAT3 m_startPos;
 	std::unique_ptr<CBossUI> m_bossUI;	// É{ÉXÇÃUI
 
-	CBillboard* m_bill;
+	//CBillboard* m_bill;
 };
