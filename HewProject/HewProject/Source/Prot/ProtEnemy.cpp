@@ -128,6 +128,17 @@ void CProtEnemy::Move()
 		
 		DirectX::XMVECTOR move;
 
+		// ‰ñ“]ˆ—
+		DirectX::XMFLOAT3 Move;
+		DirectX::XMStoreFloat3(&Move, distance);
+		Move.y = 0.0f;
+
+		if (fabsf(Move.x) + fabsf(Move.z) > 0.0f)
+		{
+			float rot = atan2f(Move.z, Move.x);
+			m_param.rot.y = (90.0f * 3.14159f / 180.0f) - rot;
+		}
+
 		// ˆÚ“®•ûŒüØ‚è‘Ö‚¦
 		if (m_param.frame / 300 > 0)
 		{
