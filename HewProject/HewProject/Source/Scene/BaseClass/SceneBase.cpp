@@ -1,5 +1,6 @@
 #include "SceneBase.hpp"
 #include <UiManager.hpp>
+#include <Camera.hpp>
 std::shared_ptr<CObjectManager> CSceneBase::m_obj = nullptr;
 
 CSceneBase::CSceneBase()

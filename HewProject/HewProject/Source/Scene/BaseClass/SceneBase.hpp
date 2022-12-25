@@ -1,6 +1,5 @@
 #pragma once
 #include <ISceneBase.hpp>
-#include <Camera.hpp>
 #include <ObjectManager.hpp>
 #include <memory>
 class CSceneBase : public IScene

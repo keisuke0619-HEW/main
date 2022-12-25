@@ -136,7 +136,7 @@ void CProtEnemy::Move()
 		if (fabsf(Move.x) + fabsf(Move.z) > 0.0f)
 		{
 			float rot = atan2f(Move.z, Move.x);
-			m_param.rot.y = (90.0f * 3.14159f / 180.0f) - rot;
+			m_param.rot.y = DirectX::XMConvertToRadians(90.f) - rot;
 		}
 
 		// ˆÚ“®•ûŒüØ‚è‘Ö‚¦
