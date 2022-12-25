@@ -7,7 +7,7 @@
 // “–‚½‚è”»’è‚ÍŒã‚Å•t‚¯‚Ü‚·B
 
 CProtEnemy::CProtEnemy()
-	: CObjectBase("Assets/Box.fbx", 0.4f)
+	: CObjectBase("Assets/Model/zako.fbx", 0.1f)
 	, m_move(0.05f)
 	, m_distance(8.0f)
 	, m_cnt(0)
@@ -30,8 +30,10 @@ CProtEnemy::CProtEnemy()
 	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
 	m_startPos = m_param.pos;
 	m_param.tag = TAG_ENEMY;
-	m_bill = new CBillboard("Assets/Img/enemy.png");
 	m_pPolyline = new GeometoryPolyline(30);
+
+	// ‚±‚±‚Å•`‰æ‚ð‚¸‚ç‚·
+	m_param.drawOffset = { 0, 1.2f, 0 };
 }
 
 CProtEnemy::~CProtEnemy()
@@ -61,9 +63,6 @@ void CProtEnemy::Update()
 void CProtEnemy::Draw()
 {
 
-	m_bill->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
-	m_bill->SetPos(m_param.pos);
-	m_bill->Draw();
 	//Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
 	//Utility::SetBlendState(BLEND_ALPHA);
