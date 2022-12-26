@@ -4,18 +4,61 @@ namespace Utility
     XINPUT_STATE g_keyState;
     XINPUT_STATE g_keyStateOld;
     
-    int g_cameraSpeed;
+    float g_cameraSpeedY;
+    float g_cameraSpeedX;
 	ControllerID g_keyID[KeySet::KEY_SET_MAX];
+	ControllerID g_padID[KeySet::KEY_SET_MAX];
+
+	// âüÇ≥ÇÍÇΩèuä‘
+	bool GetKeyTrigger(ControllerID id);
+	// âüÇ≥ÇÍÇƒÇ¢ÇÈä‘
+	bool GetKeyPress(ControllerID id);
+	// ó£Ç≥ÇÍÇΩèuä‘
+	bool GetKeyRelease(ControllerID id);
+
 }
 
 
 void Utility::ControllerInit()
 {
-    g_cameraSpeed = 10;
-	g_keyID[KeySet::BEAM] = ControllerID::RT;
-	g_keyID[KeySet::JUMP] = ControllerID::A;
-	g_keyID[KeySet::SELECT] = ControllerID::A;
-	g_keyID[KeySet::CANCEL] = ControllerID::B;
+    g_cameraSpeedY = 10.0f;
+    g_cameraSpeedX = 10.0f;
+	g_padID[KeySet::KEY_BEAM] = ControllerID::Pad_RT;
+	g_keyID[KeySet::KEY_BEAM] = ControllerID::Key_B;
+	g_padID[KeySet::KEY_JUMP] = ControllerID::Pad_A;
+	g_keyID[KeySet::KEY_JUMP] = ControllerID::Key_SPACE;
+	g_padID[KeySet::KEY_SELECT] = ControllerID::Pad_A;
+	g_keyID[KeySet::KEY_SELECT] = ControllerID::Key_RETURN;
+	g_padID[KeySet::KEY_CANCEL] = ControllerID::Pad_B;
+	g_keyID[KeySet::KEY_CANCEL] = ControllerID::Key_ESCAPE;
+	g_padID[KeySet::KEY_RIGHT] = ControllerID::Pad_RIGHT;
+	g_keyID[KeySet::KEY_RIGHT] = ControllerID::Key_Right;
+	g_padID[KeySet::KEY_LEFT] = ControllerID::Pad_LEFT;
+	g_keyID[KeySet::KEY_LEFT] = ControllerID::Key_Left;
+	g_padID[KeySet::KEY_DOWN] = ControllerID::Pad_DOWN;
+	g_keyID[KeySet::KEY_DOWN] = ControllerID::Key_Down;
+	g_padID[KeySet::KEY_UP] = ControllerID::Pad_UP;
+	g_keyID[KeySet::KEY_UP] = ControllerID::Key_Up;
+	g_padID[KeySet::KEY_CONFIG] = ControllerID::Pad_START;
+	g_keyID[KeySet::KEY_CONFIG] = ControllerID::Key_ESCAPE;
+	g_padID[KeySet::KEY_MOVE_W] = ControllerID::Key_W;
+	g_keyID[KeySet::KEY_MOVE_W] = ControllerID::Key_W;
+	g_padID[KeySet::KEY_MOVE_A] = ControllerID::Key_A;
+	g_keyID[KeySet::KEY_MOVE_A] = ControllerID::Key_A;
+	g_padID[KeySet::KEY_MOVE_S] = ControllerID::Key_S;
+	g_keyID[KeySet::KEY_MOVE_S] = ControllerID::Key_S;
+	g_padID[KeySet::KEY_MOVE_D] = ControllerID::Key_D;
+	g_keyID[KeySet::KEY_MOVE_D] = ControllerID::Key_D;
+	g_padID[KeySet::KEY_CAMERA_UP] = ControllerID::Key_Up;
+	g_keyID[KeySet::KEY_CAMERA_UP] = ControllerID::Key_Up;
+	g_padID[KeySet::KEY_CAMERA_DOWN] = ControllerID::Key_Down;
+	g_keyID[KeySet::KEY_CAMERA_DOWN] = ControllerID::Key_Down;
+	g_padID[KeySet::KEY_CAMERA_RIGHT] = ControllerID::Key_Right;
+	g_keyID[KeySet::KEY_CAMERA_RIGHT] = ControllerID::Key_Right;
+	g_padID[KeySet::KEY_CAMERA_LEFT] = ControllerID::Key_Left;
+	g_keyID[KeySet::KEY_CAMERA_LEFT] = ControllerID::Key_Left;
+	g_padID[KeySet::KEY_DEBUG_RETURN] = ControllerID::Key_RETURN;
+	g_keyID[KeySet::KEY_DEBUG_RETURN] = ControllerID::Key_RETURN;
 }
 
 void Utility::ControllerUpdate()
@@ -30,18 +73,18 @@ void Utility::ControllerUpdate()
 bool Utility::GetKeyTrigger(KeySet key)
 {
 	// ó·
-	return GetKeyTrigger(g_keyID[key]);
+	return GetKeyTrigger(g_keyID[key]) || GetKeyTrigger(g_padID[key]);
 	
 }
 
 bool Utility::GetKeyPress(KeySet key)
 {
-	return Utility::GetKeyPress(g_keyID[key]);
+	return Utility::GetKeyPress(g_keyID[key]) || GetKeyPress(g_padID[key]);
 }
 
 bool Utility::GetKeyRelease(KeySet key)
 {
-	return Utility::GetKeyRelease(g_keyID[key]);
+	return Utility::GetKeyRelease(g_keyID[key]) || GetKeyRelease(g_padID[key]);
 }
 
 void Utility::SetKeyBind(KeySet key, ControllerID id)
@@ -104,7 +147,7 @@ bool Utility::GetKeyPress(ControllerID id)
 		return IsKeyPress(Word);
 	}
 #endif // _USE_KEYBOARD_
-	if (id == RT || id == LT)
+	if (id == Pad_RT || id == Pad_LT)
 	{
 		int InputNum_LT = g_keyState.Gamepad.bLeftTrigger;
 		int InputNum_RT = g_keyState.Gamepad.bRightTrigger;
@@ -158,10 +201,26 @@ DirectX::XMFLOAT3 Utility::GetStickRight()
     return stick;
 }
 
-int Utility::GetCameraSpeed()
+float Utility::GetCameraSpeedX()
 {
-    return g_cameraSpeed;
+	return g_cameraSpeedX;
 }
+
+float Utility::GetCameraSpeedY()
+{
+    return g_cameraSpeedY;
+}
+
+void Utility::SetCameraSpeedX(float speedX)
+{
+	g_cameraSpeedX = speedX;
+}
+
+void Utility::SetCameraSpeedY(float speedY)
+{
+	g_cameraSpeedY = speedY;
+}
+
 
 char Utility::CheckWord(unsigned id)
 {

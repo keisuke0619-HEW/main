@@ -23,12 +23,12 @@ void CPlayerCamera::Update()
 	const float MOVE_SPEED = 0.15f * 3.14f / 180;
 	const float LOOK_OFFSET_X = 0.5f;
 	const float LOOK_OFFSET_Y = 1.5f;
-	if(Utility::GetKeyPress(Key_Up))	m_radY += MOVE_SPEED  * Utility::GetCameraSpeed();
-	if(Utility::GetKeyPress(Key_Down))	m_radY -= MOVE_SPEED  * Utility::GetCameraSpeed();
-	if(Utility::GetKeyPress(Key_Right))m_radXZ += MOVE_SPEED * Utility::GetCameraSpeed();
-	if(Utility::GetKeyPress(Key_Left))	m_radXZ -= MOVE_SPEED * Utility::GetCameraSpeed();
-	m_radY -= Utility::GetStickRight().y * MOVE_SPEED * Utility::GetCameraSpeed();
-	m_radXZ += Utility::GetStickRight().x * MOVE_SPEED * Utility::GetCameraSpeed();
+	if(Utility::GetKeyPress(KEY_CAMERA_UP))	m_radY += MOVE_SPEED  * Utility::GetCameraSpeedY();
+	if(Utility::GetKeyPress(KEY_CAMERA_DOWN))	m_radY -= MOVE_SPEED  * Utility::GetCameraSpeedY();
+	if(Utility::GetKeyPress(KEY_CAMERA_RIGHT))m_radXZ += MOVE_SPEED * Utility::GetCameraSpeedX();
+	if(Utility::GetKeyPress(KEY_CAMERA_LEFT))	m_radXZ -= MOVE_SPEED * Utility::GetCameraSpeedX();
+	m_radY -= Utility::GetStickRight().y * MOVE_SPEED * Utility::GetCameraSpeedY();
+	m_radXZ += Utility::GetStickRight().x * MOVE_SPEED * Utility::GetCameraSpeedX();
 
 	SET_VAR_RANGE(m_radY, -3.1415f / 2, 3.1415f / 2);
 

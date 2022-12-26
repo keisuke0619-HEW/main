@@ -11,33 +11,49 @@
 
 enum KeySet
 {
-	JUMP,		// ジャンプボタン
-	BEAM,		// ビームボタン
-	SELECT,		// 決定ボタン
-	CANCEL,		// キャンセルボタン
+	KEY_JUMP,		// ジャンプボタン
+	KEY_BEAM,		// ビームボタン
+	KEY_SELECT,		// 決定ボタン
+	KEY_CANCEL,		// キャンセルボタン
 
+	KEY_RIGHT,
+	KEY_LEFT,
+	KEY_UP,
+	KEY_DOWN,
+	KEY_CONFIG,
+
+	KEY_MOVE_W,
+	KEY_MOVE_A,
+	KEY_MOVE_S,
+	KEY_MOVE_D,
+	KEY_CAMERA_UP,
+	KEY_CAMERA_DOWN,
+	KEY_CAMERA_RIGHT,
+	KEY_CAMERA_LEFT,
+
+	KEY_DEBUG_RETURN,
 	// 何か要素があればここに追記。
 	KEY_SET_MAX
 };
 
 enum ControllerID
 {
-	A = XINPUT_GAMEPAD_A,
-	B = XINPUT_GAMEPAD_B,
-	X = XINPUT_GAMEPAD_X,
-	Y = XINPUT_GAMEPAD_Y,
-	UP = XINPUT_GAMEPAD_DPAD_UP,
-	RIGHT = XINPUT_GAMEPAD_DPAD_RIGHT,
-	DOWN = XINPUT_GAMEPAD_DPAD_DOWN,
-	LEFT = XINPUT_GAMEPAD_DPAD_LEFT,
-	RB = XINPUT_GAMEPAD_RIGHT_SHOULDER,
-	RSTICK = XINPUT_GAMEPAD_RIGHT_THUMB,
-	LB = XINPUT_GAMEPAD_LEFT_SHOULDER,
-	LSTICK = XINPUT_GAMEPAD_LEFT_THUMB,
-	START = XINPUT_GAMEPAD_START,
-	BACK = XINPUT_GAMEPAD_BACK,
-	RT,
-	LT,
+	Pad_A = XINPUT_GAMEPAD_A,
+	Pad_B = XINPUT_GAMEPAD_B,
+	Pad_X = XINPUT_GAMEPAD_X,
+	Pad_Y = XINPUT_GAMEPAD_Y,
+	Pad_UP = XINPUT_GAMEPAD_DPAD_UP,
+	Pad_RIGHT = XINPUT_GAMEPAD_DPAD_RIGHT,
+	Pad_DOWN = XINPUT_GAMEPAD_DPAD_DOWN,
+	Pad_LEFT = XINPUT_GAMEPAD_DPAD_LEFT,
+	Pad_RB = XINPUT_GAMEPAD_RIGHT_SHOULDER,
+	Pad_RSTICK = XINPUT_GAMEPAD_RIGHT_THUMB,
+	Pad_LB = XINPUT_GAMEPAD_LEFT_SHOULDER,
+	Pad_LSTICK = XINPUT_GAMEPAD_LEFT_THUMB,
+	Pad_START = XINPUT_GAMEPAD_START,
+	Pad_BACK = XINPUT_GAMEPAD_BACK,
+	Pad_RT,
+	Pad_LT,
 
 	Key_A = 4097,
 	Key_B,
@@ -111,20 +127,17 @@ namespace Utility
 	/// <param name="id">バインドするキー</param>
 	void SetKeyBind(KeySet key, ControllerID id);
 
-	// 押された瞬間
-	bool GetKeyTrigger(ControllerID id);
-	// 押されている間
-	bool GetKeyPress(ControllerID id);
-	// 離された瞬間
-	bool GetKeyRelease(ControllerID id);
 
 	// 左スティック
 	DirectX::XMFLOAT3 GetStickLeft();
 	// 右スティック
 	DirectX::XMFLOAT3 GetStickRight();
 
-	int GetCameraSpeed();
+	float GetCameraSpeedX();
+	float GetCameraSpeedY();
 
+	void SetCameraSpeedX(float speedX);
+	void SetCameraSpeedY(float speedY);
 	// 入力したキーの判定
 	char CheckWord(unsigned id);
 }

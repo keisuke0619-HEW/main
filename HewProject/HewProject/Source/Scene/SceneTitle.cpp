@@ -27,7 +27,7 @@ void CSceneTitle::Update()
 {
 	m_TitleUI.lock()->Draw();
 
-	if (Utility::GetKeyTrigger(Key_RETURN))
+	if (Utility::GetKeyTrigger(KEY_DEBUG_RETURN))
 	{
 		m_pBGMSource->Stop();
 		CSceneManager::SetScene(SCENE_STAGE01);

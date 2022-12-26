@@ -29,12 +29,12 @@ CSceneTest::~CSceneTest()
 void CSceneTest::Update()
 {
 	m_stage->Update();
-	if (Utility::GetKeyTrigger(Key_RETURN))
+	if (Utility::GetKeyTrigger(KEY_DEBUG_RETURN))
 	{
 		m_pBGMSource->Stop();
 		CSceneManager::SetScene(SCENE_RESULT);
 	}
-	if (Utility::GetKeyTrigger(Key_ESCAPE))
+	if (Utility::GetKeyTrigger(KEY_CONFIG))
 	{
 		AddOverlay(new COverlayConfig());
 	}

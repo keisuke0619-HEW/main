@@ -38,7 +38,7 @@ CGameUI::Ref CUIManager::Add(CGameUI* obj, SortOrder order)
     auto itr = m_list.begin();
     while (itr != m_list.end())
     {
-        if ((*itr)->GetSortID() >= order)
+        if ((*itr)->GetSortID() <= order)
             break;
         itr++;
     }
