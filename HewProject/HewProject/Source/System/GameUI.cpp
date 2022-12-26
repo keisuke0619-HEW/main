@@ -66,9 +66,19 @@ void CGameUI::SetPos(DirectX::XMFLOAT2 pos)
 	m_pos = pos;
 }
 
+void CGameUI::SetPos(float x, float y)
+{
+	SetPos({ x, y });
+}
+
 void CGameUI::SetSize(DirectX::XMFLOAT2 size)
 {
 	m_size = size;
+}
+
+void CGameUI::SetSize(float x, float y)
+{
+	SetSize({ x,y });
 }
 
 void CGameUI::SetUVPos(DirectX::XMFLOAT2 uv)
@@ -76,9 +86,19 @@ void CGameUI::SetUVPos(DirectX::XMFLOAT2 uv)
 	m_uvPos = uv;
 }
 
+void CGameUI::SetUVPos(float u, float v)
+{
+	SetUVPos({ u,v });
+}
+
 void CGameUI::SetUVScale(DirectX::XMFLOAT2 uv)
 {
 	m_uvScale = uv;
+}
+
+void CGameUI::SetUVScale(float u, float v)
+{
+	SetUVScale({ u, v });
 }
 
 void CGameUI::SetRotation(float degRot)

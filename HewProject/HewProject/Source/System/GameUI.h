@@ -35,24 +35,24 @@ public:
 	// 戻値 : なし
 	// 引数 : DirectX::XMFLOAT2 pos : 画像の座標(画面の座標を参考にして設定してください) 
 	void SetPos(DirectX::XMFLOAT2 pos);
-
+	void SetPos(float x, float y);
 	// 概要 : 画像のサイズを設定
 	// 戻値 : なし
 	// 引数 : DirectX::XMFLOAT2 size : 画像のサイズ(値を-にすると反転します)
 	void SetSize(DirectX::XMFLOAT2 size);
-
+	void SetSize(float x, float y);
 	/// <summary>
 	/// UVを設定
 	/// </summary>
 	/// <param name="uv">左上のUV座標</param>
 	void SetUVPos(DirectX::XMFLOAT2 uv);
-
+	void SetUVPos(float u, float v);
 	/// <summary>
 	/// UVの大きさを設定
 	/// </summary>
 	/// <param name="uv">UVの大きさ</param>
 	void SetUVScale(DirectX::XMFLOAT2 uv);
-
+	void SetUVScale(float u, float v);
 	/// <summary>
 	/// 回転を設定します。（度数法）
 	/// </summary>
