@@ -201,6 +201,9 @@
     <ClInclude Include="OverlayWindowBase.hpp">
       <Filter>シーンファイル\Base</Filter>
     </ClInclude>
+    <ClInclude Include="OverlayConfig.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -360,6 +363,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="OverlayWindowBase.cpp">
+      <Filter>シーンファイル\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="OverlayConfig.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>

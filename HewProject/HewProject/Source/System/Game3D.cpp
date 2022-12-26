@@ -10,7 +10,7 @@
 Game3D::Game3D()
 {
 	m_scenes.reset(new CSceneManager());
-	m_scenes->SetScene(SCENE_TITLE);
+	m_scenes->SetScene(SCENE_STAGE01);
 	CDebugWindow::Create();
 	Sprite::Init();
 	Utility::InitBlendState();
