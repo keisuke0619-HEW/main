@@ -23,4 +23,12 @@ private:
 		TARGET_MAX,
 	};
 	int m_target;
+
+	CGameUI* m_speedXCursor;
+	CGameUI* m_speedXBar;
+	CGameUI* m_speedYCursor;
+	CGameUI* m_speedYBar;
+
+
+
 };

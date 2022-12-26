@@ -10,6 +10,7 @@ CGameUI::CGameUI(const char* FileName)
 	, m_color({1,1,1,1})
 {
 	LoadTextureFromFile(FileName, &m_pPicture);
+	m_fileName = FileName;
 }
 
 CGameUI::~CGameUI()

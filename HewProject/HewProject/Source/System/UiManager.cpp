@@ -33,6 +33,7 @@ CGameUI::Ref CUIManager::Add(CGameUI* obj, SortOrder order)
 {
     // ƒ\[ƒg‚ð“ü‚ê‚é
     CGameUI::Ptr ptr;
+    obj->SetSortID(order);
     ptr.reset(obj);
     //m_list.push_back(ptr);
     auto itr = m_list.begin();
