@@ -198,6 +198,15 @@ void CPlayer::Beam()
 			}
 			
 		}
+		else
+		{
+			// 一定以下のチャージの時でやめたときにもチャージ音が消えるようにする
+			if (m_isSE == true)
+			{
+				m_pSESource->Stop();
+				m_isSE = false;
+			}
+		}
 		m_beamSize = 0.0f;
 	}
 	//if (m_beam)
