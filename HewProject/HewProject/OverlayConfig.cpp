@@ -10,6 +10,10 @@ const float OVERLAY_CONFIG_BAR_SIZE_X = 850.0f;
 const float OVERLAY_CONFIG_BAR_SIZE_Y = 100.0f;
 const float OVERLAY_CONFIG_CURSOR_SIZE_X = 20.0f;
 const float OVERLAY_CONFIG_CURSOR_SIZE_Y = 60.0f;
+const float OVERLAY_CONFIG_SPEED_MIN = 1.0f;
+const float OVERLAY_CONFIG_SPEED_MAX = 100.0f;
+const float OVERLAY_CONFIG_POS_MIN = OVERLAY_CONFIG_CENTER_X - OVERLAY_CONFIG_BAR_SIZE_X / 2.3f;
+const float OVERLAY_CONFIG_POS_MAX = OVERLAY_CONFIG_CENTER_X + OVERLAY_CONFIG_BAR_SIZE_X / 2.3f;
 
 COverlayConfig::COverlayConfig()
 {
@@ -68,7 +72,6 @@ void COverlayConfig::MoveCursor()
 	{
 		m_target = TARGET_MAX * 100;
 	}
-
 }
 
 void COverlayConfig::SetStatus()
@@ -103,6 +106,17 @@ void COverlayConfig::SetStatus()
 	default:
 		break;
 	}
-	CDebugWindow::Print(ShimizuKeisuke, "SpeedX", Utility::GetCameraSpeedX());
-	CDebugWindow::Print(ShimizuKeisuke, "SpeedY", Utility::GetCameraSpeedY());
+	// ƒNƒŠƒbƒv
+	auto speedX = Utility::GetCameraSpeedX();
+	auto speedY = Utility::GetCameraSpeedY();
+	if (speedX < OVERLAY_CONFIG_SPEED_MIN)
+		Utility::SetCameraSpeedX(OVERLAY_CONFIG_SPEED_MIN);
+	if (speedY < OVERLAY_CONFIG_SPEED_MIN)
+		Utility::SetCameraSpeedY(OVERLAY_CONFIG_SPEED_MIN);
+	if (speedX > OVERLAY_CONFIG_SPEED_MAX)
+		Utility::SetCameraSpeedX(OVERLAY_CONFIG_SPEED_MAX);
+	if (speedY > OVERLAY_CONFIG_SPEED_MAX)
+		Utility::SetCameraSpeedY(OVERLAY_CONFIG_SPEED_MAX);
+	m_speedXCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedX() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_X_BAR_POS_Y);
+	m_speedYCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedY() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_Y_BAR_POS_Y);
 }
