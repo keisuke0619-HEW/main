@@ -25,7 +25,7 @@ CPlayer::CPlayer()
 	m_model->Play(no, true);
 
 	// 音データの読み込み
-	m_pChargeSE = CreateSound("Assets/Sound/Charge.wav", true);
+	m_pChargeSE = CreateSound("Assets/Sound/Charge.wav", false);
 	if (m_pChargeSE == nullptr)
 	{
 
@@ -166,7 +166,11 @@ void CPlayer::Beam()
 		if (m_isSE == false)
 		{
 			m_pSESource = StartSound(m_pChargeSE);
+			// 音量
 			m_pSESource->SetVolume(0.3f);
+			// 再生スピード
+			m_pSESource->SetFrequencyRatio(1.f);
+			// 再生したか判定
 			m_isSE = true;
 		}
 		
@@ -191,9 +195,14 @@ void CPlayer::Beam()
 			// se再生
 			if (m_isSE == true)
 			{
+				// チャージ音を止める
 				m_pSESource->Stop();
 				m_pSESource = StartSound(m_pBeamSE);
+				// 音量
 				m_pSESource->SetVolume(0.3f);
+				// 再生スピード
+				m_pSESource->SetFrequencyRatio(1.f);
+				// 再生判定
 				m_isSE = false;
 			}
 			
