@@ -4,10 +4,6 @@
 // オブジェクト：オブジェクト
 bool Utility::IsCollision(TObjectParam obj1, TObjectParam obj2)
 {
-    // 引数として渡されたデータをもとに当たり判定をとる。
-    // 当たっていたらTrue
-    // 当たっていなかったらFalse
-
 	switch (obj1.collisionType)
 	{
 	case COLLISION_SPHIRE:
@@ -107,7 +103,7 @@ bool Utility::IsCollisionShpireRay(TObjectParam obj1, TObjectParam obj2)
 	return false;
 }
 
-// 完
+// 未
 // 球：面
 bool Utility::IsCollisionShpirePlane(TObjectParam obj1, TObjectParam obj2)
 {

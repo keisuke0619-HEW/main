@@ -8,22 +8,12 @@ struct Triangle
 
 namespace Utility
 {
-	/// <summary>
-	/// オブジェクト１と２が衝突していたらTrueを返す
-	/// </summary>
-	/// <param name="obj1">オブジェクト１のデータ</param>
-	/// <param name="obj2">オブジェクト２のデータ</param>
-	/// <returns>当たっていたらTrue・当たっていなかったらFalse</returns>
+	/// オブジェクト(All)とオブジェクト(All)の当たり判定
 	bool IsCollision(TObjectParam obj1, TObjectParam obj2);
 
-	/// <summary>
-	/// オブジェクト１と２が衝突していたらTrueを返す
-	/// </summary>
-	/// <param name="obj1">オブジェクト１のデータ</param>
-	/// <param name="obj2">オブジェクト２のデータ</param>
-	/// <returns>当たっていたらTrue・当たっていなかったらFalse</returns>
+	/// オブジェクト(Shpire)とオブジェクト(Shpire)の当たり判定
 	bool IsCollisionShpire(TObjectParam obj1, TObjectParam obj2);
- 
+
 	/// オブジェクト(Shpire)とオブジェクト(Ray)の当たり判定
 	bool IsCollisionShpireRay(TObjectParam obj1, TObjectParam obj2);
 
@@ -34,10 +24,10 @@ namespace Utility
 	bool IsCollisionRay(TObjectParam obj1, TObjectParam obj2);
 
 	/// オブジェクト(Ray)とオブジェクト(Plane)の当たり判定
-	bool IsCollisionRayPlane(TObjectParam obj1, TObjectParam obj2); //
+	bool IsCollisionRayPlane(TObjectParam obj1, TObjectParam obj2);
 
 	/// オブジェクト(Plane)とオブジェクト(Plane)の当たり判定
-	bool IsCollisionPlane(TObjectParam obj1, TObjectParam obj2); //
+	bool IsCollisionPlane(TObjectParam obj1, TObjectParam obj2);
 
 	/// オブジェクト(Ray)とオブジェクト(Plane)の当たり判定 (使用非推奨)
 	DirectX::XMFLOAT3 GetTargetPlane(TObjectParam obj1, TObjectParam obj2);

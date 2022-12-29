@@ -57,10 +57,8 @@ void CBeam::Draw()
 	SetGeometoryTranslate(m_pos.x, m_pos.y, m_pos.z);
 	SetGeometoryRotation(rot.x, rot.y, rot.z);
 	SetGeometoryScaling(m_size, 10000, m_size);
-	//SetGeometoryScaling(1, 10000, 1);
 	m_time -= 1.0f / 60.0f;
 
-	
 	SetColorPS(true, 0.3f, 0.56f, 1.0f, 0.5f, 1, 1);
 	DrawCapsule();
 }
@@ -73,6 +71,7 @@ void CBeam::Collision()
 
 	// “G‚ÌƒŠƒXƒg
 	auto enemyList = CSceneBase::GetObjList().lock()->FindTagAll(TAG_ENEMY);
+
 	// “G‚ÌƒŠƒXƒg‘S’Tõ
 	for (auto itr = enemyList.begin(); itr != enemyList.end(); itr++)
 	{
@@ -86,11 +85,17 @@ void CBeam::Collision()
 
 		// “àÏ‚ÌŒvZ
 		DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);
+		float A;
+		DirectX::XMStoreFloat(&A,vdot);
+		if (A < 0.0f)
+		{
+			continue;
+		}
 		
 		// ƒr[ƒ€‚Æ“G‚ÌŠp“x‚ğŒvZ
 		float rad;
 		DirectX::XMStoreFloat(&rad, vdot);
-		rad = acosf(rad);// *180 / 3.14f;
+		rad = acosf(rad);
 
 		// ƒr[ƒ€‚Æ“G‚Æ‚Ì‹——£‚ğŒvZ
 		DirectX::XMVECTOR vEnemyToBeamDis = DirectX::XMVectorSubtract(vEnemyPos,vPos);
@@ -112,7 +117,7 @@ void CBeam::Collision()
 		{
 			(*itr)->OnCollisionTag(TAG_BEAM);
 		}
-		else if (ShockwaveDisResult > 0) // ÕŒ‚”g‚Æ“G‚Ì“–‚½‚è”»’è
+		else if (ShockwaveDisResult > 0)	// ÕŒ‚”g‚Æ“G‚Ì“–‚½‚è”»’è
 		{
 			(*itr)->OnCollisionTag(TAG_SHOCK);
 		}
