@@ -42,4 +42,9 @@ private:
 	GeometoryPolyline* m_pPolyline;
 	CPlayer* m_pPlayer;
 	CCameraBase*m_Pcamera;
+
+	static std::shared_ptr<Model> sModel;
+	static std::shared_ptr<ConstantBuffer> sWVP;
+	static std::shared_ptr<VertexShader> sVS;
+
 };

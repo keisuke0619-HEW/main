@@ -20,18 +20,11 @@ CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string 
     m_param.collisionData.sphire.sphireRadius = 0;
     m_param.hp = 1.0f;
 
-    // モデル情報の読み込み
-    m_model.reset(new Model());
-    m_model->Load(src, scale, isFlip);
-    // 頂点シェーダ読み込み
-    m_vs.reset(new VertexShader());
-    if (FAILED(m_vs->Load("Assets/Shader/ModelVS.cso")))
-        MessageBox(nullptr, "ModelVS.cso", "Error", MB_OK);
-    // 定数バッファ作成
-    m_model->SetVertexShader(m_vs.get());
-    m_wvp.reset(new ConstantBuffer());
-    m_wvp->Create(sizeof(DirectX::XMFLOAT4X4) * 3);
-
+    // ソースが空だったら読み込まない
+    if (strcmp(src, "") != 0)
+    {
+        LoadModel(src, scale, isFlip, &m_model, &m_vs, &m_wvp);
+    }
 }
 
 CObjectBase::~CObjectBase()
@@ -105,4 +98,19 @@ void CObjectBase::Destroy()
 
 void CObjectBase::Finalize()
 {
+}
+
+void CObjectBase::LoadModel(const char* src, float scale, bool isFlip, std::shared_ptr<Model>* pModel, std::shared_ptr<VertexShader>* pVS, std::shared_ptr<ConstantBuffer>* pWVP)
+{
+    // モデル情報の読み込み
+    pModel->reset(new Model());
+    (*pModel)->Load(src, scale, isFlip);
+    // 頂点シェーダ読み込み
+    pVS->reset(new VertexShader());
+    if (FAILED((*pVS)->Load("Assets/Shader/ModelVS.cso")))
+        MessageBox(nullptr, "ModelVS.cso", "Error", MB_OK);
+    // 定数バッファ作成
+    (*pModel)->SetVertexShader(pVS->get());
+    pWVP->reset(new ConstantBuffer());
+    (*pWVP)->Create(sizeof(DirectX::XMFLOAT4X4) * 3);
 }

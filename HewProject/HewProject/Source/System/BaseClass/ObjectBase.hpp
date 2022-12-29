@@ -11,7 +11,7 @@ class CObjectBase : public IObjectBase
 {
 public:
 	// 基底コンストラクタ
-	CObjectBase(const char* src, float scale = 1.0f, bool isFlip = false, std::string name = "no_name");
+	CObjectBase(const char* src = "", float scale = 1.0f, bool isFlip = false, std::string name = "no_name");
 	// 仮想デストラクタ
 	virtual ~CObjectBase();
 
@@ -39,9 +39,11 @@ protected:
 	// オブジェクト情報
 	TObjectParam m_param;
 	// モデル情報
-	std::unique_ptr<Model> m_model;
+	std::shared_ptr<Model> m_model;
 	// 頂点バッファ情報
-	std::unique_ptr<VertexShader> m_vs;
+	std::shared_ptr<VertexShader> m_vs;
 	// ワールドビュー定数バッファ
-	std::unique_ptr<ConstantBuffer> m_wvp;
+	std::shared_ptr<ConstantBuffer> m_wvp;
+
+	void LoadModel(const char* src, float scale, bool isFlip, std::shared_ptr<Model>* pModel, std::shared_ptr<VertexShader>* pVS, std::shared_ptr<ConstantBuffer>* pWVP);
 };

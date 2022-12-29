@@ -3,22 +3,23 @@
 #include <Controller.hpp>
 #include <DebugWindow.hpp>
 
-const float OVERLAY_CONFIG_CENTER_X = 640.0f;
-const float OVERLAY_CONFIG_X_BAR_POS_Y = 230.0f;
-const float OVERLAY_CONFIG_Y_BAR_POS_Y = 350.0f;
-const float OVERLAY_CONFIG_BAR_SIZE_X = 850.0f;
-const float OVERLAY_CONFIG_BAR_SIZE_Y = 100.0f;
-const float OVERLAY_CONFIG_CURSOR_SIZE_X = 20.0f;
-const float OVERLAY_CONFIG_CURSOR_SIZE_Y = 60.0f;
-const float OVERLAY_CONFIG_SPEED_MIN = 1.0f;
-const float OVERLAY_CONFIG_SPEED_MAX = 100.0f;
-const float OVERLAY_CONFIG_POS_MIN = OVERLAY_CONFIG_CENTER_X - OVERLAY_CONFIG_BAR_SIZE_X / 2.3f;
-const float OVERLAY_CONFIG_POS_MAX = OVERLAY_CONFIG_CENTER_X + OVERLAY_CONFIG_BAR_SIZE_X / 2.3f;
+// 大体ここをいじれば調整できます。
+const float OVERLAY_CONFIG_CENTER_X = 640.0f;		// コンフィグUIの中心座標
+const float OVERLAY_CONFIG_X_BAR_POS_Y = 230.0f;	// 上の設定バーのY座標
+const float OVERLAY_CONFIG_Y_BAR_POS_Y = 350.0f;	// 下の設定バーのY座標
+const float OVERLAY_CONFIG_BAR_SIZE_X = 850.0f;		// 設定バーのサイズX
+const float OVERLAY_CONFIG_BAR_SIZE_Y = 100.0f;		// 設定バーのサイズY
+const float OVERLAY_CONFIG_CURSOR_SIZE_X = 20.0f;	// カーソルのサイズX
+const float OVERLAY_CONFIG_CURSOR_SIZE_Y = 60.0f;	// カーソルのサイズY
+const float OVERLAY_CONFIG_SPEED_MIN = 1.0f;		// カメラスピードの最小値
+const float OVERLAY_CONFIG_SPEED_MAX = 100.0f;		// カメラスピードの最大値
+const float OVERLAY_CONFIG_POS_MIN = OVERLAY_CONFIG_CENTER_X - OVERLAY_CONFIG_BAR_SIZE_X / 2.3f;	// カーソルの移動制限最小値（最後の数値でうまく調整
+const float OVERLAY_CONFIG_POS_MAX = OVERLAY_CONFIG_CENTER_X + OVERLAY_CONFIG_BAR_SIZE_X / 2.3f;	// カーソルの移動制限最大値
 
 COverlayConfig::COverlayConfig()
 {
 	auto tmp = new CGameUI("Assets/Img/PauseMenu/Back.png");
-	tmp->SetPos({ 640, 360 });
+	tmp->SetPos({ OVERLAY_CONFIG_CENTER_X, 360 });
 	tmp->SetSize({ 900, 600 });
 	Add("Back", tmp, SORT_ORDER_UI_BACK4);
 	tmp = new CGameUI("Assets/Img/White.png");
@@ -52,7 +53,7 @@ void COverlayConfig::Update()
 {
 	MoveCursor();
 	SetStatus();
-	if (Utility::GetKeyTrigger(KEY_CANCEL))
+	if (Utility::GetKeyTrigger(KEY_CANCEL) || Utility::GetKeyTrigger(KEY_CONFIG))
 	{
 		m_isDestroy = true;
 	}

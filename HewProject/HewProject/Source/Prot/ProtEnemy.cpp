@@ -4,10 +4,15 @@
 #include <Controller.hpp>
 #include <Camera.hpp>
 #include <Blend.hpp>
+
+std::shared_ptr<Model> CProtEnemy::sModel;
+std::shared_ptr<ConstantBuffer> CProtEnemy::sWVP;
+std::shared_ptr<VertexShader> CProtEnemy::sVS;
+
 // 当たり判定は後で付けます。
 
 CProtEnemy::CProtEnemy()
-	: CObjectBase("Assets/Model/zako.fbx", 0.1f)
+	: CObjectBase()
 	, m_move(0.05f)
 	, m_distance(8.0f)
 	, m_cnt(0)
@@ -18,6 +23,14 @@ CProtEnemy::CProtEnemy()
 	, m_blowAwayMove({0.f, 0.f, 0.f})
 	, m_ActionNum(rand() % 4 + 1)
 {
+	if (!sModel)
+	{
+		LoadModel("Assets/Model/zako.fbx", 0.1f, false, &sModel, &sVS, &sWVP);
+	}
+	m_model = sModel;
+	m_vs = sVS;
+	m_wvp = sWVP;
+
 	// オブジェクトのリストを取得
 	auto objList = CSceneBase::GetObjList();
 	// プレイヤーのオブジェクトを取得
