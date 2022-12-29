@@ -5,14 +5,12 @@
 #include <Camera.hpp>
 #include <Blend.hpp>
 
-std::shared_ptr<Model> CProtEnemy::sModel;
-std::shared_ptr<ConstantBuffer> CProtEnemy::sWVP;
-std::shared_ptr<VertexShader> CProtEnemy::sVS;
+TModelData CProtEnemy::sModel;
 
 // 当たり判定は後で付けます。
 
 CProtEnemy::CProtEnemy()
-	: CObjectBase()
+	: CObjectBase()	// クラス全体で使いまわす場合は引数なし
 	, m_move(0.05f)
 	, m_distance(8.0f)
 	, m_cnt(0)
@@ -23,13 +21,15 @@ CProtEnemy::CProtEnemy()
 	, m_blowAwayMove({0.f, 0.f, 0.f})
 	, m_ActionNum(rand() % 4 + 1)
 {
-	if (!sModel)
+	// もしモデルデータが存在しなかったらロード
+	if (!sModel.model)
 	{
-		LoadModel("Assets/Model/zako.fbx", 0.1f, false, &sModel, &sVS, &sWVP);
+		LoadModel("Assets/Model/zako.fbx", 0.1f, false, &sModel);
 	}
-	m_model = sModel;
-	m_vs = sVS;
-	m_wvp = sWVP;
+	// 自身のモデルデータにStaticモデルデータをロード
+	m_modelData = sModel;
+	// モデルをクラス全体で使いまわすならここまでが必須。
+
 
 	// オブジェクトのリストを取得
 	auto objList = CSceneBase::GetObjList();

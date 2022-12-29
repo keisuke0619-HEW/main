@@ -43,8 +43,7 @@ private:
 	CPlayer* m_pPlayer;
 	CCameraBase*m_Pcamera;
 
-	static std::shared_ptr<Model> sModel;
-	static std::shared_ptr<ConstantBuffer> sWVP;
-	static std::shared_ptr<VertexShader> sVS;
+	// クラス全体で使うモデルデータ
+	static TModelData sModel;
 
 };

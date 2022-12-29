@@ -23,7 +23,7 @@ CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string 
     // ソースが空だったら読み込まない
     if (strcmp(src, "") != 0)
     {
-        LoadModel(src, scale, isFlip, &m_model, &m_vs, &m_wvp);
+        LoadModel(src, scale, isFlip, &m_modelData);
     }
 }
 
@@ -82,10 +82,10 @@ void CObjectBase::Draw()
     mat[1] = CCameraBase::GetPrimaryViewMatrix();
     mat[2] = CCameraBase::GetPrimaryProjectionMatrix();
 
-    m_wvp->Write(mat);
-    m_wvp->BindVS(0);
+    m_modelData.wvp->Write(mat);
+    m_modelData.wvp->BindVS(0);
 
-    m_model->Draw();
+    m_modelData.model->Draw();
 
 }
 
@@ -100,17 +100,17 @@ void CObjectBase::Finalize()
 {
 }
 
-void CObjectBase::LoadModel(const char* src, float scale, bool isFlip, std::shared_ptr<Model>* pModel, std::shared_ptr<VertexShader>* pVS, std::shared_ptr<ConstantBuffer>* pWVP)
+void CObjectBase::LoadModel(const char* src, float scale, bool isFlip, TModelData* modelData)
 {
     // モデル情報の読み込み
-    pModel->reset(new Model());
-    (*pModel)->Load(src, scale, isFlip);
+    modelData->model.reset(new Model());
+    modelData->model->Load(src, scale, isFlip);
     // 頂点シェーダ読み込み
-    pVS->reset(new VertexShader());
-    if (FAILED((*pVS)->Load("Assets/Shader/ModelVS.cso")))
+    modelData->vs.reset(new VertexShader());
+    if (FAILED(modelData->vs->Load("Assets/Shader/ModelVS.cso")))
         MessageBox(nullptr, "ModelVS.cso", "Error", MB_OK);
     // 定数バッファ作成
-    (*pModel)->SetVertexShader(pVS->get());
-    pWVP->reset(new ConstantBuffer());
-    (*pWVP)->Create(sizeof(DirectX::XMFLOAT4X4) * 3);
+    modelData->model->SetVertexShader(modelData->vs.get());
+    modelData->wvp.reset(new ConstantBuffer());
+    modelData->wvp->Create(sizeof(DirectX::XMFLOAT4X4) * 3);
 }

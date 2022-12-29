@@ -1,8 +1,6 @@
 #pragma once
 #include <IObjectBase.hpp>
 #include <memory>
-#include <Model.h>
-#include <ConstantBuffer.h>
 
 /// <summary>
 /// すべての3Dオブジェクトの基底となるクラス
@@ -38,12 +36,6 @@ protected:
 
 	// オブジェクト情報
 	TObjectParam m_param;
-	// モデル情報
-	std::shared_ptr<Model> m_model;
-	// 頂点バッファ情報
-	std::shared_ptr<VertexShader> m_vs;
-	// ワールドビュー定数バッファ
-	std::shared_ptr<ConstantBuffer> m_wvp;
-
-	void LoadModel(const char* src, float scale, bool isFlip, std::shared_ptr<Model>* pModel, std::shared_ptr<VertexShader>* pVS, std::shared_ptr<ConstantBuffer>* pWVP);
+	TModelData m_modelData;
+	void LoadModel(const char* src, float scale, bool isFlip, TModelData* modelData);
 };

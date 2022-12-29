@@ -19,10 +19,10 @@ CPlayer::CPlayer()
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
 	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
 	m_playerUI.reset(new CPlayerUI());
-	Model::AnimeNo no = m_model->AddAnimation("Assets/unitychan/walk.fbx");
+	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/unitychan/walk.fbx");
 	if (no == Model::ANIME_NONE)
 		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
-	m_model->Play(no, true);
+	m_modelData.model->Play(no, true);
 
 	// ‰¹ƒf[ƒ^‚Ì“Ç‚Ýž‚Ý
 	m_pChargeSE = CreateSound("Assets/Sound/Charge.wav", false);
@@ -57,7 +57,7 @@ void CPlayer::Draw()
 {
 	auto param = m_param;
 	m_param.pos.y += 1.0f;
-	m_model->Step(1.0f / 60.0f);
+	m_modelData.model->Step(1.0f / 60.0f);
 	CObjectBase::Draw();
 	//m_playerUI->Draw();
 	//if(m_beam)

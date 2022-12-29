@@ -1,5 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
+#include <Model.h>
+#include <ConstantBuffer.h>
 #include <memory>
 #include <string>
 enum EObjectTag
@@ -80,6 +82,15 @@ struct TObjectParam
 	float hp;
 };
 
+struct TModelData
+{
+	// モデル情報
+	std::shared_ptr<Model> model;
+	// 頂点バッファ情報
+	std::shared_ptr<VertexShader> vs;
+	// ワールドビュー定数バッファ
+	std::shared_ptr<ConstantBuffer> wvp;
+};
 /// <summary>
 /// オブジェクトとマネージャーをつなぐインタフェースクラス（よくわかってない）
 /// </summary>
