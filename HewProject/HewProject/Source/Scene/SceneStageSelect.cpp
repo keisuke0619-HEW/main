@@ -61,12 +61,66 @@ CSceneStageSelect::~CSceneStageSelect()
 
 void CSceneStageSelect::Update()
 {
+	MoveCursor();
+	SetUiAlpha();
+	ChangeScene();
+}
+
+void CSceneStageSelect::MoveCursor()
+{
+	if (Utility::GetKeyTrigger(KEY_RIGHT))
+	{
+		m_cursor++;
+	}
+	if (Utility::GetKeyTrigger(KEY_LEFT))
+	{
+		m_cursor--;
+	}
+	m_cursor = m_cursor < 0 ? 0 : m_cursor > 3 ? 3 : m_cursor;
+}
+
+void CSceneStageSelect::ChangeScene()
+{
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
-		CSceneManager::SetScene(SCENE_STAGE01);
+		switch (m_cursor + STAGE_ICON_01)
+		{
+		case STAGE_ICON_01:
+			CSceneManager::SetScene(SCENE_STAGE01);
+			break;
+		case STAGE_ICON_02:
+			//CSceneManager::SetScene(SCENE_STAGE01);
+			break;
+		case STAGE_ICON_03:
+			//CSceneManager::SetScene(SCENE_STAGE01);
+			break;
+		case STAGE_ICON_04:
+			//CSceneManager::SetScene(SCENE_STAGE01);
+			break;
+		default:
+			break;
+		}
+		
+		return;
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		CSceneManager::SetScene(SCENE_TITLE);
+		return;
+	}
+
+}
+
+void CSceneStageSelect::SetUiAlpha()
+{
+	const int stageNum = STAGE_ICON_04 - STAGE_ICON_01 + 1;
+	for (int i = 0; i < stageNum ; i++)
+	{
+		int uiID = i + STAGE_ICON_01;
+		m_ui[uiID].lock()->SetColor255(128, 128, 128, 128);
+		if (m_cursor % stageNum == i)
+		{
+			m_ui[uiID].lock()->SetColor255(255, 255, 255, 255);
+		}
 	}
 }

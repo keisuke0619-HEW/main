@@ -19,7 +19,7 @@ CSceneResult::~CSceneResult()
 
 void CSceneResult::Update()
 {
-	if (Utility::GetKeyTrigger(KEY_DEBUG_RETURN))
+	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
 		CSceneManager::SetScene(SCENE_STAGE_SELECT);
 	}

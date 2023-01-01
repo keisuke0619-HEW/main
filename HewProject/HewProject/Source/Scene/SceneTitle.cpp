@@ -23,7 +23,7 @@ void CSceneTitle::Update()
 {
 	m_TitleUI.lock()->Draw();
 
-	if (Utility::GetKeyTrigger(KEY_DEBUG_RETURN))
+	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
 		CSceneManager::SetScene(SCENE_STAGE_SELECT);
 	}
