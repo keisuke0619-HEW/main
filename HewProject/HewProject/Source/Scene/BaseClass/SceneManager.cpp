@@ -2,8 +2,9 @@
 #include <Camera.hpp>
 // ÉVÅ[Éì
 #include <SceneTest.hpp>
+#include <SceneStageSelect.hpp>
 #include <SceneTitle.hpp>
-#include<SceneResult.hpp>
+#include <SceneResult.hpp>
 
 std::unique_ptr<IScene> CSceneManager::m_scene;
 
@@ -16,6 +17,9 @@ void CSceneManager::SetScene(ESceneID ID)
 	{
 	case SCENE_TITLE:
 		m_scene.reset(new CSceneTitle());
+		break;
+	case SCENE_STAGE_SELECT:
+		m_scene.reset(new CSceneStageSelect());
 		break;
 	case SCENE_STAGE01:
 		m_scene.reset(new CSceneTest());

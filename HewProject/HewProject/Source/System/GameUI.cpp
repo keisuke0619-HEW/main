@@ -136,3 +136,9 @@ void CGameUI::SetSortID(SortOrder order)
 {
 	m_sort = order;
 }
+
+void CGameUI::SetData(float posX, float posY, float sizeX, float sizeY)
+{
+	SetPos(posX, posY);
+	SetSize(sizeX, sizeY);
+}
