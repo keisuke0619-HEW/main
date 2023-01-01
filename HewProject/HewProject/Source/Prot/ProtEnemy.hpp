@@ -40,7 +40,7 @@ private:
 	DirectX::XMFLOAT3 m_startPos;
 	DirectX::XMFLOAT3 m_moveDirection;	// ˆÚ“®•ûŒü
 	DirectX::XMFLOAT3 m_blowAwayMove;	// ‚Á”ò‚Ô•ûŒü
-	GeometoryPolyline* m_pPolyline;
+	//GeometoryPolyline* m_pPolyline;
 	CPlayer* m_pPlayer;
 	CCameraBase*m_Pcamera;
 

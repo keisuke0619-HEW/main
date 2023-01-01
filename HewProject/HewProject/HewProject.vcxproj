@@ -34,6 +34,7 @@
     <ClInclude Include="Source\Scene\BaseClass\SceneBase.hpp" />
     <ClInclude Include="Source\Scene\BaseClass\SceneManager.hpp" />
     <ClInclude Include="Source\Scene\BaseClass\SceneTest.hpp" />
+    <ClInclude Include="Source\Scene\SceneStageSelect.hpp" />
     <ClInclude Include="Source\Scene\SceneTitle.hpp" />
     <ClInclude Include="Source\System\BaseClass\BossUI.h" />
     <ClInclude Include="Source\System\BaseClass\Billboard.h" />
@@ -92,6 +93,7 @@
     <ClCompile Include="Source\Scene\BaseClass\SceneBase.cpp" />
     <ClCompile Include="Source\Scene\BaseClass\SceneManager.cpp" />
     <ClCompile Include="Source\Scene\BaseClass\SceneTest.cpp" />
+    <ClCompile Include="Source\Scene\SceneStageSelect.cpp" />
     <ClCompile Include="Source\Scene\SceneTitle.cpp" />
     <ClCompile Include="Source\System\BaseClass\BossUI.cpp" />
     <ClCompile Include="Source\System\BaseClass\Billboard.cpp" />

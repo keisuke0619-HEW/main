@@ -204,6 +204,9 @@
     <ClInclude Include="OverlayConfig.hpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\SceneStageSelect.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -356,17 +359,20 @@
     <ClCompile Include="Polyline.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scene\SceneTitle.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneResult.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="OverlayWindowBase.cpp">
       <Filter>シーンファイル\Base</Filter>
     </ClCompile>
     <ClCompile Include="OverlayConfig.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneResult.cpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\SceneTitle.cpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\SceneStageSelect.cpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

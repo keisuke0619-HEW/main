@@ -27,4 +27,6 @@ XAUDIO2_BUFFER* CreateSound(const char *file, bool loop = false);
 // ƒTƒEƒ“ƒh‚ÌÄ¶
 IXAudio2SourceVoice* StartSound(XAUDIO2_BUFFER* pSound);
 
+bool GetIsUsefulSound();
+
 #endif // __SOUND_H__

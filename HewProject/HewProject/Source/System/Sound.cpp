@@ -61,6 +61,7 @@ IXAudio2 *g_pXAudio;
 IXAudio2MasteringVoice *g_pMasterVoice;
 SoundList g_soundList;
 SourceList g_sourceList;
+bool g_isUsefulSound;
 
 /**
  * @brief 初期化
@@ -87,6 +88,7 @@ HRESULT InitSound(void)
 	// マスターボイス(ソース)作成
 	hr = g_pXAudio->CreateMasteringVoice(&g_pMasterVoice);
 
+	g_isUsefulSound = true;
 	return hr;
 }
 
@@ -118,6 +120,7 @@ void UninitSound(void)
 		g_pXAudio->Release();
 		g_pXAudio = NULL;
 	}
+	g_isUsefulSound = false;
 }
 
 /**
@@ -252,6 +255,11 @@ IXAudio2SourceVoice* StartSound(XAUDIO2_BUFFER* pSound)
 
 
 	return pSource;
+}
+
+bool GetIsUsefulSound()
+{
+	return g_isUsefulSound;
 }
 
 /**

@@ -44,7 +44,7 @@ CProtEnemy::CProtEnemy()
 	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
 	m_startPos = m_param.pos;
 	m_param.tag = TAG_ENEMY;
-	m_pPolyline = new GeometoryPolyline(30);
+	//m_pPolyline = new GeometoryPolyline(30);
 
 	// ここで描画をずらす
 	m_param.drawOffset = { 0, 1.2f, 0 };
@@ -80,19 +80,19 @@ void CProtEnemy::Draw()
 	CObjectBase::Draw();
 	//Utility::SetBlendState(BLEND_ALPHA);
 	//奇跡の追加
-	GeometoryPolyline::Point point = {};
-	//ポリライン
-	auto fCamPos = CCameraBase::GetPrimaryData().pos;
-	
-	DirectX::XMVECTOR vCamPos = DirectX::XMLoadFloat3(&fCamPos);
-	DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&CProtEnemy::m_param.pos);
-	DirectX::XMStoreFloat3(&point.normal, DirectX::XMVectorSubtract(vCamPos, vPos));
-	point.pos = CProtEnemy::m_param.pos;
-	point.width = 200.0f;
-	m_pPolyline->PushPoint(point);
-	m_pPolyline->SetView(CCameraBase::GetPrimaryViewMatrix());
-	m_pPolyline->SetProjection(CCameraBase::GetPrimaryProjectionMatrix());
-	m_pPolyline->Draw();
+	//GeometoryPolyline::Point point = {};
+	////ポリライン
+	//auto fCamPos = CCameraBase::GetPrimaryData().pos;
+	//
+	//DirectX::XMVECTOR vCamPos = DirectX::XMLoadFloat3(&fCamPos);
+	//DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&CProtEnemy::m_param.pos);
+	//DirectX::XMStoreFloat3(&point.normal, DirectX::XMVectorSubtract(vCamPos, vPos));
+	//point.pos = CProtEnemy::m_param.pos;
+	//point.width = 200.0f;
+	//m_pPolyline->PushPoint(point);
+	//m_pPolyline->SetView(CCameraBase::GetPrimaryViewMatrix());
+	//m_pPolyline->SetProjection(CCameraBase::GetPrimaryProjectionMatrix());
+	//m_pPolyline->Draw();
 
 }
 

@@ -3,6 +3,8 @@
 #include <ObjectManager.hpp>
 #include <OverlayWindowBase.hpp>
 #include <memory>
+#include <Sound.h>
+
 class CSceneBase : public IScene
 {
 public:
@@ -20,10 +22,16 @@ protected:
 	virtual void Update() = 0;
 	virtual void PreDraw();
 	virtual void Draw();
+	
 	void AddOverlay(COverlayWindowBase* overlayIns);
+	void BGMSet(const char* src, float volume = 1.0f);
+	void BGMStop();
+	void BGMRestart();
 
 	int m_frame;
 	std::unique_ptr<COverlayWindowBase> m_overlay;
 	static std::shared_ptr<CObjectManager> m_obj;
-//private:
+	IXAudio2SourceVoice* m_BGM;
+private:
+	XAUDIO2_BUFFER* m_bgmBuffer;
 };
