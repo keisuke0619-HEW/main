@@ -27,6 +27,6 @@ private:
 
 	CGameUI::Ref m_ui[STAGE_SELECT_UI_MAX];
 	int m_cursor;	// ÉJÅ[É\Éã
-
+	bool m_isNext;
 
 };

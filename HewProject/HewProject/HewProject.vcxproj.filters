@@ -207,6 +207,12 @@
     <ClInclude Include="Source\Scene\SceneStageSelect.hpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Scene\OverlayStagePrep.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\BaseClass\PlayerUI.hpp">
+      <Filter>システム\Other</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -332,9 +338,6 @@
     <ClCompile Include="Source\System\Sound.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\BaseClass\PlayerUI.hpp">
-      <Filter>システム\BaseClass</Filter>
-    </ClCompile>
     <ClCompile Include="Source\System\BaseClass\BossUI.cpp">
       <Filter>システム\BaseClass</Filter>
     </ClCompile>
@@ -345,9 +348,6 @@
       <Filter>プロトタイプ用\Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\ProducePlane.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\Beam.cpp">
@@ -373,6 +373,12 @@
     </ClCompile>
     <ClCompile Include="Source\Scene\SceneStageSelect.cpp">
       <Filter>シーンファイル\シーンファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\OverlayStagePrep.cpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp">
+      <Filter>システム\Other</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,11 @@ CSceneBase::CSceneBase()
 
 CSceneBase::~CSceneBase()
 {
+	if (m_overlay)
+	{
+		auto ins = m_overlay.release();
+		delete ins;
+	}
 	BGMStop();
 }
 
