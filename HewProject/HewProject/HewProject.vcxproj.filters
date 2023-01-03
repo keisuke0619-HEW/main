@@ -210,6 +210,9 @@
     <ClInclude Include="Source\System\BaseClass\PlayerUI.hpp">
       <Filter>システム\Other</Filter>
     </ClInclude>
+    <ClInclude Include="BGM.h">
+      <Filter>システム\Other</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -375,6 +378,9 @@
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp">
+      <Filter>システム\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="BGM.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
   </ItemGroup>
