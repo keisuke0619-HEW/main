@@ -648,5 +648,6 @@ float4 main(PS_IN pin) : SV_TARGET
 	*vs = new VertexShader();
 	(*vs)->Compile(ModelVS);
 	*ps = new PixelShader();
-	(*ps)->Compile(ModelPS);
+	(*ps)->Load("Assets/Shader/ModelPS.cso");
+	//(*ps)->Compile(ModelPS);
 }
