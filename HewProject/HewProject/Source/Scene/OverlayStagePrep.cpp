@@ -1,7 +1,7 @@
 #include "OverlayStagePrep.hpp"
 #include <Controller.hpp>
 #include <SceneManager.hpp>
-
+#include <OverlayConfig.hpp>
 COverlayStagePrep::COverlayStagePrep(int id)
 {
 	m_next = nullptr;
@@ -54,6 +54,10 @@ void COverlayStagePrep::Update()
 	else if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		m_isDestroy = true;
+	}
+	else if (Utility::GetKeyTrigger(KEY_CONFIG))
+	{
+		m_overlay.reset(new COverlayConfig());
 	}
 
 }

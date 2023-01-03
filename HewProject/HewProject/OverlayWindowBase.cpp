@@ -21,6 +21,11 @@ void COverlayWindowBase::UpdateBase()
 	if (m_overlay)
 	{
 		m_overlay->UpdateBase();
+		if (m_overlay->IsDestroy())
+		{
+			auto ins = m_overlay.release();
+			delete ins;
+		}
 		return;
 	}
 	m_obj->UpdateAll();

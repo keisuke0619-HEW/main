@@ -39,7 +39,7 @@ void Utility::ControllerInit()
 	g_keyID[KeySet::KEY_DOWN] = ControllerID::Key_Down;
 	g_padID[KeySet::KEY_UP] = ControllerID::Pad_UP;
 	g_keyID[KeySet::KEY_UP] = ControllerID::Key_Up;
-	g_padID[KeySet::KEY_CONFIG] = ControllerID::Key_TAB;
+	g_padID[KeySet::KEY_CONFIG] = ControllerID::Pad_Y;
 	g_keyID[KeySet::KEY_CONFIG] = ControllerID::Key_TAB;
 	g_padID[KeySet::KEY_MOVE_W] = ControllerID::Key_W;
 	g_keyID[KeySet::KEY_MOVE_W] = ControllerID::Key_W;
