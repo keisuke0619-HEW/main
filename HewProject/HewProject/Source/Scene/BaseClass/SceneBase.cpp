@@ -70,6 +70,10 @@ void CSceneBase::Uninit()
 	CUIManager::GetIns()->DeleteAll();
 }
 
+void CSceneBase::SetData(void* dataPtr, long size, const char* name)
+{
+}
+
 void CSceneBase::PreUpdate()
 {
 }

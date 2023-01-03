@@ -1,11 +1,13 @@
 #include "SceneManager.hpp"
 #include <Camera.hpp>
 // シーン
-#include <SceneTest.hpp>
+#include <GameScene.hpp>
 #include <SceneStageSelect.hpp>
 #include <SceneTitle.hpp>
 #include <SceneResult.hpp>
 
+// ステージ情報
+#include <StageData01.hpp>
 std::unique_ptr<IScene> CSceneManager::m_scene;
 
 void CSceneManager::SetScene(ESceneID ID)
@@ -22,7 +24,8 @@ void CSceneManager::SetScene(ESceneID ID)
 		m_scene.reset(new CSceneStageSelect());
 		break;
 	case SCENE_STAGE01:
-		m_scene.reset(new CSceneTest());
+		m_scene.reset(new CGameScene());
+		m_scene->SetData(new CStageData01());
 		break;
 	case SCENE_RESULT:
 		m_scene.reset(new CSceneResult());

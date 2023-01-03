@@ -17,6 +17,7 @@ public:
 	virtual void BaseUpdate() override;
 	virtual void BaseDraw() override;
 	virtual void Uninit() override;
+	virtual void SetData(void* dataPtr, long size = 0, const char* name = "NO_NAME") override;
 protected:
 	virtual void PreUpdate();
 	virtual void Update() = 0;

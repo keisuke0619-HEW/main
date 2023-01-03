@@ -1,28 +1,27 @@
-#include "SceneTest.hpp"
+#include "GameScene.hpp"
 #include <SceneManager.hpp>
 #include <Player.hpp>
 #include <PlayerCamera.hpp>
 #include <DebugCamera.hpp>
 #include <Input.h>
-#include <ProtEnemy.hpp>
-#include<Controller.hpp>
+#include <EnemyZako01.hpp>
+#include <Controller.hpp>
 #include <OverlayConfig.hpp>
-CSceneTest::CSceneTest()
+CGameScene::CGameScene()
 {
 	m_obj->Add(new CPlayer());
 	CCameraBase::CreateCamera(new CPlayerCamera(), "Player");
 	CCameraBase::SetPrimaryCamera("Player");
-	m_stage.reset(new CProtScene());
 
 	BGMSet("Assets/Sound/BGM.wav");
 
 }
 
-CSceneTest::~CSceneTest()
+CGameScene::~CGameScene()
 {
 }
 
-void CSceneTest::Update()
+void CGameScene::Update()
 {
 	m_stage->Update();
 	if (Utility::GetKeyTrigger(KEY_DEBUG_RETURN))
@@ -35,8 +34,13 @@ void CSceneTest::Update()
 	}
 }
 
-void CSceneTest::Draw()
+void CGameScene::Draw()
 {
 	CSceneBase::Draw();
 	m_stage->Draw();
+}
+
+void CGameScene::SetData(void* dataPtr, long size, const char* name)
+{
+	m_stage.reset((CStageData01*)dataPtr);
 }

@@ -1,4 +1,4 @@
-#include <ProtStage.hpp>
+#include <StageData01.hpp>
 #include <stdio.h>
 #include <Windows.h>
 #include <Geometory.h>
@@ -6,7 +6,7 @@
 #include <DirectX.h>
 
 // Stage00.cppを参考にジオメトリーで作成
-CProtScene::CProtScene()
+CStageData01::CStageData01()
 {
 	m_stageData = { 1, 1 };
 	// ここで読み込み※メモリリーク注意
@@ -35,18 +35,18 @@ CProtScene::CProtScene()
 	}
 }
 
-CProtScene::~CProtScene()
+CStageData01::~CStageData01()
 {
 	delete m_producePlane;
 }
 
-void CProtScene::Update()
+void CStageData01::Update()
 {
 	// ステージのアップデート
 	m_enemyManager->Update();
 }
 
-void CProtScene::Draw()
+void CStageData01::Draw()
 {
 	m_producePlane->Draw();
 

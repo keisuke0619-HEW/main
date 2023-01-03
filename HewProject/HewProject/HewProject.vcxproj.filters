@@ -37,14 +37,11 @@
     <Filter Include="システム\Other">
       <UniqueIdentifier>{3abef65e-1391-4ee9-80da-fc27a3af035d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="プロトタイプ用">
-      <UniqueIdentifier>{a61cc566-8608-475d-8664-d4b85ed7ddfc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="プロトタイプ用\Stage">
-      <UniqueIdentifier>{889185aa-c4b7-4a06-a9fd-7fce54ec3562}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="プロトタイプ用\Object">
+    <Filter Include="シーンファイル\Object">
       <UniqueIdentifier>{a0a210b3-e854-4a9a-b6b7-b7159066aca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="シーンファイル\Stage">
+      <UniqueIdentifier>{889185aa-c4b7-4a06-a9fd-7fce54ec3562}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,7 +63,7 @@
     <ClInclude Include="Source\Scene\BaseClass\SceneManager.hpp">
       <Filter>シーンファイル\シーンシステム</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Scene\BaseClass\SceneTest.hpp">
+    <ClInclude Include="Source\Scene\BaseClass\GameScene.hpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene\BaseClass\ObjectManager.hpp">
@@ -141,14 +138,14 @@
     <ClInclude Include="Source\System\Easing.hpp">
       <Filter>システム\Other</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Prot\ProtStage.hpp">
-      <Filter>プロトタイプ用\Stage</Filter>
+    <ClInclude Include="Source\Prot\StageData01.hpp">
+      <Filter>シーンファイル\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Prot\ProtEnemy.hpp">
-      <Filter>プロトタイプ用\Object</Filter>
+    <ClInclude Include="Source\Prot\EnemyZako01.hpp">
+      <Filter>シーンファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\Prot\ProtEnemyManager.hpp">
-      <Filter>プロトタイプ用\Object</Filter>
+      <Filter>シーンファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\System\Controller.hpp">
       <Filter>システム\Other</Filter>
@@ -183,8 +180,8 @@
     <ClInclude Include="Source\System\Blend.hpp">
       <Filter>システム\Other</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Prot\ProtEnemyBoss.hpp">
-      <Filter>プロトタイプ用\Object</Filter>
+    <ClInclude Include="Source\Prot\EnemyBoss01.hpp">
+      <Filter>シーンファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\System\ProducePlane.h">
       <Filter>システム\Other</Filter>
@@ -227,7 +224,7 @@
     <ClCompile Include="Source\Scene\BaseClass\SceneBase.cpp">
       <Filter>シーンファイル\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Scene\BaseClass\SceneTest.cpp">
+    <ClCompile Include="Source\Scene\BaseClass\GameScene.cpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\BaseClass\ObjectManager.cpp">
@@ -308,14 +305,14 @@
     <ClCompile Include="Source\System\Easing.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Prot\ProtStage.cpp">
-      <Filter>プロトタイプ用\Stage</Filter>
+    <ClCompile Include="Source\Prot\StageData01.cpp">
+      <Filter>シーンファイル\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Prot\ProtEnemy.cpp">
-      <Filter>プロトタイプ用\Object</Filter>
+    <ClCompile Include="Source\Prot\EnemyZako01.cpp">
+      <Filter>シーンファイル\Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\Prot\ProtEnemyManager.cpp">
-      <Filter>プロトタイプ用\Object</Filter>
+      <Filter>シーンファイル\Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\Controller.cpp">
       <Filter>システム\Other</Filter>
@@ -344,8 +341,8 @@
     <ClCompile Include="Source\System\Blend.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Prot\ProtEnemyBoss.cpp">
-      <Filter>プロトタイプ用\Object</Filter>
+    <ClCompile Include="Source\Prot\EnemyBoss01.cpp">
+      <Filter>シーンファイル\Object</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\ProducePlane.cpp">
       <Filter>システム\Other</Filter>

@@ -39,6 +39,8 @@ void CObjectManager::UpdateAll()
 #endif // CRITICAL_LOW_FPS_TEMPORARY_RESPONSE
 
 		auto collisionType = (*itr)->GetParam().collisionType;
+		auto param = (*itr)->GetParam();
+		int aaaaa = 0;
 		// 当たり判定を使用しないオブジェクトならここで次へ
 		if (collisionType == COLLISION_NONE)
 			continue;

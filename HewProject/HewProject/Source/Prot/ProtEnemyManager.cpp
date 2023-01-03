@@ -1,6 +1,6 @@
 #include "ProtEnemyManager.hpp"
-#include <ProtEnemy.hpp>
-#include<ProtEnemyBoss.hpp>
+#include <EnemyZako01.hpp>
+#include<EnemyBoss01.hpp>
 CProtEnemyManager::CProtEnemyManager()
 {
 	// オブジェクトリストを格納

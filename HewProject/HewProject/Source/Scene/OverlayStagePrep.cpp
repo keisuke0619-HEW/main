@@ -14,8 +14,6 @@ COverlayStagePrep::COverlayStagePrep(int id)
 	Add("Back", m_ui[PREP_BACK], SORT_ORDER_UI_BACK4);
 
 
-
-
 	switch (id)
 	{
 	case 0:

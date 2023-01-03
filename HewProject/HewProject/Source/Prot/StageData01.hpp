@@ -4,7 +4,7 @@
 #include <memory>
 #include <ProducePlane.h>
 
-class CProtScene
+class CStageData01
 {
 public:
 	struct StageData
@@ -15,8 +15,8 @@ public:
 		float sizeZ;
 	};
 public:
-	CProtScene();
-	~CProtScene();
+	CStageData01();
+	~CStageData01();
 
 	void Update();
 	void Draw();

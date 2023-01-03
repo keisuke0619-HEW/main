@@ -1,4 +1,4 @@
-#include"ProtEnemyBoss.hpp"
+#include"EnemyBoss01.hpp"
 #include <Easing.hpp>
 #include <SceneBase.hpp>
 #include <Controller.hpp>
