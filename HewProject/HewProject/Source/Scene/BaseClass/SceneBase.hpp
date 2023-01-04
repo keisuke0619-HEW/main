@@ -26,7 +26,7 @@ protected:
 	
 	void AddOverlay(COverlayWindowBase* overlayIns);
 
-	void SetBGM(const char* src, float volume = 1.0f);
+	void SetBGM(const char* src, float volume = 0.6f);
 	void SetVolumeFade(float newVolume, int frame);
 
 

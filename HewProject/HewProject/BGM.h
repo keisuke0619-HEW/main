@@ -18,6 +18,7 @@ public:
 	void SetVolumeFade(float newVolume, int flame);
 	void BGMStop();
 	void BGMRestart();
+	void BGMEnd();
 
 private:
 	CSound();
@@ -28,6 +29,16 @@ private:
 	bool m_isFade;
 	IXAudio2SourceVoice* m_BGM;
 	XAUDIO2_BUFFER* m_bgmBuffer;
+
+	enum EResetFadeStage
+	{
+		RESET_FADE_NONE,	// リセットフェードなし
+		RESET_FADE_DOING,	// リセットフェード（消音化）中
+		RESET_FADE_DONE,	// リセットフェード（消音化）済み
+	};
+	const char* m_resetNewSrc;	// 新しいBGMのパス名
+	float m_resetVolume;		// 新しいBGMのボリューム
+	EResetFadeStage m_isResetBGM;			// 新しいBGMへの変更があるか
 };
 
 

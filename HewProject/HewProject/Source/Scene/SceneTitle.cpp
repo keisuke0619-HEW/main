@@ -11,8 +11,7 @@ CSceneTitle::CSceneTitle()
 	m_TitleUI.lock()->SetSize({ 1200.0f, 600.0f });
 	m_TitleUI.lock()->SetPos({ 640.0f, 360.0f });
 
-	SetBGM("Assets/Sound/ExtendedWinter.wav", 0.f);
-	SetVolumeFade(1.0f, 600);
+	SetBGM("Assets/Sound/ExtendedWinter.wav");
 	
 }
 
@@ -27,6 +26,10 @@ void CSceneTitle::Update()
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
 		CSceneManager::SetScene(SCENE_STAGE_SELECT);
+	}
+	if (Utility::GetKeyTrigger(KEY_BEAM))
+	{
+		SetBGM("Assets/Sound/korinoyaiba.wav");
 	}
 }
 
