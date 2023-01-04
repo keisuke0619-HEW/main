@@ -3,6 +3,7 @@
 #include <Beam.hpp>
 #include <memory>
 #include <PlayerUI.hpp>
+#include <Billboard.h>
 #include "Sound.h"
 class CPlayer : public CObjectBase
 {
@@ -28,4 +29,7 @@ private:
 	XAUDIO2_BUFFER* m_pChargeSE;
 	IXAudio2SourceVoice* m_pSESource;
 	bool m_isSE;
+
+
+	CBillboard* m_bill;
 };

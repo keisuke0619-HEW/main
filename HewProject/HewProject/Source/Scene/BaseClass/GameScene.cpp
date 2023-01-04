@@ -13,7 +13,7 @@ CGameScene::CGameScene()
 	CCameraBase::CreateCamera(new CPlayerCamera(), "Player");
 	CCameraBase::SetPrimaryCamera("Player");
 
-	//BGMSet("Assets/Sound/BGM.wav");
+	SetBGM("Assets/Sound/BGM.wav");
 
 }
 

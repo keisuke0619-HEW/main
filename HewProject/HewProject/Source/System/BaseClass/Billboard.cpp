@@ -1,29 +1,67 @@
 #include  "Billboard.h"
+#include <Camera.hpp>
+#include <Blend.hpp>
+std::list<CBillboard*> CBillboard::m_billList;
+std::map<const char*, ID3D11ShaderResourceView*> CBillboard::m_billImg;
 
+
+void CBillboard::DrawAll()
+{
+	for (auto itr = m_billList.begin(); itr != m_billList.end(); itr++)
+	{
+		(*itr)->Draw();
+	}
+}
+void CBillboard::ClearBillboard()
+{
+	auto itr = m_billImg.begin();
+	while (itr != m_billImg.end())
+	{
+		(itr->second)->Release();
+		itr++;
+	}
+	m_billImg.clear();
+}
 CBillboard::CBillboard(const char* FileName)
 	: m_pos(0.f, 0.f, 0.f)
 	, m_playerPos(0.f, 0.f, 0.f)
 	, m_size(1.f, 1.f)
 	, m_distance(4.f)
 	, m_rot(0.f)
+	, m_isUseUniqueViewProj(false)
 {
-	LoadTextureFromFile(FileName, &m_pPicture);
-
+	if (m_billImg.count(FileName) == 0)
+	{
+		LoadTextureFromFile(FileName, &m_pPicture);
+		m_billImg[FileName] = m_pPicture;
+	}
+	else
+	{
+		m_pPicture = m_billImg[FileName];
+	}
+	m_billList.push_back(this);
 }
 
 CBillboard::~CBillboard()
 {
-	m_pPicture->Release();
+	m_billList.remove(this);
 }
 
 
 void CBillboard::Draw(bool BillOnOff, bool enable)
 {
+	
+	if (m_isUseUniqueViewProj == false)
+	{
+		// ビュー行列セット
+		m_view = CCameraBase::GetPrimaryViewMatrix();
+		// プロジェクション行列セット
+		m_proj = CCameraBase::GetPrimaryProjectionMatrix();
+	}
 	// ビュー行列セット
 	Sprite::SetView(m_view);
 	// プロジェクション行列セット
 	Sprite::SetProjection(m_proj);
-
 	// ワールド行列
 	DirectX::XMMATRIX T = DirectX::XMMatrixTranslation(m_pos.x, m_pos.y, m_pos.z);
 	DirectX::XMFLOAT4X4 world;
@@ -83,14 +121,16 @@ void CBillboard::Draw(bool BillOnOff, bool enable)
 		}
 	}
 
-
+	Utility::SetBlendState(BLEND_ALPHA);
 	Sprite::Draw();
 	EnableDepth(true);
+	Utility::SetBlendState(BLEND_NONE);
 
 }
 
 void CBillboard::SetPosViewProj(DirectX::XMFLOAT4X4 view, DirectX::XMFLOAT4X4 proj)
 {
+	m_isUseUniqueViewProj = true;
 	m_view = view;
 	m_proj = proj;
 }

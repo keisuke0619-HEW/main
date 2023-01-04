@@ -4,9 +4,23 @@
 #include "DirectX.h"
 #include "Sprite.h"
 #include "DirectXTex/Texture.h"
-
+#include <list>
+#include <map>
 class CBillboard
 {
+public:
+	static void DrawAll();
+	static void ClearBillboard();
+private:
+	static std::list<CBillboard*> m_billList;
+	static std::map<const char*, ID3D11ShaderResourceView*> m_billImg;
+
+
+
+
+
+
+
 public:
 	CBillboard(const char*);
 	~CBillboard();
@@ -60,6 +74,7 @@ private:
 	DirectX::XMFLOAT2 m_size;				// 画像のサイズ
 	float m_distance;						// 画像が手前に描画される距離
 	float m_rot;							// 画像の角度
+	bool m_isUseUniqueViewProj;				// "既定外"のビュープロジェクションマトリックスを使うか
 };
 
 

@@ -5,7 +5,7 @@
 #include <Blend.hpp>
 #include <SamplerState.h>
 #include <BGM.h>
-
+#include <Billboard.h>
 //--- Scenes ---//
 
 Game3D::Game3D()
@@ -23,6 +23,7 @@ Game3D::Game3D()
 }
 Game3D::~Game3D()
 {
+	CBillboard::ClearBillboard();
 	Utility::UninitBlendState();
 	Sprite::Uninit();
 	CDebugWindow::Close();

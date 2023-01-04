@@ -1,5 +1,5 @@
 #include "GameUI.h"
-
+#include <Blend.hpp>
 CGameUI::CGameUI(const char* FileName)
 	: m_pos(0.f, 0.f)
 	, m_size(1.f, 1.f)

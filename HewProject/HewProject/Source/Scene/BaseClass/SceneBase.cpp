@@ -3,6 +3,7 @@
 #include <Camera.hpp>
 #include <Controller.hpp>
 #include <DebugCamera.hpp>
+#include <Billboard.h>
 std::shared_ptr<CObjectManager> CSceneBase::m_obj = nullptr;
 
 CSceneBase::CSceneBase()
@@ -54,6 +55,7 @@ void CSceneBase::BaseDraw()
 	PreDraw();
 	m_obj->DrawAll();
 	Draw();
+	CBillboard::DrawAll();
 	if (m_overlay)
 		m_overlay->DrawBase();
 	CUIManager::GetIns()->DrawAll();

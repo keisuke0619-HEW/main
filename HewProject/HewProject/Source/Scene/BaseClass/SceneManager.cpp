@@ -1,5 +1,6 @@
 #include "SceneManager.hpp"
 #include <Camera.hpp>
+#include <Billboard.h>
 // ÉVÅ[Éì
 #include <GameScene.hpp>
 #include <SceneStageSelect.hpp>
@@ -12,6 +13,7 @@ std::unique_ptr<IScene> CSceneManager::m_scene;
 
 void CSceneManager::SetScene(ESceneID ID)
 {
+	CBillboard::ClearBillboard();
 	CCameraBase::DeleteCameraAll();
 	if(m_scene)
 		m_scene->Uninit();

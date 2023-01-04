@@ -34,6 +34,8 @@ CPlayer::CPlayer()
 	m_isSE = false;
 	
 
+	m_bill = new CBillboard("Assets/Img/number.png");
+	m_bill->SetSize({ 2.0f, 0.25f });
 }
 
 CPlayer::~CPlayer()
@@ -48,7 +50,9 @@ void CPlayer::Update()
 	//m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
 	m_playerUI->Update();
-	
+
+	m_bill->SetPos({ m_param.pos.x, m_param.pos.y + 2.0f, m_param.pos.z });
+	m_bill->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
 	//if (IsKeyTrigger('U'))
 	//	Destroy();
 }
