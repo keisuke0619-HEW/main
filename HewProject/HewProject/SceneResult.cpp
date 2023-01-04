@@ -9,7 +9,7 @@ CSceneResult::CSceneResult()
 	m_ResultUI.lock()->SetSize({ 1200.f, 600.f });
 	m_ResultUI.lock()->SetPos({ 640.f, 360.f });
 	// ‰¹ƒf[ƒ^‚Ì“Ç‚İ‚İ
-	BGMSet("Assets/Sound/korinoyaiba.wav");
+	//BGMSet("Assets/Sound/korinoyaiba.wav");
 	
 }
 

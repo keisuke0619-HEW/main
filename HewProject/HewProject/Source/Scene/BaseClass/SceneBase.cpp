@@ -7,11 +7,6 @@ std::shared_ptr<CObjectManager> CSceneBase::m_obj = nullptr;
 
 CSceneBase::CSceneBase()
 {
-	m_BGM = nullptr;
-	m_bgmBuffer = nullptr;
-
-
-
 	CCameraBase::CreateCamera(new CDebugCamera(), "Debug");
 	CCameraBase::SetPrimaryCamera("Debug");
 
@@ -29,7 +24,6 @@ CSceneBase::~CSceneBase()
 		auto ins = m_overlay.release();
 		delete ins;
 	}
-	BGMStop();
 }
 
 void CSceneBase::BaseUpdate()
@@ -100,24 +94,13 @@ void CSceneBase::AddOverlay(COverlayWindowBase* overlayIns)
 	m_overlay.reset(overlayIns);
 }
 
-void CSceneBase::BGMSet(const char* src, float volume)
+void CSceneBase::SetBGM(const char* src, float volume)
 {
-	m_bgmBuffer = CreateSound(src, true);
-	m_BGM = StartSound(m_bgmBuffer);
-	m_BGM->SetVolume(volume);
+	CSound::GetIns()->BGMSet(src, volume);
 }
 
-void CSceneBase::BGMStop()
+void CSceneBase::SetVolumeFade(float newVolume, int frame)
 {
-	if (m_BGM != nullptr && GetIsUsefulSound())
-	{
-		m_BGM->Stop();
-	}
-}
-
-void CSceneBase::BGMRestart()
-{
-	if (m_BGM != nullptr)
-		m_BGM->Start();
+	CSound::GetIns()->SetVolumeFade(newVolume, frame);
 }
 

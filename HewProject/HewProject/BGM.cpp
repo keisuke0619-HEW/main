@@ -1,4 +1,7 @@
 #include "BGM.h"
+#include <DebugWindow.hpp>
+
+CSound::Ptr CSound::m_ins;
 
 CSound::CSound()
 	: m_BGM(nullptr)
@@ -19,7 +22,7 @@ CSound::~CSound()
 
 void CSound::Update()
 {
-	if (m_isFade && m_frame % 60 == 0)
+	if (m_isFade)
 	{
 		float nowVolume;
 		m_BGM->GetVolume(&nowVolume);
@@ -30,11 +33,13 @@ void CSound::Update()
 		if (nowVolume < 0.f)
 			nowVolume = 0.f;
 
+		CDebugWindow::Print(ShimizuKeisuke, "Volume", nowVolume);
 		m_BGM->SetVolume(nowVolume);
 
-		if ((m_fadeVolume < 0.f && nowVolume < m_newVolume) ||
-			(m_fadeVolume > 0.f && nowVolume > m_newVolume))
+		if ((m_fadeVolume <= 0.f && nowVolume <= m_newVolume) ||
+			(m_fadeVolume >= 0.f && nowVolume >= m_newVolume))
 		{
+			m_BGM->SetVolume(m_newVolume);
 			m_isFade = false;
 		}
 		m_frame = 0;
@@ -51,17 +56,13 @@ void CSound::BGMSet(const char * src, float volume)
 
 void CSound::SetVolumeFade(float newVolume, int flame)
 {
-	if (m_isFade == false)
-	{
-		m_newVolume = newVolume;
-		m_fadeFlame = flame;
-		float nowVolume;
-		m_BGM->GetVolume(&nowVolume);
+	m_newVolume = newVolume;
+	m_fadeFlame = flame;
+	float nowVolume;
+	m_BGM->GetVolume(&nowVolume);
 
-		m_fadeVolume = (newVolume - nowVolume) / m_fadeFlame;
-		m_isFade = true;
-	}
-	
+	m_fadeVolume = (newVolume - nowVolume) / m_fadeFlame;
+	m_isFade = true;
 }
 
 void CSound::BGMStop()

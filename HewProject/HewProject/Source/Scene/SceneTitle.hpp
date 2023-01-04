@@ -13,5 +13,4 @@ public:
 private:
 	void Update() override;
 	CGameUI::Ref m_TitleUI;
-	CSound* m_pBGM;
 };

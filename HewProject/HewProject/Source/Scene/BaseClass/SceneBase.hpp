@@ -4,7 +4,7 @@
 #include <OverlayWindowBase.hpp>
 #include <memory>
 #include <Sound.h>
-
+#include <BGM.h>
 class CSceneBase : public IScene
 {
 public:
@@ -25,14 +25,13 @@ protected:
 	virtual void Draw();
 	
 	void AddOverlay(COverlayWindowBase* overlayIns);
-	void BGMSet(const char* src, float volume = 1.0f);
-	void BGMStop();
-	void BGMRestart();
+
+	void SetBGM(const char* src, float volume = 1.0f);
+	void SetVolumeFade(float newVolume, int frame);
+
+
 
 	int m_frame;
 	std::unique_ptr<COverlayWindowBase> m_overlay;
 	static std::shared_ptr<CObjectManager> m_obj;
-	IXAudio2SourceVoice* m_BGM;
-private:
-	XAUDIO2_BUFFER* m_bgmBuffer;
 };

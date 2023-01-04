@@ -4,6 +4,7 @@
 #include <Sprite.h>
 #include <Blend.hpp>
 #include <SamplerState.h>
+#include <BGM.h>
 
 //--- Scenes ---//
 
@@ -30,6 +31,7 @@ Game3D::~Game3D()
 void Game3D::Update()
 {
 	Utility::ControllerUpdate();
+	CSound::GetIns()->Update();
 	m_scenes->Update();
 }
 void Game3D::Draw()
