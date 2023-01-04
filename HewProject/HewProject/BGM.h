@@ -39,6 +39,7 @@ private:
 	const char* m_resetNewSrc;	// 新しいBGMのパス名
 	float m_resetVolume;		// 新しいBGMのボリューム
 	EResetFadeStage m_isResetBGM;			// 新しいBGMへの変更があるか
+	const char* m_playSrc;		// 再生中のBGMパス名
 };
 
 

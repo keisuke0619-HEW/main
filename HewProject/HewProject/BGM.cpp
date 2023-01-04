@@ -62,6 +62,9 @@ void CSound::Update()
 
 void CSound::BGMSet(const char * src, float volume)
 {
+	// 現在再生中のBGMと同じならそのまま流す。（処理しない）
+	if (src == m_playSrc)
+		return;
 	// もしすでにBGMがあるならフェード処理を入れる
 	if (m_BGM != nullptr)
 	{
@@ -71,7 +74,7 @@ void CSound::BGMSet(const char * src, float volume)
 		SetVolumeFade(0, CROSS_FADE_FRAME / 2);
 		return;
 	}
-
+	m_playSrc = src;
 	m_bgmBuffer = CreateSound(src, true);
 	m_BGM = StartSound(m_bgmBuffer);
 	m_BGM->SetVolume(volume);
