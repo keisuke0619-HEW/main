@@ -77,7 +77,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Source\System\Sprite.h" />
-    <ClInclude Include="Source\System\Stage00.hpp" />
     <ClInclude Include="Source\System\Timer.h" />
     <ClInclude Include="Source\System\UiManager.hpp" />
     <ClInclude Include="Source\System\WinUtil.h" />
@@ -140,7 +139,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Source\System\Sprite.cpp" />
-    <ClCompile Include="Source\System\Stage00.cpp" />
     <ClCompile Include="Source\System\Startup.cpp" />
     <ClCompile Include="Source\System\Timer.cpp" />
     <ClCompile Include="Source\System\UiManager.cpp" />

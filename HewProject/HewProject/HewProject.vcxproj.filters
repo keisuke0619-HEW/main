@@ -43,6 +43,39 @@
     <Filter Include="シーンファイル\Stage">
       <UniqueIdentifier>{889185aa-c4b7-4a06-a9fd-7fce54ec3562}</UniqueIdentifier>
     </Filter>
+    <Filter Include="システム\2D">
+      <UniqueIdentifier>{064c7fd1-dfd5-4397-bd92-22f2bdaf93b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\Camera">
+      <UniqueIdentifier>{88897391-e6c9-4f00-a056-b1a6c344d892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\3D">
+      <UniqueIdentifier>{2164b2a9-3570-4d7b-9095-90d8043117c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\Input">
+      <UniqueIdentifier>{40b69008-7e4d-4eb5-b58e-91029acf7dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\Sound">
+      <UniqueIdentifier>{42dbcabf-7918-4518-9d99-258e7ce71314}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\Player">
+      <UniqueIdentifier>{77d19cee-0404-4237-8967-8d5a7c079612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\Effect">
+      <UniqueIdentifier>{00348c41-6a04-4aa6-b829-597bd8f92628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\Shader">
+      <UniqueIdentifier>{ae61783c-27c2-4398-9fda-6006501ee47c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\Texture">
+      <UniqueIdentifier>{195c447c-1a3c-4759-bc1b-00a1b122fc36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\DirextX">
+      <UniqueIdentifier>{d5285bcd-f332-4dca-8ba5-94bff8b8a59d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="システム\Window">
+      <UniqueIdentifier>{5ed6214c-b622-4fc1-bd33-6b0d2e2d1616}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\System\BaseClass\IObjectBase.hpp">
@@ -69,71 +102,14 @@
     <ClInclude Include="Source\Scene\BaseClass\ObjectManager.hpp">
       <Filter>システム\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\BlendState.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Camera.hpp">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\ConstantBuffer.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\DebugCamera.hpp">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\DebugWindow.hpp">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\DirectX.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectXTex\DirectXTex.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
     <ClInclude Include="Source\System\Geometory.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Input.h">
       <Filter>システム\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\System\macro.hpp">
       <Filter>システム\Other</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\Main.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\MeshBuffer.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Model.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Player.hpp">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\PlayerCamera.hpp">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\SamplerState.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Shader.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Stage00.hpp">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectXTex\Texture.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
     <ClInclude Include="Source\System\Timer.h">
       <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\WinUtil.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Game3D.h">
-      <Filter>システム</Filter>
     </ClInclude>
     <ClInclude Include="Source\System\Easing.hpp">
       <Filter>システム\Other</Filter>
@@ -147,46 +123,16 @@
     <ClInclude Include="Source\Prot\ProtEnemyManager.hpp">
       <Filter>シーンファイル\Object</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\Controller.hpp">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\CollisionBase.hpp">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Sprite.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\GameUI.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\BaseClass\Billboard.h">
-      <Filter>システム\BaseClass</Filter>
-    </ClInclude>
     <ClInclude Include="Source\System\BaseClass\TerrainBase.hpp">
       <Filter>システム\BaseClass</Filter>
     </ClInclude>
-    <ClInclude Include="Source\System\Beam.hpp">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Sound.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Source\System\UiManager.hpp">
       <Filter>システム\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\BaseClass\BossUI.h">
-      <Filter>システム\BaseClass</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System\Blend.hpp">
-      <Filter>システム\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\Prot\EnemyBoss01.hpp">
       <Filter>シーンファイル\Object</Filter>
     </ClInclude>
     <ClInclude Include="Source\System\ProducePlane.h">
-      <Filter>システム\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="Polyline.h">
       <Filter>システム\Other</Filter>
     </ClInclude>
     <ClInclude Include="Source\Scene\SceneTitle.hpp">
@@ -207,11 +153,95 @@
     <ClInclude Include="Source\Scene\OverlayStagePrep.hpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Source\System\BaseClass\Billboard.h">
+      <Filter>システム\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\BaseClass\BossUI.h">
+      <Filter>システム\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\CollisionBase.hpp">
+      <Filter>システム\BaseClass</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\GameUI.h">
+      <Filter>システム\2D</Filter>
+    </ClInclude>
     <ClInclude Include="Source\System\BaseClass\PlayerUI.hpp">
-      <Filter>システム\Other</Filter>
+      <Filter>システム\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Camera.hpp">
+      <Filter>システム\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\DebugCamera.hpp">
+      <Filter>システム\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\PlayerCamera.hpp">
+      <Filter>システム\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Model.h">
+      <Filter>システム\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Main.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Input.h">
+      <Filter>システム\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Controller.hpp">
+      <Filter>システム\Input</Filter>
     </ClInclude>
     <ClInclude Include="BGM.h">
-      <Filter>システム\Other</Filter>
+      <Filter>システム\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Sound.h">
+      <Filter>システム\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Player.hpp">
+      <Filter>システム\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Beam.hpp">
+      <Filter>システム\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Polyline.h">
+      <Filter>システム\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Game3D.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\ConstantBuffer.h">
+      <Filter>システム\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Shader.h">
+      <Filter>システム\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Blend.hpp">
+      <Filter>システム\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\BlendState.h">
+      <Filter>システム\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\MeshBuffer.h">
+      <Filter>システム\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\Sprite.h">
+      <Filter>システム\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTex\Texture.h">
+      <Filter>システム\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\SamplerState.h">
+      <Filter>システム\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\DirectX.h">
+      <Filter>システム\DirextX</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTex\DirectXTex.h">
+      <Filter>システム\DirextX</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\DebugWindow.hpp">
+      <Filter>システム\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System\WinUtil.h">
+      <Filter>システム\Window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -233,77 +263,14 @@
     <ClCompile Include="Source\Scene\BaseClass\ObjectManager.cpp">
       <Filter>システム\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\BlendState.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Camera.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\ConstantBuffer.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\CreatorUnique.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\DebugCamera.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\DebugWindow.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\DirectX.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
     <ClCompile Include="Source\System\Geometory.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Input.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\macro.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\Main.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\MeshBuffer.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Model.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Model_Contents.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Player.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\PlayerCamera.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\SamplerState.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Shader.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Stage00.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Startup.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectXTex\Texture.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
     <ClCompile Include="Source\System\Timer.cpp">
       <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\WinUtil.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Game3D.cpp">
-      <Filter>システム</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\Easing.cpp">
       <Filter>システム\Other</Filter>
@@ -317,32 +284,11 @@
     <ClCompile Include="Source\Prot\ProtEnemyManager.cpp">
       <Filter>シーンファイル\Object</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\Controller.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Sprite.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\GameUI.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\BaseClass\Billboard.cpp">
-      <Filter>システム\BaseClass</Filter>
-    </ClCompile>
     <ClCompile Include="Source\System\BaseClass\TerrainBase.cpp">
       <Filter>システム\BaseClass</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\CollisionBase.cpp">
       <Filter>システム\BaseClass</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Sound.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\BaseClass\BossUI.cpp">
-      <Filter>システム\BaseClass</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\Blend.cpp">
-      <Filter>システム\Other</Filter>
     </ClCompile>
     <ClCompile Include="Source\Prot\EnemyBoss01.cpp">
       <Filter>シーンファイル\Object</Filter>
@@ -350,14 +296,8 @@
     <ClCompile Include="Source\System\ProducePlane.cpp">
       <Filter>システム\Other</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\Beam.cpp">
-      <Filter>システム\Other</Filter>
-    </ClCompile>
     <ClCompile Include="Source\System\UiManager.cpp">
       <Filter>システム\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Polyline.cpp">
-      <Filter>システム\Other</Filter>
     </ClCompile>
     <ClCompile Include="OverlayWindowBase.cpp">
       <Filter>シーンファイル\Base</Filter>
@@ -377,11 +317,98 @@
     <ClCompile Include="Source\Scene\OverlayStagePrep.cpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Source\System\BaseClass\Billboard.cpp">
+      <Filter>システム\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\BaseClass\BossUI.cpp">
+      <Filter>システム\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\GameUI.cpp">
+      <Filter>システム\2D</Filter>
+    </ClCompile>
     <ClCompile Include="Source\System\BaseClass\PlayerUI.cpp">
-      <Filter>システム\Other</Filter>
+      <Filter>システム\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Camera.cpp">
+      <Filter>システム\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\DebugCamera.cpp">
+      <Filter>システム\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\PlayerCamera.cpp">
+      <Filter>システム\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Model.cpp">
+      <Filter>システム\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Model_Contents.cpp">
+      <Filter>システム\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Input.cpp">
+      <Filter>システム\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Controller.cpp">
+      <Filter>システム\Input</Filter>
     </ClCompile>
     <ClCompile Include="BGM.cpp">
-      <Filter>システム\Other</Filter>
+      <Filter>システム\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Sound.cpp">
+      <Filter>システム\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Player.cpp">
+      <Filter>システム\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Beam.cpp">
+      <Filter>システム\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Polyline.cpp">
+      <Filter>システム\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Game3D.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\ConstantBuffer.cpp">
+      <Filter>システム\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Shader.cpp">
+      <Filter>システム\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Blend.cpp">
+      <Filter>システム\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\BlendState.cpp">
+      <Filter>システム\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\MeshBuffer.cpp">
+      <Filter>システム\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Sprite.cpp">
+      <Filter>システム\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\Startup.cpp">
+      <Filter>システム\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTex\Texture.cpp">
+      <Filter>システム\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\SamplerState.cpp">
+      <Filter>システム\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\DirectX.cpp">
+      <Filter>システム\DirextX</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\DebugWindow.cpp">
+      <Filter>システム\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\WinUtil.cpp">
+      <Filter>システム\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\CreatorUnique.cpp">
+      <Filter>システム\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
