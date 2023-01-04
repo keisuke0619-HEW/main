@@ -29,7 +29,6 @@ private:
 	int m_randNum;		// ランダム移動で使う(移動する方向を決める)
 	DirectX::XMFLOAT3 m_target;
 	DirectX::XMFLOAT3 m_randTarget;
-	DirectX::XMFLOAT3 m_startPos;
 	std::unique_ptr<CBossUI> m_bossUI;	// ボスのUI
 
 };

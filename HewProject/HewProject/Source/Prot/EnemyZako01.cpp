@@ -7,8 +7,6 @@
 
 TModelData CProtEnemy::sModel;
 
-// 当たり判定は後で付けます。
-
 CProtEnemy::CProtEnemy()
 	: CObjectBase()	// クラス全体で使いまわす場合は引数なし
 	, m_move(0.05f)
@@ -57,8 +55,6 @@ CProtEnemy::~CProtEnemy()
 
 void CProtEnemy::Update()
 {
-	m_param.frame++;
-
 	// もしプレイヤーのオブジェクトが消えていたらもう一度取得
 	if (m_player.expired() == true)
 	{
@@ -124,7 +120,7 @@ void CProtEnemy::Move()
 	else
 	{
 		// 移動種類切り替え
-		if (m_param.frame > 500)
+		if (m_param.frame > 250)
 		{
 			// プレイヤーとの距離を取得
 			if (m_player.expired() == false)

@@ -19,16 +19,19 @@ CProtEnemyBoss::CProtEnemyBoss()
 	auto objList = CSceneBase::GetObjList();
 	// プレイヤーのオブジェクトを取得
 	m_player = objList.lock()->FindTag(TAG_PLAYER);
+	// 初期座標を設定
 	m_param.pos.x = (rand() % 100) / 10.0f;
 	m_param.pos.y = 1.0f;
 	m_param.pos.z = (rand() % 100) / 10.0f;
-	m_param.collisionType = COLLISION_SPHIRE;
-	m_param.collisionData.sphire.sphirePos = m_param.pos;
-	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
+	// 当たり判定の情報設定
+	m_param.collisionType = COLLISION_SPHIRE;	// 球の当たり判定を使用
+	m_param.collisionData.sphire.sphirePos = m_param.pos;	// 当たり判定の中心座標
+	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;	// 当たり判定の半径
+	// 種類を識別するタグを設定
 	m_param.tag = TAG_ENEMY;
-	m_startPos = m_param.pos;
+	// UIを設定
 	m_bossUI.reset(new CBossUI());
-	
+	// 描画のオフセットを指定（内部的な"Pos"と描画のギャップを埋める）
 	m_param.drawOffset = { 0,1.2f,0 };
 }
 
@@ -47,28 +50,23 @@ void CProtEnemyBoss::Update()
 	}
 	// 移動るーちん
 	Move();
+	// 当たり判定の中心を更新
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
-	
+	// 疑似床判定
 	if(m_param.pos.y < 1.3f)
 		m_param.pos.y = 1.3f;
-
 	// ボスUIの更新
 	m_bossUI->Update();
 }
 
 void CProtEnemyBoss::Draw()
 {
-	//Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
-	//Utility::SetBlendState(BLEND_ALPHA);
 	
 	// ボスUIの描画
-	//CObjectBase::Draw();
 	m_bossUI->SetLife(m_param.hp);
 }
 
-// 移動ルーチン。Excelを参考に作成
-// いーじんぐを使用。
 void CProtEnemyBoss::Move()
 {
 	// プレイヤーとの距離を取得
@@ -87,19 +85,19 @@ void CProtEnemyBoss::Move()
 	DirectX::XMStoreFloat3(&movePos, distance);
 
 	//ボスに常に向かってくる
-		m_param.pos.x += movePos.x * m_move; // エネミーのposを使う
-		m_param.pos.y += movePos.y * m_move;
-		m_param.pos.z += movePos.z * m_move;
-		m_param.frame = 0;
+	m_param.pos.x += movePos.x * m_move; // エネミーのposを使う
+	m_param.pos.y += movePos.y * m_move;
+	m_param.pos.z += movePos.z * m_move;
+	m_param.frame = 0;
 
-		DirectX::XMFLOAT3 Move;
-		DirectX::XMStoreFloat3(&Move, distance);
-		Move.y = 0.0f;
-		if (fabsf(Move.x) + fabsf(Move.z) > 0.0f)
-		{
-			float rot = atan2f(Move.z, Move.x);
-			m_param.rot.y = DirectX::XMConvertToRadians(90.f) - rot;
-		}
+	DirectX::XMFLOAT3 Move;
+	DirectX::XMStoreFloat3(&Move, distance);
+	Move.y = 0.0f;
+	if (fabsf(Move.x) + fabsf(Move.z) > 0.0f)
+	{
+		float rot = atan2f(Move.z, Move.x);
+		m_param.rot.y = DirectX::XMConvertToRadians(90.f) - rot;
+	}
 	
 }
 
@@ -112,12 +110,6 @@ void CProtEnemyBoss::Finalize()
 
 void CProtEnemyBoss::OnCollision(Ptr obj)
 {
-	//	けいすけに確認
-
-	//if (obj->GetParam().tag == TAG_BEAM)
-	//{
-	//	m_param.hp -= 0.001f;
-	//}
 }
 
 void CProtEnemyBoss::OnCollisionTag(EObjectTag tag)
@@ -127,8 +119,7 @@ void CProtEnemyBoss::OnCollisionTag(EObjectTag tag)
 		m_param.hp -= 0.005f;
 		if (m_param.hp <= 0.0f)
 		{
-			//CSceneManager::SetScene(SCENE_RESULT);
-			//CObjectManager::NoDestroy();
+
 		}
 	}
 }
