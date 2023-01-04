@@ -9,7 +9,8 @@ SamplerState samp : register(s0);
 
 float4 main(PS_IN pin) : SV_TARGET
 {
-	//float4 color = tex.Sample(samp, pin.uv);
+	float4 color = tex.Sample(samp, pin.uv);
+	return color;
 	//color = mul(color, pin.col);
-	return pin.col;
+	//return pin.col;
 }

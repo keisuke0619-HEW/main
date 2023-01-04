@@ -47,7 +47,7 @@ void CSound::Update()
 			{
 				m_BGM = nullptr;
 				BGMSet(m_resetNewSrc, 0);
-				SetVolumeFade(m_resetVolume, CROSS_FADE_FRAME * 2);
+				SetVolumeFade(m_resetVolume, CROSS_FADE_FRAME / 2);
 				m_isResetBGM = RESET_FADE_DONE;
 			}
 			else if (m_isResetBGM == RESET_FADE_DONE)
