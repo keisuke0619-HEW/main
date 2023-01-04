@@ -243,6 +243,9 @@
     <ClInclude Include="Source\System\WinUtil.h">
       <Filter>システム\Window</Filter>
     </ClInclude>
+    <ClInclude Include="OutputEffekseer.h">
+      <Filter>システム\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="Source\System\CreatorUnique.cpp">
       <Filter>システム\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputEffekseer.cpp">
+      <Filter>システム\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

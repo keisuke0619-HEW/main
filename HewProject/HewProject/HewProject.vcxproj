@@ -22,6 +22,7 @@
     <ClInclude Include="BGM.h" />
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
+    <ClInclude Include="OutputEffekseer.h" />
     <ClInclude Include="OverlayConfig.hpp" />
     <ClInclude Include="OverlayWindowBase.hpp" />
     <ClInclude Include="Polyline.h" />
@@ -84,6 +85,7 @@
   <ItemGroup>
     <ClCompile Include="BGM.cpp" />
     <ClCompile Include="DirectXTex\Texture.cpp" />
+    <ClCompile Include="OutputEffekseer.cpp" />
     <ClCompile Include="OverlayConfig.cpp" />
     <ClCompile Include="OverlayWindowBase.cpp" />
     <ClCompile Include="Polyline.cpp" />
@@ -225,7 +227,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)Source\;$(ProjectDir)Source\System\;$(ProjectDir);$(ProjectDir)Source\System\BaseClass\;$(ProjectDir)Source\Scene\;$(ProjectDir)Source\Scene\BaseClass\;$(ProjectDir)Source\Prot\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)install_msvc2017\include\EffekseerRendererDX11\;$(ProjectDir)install_msvc2017\include\Effekseer\;$(ProjectDir)Source\;$(ProjectDir)Source\System\;$(ProjectDir);$(ProjectDir)Source\System\BaseClass\;$(ProjectDir)Source\Scene\;$(ProjectDir)Source\Scene\BaseClass\;$(ProjectDir)Source\Prot\;$(ProjectDir)install_msvc2017\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)install_msvc2017\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir)Source\;$(ProjectDir)Source\System\;$(ProjectDir);$(ProjectDir)Source\System\BaseClass\;$(ProjectDir)Source\Scene\;$(ProjectDir)Source\Scene\BaseClass\;$(ProjectDir)Source\Prot\;$(IncludePath)</IncludePath>
@@ -269,7 +272,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>assimp-vc141-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>assimp-vc141-mtd.lib;Effekseerd.lib;EffekseerRendererDX11d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <FxCompile>
       <ObjectFileOutput>$(ProjectDir)Assets\Shader\%(Filename).cso</ObjectFileOutput>
