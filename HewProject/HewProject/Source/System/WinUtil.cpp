@@ -33,7 +33,7 @@ HRESULT InitWindow(LPCSTR appName, LONG width, LONG height)
 
 	// ウィンドウの作成
 	RECT rect = { 0, 0, width, height };
-	DWORD style = WS_CAPTION | WS_SYSMENU;
+	DWORD style = WS_CAPTION; //| WS_SYSMENU;
 	DWORD exStyle = WS_EX_OVERLAPPEDWINDOW;
 	AdjustWindowRectEx(&rect, style, false, exStyle);
 	g_hWnd = CreateWindowEx(

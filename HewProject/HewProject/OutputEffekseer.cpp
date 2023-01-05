@@ -1,6 +1,16 @@
 #include "OutputEffekseer.h"
+#include <Camera.hpp>
+Effekseer::ManagerRef				CEffect::m_efkManager;
+EffekseerRendererDX11::RendererRef	CEffect::m_efkRenderer;
 
-void OutputEffekseer::Init(const char16_t* effect)
+
+CEffect::CEffect(const char16_t* effect)
+{
+	//--- effect読み込み
+	m_effect = Effekseer::Effect::Create(m_efkManager, effect);
+}
+
+void CEffect::InitSystem()
 {
 	//--- effekseer関数初期化
 	m_efkManager = Effekseer::Manager::Create(8000);
@@ -21,38 +31,32 @@ void OutputEffekseer::Init(const char16_t* effect)
 	m_efkManager->SetMaterialLoader(m_efkRenderer->CreateMaterialLoader());
 	m_efkManager->SetCurveLoader(Effekseer::MakeRefPtr<Effekseer::CurveLoader>());
 
-	//--- effect読み込み
-	m_effect = Effekseer::Effect::Create(m_efkManager, effect);
 }
-
-void OutputEffekseer::Uninit()
+void CEffect::UninitSystem()
 {
-	m_effect.Reset();
 	m_efkRenderer.Reset();
 	m_efkManager.Reset();
+
 }
 
-void OutputEffekseer::Update()
+CEffect::~CEffect()
+{
+	m_effect.Reset();
+}
+
+void CEffect::Update()
 {
 	//---effekseerの描画
 	auto viewerPosition = Effekseer::Vector3D(10.0f, 5.0f, 20.0f);
 	Effekseer::Matrix44 projectionMatrix;
-	/*projectionMatrix.PerspectiveFovRH(
-		90.0f / 180.0f * 3.14f, (float)1280 / 720,
-		1.0f, 500.0f
-	);*/
 	projectionMatrix.PerspectiveFovLH(
 		90.0f / 180.0f * 3.14f, (float)1280 / 720,
 		1.0f, 500.0f
 	);
 	Effekseer::Matrix44 cameraMatrix;
-	/*cameraMatrix.LookAtRH(viewerPosition,
-		Effekseer::Vector3D(0.0f, 0.0f, 0.0f),
-		Effekseer::Vector3D(0.0f, 1.0f, 0.0f));*/
 	cameraMatrix.LookAtLH(viewerPosition,
 		Effekseer::Vector3D(0.0f, 0.0f, 0.0f),
 		Effekseer::Vector3D(0.0f, 1.0f, 0.0f));
-
 	Effekseer::Manager::LayerParameter layerParameter;
 	layerParameter.ViewerPosition = viewerPosition;
 	m_efkManager->SetLayerParameter(0, layerParameter);
@@ -76,31 +80,22 @@ void OutputEffekseer::Update()
 	m_efkRenderer->EndRendering();
 }
 
-void OutputEffekseer::Draw(float rotx, float roty, float rotz, float sizex, float sizey, float sizez)
+void CEffect::Draw()
 {
 	//---effekseerの描画
 	// 視点位置を確定
-	auto viewerPosition = Effekseer::Vector3D(10.0f, 5.0f, 20.0f);
+	auto camPos = CCameraBase::GetPrimaryData().pos;
+	auto viewerPosition = Effekseer::Vector3D(camPos.x, camPos.y, camPos.z);
 
 	// 投影行列を設定
 	Effekseer::Matrix44 projectionMatrix;
-	/*projectionMatrix.PerspectiveFovRH(
-		90.0f / 180.0f * 3.14f, (float)1280 / 720,
-		1.0f, 500.0f
-	);*/
 	projectionMatrix.PerspectiveFovLH(
 		90.0f / 180.0f * 3.14f, (float)1280 / 720,
 		1.0f, 500.0f
 	);
-
+	projectionMatrix = GetMat(CCameraBase::GetPrimaryProjectionMatrix());
 	// カメラ行列を設定
-	Effekseer::Matrix44 cameraMatrix;
-	/*cameraMatrix.LookAtRH(viewerPosition,
-		Effekseer::Vector3D(0.0f, 0.0f, 0.0f),
-		Effekseer::Vector3D(0.0f, 1.0f, 0.0f));*/
-	cameraMatrix.LookAtLH(viewerPosition,
-		Effekseer::Vector3D(0.0f, 0.0f, 0.0f),
-		Effekseer::Vector3D(0.0f, 1.0f, 0.0f));
+	Effekseer::Matrix44 cameraMatrix = GetMat(CCameraBase::GetPrimaryViewMatrix());
 
 	// レイヤーパラメータの設定
 	Effekseer::Manager::LayerParameter layerParameter;
@@ -131,22 +126,57 @@ void OutputEffekseer::Draw(float rotx, float roty, float rotz, float sizex, floa
 	// エフェクトの描画終了処理を行う
 	m_efkRenderer->EndRendering();
 
-	// エフェクトのサイズ設定
-	//m_efkManager->SetScale(m_efkHandle, sizex, sizey, sizez);
-
 	// 度数法から弧度法に変換
-	float radx = rotx * 3.14 / 180.0f;
-	float rady = roty * 3.14 / 180.0f;
-	float radz = rotz * 3.14 / 180.0f;
+	float radx = m_rot.X * 3.14f / 180.0f;
+	float rady = m_rot.Y * 3.14f / 180.0f;
+	float radz = m_rot.Z * 3.14f / 180.0f;
 
 
 	m_efkManager->SetRotation(m_efkHandle, radx, rady, radz);
-	m_efkManager->SetScale(m_efkHandle, sizex, sizey, sizez);
+	m_efkManager->SetScale(m_efkHandle, m_scale.X, m_scale.Y, m_scale.Z);
 
 }
 
-void OutputEffekseer::Play()
+void CEffect::SetPos(float x, float y, float z)
 {
+	m_pos = { x, y, z };
+}
 
+void CEffect::SetRotation(float x, float y, float z)
+{
+	m_rot = { x, y, z };
+}
+
+void CEffect::SetScale(float x, float y, float z)
+{
+	m_scale.X = x;
+	m_scale.Y = y;
+	m_scale.Z = z;
+}
+
+void CEffect::Play()
+{
 	m_efkHandle = m_efkManager->Play(m_effect, 0, 0, 0);
+}
+
+Effekseer::Matrix44 CEffect::GetMat(DirectX::XMFLOAT4X4 in)
+{
+	Effekseer::Matrix44 out;
+	out.Values[0][0] = in._11;
+	out.Values[1][0] = in._12;
+	out.Values[2][0] = in._13;
+	out.Values[3][0] = in._14;
+	out.Values[0][1] = in._21;
+	out.Values[1][1] = in._22;
+	out.Values[2][1] = in._23;
+	out.Values[3][1] = in._24;
+	out.Values[0][2] = in._31;
+	out.Values[1][2] = in._32;
+	out.Values[2][2] = in._33;
+	out.Values[3][2] = in._34;
+	out.Values[0][3] = in._41;
+	out.Values[1][3] = in._42;
+	out.Values[2][3] = in._43;
+	out.Values[3][3] = in._44;
+	return out;
 }

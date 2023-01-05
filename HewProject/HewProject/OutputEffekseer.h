@@ -4,23 +4,42 @@
 #include "DirectX.h"
 #include <Effekseer.h>
 #include <EffekseerRendererDX11.h>
-
-class OutputEffekseer
+#include <DirectXMath.h>
+#include <memory>
+#include <list>
+class CEffect
 {
 public:
-	void Init(const char16_t* effect);
-	void Uninit();
-	void Update();
-	void Draw(float rotx, float roty, float rotz, float sizex, float sizey, float sizez);
+	using Ptr = std::shared_ptr<CEffect>;
+	static void InitSystem();
+	static void UninitSystem();
+	static void DrawAll();
 
+private:
+	static std::list<Ptr> m_list;
+
+public:
+	CEffect(const char16_t* effect);
+	~CEffect();
+	void Update();
+	void Draw();
+
+	void SetPos(float x, float y, float z);
+	void SetRotation(float x, float y, float z);
+	void SetScale(float x, float y, float z);
 	void Play();
 private:
 	//--- EffekseerÇÃèâä˙âª
-	Effekseer::ManagerRef				m_efkManager;
-	EffekseerRendererDX11::RendererRef	m_efkRenderer;
+	static Effekseer::ManagerRef				m_efkManager;
+	static EffekseerRendererDX11::RendererRef	m_efkRenderer;
 	Effekseer::Handle					m_efkHandle;
 	Effekseer::EffectRef				m_effect;
 
+	Effekseer::Vector3D m_pos;
+	Effekseer::Vector3D m_rot;
+	Effekseer::Vector3D m_scale;
+
+	Effekseer::Matrix44 GetMat(DirectX::XMFLOAT4X4);
 };
 
 

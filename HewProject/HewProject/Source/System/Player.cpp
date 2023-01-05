@@ -38,14 +38,11 @@ CPlayer::CPlayer()
 	m_bill->SetSize({ 2.0f, 0.25f });
 
 	// エフェクシアの初期化　読み込み
-	m_pEfk = new OutputEffekseer;
-	m_pEfk->Init(u"Assets/Effect/Laser01.efkefc");
+	m_pEfk.reset(new CEffect(u"Assets/Effect/Laser01.efkefc"));
 }
 
 CPlayer::~CPlayer()
 {
-	m_pEfk->Uninit();
-	delete m_pEfk;
 }
 
 void CPlayer::Update()
@@ -75,7 +72,11 @@ void CPlayer::Draw()
 	m_playerUI->SetLife(m_param.hp);
 	m_param = param;
 
-	m_pEfk->Draw(0.0f, -60.0f, 0.0f, 1.0f, 1.0f, 1.0f);
+	m_pEfk->SetRotation(0, -60, 0);
+	m_pEfk->SetScale(1,1,1);
+	m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+
+	m_pEfk->Draw();//(0.0f, -60.0f, 0.0f, 1.0f, 1.0f, 1.0f);
 	if (Utility::GetKeyTrigger(KEY_BEAM))
 	{
 		m_pEfk->Play();

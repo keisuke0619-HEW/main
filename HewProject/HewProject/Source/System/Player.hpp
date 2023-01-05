@@ -8,6 +8,8 @@
 #include <OutputEffekseer.h>
 class CPlayer : public CObjectBase
 {
+
+
 public:
 	CPlayer();
 	~CPlayer();
@@ -34,5 +36,5 @@ private:
 
 	CBillboard::Ptr m_bill;
 
-	OutputEffekseer* m_pEfk;
+	CEffect::Ptr m_pEfk;
 };
