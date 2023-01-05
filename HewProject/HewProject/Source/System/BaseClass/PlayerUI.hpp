@@ -3,6 +3,7 @@
 #include <list>
 #include <GameUI.h>
 #include <memory>
+#include <MiniMap.h>
 class CPlayerUI
 {
 public:
@@ -22,6 +23,7 @@ private:
 	CGameUI::Ref m_hpbar;
 	CGameUI::Ref m_haguruma;
 
+	CMiniMap* m_pMap;
 	void UpdateLife();
 	void UpdateCharge();
 

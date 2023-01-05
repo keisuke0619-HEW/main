@@ -249,6 +249,9 @@
     <ClInclude Include="NumberUI.hpp">
       <Filter>システム\2D</Filter>
     </ClInclude>
+    <ClInclude Include="MiniMap.h">
+      <Filter>システム\2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -420,6 +423,9 @@
       <Filter>システム\Effect</Filter>
     </ClCompile>
     <ClCompile Include="NumberUI.cpp">
+      <Filter>システム\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMap.cpp">
       <Filter>システム\2D</Filter>
     </ClCompile>
   </ItemGroup>
