@@ -44,6 +44,7 @@ void CSceneBase::BaseUpdate()
 	PreUpdate();
 	m_obj->UpdateAll();
 	Update();
+	CEffect::UpdateSystem();
 	CUIManager::GetIns()->UpdateAll();
 	CCameraBase::UpdatePrimary();
 	m_obj->DestroyUpdate();

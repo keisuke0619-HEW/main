@@ -41,6 +41,12 @@ void CEffect::DrawAll()
 	}
 }
 
+void CEffect::UpdateSystem()
+{
+	Effekseer::Manager::UpdateParameter updateParameter;
+	m_efkManager->Update(updateParameter);
+}
+
 CEffect::CEffect(const char16_t* effect)
 {
 	//--- effect読み込み
@@ -77,9 +83,6 @@ void CEffect::Draw()
 	layerParameter.ViewerPosition = viewerPosition;
 	m_efkManager->SetLayerParameter(0, layerParameter);
 
-	// マネージャーの更新
-	Effekseer::Manager::UpdateParameter updateParameter;
-	m_efkManager->Update(updateParameter);
 
 	// 投影行列を設定
 	m_efkRenderer->SetProjectionMatrix(projectionMatrix);

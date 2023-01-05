@@ -14,7 +14,7 @@ public:
 	static void InitSystem();
 	static void UninitSystem();
 	static void DrawAll();
-
+	static void UpdateSystem();
 private:
 	static std::list<CEffect*> m_list;
 
