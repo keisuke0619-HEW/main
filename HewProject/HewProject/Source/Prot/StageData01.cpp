@@ -48,7 +48,6 @@ void CStageData01::Update()
 
 void CStageData01::Draw()
 {
-	return;
 	m_producePlane->Draw();
 
 	for (int i = 0; i < 4; i++)

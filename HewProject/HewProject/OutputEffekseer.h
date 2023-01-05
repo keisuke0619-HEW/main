@@ -16,19 +16,19 @@ public:
 	static void DrawAll();
 
 private:
-	static std::list<Ptr> m_list;
+	static std::list<CEffect*> m_list;
 
 public:
 	CEffect(const char16_t* effect);
 	~CEffect();
 	void Update();
-	void Draw();
 
 	void SetPos(float x, float y, float z);
 	void SetRotation(float x, float y, float z);
 	void SetScale(float x, float y, float z);
 	void Play();
 private:
+	void Draw();
 	//--- Effekseer‚Ì‰Šú‰»
 	static Effekseer::ManagerRef				m_efkManager;
 	static EffekseerRendererDX11::RendererRef	m_efkRenderer;

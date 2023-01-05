@@ -4,6 +4,7 @@
 #include <Controller.hpp>
 #include <DebugCamera.hpp>
 #include <Billboard.h>
+#include <OutputEffekseer.h>
 std::shared_ptr<CObjectManager> CSceneBase::m_obj = nullptr;
 
 CSceneBase::CSceneBase()
@@ -55,6 +56,7 @@ void CSceneBase::BaseDraw()
 	PreDraw();
 	m_obj->DrawAll();
 	Draw();
+	CEffect::DrawAll();
 	CBillboard::DrawAll();
 	if (m_overlay)
 		m_overlay->DrawBase();

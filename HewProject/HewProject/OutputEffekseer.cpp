@@ -2,13 +2,7 @@
 #include <Camera.hpp>
 Effekseer::ManagerRef				CEffect::m_efkManager;
 EffekseerRendererDX11::RendererRef	CEffect::m_efkRenderer;
-
-
-CEffect::CEffect(const char16_t* effect)
-{
-	//--- effect読み込み
-	m_effect = Effekseer::Effect::Create(m_efkManager, effect);
-}
+std::list<CEffect*> CEffect::m_list;
 
 void CEffect::InitSystem()
 {
@@ -32,67 +26,48 @@ void CEffect::InitSystem()
 	m_efkManager->SetCurveLoader(Effekseer::MakeRefPtr<Effekseer::CurveLoader>());
 
 }
+
 void CEffect::UninitSystem()
 {
 	m_efkRenderer.Reset();
 	m_efkManager.Reset();
+}
 
+void CEffect::DrawAll()
+{
+	for (auto itr = m_list.begin(); itr != m_list.end(); itr++)
+	{
+		(*itr)->Draw();
+	}
+}
+
+CEffect::CEffect(const char16_t* effect)
+{
+	//--- effect読み込み
+	m_effect = Effekseer::Effect::Create(m_efkManager, effect);
+	m_list.push_back(this);
 }
 
 CEffect::~CEffect()
 {
+	m_list.remove(this);
 	m_effect.Reset();
 }
 
 void CEffect::Update()
 {
 	//---effekseerの描画
-	auto viewerPosition = Effekseer::Vector3D(10.0f, 5.0f, 20.0f);
-	Effekseer::Matrix44 projectionMatrix;
-	projectionMatrix.PerspectiveFovLH(
-		90.0f / 180.0f * 3.14f, (float)1280 / 720,
-		1.0f, 500.0f
-	);
-	Effekseer::Matrix44 cameraMatrix;
-	cameraMatrix.LookAtLH(viewerPosition,
-		Effekseer::Vector3D(0.0f, 0.0f, 0.0f),
-		Effekseer::Vector3D(0.0f, 1.0f, 0.0f));
-	Effekseer::Manager::LayerParameter layerParameter;
-	layerParameter.ViewerPosition = viewerPosition;
-	m_efkManager->SetLayerParameter(0, layerParameter);
-
-	Effekseer::Manager::UpdateParameter updateParameter;
-	m_efkManager->Update(updateParameter);
-
-	m_efkRenderer->SetProjectionMatrix(projectionMatrix);
-	m_efkRenderer->SetCameraMatrix(cameraMatrix);
-
-	m_efkRenderer->BeginRendering();
-
-
-	Effekseer::Manager::DrawParameter drawParameter;
-	drawParameter.ZNear = 0.0f;
-	drawParameter.ZFar = 1.0f;
-	drawParameter.ViewProjectionMatrix =
-		m_efkRenderer->GetCameraProjectionMatrix();
-	m_efkManager->Draw(drawParameter);
-
-	m_efkRenderer->EndRendering();
 }
 
 void CEffect::Draw()
 {
 	//---effekseerの描画
 	// 視点位置を確定
-	auto camPos = CCameraBase::GetPrimaryData().pos;
+	auto camPos = CCameraBase::GetPrimaryData().look;
 	auto viewerPosition = Effekseer::Vector3D(camPos.x, camPos.y, camPos.z);
 
 	// 投影行列を設定
 	Effekseer::Matrix44 projectionMatrix;
-	projectionMatrix.PerspectiveFovLH(
-		90.0f / 180.0f * 3.14f, (float)1280 / 720,
-		1.0f, 500.0f
-	);
 	projectionMatrix = GetMat(CCameraBase::GetPrimaryProjectionMatrix());
 	// カメラ行列を設定
 	Effekseer::Matrix44 cameraMatrix = GetMat(CCameraBase::GetPrimaryViewMatrix());
@@ -112,6 +87,15 @@ void CEffect::Draw()
 	// カメラ行列を設定
 	m_efkRenderer->SetCameraMatrix(cameraMatrix);
 
+	// 度数法から弧度法に変換
+	float radx = m_rot.X * 3.14f / 180.0f;
+	float rady = m_rot.Y * 3.14f / 180.0f;
+	float radz = m_rot.Z * 3.14f / 180.0f;
+
+
+	m_efkManager->SetRotation(m_efkHandle, radx, rady, radz);
+	m_efkManager->SetScale(m_efkHandle, m_scale.X, m_scale.Y, m_scale.Z);
+
 	// エフェクトの描画開始処理を行う
 	m_efkRenderer->BeginRendering();
 
@@ -126,14 +110,6 @@ void CEffect::Draw()
 	// エフェクトの描画終了処理を行う
 	m_efkRenderer->EndRendering();
 
-	// 度数法から弧度法に変換
-	float radx = m_rot.X * 3.14f / 180.0f;
-	float rady = m_rot.Y * 3.14f / 180.0f;
-	float radz = m_rot.Z * 3.14f / 180.0f;
-
-
-	m_efkManager->SetRotation(m_efkHandle, radx, rady, radz);
-	m_efkManager->SetScale(m_efkHandle, m_scale.X, m_scale.Y, m_scale.Z);
 
 }
 
@@ -156,7 +132,7 @@ void CEffect::SetScale(float x, float y, float z)
 
 void CEffect::Play()
 {
-	m_efkHandle = m_efkManager->Play(m_effect, 0, 0, 0);
+	m_efkHandle = m_efkManager->Play(m_effect, m_pos.X, m_pos.Y, m_pos.Z);
 }
 
 Effekseer::Matrix44 CEffect::GetMat(DirectX::XMFLOAT4X4 in)
