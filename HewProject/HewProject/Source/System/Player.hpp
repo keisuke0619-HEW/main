@@ -32,7 +32,7 @@ private:
 	bool m_isSE;
 
 
-	CBillboard* m_bill;
+	CBillboard::Ptr m_bill;
 
 	OutputEffekseer* m_pEfk;
 };

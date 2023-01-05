@@ -5,6 +5,7 @@ std::list<CBillboard*> CBillboard::m_billList;
 std::map<const char*, ID3D11ShaderResourceView*> CBillboard::m_billImg;
 
 
+
 void CBillboard::DrawAll()
 {
 	for (auto itr = m_billList.begin(); itr != m_billList.end(); itr++)

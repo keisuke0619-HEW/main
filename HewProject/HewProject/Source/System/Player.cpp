@@ -34,7 +34,7 @@ CPlayer::CPlayer()
 	m_isSE = false;
 	
 
-	m_bill = new CBillboard("Assets/Img/number.png");
+	m_bill.reset(new CBillboard("Assets/Img/number.png"));
 	m_bill->SetSize({ 2.0f, 0.25f });
 
 	// エフェクシアの初期化　読み込み

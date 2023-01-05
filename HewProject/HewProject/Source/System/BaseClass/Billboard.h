@@ -6,9 +6,11 @@
 #include "DirectXTex/Texture.h"
 #include <list>
 #include <map>
+#include <memory>
 class CBillboard
 {
 public:
+	using Ptr =  std::unique_ptr<CBillboard>;
 	static void DrawAll();
 	static void ClearBillboard();
 private:
