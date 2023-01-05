@@ -26,7 +26,7 @@ public:
 	/// <param name="sort">ソートオーダー</param>
 	/// <param name="isFloat">小数点以下を描画するか</param>
 	/// <param name="floatLength">小数点以下の桁数</param>
-	CNumberUI(int length = 3, SortOrder sort = SORT_ORDER_UI_DEFAULT, bool isFloat = false, int floatLength = 0);
+	CNumberUI(int length = 3, SortOrder sort = SORT_ORDER_UI_DEFAULT, int floatLength = 0);
 	~CNumberUI();
 
 	/// <summary>
@@ -36,7 +36,7 @@ public:
 	/// <param name="sort">ソートオーダー</param>
 	/// <param name="isFloat">小数点以下を描画するか</param>
 	/// <param name="floatLength">小数点以下の桁数</param>
-	void ResetLength(int length = 3, SortOrder sort = SORT_ORDER_UI_DEFAULT, bool isFloat = false, int floatLength = 0);
+	void ResetLength(int length = 3, SortOrder sort = SORT_ORDER_UI_DEFAULT, int floatLength = 0);
 	void SetPos(float x, float y);
 	void SetPos(DirectX::XMFLOAT2 pos);
 	void SetSize(float x, float y);
@@ -47,6 +47,8 @@ public:
 	void SetAlign(ENumAlign align);
 	void SetSortOrder(SortOrder sort);
 	void SetMarginLevel(float level);
+	void SetColor(float r, float g, float b, float a);
+	void SetColor255(int r, int g, int b, int a);
 private:
 	float m_num;	// 表示する値
 	DirectX::XMFLOAT2 m_pos;	// 中心座標
@@ -55,7 +57,6 @@ private:
 	ENumAlign m_align;
 	SortOrder m_sort;
 	float m_margin;
-	bool m_isFloat;	// 小数点以下を表示するか
 	int m_len;		// 全体の長さ（小数点含まず
 	int m_floatLen;	// 小数点以下の長さ（小数点含まず
 	bool m_isZeroFill;	// ゼロ埋めするか
