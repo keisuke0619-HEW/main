@@ -22,6 +22,7 @@
     <ClInclude Include="BGM.h" />
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
+    <ClInclude Include="NumberUI.hpp" />
     <ClInclude Include="OutputEffekseer.h" />
     <ClInclude Include="OverlayConfig.hpp" />
     <ClInclude Include="OverlayWindowBase.hpp" />
@@ -85,6 +86,7 @@
   <ItemGroup>
     <ClCompile Include="BGM.cpp" />
     <ClCompile Include="DirectXTex\Texture.cpp" />
+    <ClCompile Include="NumberUI.cpp" />
     <ClCompile Include="OutputEffekseer.cpp" />
     <ClCompile Include="OverlayConfig.cpp" />
     <ClCompile Include="OverlayWindowBase.cpp" />

@@ -9,13 +9,17 @@ CGameUI::CGameUI(const char* FileName)
 	, m_uvScale({1,1})
 	, m_color({1,1,1,1})
 {
-	LoadTextureFromFile(FileName, &m_pPicture);
+	if (strcmp(FileName, "") != 0)
+	{
+		LoadTextureFromFile(FileName, &m_pPicture);
+	}
 	m_fileName = FileName;
 }
 
 CGameUI::~CGameUI()
 {
-	m_pPicture->Release();
+	if(strcmp(m_fileName, "") != 0)
+		m_pPicture->Release();
 }
 
 void CGameUI::Draw()
@@ -141,4 +145,9 @@ void CGameUI::SetData(float posX, float posY, float sizeX, float sizeY)
 {
 	SetPos(posX, posY);
 	SetSize(sizeX, sizeY);
+}
+
+void CGameUI::SetResourceView(ID3D11ShaderResourceView* pTex)
+{
+	m_pPicture = pTex;
 }

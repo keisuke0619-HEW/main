@@ -43,6 +43,13 @@ COverlayConfig::COverlayConfig()
 	m_speedYCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_Y_BAR_POS_Y);
 	m_speedYCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
 	Add("YCursor", m_speedYCursor);
+
+	m_speedXNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, true, 2));
+	m_speedXNum->SetSize(36, 45);
+	m_speedYNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, true, 2));
+	m_speedYNum->SetSize(36, 45);
+
+
 }
 
 COverlayConfig::~COverlayConfig()
@@ -77,7 +84,7 @@ void COverlayConfig::MoveCursor()
 
 void COverlayConfig::SetStatus()
 {
-	const float addLevel = 0.3f;
+	const float addLevel = 0.25f;
 	float add = 0;
 	m_speedXBar->SetColor255(128, 128, 128, 128);
 	m_speedXCursor->SetColor255(128, 128, 128, 128);
@@ -120,4 +127,12 @@ void COverlayConfig::SetStatus()
 		Utility::SetCameraSpeedY(OVERLAY_CONFIG_SPEED_MAX);
 	m_speedXCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedX() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_X_BAR_POS_Y);
 	m_speedYCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedY() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_Y_BAR_POS_Y);
+	m_speedXNum->SetPos(
+		OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedX() / OVERLAY_CONFIG_SPEED_MAX),
+		OVERLAY_CONFIG_X_BAR_POS_Y - OVERLAY_CONFIG_CURSOR_SIZE_Y / 2);
+	m_speedXNum->SetNum(Utility::GetCameraSpeedX());
+	m_speedYNum->SetPos(
+		OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedY() / OVERLAY_CONFIG_SPEED_MAX),
+		OVERLAY_CONFIG_Y_BAR_POS_Y - OVERLAY_CONFIG_CURSOR_SIZE_Y / 2);
+	m_speedYNum->SetNum(Utility::GetCameraSpeedY());
 }

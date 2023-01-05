@@ -246,6 +246,9 @@
     <ClInclude Include="OutputEffekseer.h">
       <Filter>システム\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="NumberUI.hpp">
+      <Filter>システム\2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -415,6 +418,9 @@
     </ClCompile>
     <ClCompile Include="OutputEffekseer.cpp">
       <Filter>システム\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="NumberUI.cpp">
+      <Filter>システム\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

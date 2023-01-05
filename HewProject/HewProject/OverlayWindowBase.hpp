@@ -19,13 +19,13 @@ public:
 protected:
 	virtual void Update() = 0;
 	virtual void Draw();
-	void Add(const char* tagName, CGameUI* uiObj, SortOrder sort = SORT_ORDER_UI_DEFAULT);
+	void Add(std::string tagName, CGameUI* uiObj, SortOrder sort = SORT_ORDER_UI_DEFAULT);
 
 	int m_frame;
 	bool m_isDestroy;
 
 	std::unique_ptr<COverlayWindowBase> m_overlay;
 private:
-	std::map<const char*, CGameUI::Ref> m_objList;
+	std::map<std::string, CGameUI::Ref> m_objList;
 	std::shared_ptr<CObjectManager> m_obj;
 };

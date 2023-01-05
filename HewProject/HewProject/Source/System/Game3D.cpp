@@ -7,6 +7,7 @@
 #include <BGM.h>
 #include <Billboard.h>
 #include <OutputEffekseer.h>
+#include <NumberUI.hpp>
 //--- Scenes ---//
 
 Game3D::Game3D()
@@ -21,10 +22,11 @@ Game3D::Game3D()
 	auto sp = new SamplerState();
 	sp->Create(D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
 	CEffect::InitSystem();
-
+	CNumberUI::Init();
 }
 Game3D::~Game3D()
 {
+	CNumberUI::Uninit();
 	CEffect::UninitSystem();
 	CBillboard::ClearBillboard();
 	Utility::UninitBlendState();

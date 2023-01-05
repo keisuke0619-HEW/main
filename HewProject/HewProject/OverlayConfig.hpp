@@ -1,6 +1,6 @@
 #pragma once
 #include <OverlayWindowBase.hpp>
-
+#include <NumberUI.hpp>
 class COverlayConfig : public COverlayWindowBase
 {
 public:
@@ -29,6 +29,8 @@ private:
 	CGameUI* m_speedYCursor;
 	CGameUI* m_speedYBar;
 
+	CNumberUI::Ptr m_speedXNum;
+	CNumberUI::Ptr m_speedYNum;
 
 
 };

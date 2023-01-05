@@ -63,12 +63,12 @@ void COverlayWindowBase::Draw()
 {
 }
 
-void COverlayWindowBase::Add(const char* tagName, CGameUI* uiObj, SortOrder sort)
+void COverlayWindowBase::Add(std::string tagName, CGameUI* uiObj, SortOrder sort)
 {
 	if (m_objList.count(tagName) != 0)
 	{
 #ifdef _DEBUG
-		MessageBox(NULL, "COverlayWindowBase:すでにそのタグ名は使用されています。\nこの操作は無視されました。", tagName, MB_OK);
+		MessageBox(NULL, "COverlayWindowBase:すでにそのタグ名は使用されています。\nこの操作は無視されました。", tagName.c_str(), MB_OK);
 #endif // _DEBUG
 		return;
 	}
