@@ -50,12 +50,12 @@ void CPlayer::Update()
 	if (m_isCancel == false)
 	{
 		Move();
+		Beam();
 	}
 	else
 	{
 		CancelMove();
 	}
-	Beam();
 	m_InvincibleTime--;
 	//m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
@@ -247,7 +247,14 @@ void CPlayer::CancelMove()
 	if (m_CancelTime < 60)
 	{
 		m_CancelTime++;
-		m_param.move = { 0.0f, 0.0f, 0.0f }; // プレイヤーの動きを止める
+		// プレイヤーの動きを止める
+		m_param.move = { 0.0f, 0.0f, 0.0f }; 
+
+		DirectX::XMFLOAT3 Front;
+		DirectX::XMStoreFloat3(&Front, CCameraBase::GetPrimaryFrontHorizontal());
+		// プレイヤーの視点をカメラと同じにする
+		m_param.rot.y = (90.0f * 3.14159f / 180.0f) - atan2f(Front.z, Front.x);
+		
 	}
 	else
 	{
