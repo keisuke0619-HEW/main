@@ -13,6 +13,9 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 
 	m_maxSize = size;
 	m_time = 2.0f;
+
+	// エフェクシアの初期化　読み込み
+	m_pEfk.reset(new CEffect(u"Assets/Effect/Laser01.efkefc"));
 }
 
 CBeam::~CBeam()
@@ -32,6 +35,9 @@ void CBeam::Update()
 	{
 		Destroy();
 	}	
+	m_pEfk->SetRotation(0, -60, 0);
+	m_pEfk->SetScale(1, 1, 1);
+	m_pEfk->SetPos(m_pos.x, m_pos.y, m_pos.z);//(m_param.pos.x, m_param.pos.y + 1.5f, m_param.pos.z);
 }
 
 void CBeam::Draw()
@@ -61,6 +67,11 @@ void CBeam::Draw()
 
 	SetColorPS(true, 0.3f, 0.56f, 1.0f, 0.5f, 1, 1);
 	DrawCapsule();
+
+	// 毎回エフェクシアを描画するため処理が重くなる
+	// 新しく関数を作るなど改善の余地あり
+	//m_pEfk->Play();
+	
 }
 
 void CBeam::Collision()

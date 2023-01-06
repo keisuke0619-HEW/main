@@ -1,6 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
 #include "BaseClass/ObjectBase.hpp"
+#include <OutputEffekseer.h>
 
 class CBeam : public CObjectBase
 {
@@ -21,4 +22,6 @@ private:
 	float m_enemySize;
 	DirectX::XMFLOAT3 m_enemyPos;
 	DirectX::XMFLOAT3 m_enemyTarget;
+
+	CEffect::Ptr m_pEfk;
 };
