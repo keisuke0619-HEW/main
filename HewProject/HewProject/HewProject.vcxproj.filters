@@ -249,16 +249,17 @@
     <ClInclude Include="NumberUI.hpp">
       <Filter>システム\2D</Filter>
     </ClInclude>
-<<<<<<< HEAD
+    <ClInclude Include="MiniMap.h">
+      <Filter>システム\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene_02.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClInclude>
     <ClInclude Include="GameScene_03.hpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClInclude>
     <ClInclude Include="GameScene_04.hpp">
       <Filter>シーンファイル\シーンファイル</Filter>
-=======
-    <ClInclude Include="MiniMap.h">
-      <Filter>システム\2D</Filter>
->>>>>>> 9f78c4dddc329c535444b85dbc5b1b8df02771d4
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -433,7 +434,9 @@
     <ClCompile Include="NumberUI.cpp">
       <Filter>システム\2D</Filter>
     </ClCompile>
-<<<<<<< HEAD
+    <ClCompile Include="MiniMap.cpp">
+      <Filter>システム\2D</Filter>
+    </ClCompile>
     <ClCompile Include="GameScene_02.cpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
@@ -442,10 +445,6 @@
     </ClCompile>
     <ClCompile Include="GameScene_04.cpp">
       <Filter>シーンファイル\シーンファイル</Filter>
-=======
-    <ClCompile Include="MiniMap.cpp">
-      <Filter>システム\2D</Filter>
->>>>>>> 9f78c4dddc329c535444b85dbc5b1b8df02771d4
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -461,10 +460,5 @@
     <FxCompile Include="ModelPS.hlsl">
       <Filter>リソース ファイル</Filter>
     </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="GameScene_02.hpp">
-      <Filter>シーンファイル\シーンファイル</Filter>
-    </None>
   </ItemGroup>
 </Project>
