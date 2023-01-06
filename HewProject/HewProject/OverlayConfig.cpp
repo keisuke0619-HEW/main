@@ -145,7 +145,7 @@ void COverlayConfig::SetStatus()
 
 CGameEnd::CGameEnd()
 {
-	auto tmp = new CGameUI("Assets/Img/PauseMenu/Back.png");
+	auto tmp = new CGameUI("Assets/Img/PauseMenu/END.png");
 	tmp->SetPos({ OVERLAY_CONFIG_CENTER_X, 360 });
 	tmp->SetSize({ 1100, 700 });
 	Add("Back", tmp, SORT_ORDER_UI_BACK2);
@@ -154,19 +154,8 @@ CGameEnd::CGameEnd()
 	tmp->SetSize({ 1280, 720 });
 	tmp->SetColor255(0, 0, 0, 128);
 	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
-	m_speedXCursor = new CGameUI("Assets/Img/PauseMenu/Cursor.png");
-	m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_X_BAR_POS_Y);
-	m_speedXCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
-	Add("XCursor", m_speedXCursor);
-	m_speedYCursor = new CGameUI("Assets/Img/PauseMenu/Cursor.png");
-	m_speedYCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_Y_BAR_POS_Y);
-	m_speedYCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
-	Add("YCursor", m_speedYCursor);
 
-	m_speedXNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
-	m_speedXNum->SetSize(36, 45);
-	m_speedYNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
-	m_speedYNum->SetSize(36, 45);
+
 }
 
 CGameEnd::~CGameEnd()
@@ -185,11 +174,11 @@ void CGameEnd::Update()
 
 void CGameEnd::MoveCursor()
 {
-	if (Utility::GetKeyTrigger(KEY_UP))
+	if (Utility::GetKeyTrigger(KEY_LEFT))
 	{
 		m_target--;
 	}
-	if (Utility::GetKeyTrigger(KEY_DOWN))
+	if (Utility::GetKeyTrigger(KEY_RIGHT))
 	{
 		m_target++;
 	}
@@ -201,59 +190,11 @@ void CGameEnd::MoveCursor()
 
 void CGameEnd::SetStatus()
 {
-	const float addLevel = 0.25f;
-	float add = 0;
 	m_speedXBar->SetColor255(128, 128, 128, 128);
 	m_speedXCursor->SetColor255(128, 128, 128, 128);
 	m_speedYBar->SetColor255(128, 128, 128, 128);
 	m_speedYCursor->SetColor255(128, 128, 128, 128);
 	m_speedXNum->SetColor255(128, 128, 128, 128);
 	m_speedYNum->SetColor255(128, 128, 128, 128);
-	if (Utility::GetKeyPress(KEY_RIGHT))
-	{
-		add += addLevel;
 
-	}
-	if (Utility::GetKeyPress(KEY_LEFT))
-	{
-		add -= addLevel;
-	}
-	switch (m_target % TARGET_MAX)
-	{
-	case 0:
-		m_speedXBar->SetColor255(255, 255, 255, 255);
-		m_speedXCursor->SetColor255(255, 255, 255, 255);
-		m_speedXNum->SetColor255(255, 255, 255, 255);
-		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
-		break;
-	case 1:
-		m_speedYBar->SetColor255(255, 255, 255, 255);
-		m_speedYCursor->SetColor255(255, 255, 255, 255);
-		m_speedYNum->SetColor255(255, 255, 255, 255);
-		Utility::SetCameraSpeedY(Utility::GetCameraSpeedY() + add);
-		break;
-	default:
-		break;
-	}
-	// ƒNƒŠƒbƒv
-	auto speedX = Utility::GetCameraSpeedX();
-	auto speedY = Utility::GetCameraSpeedY();
-	if (speedX < OVERLAY_CONFIG_SPEED_MIN)
-		Utility::SetCameraSpeedX(OVERLAY_CONFIG_SPEED_MIN);
-	if (speedY < OVERLAY_CONFIG_SPEED_MIN)
-		Utility::SetCameraSpeedY(OVERLAY_CONFIG_SPEED_MIN);
-	if (speedX > OVERLAY_CONFIG_SPEED_MAX)
-		Utility::SetCameraSpeedX(OVERLAY_CONFIG_SPEED_MAX);
-	if (speedY > OVERLAY_CONFIG_SPEED_MAX)
-		Utility::SetCameraSpeedY(OVERLAY_CONFIG_SPEED_MAX);
-	m_speedXCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedX() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_X_BAR_POS_Y);
-	m_speedYCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedY() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_Y_BAR_POS_Y);
-	m_speedXNum->SetPos(
-		OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedX() / OVERLAY_CONFIG_SPEED_MAX),
-		OVERLAY_CONFIG_X_BAR_POS_Y - OVERLAY_CONFIG_CURSOR_SIZE_Y / 2.5f);
-	m_speedXNum->SetNum(Utility::GetCameraSpeedX());
-	m_speedYNum->SetPos(
-		OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedY() / OVERLAY_CONFIG_SPEED_MAX),
-		OVERLAY_CONFIG_Y_BAR_POS_Y - OVERLAY_CONFIG_CURSOR_SIZE_Y / 2.5f);
-	m_speedYNum->SetNum(Utility::GetCameraSpeedY());
 }
