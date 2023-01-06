@@ -31,10 +31,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			Update(GetDeltaTime());
 			Draw();
 
-			if (IsKeyTrigger(VK_ESCAPE))
-			{
-				bGameFlag = false;
-			}
+			//if (IsKeyTrigger(VK_ESCAPE))
+			//{
+			//	bGameFlag = false;
+			//}
 		}
 	}
 
