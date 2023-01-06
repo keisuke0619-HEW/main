@@ -140,3 +140,72 @@ void COverlayConfig::SetStatus()
 		OVERLAY_CONFIG_Y_BAR_POS_Y - OVERLAY_CONFIG_CURSOR_SIZE_Y / 2.5f);
 	m_speedYNum->SetNum(Utility::GetCameraSpeedY());
 }
+
+
+
+CGameEnd::CGameEnd()
+{
+	auto tmp = new CGameUI("Assets/Img/PauseMenu/END.png");
+	tmp->SetPos({ OVERLAY_CONFIG_CENTER_X, 360 });
+	tmp->SetSize({ 1100, 700 });
+	Add("Back", tmp, SORT_ORDER_UI_BACK2);
+	tmp = new CGameUI("Assets/Img/White.png");
+	tmp->SetPos({ 640, 360 });
+	tmp->SetSize({ 1280, 720 });
+	tmp->SetColor255(0, 0, 0, 128);
+	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
+	m_speedXCursor = new CGameUI("Assets/Img/PauseMenu/Cursor.png");
+	m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_X_BAR_POS_Y);
+	m_speedXCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
+	Add("XCursor", m_speedXCursor);
+	m_speedYCursor = new CGameUI("Assets/Img/PauseMenu/Cursor.png");
+	m_speedYCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_Y_BAR_POS_Y);
+	m_speedYCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
+	Add("YCursor", m_speedYCursor);
+
+	m_speedXNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
+	m_speedXNum->SetSize(36, 45);
+	m_speedYNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
+	m_speedYNum->SetSize(36, 45);
+}
+
+CGameEnd::~CGameEnd()
+{
+}
+
+void CGameEnd::Update()
+{
+	MoveCursor();
+	SetStatus();
+	if (Utility::GetKeyTrigger(KEY_CANCEL))
+	{
+		m_isDestroy = true;
+	}
+}
+
+void CGameEnd::MoveCursor()
+{
+	if (Utility::GetKeyTrigger(KEY_LEFT))
+	{
+		m_target--;
+	}
+	if (Utility::GetKeyTrigger(KEY_RIGHT))
+	{
+		m_target++;
+	}
+	if (m_target < 0)
+	{
+		m_target = TARGET_MAX * 100;
+	}
+}
+
+void CGameEnd::SetStatus()
+{
+	m_speedXBar->SetColor255(128, 128, 128, 128);
+	m_speedXCursor->SetColor255(128, 128, 128, 128);
+	m_speedYBar->SetColor255(128, 128, 128, 128);
+	m_speedYCursor->SetColor255(128, 128, 128, 128);
+	m_speedXNum->SetColor255(128, 128, 128, 128);
+	m_speedYNum->SetColor255(128, 128, 128, 128);
+
+}

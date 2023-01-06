@@ -249,11 +249,16 @@
     <ClInclude Include="NumberUI.hpp">
       <Filter>システム\2D</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="GameScene_03.hpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClInclude>
     <ClInclude Include="GameScene_04.hpp">
       <Filter>シーンファイル\シーンファイル</Filter>
+=======
+    <ClInclude Include="MiniMap.h">
+      <Filter>システム\2D</Filter>
+>>>>>>> 9f78c4dddc329c535444b85dbc5b1b8df02771d4
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -428,6 +433,7 @@
     <ClCompile Include="NumberUI.cpp">
       <Filter>システム\2D</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="GameScene_02.cpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
@@ -436,6 +442,10 @@
     </ClCompile>
     <ClCompile Include="GameScene_04.cpp">
       <Filter>シーンファイル\シーンファイル</Filter>
+=======
+    <ClCompile Include="MiniMap.cpp">
+      <Filter>システム\2D</Filter>
+>>>>>>> 9f78c4dddc329c535444b85dbc5b1b8df02771d4
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

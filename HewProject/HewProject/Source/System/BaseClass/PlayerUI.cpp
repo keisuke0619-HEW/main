@@ -44,6 +44,8 @@ CPlayerUI::CPlayerUI()
 	m_chargeSprite.lock()->SetPos(PLAYER_UI_CHARGE_CENTER);
 	m_chargeSprite.lock()->SetSize(PLAYER_UI_CHARGE_SIZE);
 	m_chargeSprite.lock()->SetColor(0, 1, 1, 1);
+
+	m_pMap = new CMiniMap;
 }
 
 CPlayerUI::~CPlayerUI()
@@ -56,6 +58,7 @@ void CPlayerUI::Update()
 	// ここでUIのスプライトを更新
 	UpdateLife();
 	UpdateCharge();
+	m_pMap->Update();
 }
 
 

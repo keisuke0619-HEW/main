@@ -3,6 +3,7 @@
 #include <DebugCamera.hpp>
 #include <Controller.hpp>
 #include <UiManager.hpp>
+#include <OverlayConfig.hpp>
 
 CSceneTitle::CSceneTitle()
 {
@@ -31,6 +32,11 @@ void CSceneTitle::Update()
 	{
 		SetBGM("Assets/Sound/korinoyaiba.wav");
 	}
+	if (Utility::GetKeyTrigger(KEY_CANCEL))
+	{
+		AddOverlay(new CGameEnd());
+	}
+
 }
 
 
