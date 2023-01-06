@@ -4,11 +4,15 @@
 
 CMiniMap::CMiniMap()
 {
-	m_map = new CGameUI("Assets/Img/White.png");
+	
+	
 	m_player = CSceneBase::GetObjList().lock()->FindTag(TAG_PLAYER);
-	m_map->SetPos(DirectX::XMFLOAT2(1150.f, 120.f));
-	m_map->SetSize(DirectX::XMFLOAT2(300.f, 300.f));
-	//CUIManager::GetIns()->Add(m_map);
+	m_map = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Map/UI map.png"));
+	m_map.lock()->SetPos(DirectX::XMFLOAT2(1150.f, 120.f));
+	m_map.lock()->SetSize(DirectX::XMFLOAT2(350.f, 350.f));
+	m_map.lock()->SetSortID(SORT_ORDER_BACK);
+	
+
 }
 
 CMiniMap::~CMiniMap()
@@ -48,23 +52,30 @@ void CMiniMap::Update()
 			DirectX::XMStoreFloat3(&m_movePos, distance);
 
 			// ƒ}ƒbƒv‚É‰f‚é‹——£
-			float disPlayer = 15.f;
+			float disPlayer = 7.f;
 			
 			if (fabsf(m_movePos.x) <= disPlayer && fabsf(m_movePos.y) <= disPlayer && fabsf(m_movePos.z) <= disPlayer)
 			{
-				if(enemyList.size() > m_enemyIcon.size())
-				m_enemyIcon.push_back(new CGameUI("Assets/Img/enemy.png"));
-				auto it = m_enemyIcon.begin();
-				for (int j = i; j > 0; j--, it++);
-				(*it)->SetPos({ ((m_movePos.x * -10)) + 1150, (m_movePos.z * 10) + 120 });
-				(*it)->SetSize(DirectX::XMFLOAT2(10.f, 10.f));
-				CUIManager::GetIns()->Add(*it);
 				
+				if (enemyList.size() > m_Icon.size())
+					m_Icon.push_back(CUIManager::GetIns()->Add(new CGameUI("Assets/Img/PauseMenu/Cursor.png")));
+				m_Icon[i].lock()->SetPos({ ((m_movePos.x * -10)) + 1150, (m_movePos.z * 10) + 120 });
+				m_Icon[i].lock()->SetSize(DirectX::XMFLOAT2(10.f, 10.f));
 			}
 			else
 			{
-				if(m_enemyIcon.empty() == false)
-				m_enemyIcon.pop_back();
+				if (m_Icon.empty() == false)
+				{
+					if (i >= m_Icon.size())
+					{
+						--i;
+						continue;
+					}
+					
+					CUIManager::GetIns()->Delete(m_Icon[m_Icon.size() - 1]);
+					m_Icon.pop_back();
+				}
+				
 				i -= 2;
 				if (i < -1)
 					i = -1;
