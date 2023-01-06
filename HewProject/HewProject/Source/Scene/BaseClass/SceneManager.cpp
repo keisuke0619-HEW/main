@@ -3,6 +3,9 @@
 #include <Billboard.h>
 // ÉVÅ[Éì
 #include <GameScene.hpp>
+#include <GameScene_02.hpp>
+#include <GameScene_03.hpp>
+#include <GameScene_04.hpp>
 #include <SceneStageSelect.hpp>
 #include <SceneTitle.hpp>
 #include <SceneResult.hpp>
@@ -27,6 +30,18 @@ void CSceneManager::SetScene(ESceneID ID)
 		break;
 	case SCENE_STAGE01:
 		m_scene.reset(new CGameScene());
+		m_scene->SetData(new CStageData01());
+		break;
+	case SCENE_STAGE02:
+		m_scene.reset(new CGameScene_02());
+		m_scene->SetData(new CStageData01());
+		break;
+	case SCENE_STAGE03:
+		m_scene.reset(new CGameScene_03());
+		m_scene->SetData(new CStageData01());
+		break;
+	case SCENE_STAGE04:
+		m_scene.reset(new CGameScene_04());
 		m_scene->SetData(new CStageData01());
 		break;
 	case SCENE_RESULT:
