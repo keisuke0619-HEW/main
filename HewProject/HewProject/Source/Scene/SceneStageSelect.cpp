@@ -102,13 +102,13 @@ void CSceneStageSelect::ChangeScene()
 			CSceneManager::SetScene(SCENE_STAGE01);
 			break;
 		case STAGE_ICON_02:
-			//CSceneManager::SetScene(SCENE_STAGE01);
+			CSceneManager::SetScene(SCENE_STAGE02);
 			break;
 		case STAGE_ICON_03:
-			//CSceneManager::SetScene(SCENE_STAGE01);
+			CSceneManager::SetScene(SCENE_STAGE03);
 			break;
 		case STAGE_ICON_04:
-			//CSceneManager::SetScene(SCENE_STAGE01);
+			CSceneManager::SetScene(SCENE_STAGE04);
 			break;
 		default:
 			break;

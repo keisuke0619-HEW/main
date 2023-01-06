@@ -22,7 +22,12 @@
     <ClInclude Include="BGM.h" />
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
+<<<<<<< HEAD
+    <ClInclude Include="GameScene_03.hpp" />
+    <ClInclude Include="GameScene_04.hpp" />
+=======
     <ClInclude Include="MiniMap.h" />
+>>>>>>> 9f78c4dddc329c535444b85dbc5b1b8df02771d4
     <ClInclude Include="NumberUI.hpp" />
     <ClInclude Include="OutputEffekseer.h" />
     <ClInclude Include="OverlayConfig.hpp" />
@@ -87,7 +92,13 @@
   <ItemGroup>
     <ClCompile Include="BGM.cpp" />
     <ClCompile Include="DirectXTex\Texture.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="GameScene_02.cpp" />
+    <ClCompile Include="GameScene_03.cpp" />
+    <ClCompile Include="GameScene_04.cpp" />
+=======
     <ClCompile Include="MiniMap.cpp" />
+>>>>>>> 9f78c4dddc329c535444b85dbc5b1b8df02771d4
     <ClCompile Include="NumberUI.cpp" />
     <ClCompile Include="OutputEffekseer.cpp" />
     <ClCompile Include="OverlayConfig.cpp" />
@@ -177,6 +188,9 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GameScene_02.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
