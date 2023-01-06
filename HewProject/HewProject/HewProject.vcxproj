@@ -22,6 +22,9 @@
     <ClInclude Include="BGM.h" />
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
+    <ClInclude Include="GameScene_02.hpp" />
+    <ClInclude Include="GameScene_03.hpp" />
+    <ClInclude Include="GameScene_04.hpp" />
     <ClInclude Include="MiniMap.h" />
     <ClInclude Include="NumberUI.hpp" />
     <ClInclude Include="OutputEffekseer.h" />
@@ -87,6 +90,9 @@
   <ItemGroup>
     <ClCompile Include="BGM.cpp" />
     <ClCompile Include="DirectXTex\Texture.cpp" />
+    <ClCompile Include="GameScene_02.cpp" />
+    <ClCompile Include="GameScene_03.cpp" />
+    <ClCompile Include="GameScene_04.cpp" />
     <ClCompile Include="MiniMap.cpp" />
     <ClCompile Include="NumberUI.cpp" />
     <ClCompile Include="OutputEffekseer.cpp" />

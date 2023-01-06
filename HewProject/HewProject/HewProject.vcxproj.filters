@@ -252,6 +252,15 @@
     <ClInclude Include="MiniMap.h">
       <Filter>システム\2D</Filter>
     </ClInclude>
+    <ClInclude Include="GameScene_02.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene_03.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene_04.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -427,6 +436,15 @@
     </ClCompile>
     <ClCompile Include="MiniMap.cpp">
       <Filter>システム\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene_02.cpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene_03.cpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene_04.cpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

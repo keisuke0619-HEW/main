@@ -5,7 +5,6 @@
 #include <PlayerUI.hpp>
 #include <Billboard.h>
 #include "Sound.h"
-#include <OutputEffekseer.h>
 class CPlayer : public CObjectBase
 {
 
@@ -35,6 +34,4 @@ private:
 
 
 	CBillboard::Ptr m_bill;
-
-	CEffect::Ptr m_pEfk;
 };
