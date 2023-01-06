@@ -249,6 +249,12 @@
     <ClInclude Include="NumberUI.hpp">
       <Filter>システム\2D</Filter>
     </ClInclude>
+    <ClInclude Include="GameScene_03.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene_04.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -422,6 +428,15 @@
     <ClCompile Include="NumberUI.cpp">
       <Filter>システム\2D</Filter>
     </ClCompile>
+    <ClCompile Include="GameScene_02.cpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene_03.cpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene_04.cpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ModelVS.hlsl">
@@ -436,5 +451,10 @@
     <FxCompile Include="ModelPS.hlsl">
       <Filter>リソース ファイル</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GameScene_02.hpp">
+      <Filter>シーンファイル\シーンファイル</Filter>
+    </None>
   </ItemGroup>
 </Project>
