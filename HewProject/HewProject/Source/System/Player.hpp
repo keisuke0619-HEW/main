@@ -32,6 +32,9 @@ private:
 	IXAudio2SourceVoice* m_pSESource;
 	bool m_isSE;
 
+	void CancelMove();
+	bool m_isCancel;	// çdíºíÜÅH
+	int m_CancelTime;	// çdíºéûä‘
 
 	CBillboard::Ptr m_bill;
 };

@@ -15,6 +15,8 @@ CPlayer::CPlayer()
 	m_isGround = true;
 	m_beamSize = 0;
 	m_InvincibleTime = 0;
+	m_isCancel = false;
+	m_CancelTime = 0;
 	m_param.collisionType = COLLISION_SPHIRE;
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
 	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
@@ -45,7 +47,14 @@ CPlayer::~CPlayer()
 
 void CPlayer::Update()
 {
-	Move();
+	if (m_isCancel == false)
+	{
+		Move();
+	}
+	else
+	{
+		CancelMove();
+	}
 	Beam();
 	m_InvincibleTime--;
 	//m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
@@ -213,6 +222,8 @@ void CPlayer::Beam()
 				m_isSE = false;
 			}
 			
+			// プレイヤーを硬直
+			m_isCancel = true;
 		}
 		else
 		{
@@ -229,6 +240,20 @@ void CPlayer::Beam()
 	//{
 	//	m_beam->Update();
 	//}
+}
+
+void CPlayer::CancelMove()
+{
+	if (m_CancelTime < 60)
+	{
+		m_CancelTime++;
+		m_param.move = { 0.0f, 0.0f, 0.0f }; // プレイヤーの動きを止める
+	}
+	else
+	{
+		m_CancelTime = 0;
+		m_isCancel = false;
+	}
 }
 
 void CPlayer::SetTarget(DirectX::XMFLOAT3 target)
