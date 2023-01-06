@@ -148,20 +148,19 @@ CGameEnd::CGameEnd()
 	auto tmp = new CGameUI("Assets/Img/PauseMenu/END.png");
 	tmp->SetPos({ OVERLAY_CONFIG_CENTER_X, 360 });
 	tmp->SetSize({ 1100, 700 });
-	Add("Back", tmp, SORT_ORDER_UI_BACK2);
+	tmp->SetColor255(255, 255, 255, 128);
+	Add("Back", tmp, SORT_ORDER_UI_FRONT);
 	tmp = new CGameUI("Assets/Img/White.png");
 	tmp->SetPos({ 640, 360 });
 	tmp->SetSize({ 1280, 720 });
-	tmp->SetColor255(0, 0, 0, 128);
+	tmp->SetColor255(0, 0, 0, 255);
 	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
 	m_speedXCursor = new CGameUI("Assets/Img/PauseMenu/Cursor.png");
-	m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_X_BAR_POS_Y);
+	m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
 	m_speedXCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
-	Add("XCursor", m_speedXCursor);
-	m_speedYCursor = new CGameUI("Assets/Img/PauseMenu/Cursor.png");
-	m_speedYCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_Y_BAR_POS_Y);
-	m_speedYCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
-	Add("YCursor", m_speedYCursor);
+	//m_speedXCursor->SetColor255(128, 128, 128, 128);
+	Add("XCursor", m_speedXCursor, SORT_ORDER_UI_BACK);
+
 
 	m_speedXNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
 	m_speedXNum->SetSize(36, 45);
@@ -193,6 +192,11 @@ void CGameEnd::MoveCursor()
 	{
 		m_target++;
 	}
+	if (Utility::GetKeyTrigger(KEY_SELECT))
+	{
+		//	Œˆ’è
+
+	}
 	if (m_target < 0)
 	{
 		m_target = TARGET_MAX * 100;
@@ -201,11 +205,35 @@ void CGameEnd::MoveCursor()
 
 void CGameEnd::SetStatus()
 {
-	m_speedXBar->SetColor255(128, 128, 128, 128);
+	const float addLevel = 0.25f;
+	float add = 0;
 	m_speedXCursor->SetColor255(128, 128, 128, 128);
-	m_speedYBar->SetColor255(128, 128, 128, 128);
-	m_speedYCursor->SetColor255(128, 128, 128, 128);
 	m_speedXNum->SetColor255(128, 128, 128, 128);
-	m_speedYNum->SetColor255(128, 128, 128, 128);
+	if (Utility::GetKeyPress(KEY_RIGHT))
+	{
+		add += addLevel;
+
+	}
+	if (Utility::GetKeyPress(KEY_LEFT))
+	{
+		add -= addLevel;
+	}
+	switch (m_target % TARGET_MAX)
+	{
+	case 0:
+		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
+		//m_speedXCursor->SetColor255(255, 255, 255, 255);
+		m_speedXNum->SetColor255(255, 255, 255, 255);
+		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
+		break;
+	case 1:
+		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X + 265.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
+		//m_speedXCursor->SetColor255(255, 255, 255, 255);
+		m_speedXNum->SetColor255(255, 255, 255, 255);
+		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
+		break;
+	default:
+		break;
+	}
 
 }
