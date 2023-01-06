@@ -19,7 +19,7 @@ CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string 
 	m_param.collisionData.sphire.sphirePos = { 0 ,0, 0 };
     m_param.collisionData.sphire.sphireRadius = 0;
     m_param.hp = 1.0f;
-
+    m_param.drawOffset = { 0,0,0 };
     // ソースが空だったら読み込まない
     if (strcmp(src, "") != 0)
     {
@@ -64,7 +64,7 @@ void CObjectBase::Draw()
     DirectX::XMFLOAT4X4 mat[3];
 
     // それぞれのマトリックスを作成
-    auto trs = DirectX::XMMatrixTranslation(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+    auto trs = DirectX::XMMatrixTranslation(m_param.pos.x + m_param.drawOffset.x, m_param.pos.y + m_param.drawOffset.y, m_param.pos.z + m_param.drawOffset.z);
     auto rotX = DirectX::XMMatrixRotationX(m_param.rot.x);
     auto rotY = DirectX::XMMatrixRotationY(m_param.rot.y);
     auto rotZ = DirectX::XMMatrixRotationZ(m_param.rot.z);
