@@ -148,18 +148,18 @@ CGameEnd::CGameEnd()
 	auto tmp = new CGameUI("Assets/Img/PauseMenu/END.png");
 	tmp->SetPos({ OVERLAY_CONFIG_CENTER_X, 360 });
 	tmp->SetSize({ 1100, 700 });
-	tmp->SetColor255(255, 255, 255, 128);
-	Add("Back", tmp, SORT_ORDER_UI_FRONT);
+	//tmp->SetColor255(255, 255, 255, 128);
+	Add("Back", tmp, SORT_ORDER_UI_BACK2);
 	tmp = new CGameUI("Assets/Img/White.png");
 	tmp->SetPos({ 640, 360 });
 	tmp->SetSize({ 1280, 720 });
 	tmp->SetColor255(0, 0, 0, 255);
 	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
-	m_speedXCursor = new CGameUI("Assets/Img/PauseMenu/Cursor.png");
+	m_speedXCursor = new CGameUI("Assets/Img/PauseMenu/Cursor2.png");
 	m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-	m_speedXCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
+	m_speedXCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X * 1.5f, OVERLAY_CONFIG_CURSOR_SIZE_Y);
 	//m_speedXCursor->SetColor255(128, 128, 128, 128);
-	Add("XCursor", m_speedXCursor, SORT_ORDER_UI_BACK);
+	Add("XCursor", m_speedXCursor, SORT_ORDER_UI_FRONT);
 
 
 	m_speedXNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
@@ -222,13 +222,13 @@ void CGameEnd::SetStatus()
 	{
 	case 0:
 		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-		//m_speedXCursor->SetColor255(255, 255, 255, 255);
+		m_speedXCursor->SetColor255(255, 255, 255, 255);
 		m_speedXNum->SetColor255(255, 255, 255, 255);
 		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
 		break;
 	case 1:
 		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X + 265.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-		//m_speedXCursor->SetColor255(255, 255, 255, 255);
+		m_speedXCursor->SetColor255(255, 255, 255, 255);
 		m_speedXNum->SetColor255(255, 255, 255, 255);
 		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
 		break;
