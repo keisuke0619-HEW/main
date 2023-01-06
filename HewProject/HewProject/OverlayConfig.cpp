@@ -154,8 +154,19 @@ CGameEnd::CGameEnd()
 	tmp->SetSize({ 1280, 720 });
 	tmp->SetColor255(0, 0, 0, 128);
 	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
+	m_speedXCursor = new CGameUI("Assets/Img/PauseMenu/Cursor.png");
+	m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_X_BAR_POS_Y);
+	m_speedXCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
+	Add("XCursor", m_speedXCursor);
+	m_speedYCursor = new CGameUI("Assets/Img/PauseMenu/Cursor.png");
+	m_speedYCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_Y_BAR_POS_Y);
+	m_speedYCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
+	Add("YCursor", m_speedYCursor);
 
-
+	m_speedXNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
+	m_speedXNum->SetSize(36, 45);
+	m_speedYNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
+	m_speedYNum->SetSize(36, 45);
 }
 
 CGameEnd::~CGameEnd()
