@@ -8,19 +8,6 @@
 // Stage00.cppを参考にジオメトリーで作成
 CStageData01::CStageData01()
 {
-	m_stageData = { 1, 1 };
-	// ここで読み込み※メモリリーク注意
-	FILE* fp = fopen("Assets/Data/Test.dat", "rb");
-	if (fp == nullptr)
-	{
-		MessageBox(NULL, "ステージ読み込みエラー", "CProtSceneコンストラクタ", MB_OK);
-	}
-	else
-	{
-		fread(&m_stageData, sizeof(StageData), 1, fp);
-		fclose(fp);
-	}
-	m_terrain = new CTerrainBase("Assets/Data/TestTerrain.dat", 100, 100);
 	m_enemyManager.reset(new CProtEnemyManager());
 	
 	m_producePlane = new ProducePlane("Assets/Img/White.png");
