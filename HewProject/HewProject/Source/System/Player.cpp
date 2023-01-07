@@ -249,7 +249,7 @@ void CPlayer::CancelMove()
 		m_CancelTime++;
 		// プレイヤーの動きを止める
 		m_param.move = { 0.0f, 0.0f, 0.0f }; 
-
+		m_gra = 0;
 		DirectX::XMFLOAT3 Front;
 		DirectX::XMStoreFloat3(&Front, CCameraBase::GetPrimaryFrontHorizontal());
 		// プレイヤーの視点をカメラと同じにする
