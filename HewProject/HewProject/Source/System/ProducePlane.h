@@ -28,8 +28,6 @@ public:
 		float height;
 	};
 	void Draw();
-	void SetRect(DirectX::XMFLOAT3 pos1, DirectX::XMFLOAT3 pos2, 
-		DirectX::XMFLOAT3 pos3, DirectX::XMFLOAT3 pos4);//矩形を選択して四角形を設定
 	void SetProducePlaneInformation(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 size, DirectX::XMFLOAT3 rot);// 描画に必要な情報を設定
 	void SetEnable(bool isDraw);// 描画するか
 	void SetColor(float r, float g, float b, float a = 255);

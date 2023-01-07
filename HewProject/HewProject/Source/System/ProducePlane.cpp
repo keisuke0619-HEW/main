@@ -55,12 +55,6 @@ void ProducePlane::Draw()
 	m_pConstantWVP->Write(m_PlaneMat);*/
 }
 
-void ProducePlane::SetRect(DirectX::XMFLOAT3 pos1, DirectX::XMFLOAT3 pos2,
-	DirectX::XMFLOAT3 pos3, DirectX::XMFLOAT3 pos4)
-{
-	
-}
-
 void ProducePlane::SetProducePlaneInformation(DirectX::XMFLOAT3 center, DirectX::XMFLOAT3 size, DirectX::XMFLOAT3 rot)
 {
 	// ‰æ‘œ‚Ì’†S‚ÌÀ•W‚ğİ’è
