@@ -3,8 +3,10 @@
 #include <ProtEnemyManager.hpp>
 #include <memory>
 #include <ProducePlane.h>
+#include<ObjectBase.hpp>
 
 class CStageData01
+	:public CObjectBase
 {
 public:
 	struct StageData
