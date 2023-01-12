@@ -24,7 +24,6 @@ void CEffect::InitSystem()
 	m_efkManager->SetModelLoader(m_efkRenderer->CreateModelLoader());
 	m_efkManager->SetMaterialLoader(m_efkRenderer->CreateMaterialLoader());
 	m_efkManager->SetCurveLoader(Effekseer::MakeRefPtr<Effekseer::CurveLoader>());
-
 }
 
 void CEffect::UninitSystem()
@@ -52,6 +51,7 @@ CEffect::CEffect(const char16_t* effect)
 	//--- effect“Ç‚Ýž‚Ý
 	m_effect = Effekseer::Effect::Create(m_efkManager, effect);
 	m_list.push_back(this);
+	IsPlay = false;
 }
 
 CEffect::~CEffect()
@@ -135,7 +135,12 @@ void CEffect::SetScale(float x, float y, float z)
 
 void CEffect::Play()
 {
-	m_efkHandle = m_efkManager->Play(m_effect, m_pos.X, m_pos.Y, m_pos.Z);
+	// Draw‚Åˆê‰ñ‚¾‚¯ŒÄ‚Î‚ê‚é
+	if (IsPlay == false)
+	{
+		m_efkHandle = m_efkManager->Play(m_effect, m_pos.X, m_pos.Y, m_pos.Z);
+		IsPlay = true;
+	}
 }
 
 Effekseer::Matrix44 CEffect::GetMat(DirectX::XMFLOAT4X4 in)
