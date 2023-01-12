@@ -19,8 +19,6 @@ Game3D::Game3D()
 	Utility::InitBlendState();
 	Utility::SetBlendState(BLEND_NONE);
 	Utility::ControllerInit();
-	auto sp = new SamplerState();
-	sp->Create(D3D11_FILTER_MIN_MAG_MIP_POINT, D3D11_TEXTURE_ADDRESS_WRAP);
 	CEffect::InitSystem();
 	CNumberUI::Init();
 }
