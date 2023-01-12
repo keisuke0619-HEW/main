@@ -6,7 +6,6 @@
 #include<ObjectBase.hpp>
 
 class CStageData01
-	:public CObjectBase
 {
 public:
 	struct StageData
@@ -23,6 +22,7 @@ public:
 	void Update();
 	void Draw();
 private:
+	CObjectBase*m_Object;
 	StageData m_stageData;
 	CTerrainBase* m_terrain;
 	std::unique_ptr<CProtEnemyManager> m_enemyManager;
