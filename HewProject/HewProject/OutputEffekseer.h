@@ -40,6 +40,8 @@ private:
 	Effekseer::Vector3D m_scale;
 
 	Effekseer::Matrix44 GetMat(DirectX::XMFLOAT4X4);
+
+	bool IsPlay;
 };
 
 
