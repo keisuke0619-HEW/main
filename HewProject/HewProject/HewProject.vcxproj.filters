@@ -261,6 +261,9 @@
     <ClInclude Include="GameScene_04.hpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClInclude>
+    <ClInclude Include="Pillar.hpp">
+      <Filter>シーンファイル\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -445,6 +448,15 @@
     </ClCompile>
     <ClCompile Include="GameScene_04.cpp">
       <Filter>シーンファイル\シーンファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Pillar.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\CutinCamera.hpp">
+      <Filter>システム\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\CutinCamera.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

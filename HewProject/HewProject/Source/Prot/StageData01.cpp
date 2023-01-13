@@ -5,6 +5,9 @@
 #include <Camera.hpp>
 #include <DirectX.h>
 
+#include <ObjectManager.hpp>
+#include <Pillar.hpp>
+
 // Stage00.cppを参考にジオメトリーで作成
 CStageData01::CStageData01()
 	//:CObjectBase("Assets/Model/kaidan.fbx", 0.1f)
@@ -27,7 +30,7 @@ CStageData01::CStageData01()
 	m_param.pos.z = 0.0f;
 	m_param.collisionType = COLLISION_NONE;
 	m_param.tag = TAG_STATIC_OBJECT;*/
-
+	CSceneBase::GetObjList().lock()->Add(new CPillar(-5,0,5));
 }
 
 CStageData01::~CStageData01()
@@ -50,5 +53,4 @@ void CStageData01::Draw()
 	{
 		m_wall[i]->Draw();
 	}
-	//CObjectBase::Draw();
 }

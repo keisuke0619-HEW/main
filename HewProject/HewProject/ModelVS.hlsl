@@ -10,7 +10,7 @@ struct VS_OUT
 {
 	float4 pos : SV_POSITION;
 	float2 uv : TEXCOORD0;
-	float3 normal : NORMAL;
+	float3 normal : NORMAL0;
 };
 
 cbuffer WVP : register(b0)
@@ -38,10 +38,10 @@ VS_OUT main(VS_IN vin)
 	vout.pos = mul(vout.pos, world);
 	vout.pos = mul(vout.pos, view);
 	vout.pos = mul(vout.pos, proj);
-	vout.pos.x += vin.normal.x;
 	vout.uv = vin.uv;
 
 	vout.normal = mul(vin.normal, world);
+
 
 	return vout;
 }

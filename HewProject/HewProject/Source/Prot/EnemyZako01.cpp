@@ -64,9 +64,10 @@ void CProtEnemy::Update()
 	// ˆÚ“®‚é[‚¿‚ñ
 	Move();
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
-	if (m_param.pos.y < 1.3f)
+	m_param.pos.y -= 0.08f;
+	if (m_param.pos.y < 0)
 	{
-		m_param.pos.y = 1.3f;
+		m_param.pos.y = 0;
 	}
 }
 

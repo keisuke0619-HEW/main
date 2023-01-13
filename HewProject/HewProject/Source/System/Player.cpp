@@ -6,6 +6,8 @@
 #include <SceneBase.hpp>
 #include <Billboard.h>
 #include <SceneManager.hpp>
+#include <CutinCamera.hpp>
+
 CPlayer::CPlayer()
 	: CObjectBase("Assets/Model/player.fbx", 0.08f, false, "Player")
 	//: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f, false, "Player")
@@ -62,10 +64,12 @@ void CPlayer::Update()
 	m_playerUI->Update();
 
 
-	m_bill->SetPos({ m_param.pos.x, m_param.pos.y + 2.0f, m_param.pos.z });
+	m_bill->SetPos({ m_param.pos.x, m_param.pos.y + 100.0f, m_param.pos.z });
 	m_bill->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
 	//if (IsKeyTrigger('U'))
 	//	Destroy();
+
+	m_param.hp = 1;
 }
 
 void CPlayer::Draw()
@@ -195,19 +199,29 @@ void CPlayer::Beam()
 	{
 		if (m_beamSize > 1.0f)
 		{
+			//// とりあえず見ている方向に打つ
+			//DirectX::XMFLOAT3 CameraPos = CCameraBase::GetDataFromTag("Player").pos;
+			//DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
+			//DirectX::XMVECTOR CameraRay = DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&CameraLook), DirectX::XMLoadFloat3(&CameraPos));
+			//CameraRay = DirectX::XMVectorScale(CameraRay, 2.0f);
+			//DirectX::XMStoreFloat3(&m_beamTarget,DirectX::XMVectorAdd(CameraRay, DirectX::XMLoadFloat3(&CameraLook)));
+			//m_beamTarget.y -= CameraPos.y - CameraLook.y;
+			//
+			//// ビーム生成
+			//auto beamPos = m_param.pos;
+			//beamPos.y += 1.0f;
+			//CSceneBase::GetObjList().lock()->Add(new CBeam(beamPos, m_beamTarget, m_beamSize));
+			//m_beam.reset(new CBeam(m_param.pos, m_beamTarget, m_beamSize));
+			
 			// とりあえず見ている方向に打つ
 			DirectX::XMFLOAT3 CameraPos = CCameraBase::GetDataFromTag("Player").pos;
 			DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
-			DirectX::XMVECTOR CameraRay = DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&CameraLook), DirectX::XMLoadFloat3(&CameraPos));
-			CameraRay = DirectX::XMVectorScale(CameraRay, 2.0f);
-			DirectX::XMStoreFloat3(&m_beamTarget,DirectX::XMVectorAdd(CameraRay, DirectX::XMLoadFloat3(&CameraLook)));
-			m_beamTarget.y -= CameraPos.y - CameraLook.y;
-			
-			// ビーム生成
-			auto beamPos = m_param.pos;
-			beamPos.y += 1.0f;
-			CSceneBase::GetObjList().lock()->Add(new CBeam(beamPos, m_beamTarget, m_beamSize));
-			//m_beam.reset(new CBeam(m_param.pos, m_beamTarget, m_beamSize));
+
+			auto beam = new CBeam(CameraPos, CameraLook, m_beamSize);
+			beam->SetPlayerPos(m_param.pos);
+			CSceneBase::GetObjList().lock()->Add(beam);
+
+
 			// se再生
 			if (m_isSE == true)
 			{
@@ -224,6 +238,10 @@ void CPlayer::Beam()
 			
 			// プレイヤーを硬直
 			m_isCancel = true;
+			auto cutin = new CCutinCamera();
+			cutin->SetData({ 0,0,0 }, { 10,10,10 }, { 0,0,0 }, { 0,0,0 });
+			CCameraBase::CreateCamera(cutin, "Cutin");
+			CCameraBase::SetPrimaryCamera("Cutin");
 		}
 		else
 		{

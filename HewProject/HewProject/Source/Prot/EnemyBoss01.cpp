@@ -32,7 +32,7 @@ CProtEnemyBoss::CProtEnemyBoss()
 	// UIを設定
 	m_bossUI.reset(new CBossUI());
 	// 描画のオフセットを指定（内部的な"Pos"と描画のギャップを埋める）
-	m_param.drawOffset = { 0,1.2f,0 };
+	m_param.drawOffset = { 0,1.4f,0 };
 }
 
 CProtEnemyBoss::~CProtEnemyBoss()
@@ -52,9 +52,11 @@ void CProtEnemyBoss::Update()
 	Move();
 	// 当たり判定の中心を更新
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
+
+	m_param.pos.y -= 0.08f;
 	// 疑似床判定
-	if(m_param.pos.y < 1.3f)
-		m_param.pos.y = 1.3f;
+	if(m_param.pos.y < 0)
+		m_param.pos.y = 0;
 	// ボスUIの更新
 	m_bossUI->Update();
 }

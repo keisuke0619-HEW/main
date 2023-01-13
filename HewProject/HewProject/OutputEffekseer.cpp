@@ -52,6 +52,9 @@ CEffect::CEffect(const char16_t* effect)
 	m_effect = Effekseer::Effect::Create(m_efkManager, effect);
 	m_list.push_back(this);
 	IsPlay = false;
+	m_scale.X = 1;
+	m_scale.Y = 1;
+	m_scale.Z = 1;
 }
 
 CEffect::~CEffect()
@@ -91,9 +94,9 @@ void CEffect::Draw()
 	m_efkRenderer->SetCameraMatrix(cameraMatrix);
 
 	// 度数法から弧度法に変換
-	float radx = m_rot.X * 3.14f / 180.0f;
-	float rady = m_rot.Y * 3.14f / 180.0f;
-	float radz = m_rot.Z * 3.14f / 180.0f;
+	float radx = m_rot.X;
+	float rady = m_rot.Y;
+	float radz = m_rot.Z;
 
 
 	m_efkManager->SetRotation(m_efkHandle, radx, rady, radz);
@@ -123,7 +126,10 @@ void CEffect::SetPos(float x, float y, float z)
 
 void CEffect::SetRotation(float x, float y, float z)
 {
-	m_rot = { x, y, z };
+	m_rot.X = x;
+	m_rot.Y = y;
+	m_rot.Z = z;
+	//{ x, y, z };
 }
 
 void CEffect::SetScale(float x, float y, float z)

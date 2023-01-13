@@ -12,10 +12,12 @@ public:
 	void Update();
 	void Draw();
 	void Collision();
+	void SetPlayerPos(DirectX::XMFLOAT3 playerpos);
 private:
 	float m_size;
 	float m_maxSize;
 	float m_time;
+	DirectX::XMFLOAT3 m_playerPos;
 	DirectX::XMFLOAT3 m_pos;
 	DirectX::XMFLOAT3 m_target;
 
@@ -24,4 +26,6 @@ private:
 	DirectX::XMFLOAT3 m_enemyTarget;
 
 	CEffect::Ptr m_pEfk;
+
+	bool m_debugOutput;
 };

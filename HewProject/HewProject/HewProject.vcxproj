@@ -30,6 +30,7 @@
     <ClInclude Include="OutputEffekseer.h" />
     <ClInclude Include="OverlayConfig.hpp" />
     <ClInclude Include="OverlayWindowBase.hpp" />
+    <ClInclude Include="Pillar.hpp" />
     <ClInclude Include="Polyline.h" />
     <ClInclude Include="SceneResult.hpp" />
     <ClInclude Include="Source\Prot\EnemyZako01.hpp" />
@@ -98,6 +99,7 @@
     <ClCompile Include="OutputEffekseer.cpp" />
     <ClCompile Include="OverlayConfig.cpp" />
     <ClCompile Include="OverlayWindowBase.cpp" />
+    <ClCompile Include="Pillar.cpp" />
     <ClCompile Include="Polyline.cpp" />
     <ClCompile Include="SceneResult.cpp" />
     <ClCompile Include="Source\Prot\EnemyZako01.cpp" />
@@ -128,6 +130,8 @@
     <ClCompile Include="Source\System\ConstantBuffer.cpp" />
     <ClCompile Include="Source\System\Controller.cpp" />
     <ClCompile Include="Source\System\CreatorUnique.cpp" />
+    <ClCompile Include="Source\System\CutinCamera.cpp" />
+    <ClCompile Include="Source\System\CutinCamera.hpp" />
     <ClCompile Include="Source\System\DebugCamera.cpp" />
     <ClCompile Include="Source\System\DebugWindow.cpp" />
     <ClCompile Include="Source\System\DirectX.cpp" />
