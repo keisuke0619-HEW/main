@@ -449,14 +449,14 @@
     <ClCompile Include="GameScene_04.cpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Pillar.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Source\System\CutinCamera.hpp">
       <Filter>システム\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\CutinCamera.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Pillar.cpp">
+      <Filter>シーンファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
