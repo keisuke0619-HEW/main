@@ -255,7 +255,7 @@ void CPlayer::CancelMove()
 		m_param.move = { 0.0f, 0.0f, 0.0f }; 
 		m_gra = 0;
 		DirectX::XMFLOAT3 Front;
-		DirectX::XMStoreFloat3(&Front, CCameraBase::GetPrimaryFrontHorizontal());
+		DirectX::XMStoreFloat3(&Front, CCameraBase::GetFrontHorizontal("Player"));
 		// プレイヤーの視点をカメラと同じにする
 		m_param.rot.y = (90.0f * 3.14159f / 180.0f) - atan2f(Front.z, Front.x);
 		

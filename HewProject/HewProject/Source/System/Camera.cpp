@@ -122,7 +122,12 @@ DirectX::XMVECTOR CCameraBase::GetPrimaryUp()
 
 DirectX::XMVECTOR CCameraBase::GetPrimaryFrontHorizontal()
 {
-    auto data = m_cameraMap[m_primaryCameraName]->m_data;
+    return GetFrontHorizontal(m_primaryCameraName);
+}
+
+DirectX::XMVECTOR CCameraBase::GetFrontHorizontal(const char* cameraName)
+{
+    auto data = m_cameraMap[cameraName]->m_data;
     data.pos.y = 0;
     data.look.y = 0;
     auto vPos = DirectX::XMLoadFloat3(&data.pos);
