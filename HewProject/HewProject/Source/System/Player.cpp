@@ -199,20 +199,6 @@ void CPlayer::Beam()
 	{
 		if (m_beamSize > 1.0f)
 		{
-			//// とりあえず見ている方向に打つ
-			//DirectX::XMFLOAT3 CameraPos = CCameraBase::GetDataFromTag("Player").pos;
-			//DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
-			//DirectX::XMVECTOR CameraRay = DirectX::XMVectorSubtract(DirectX::XMLoadFloat3(&CameraLook), DirectX::XMLoadFloat3(&CameraPos));
-			//CameraRay = DirectX::XMVectorScale(CameraRay, 2.0f);
-			//DirectX::XMStoreFloat3(&m_beamTarget,DirectX::XMVectorAdd(CameraRay, DirectX::XMLoadFloat3(&CameraLook)));
-			//m_beamTarget.y -= CameraPos.y - CameraLook.y;
-			//
-			//// ビーム生成
-			//auto beamPos = m_param.pos;
-			//beamPos.y += 1.0f;
-			//CSceneBase::GetObjList().lock()->Add(new CBeam(beamPos, m_beamTarget, m_beamSize));
-			//m_beam.reset(new CBeam(m_param.pos, m_beamTarget, m_beamSize));
-			
 			// とりあえず見ている方向に打つ
 			DirectX::XMFLOAT3 CameraPos = CCameraBase::GetDataFromTag("Player").pos;
 			DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
@@ -278,6 +264,8 @@ void CPlayer::CancelMove()
 	{
 		m_CancelTime = 0;
 		m_isCancel = false;
+		CCameraBase::SetPrimaryCamera("Player");	// カメラ戻す
+		CCameraBase::DeleteCamera("Cutin");			// カットインカメラ削除
 	}
 }
 
