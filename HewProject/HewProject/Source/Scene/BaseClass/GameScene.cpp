@@ -26,7 +26,7 @@ void CGameScene::Update()
 	m_stage->Update();
 	if (Utility::GetKeyTrigger(KEY_DEBUG_RETURN))
 	{
-		CSceneManager::SetScene(SCENE_STAGE02);
+		CSceneManager::SetScene(SCENE_RESULT);
 	}
 	if (Utility::GetKeyTrigger(KEY_CONFIG))
 	{

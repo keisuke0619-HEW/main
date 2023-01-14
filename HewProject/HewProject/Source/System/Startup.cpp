@@ -1,6 +1,7 @@
 #include "Main.h"
 #include "WinUtil.h"
 #include "Timer.h"
+#include <OverlayConfig.hpp>
 
 //--- íËêîíËã`
 const char* APP_TITLE = "It's so CHARGE BEAM -AX218-";
@@ -28,6 +29,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			Update(GetDeltaTime());
 			Draw();
+			if (CGameEnd::IsLoop())
+			{
+				state = APP_STATE_QUIT;
+			}
+			
 		}
 	}
 

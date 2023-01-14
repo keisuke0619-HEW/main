@@ -40,6 +40,7 @@ class CGameEnd : public COverlayWindowBase
 public:
 	CGameEnd();
 	~CGameEnd();
+	static bool IsLoop();
 
 private:
 	void Update();
@@ -56,6 +57,7 @@ private:
 		TARGET_MAX,
 	};
 	int m_target;
+	bool m_isDestroy;
 
 	CGameUI* m_speedXCursor;
 	CGameUI* m_speedXBar;

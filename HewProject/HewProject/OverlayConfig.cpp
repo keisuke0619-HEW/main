@@ -16,6 +16,7 @@ const float OVERLAY_CONFIG_SPEED_MAX = 100.0f;		// カメラスピードの最大値
 const float OVERLAY_CONFIG_POS_MIN = OVERLAY_CONFIG_CENTER_X - OVERLAY_CONFIG_BAR_SIZE_X / 2.08f;	// カーソルの移動制限最小値（最後の数値でうまく調整
 const float OVERLAY_CONFIG_POS_MAX = OVERLAY_CONFIG_CENTER_X + OVERLAY_CONFIG_BAR_SIZE_X / 2.23f;	// カーソルの移動制限最大値
 
+static bool g_isLoop = false;
 COverlayConfig::COverlayConfig()
 {
 	auto tmp = new CGameUI("Assets/Img/PauseMenu/Back.png");
@@ -166,11 +167,21 @@ CGameEnd::CGameEnd()
 	m_speedXNum->SetSize(36, 45);
 	m_speedYNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
 	m_speedYNum->SetSize(36, 45);
+
+	g_isLoop = false;
+	m_isDestroy = false;
 }
 
 CGameEnd::~CGameEnd()
 {
 }
+
+bool CGameEnd::IsLoop()
+{
+	return g_isLoop;
+}
+
+
 
 void CGameEnd::Update()
 {
@@ -195,7 +206,14 @@ void CGameEnd::MoveCursor()
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
 		//	決定
-
+		if ((m_target % TARGET_MAX) == 0)
+		{
+			g_isLoop = true;
+		}
+		if ((m_target % TARGET_MAX) == 1)
+		{
+			m_isDestroy = true;
+		}
 	}
 	if (m_target < 0)
 	{
