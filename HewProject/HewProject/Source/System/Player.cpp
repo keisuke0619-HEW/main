@@ -284,6 +284,27 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 			m_InvincibleTime = 120;
 
 			m_param.hp -= 0.1f;
+
+			// ノックバック
+			//DirectX::XMFLOAT3 Enemypos = obj->GetParam().pos;
+			//DirectX::XMVECTOR vEnemy = DirectX::XMLoadFloat3(&Enemypos);
+			
+			//DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_param.pos);
+			
+			//DirectX::XMVECTOR vNockBack = DirectX::XMVectorSubtract(vPos, vEnemy);
+			//DirectX::XMVector3Normalize(vNockBack);
+			
+			//float back = 3.0f;
+			//vNockBack = DirectX::XMVectorScale(vNockBack, back);
+			
+			//DirectX::XMFLOAT3 fNockBack;
+			//DirectX::XMStoreFloat3(&fNockBack, vNockBack);
+
+			//m_param.pos.x += fNockBack.x;
+			//m_param.pos.y += fNockBack.y;
+			//m_param.pos.z += fNockBack.z;
+
+
 			if (m_param.hp <= 0.0f)
 			{
 				//CSceneManager::SetScene(SCENE_RESULT);
