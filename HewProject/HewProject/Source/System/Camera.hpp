@@ -56,6 +56,7 @@ public:
 	static DirectX::XMVECTOR GetPrimaryUp();
 	// メインカメラの前向き単位ベクトル（水平）
 	static DirectX::XMVECTOR GetPrimaryFrontHorizontal();
+	static DirectX::XMVECTOR GetFrontHorizontal(const char* cameraName);
 	// メインカメラの右向き単位ベクトル（水平）
 	static DirectX::XMVECTOR GetPrimaryRightHorizontal();
 	// メインカメラの上向き単位ベクトル（水平）

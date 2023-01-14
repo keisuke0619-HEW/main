@@ -12,16 +12,12 @@ CCutinCamera::~CCutinCamera()
 void CCutinCamera::Update()
 {
 	const float easingTime = 1.0f;	// •b
-	const float easingAdd = easingTime / 60;
+	const float easingAdd = 1 / easingTime / 60;
 	auto easing = Utility::OutCubic(m_step);
 	m_data.pos.x = (m_endPos.x - m_startPos.x) * easing + m_startPos.x;
 	m_data.pos.y = (m_endPos.y - m_startPos.y) * easing + m_startPos.y;
 	m_data.pos.z = (m_endPos.z - m_startPos.z) * easing + m_startPos.z;
 	m_step += easingAdd;
-	if (m_step >= 1.0f)
-	{
-		CCameraBase::SetPrimaryCamera("Player");
-	}
 }
 
 void CCutinCamera::SetData(DirectX::XMFLOAT3 startpos, DirectX::XMFLOAT3 endpos, DirectX::XMFLOAT3 startrad, DirectX::XMFLOAT3 endrad)
