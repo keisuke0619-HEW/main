@@ -34,7 +34,8 @@ CStageData01::CStageData01()
 	CSceneBase::GetObjList().lock()->Add(new CPillar(-5,0,5));
 	CSceneBase::GetObjList().lock()->Add(new CPillar(5, 0, 5));
 	CSceneBase::GetObjList().lock()->Add(new Wall(-10, 0, -10));
-	
+	CSceneBase::GetObjList().lock()->Add(new Wall(10, 0, -15,1,1,1));
+
 	
 }
 
