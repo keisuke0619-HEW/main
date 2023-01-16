@@ -19,6 +19,8 @@ CPlayer::CPlayer()
 	m_InvincibleTime = 0;
 	m_isCancel = false;
 	m_CancelTime = 0;
+	m_NockBackTime = 60;
+	m_isNockBack = false;
 	m_param.collisionType = COLLISION_SPHIRE;
 	m_param.collisionData.sphire.sphirePos = m_param.pos;
 	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
@@ -137,6 +139,19 @@ void CPlayer::Move()
 
 	DirectX::XMStoreFloat3(&m_param.move, vMove);
 
+	if (m_isRemainNockBack == true)
+	{
+		m_param.pos.x += m_fNockBack.x / m_NockBackTime;
+		m_param.pos.y += m_fNockBack.y / m_NockBackTime;
+		m_param.pos.z += m_fNockBack.z / m_NockBackTime;
+
+		m_param.pos.y -= 0.01f;
+		if (m_param.pos.y < 0.5f)
+		{
+			m_isRemainNockBack = false;
+		}
+	}
+
 	// 疑似床当たり判定
 	if (m_param.pos.y < 0.5f)
 	{
@@ -144,6 +159,7 @@ void CPlayer::Move()
 		m_param.move.y = 0;
 		m_gra = 0;
 		m_isGround = true;
+		m_isRemainNockBack = false;
 	}
 	if (m_isGround)
 	{
@@ -251,21 +267,51 @@ void CPlayer::CancelMove()
 	if (m_CancelTime < 60)
 	{
 		m_CancelTime++;
-		// プレイヤーの動きを止める
-		m_param.move = { 0.0f, 0.0f, 0.0f }; 
-		m_gra = 0;
-		DirectX::XMFLOAT3 Front;
-		DirectX::XMStoreFloat3(&Front, CCameraBase::GetFrontHorizontal("Player"));
-		// プレイヤーの視点をカメラと同じにする
-		m_param.rot.y = (90.0f * 3.14159f / 180.0f) - atan2f(Front.z, Front.x);
+		if (m_isNockBack == true)
+		{
+			m_param.move = { 0.0f, 0.0f, 0.0f };
+			m_param.pos.x += m_fNockBack.x / m_NockBackTime;
+			m_param.pos.y += m_fNockBack.y / m_NockBackTime;
+			m_param.pos.z += m_fNockBack.z / m_NockBackTime;
+
+			m_param.pos.y -= 0.01f;
+			if (m_param.pos.y < 0.5f)
+			{
+				m_param.pos.y = 0.5f;
+			}
+
+		}
+		else
+		{
+			// プレイヤーの動きを止める
+			m_param.move = { 0.0f, 0.0f, 0.0f };
+			m_gra = 0;
+			DirectX::XMFLOAT3 Front;
+			DirectX::XMStoreFloat3(&Front, CCameraBase::GetFrontHorizontal("Player"));
+			// プレイヤーの視点をカメラと同じにする
+			m_param.rot.y = (90.0f * 3.14159f / 180.0f) - atan2f(Front.z, Front.x);
+		}
 		
 	}
 	else
 	{
-		m_CancelTime = 0;
-		m_isCancel = false;
-		CCameraBase::SetPrimaryCamera("Player");	// カメラ戻す
-		CCameraBase::DeleteCamera("Cutin");			// カットインカメラ削除
+		if (m_isNockBack == true)
+		{
+			if (m_param.pos.y > 0.5f)
+			{
+				m_isRemainNockBack = true;
+			}
+			m_isNockBack = false;
+			m_CancelTime = 0;
+			m_isCancel = false;
+		}
+		else
+		{
+			m_CancelTime = 0;
+			m_isCancel = false;
+			CCameraBase::SetPrimaryCamera("Player");	// カメラ戻す
+			CCameraBase::DeleteCamera("Cutin");			// カットインカメラ削除
+		}
 	}
 }
 
@@ -286,24 +332,25 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 			m_param.hp -= 0.1f;
 
 			// ノックバック
-			//DirectX::XMFLOAT3 Enemypos = obj->GetParam().pos;
-			//DirectX::XMVECTOR vEnemy = DirectX::XMLoadFloat3(&Enemypos);
+			DirectX::XMFLOAT3 Enemypos = obj->GetParam().pos;
+			DirectX::XMVECTOR vEnemy = DirectX::XMLoadFloat3(&Enemypos);
 			
-			//DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_param.pos);
+			DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_param.pos);
 			
-			//DirectX::XMVECTOR vNockBack = DirectX::XMVectorSubtract(vPos, vEnemy);
-			//DirectX::XMVector3Normalize(vNockBack);
+			DirectX::XMVECTOR vNockBack = DirectX::XMVectorSubtract(vPos, vEnemy);
+			DirectX::XMVector3Normalize(vNockBack);
 			
-			//float back = 3.0f;
-			//vNockBack = DirectX::XMVectorScale(vNockBack, back);
+			float backpower = 3.0f;
+			vNockBack = DirectX::XMVectorScale(vNockBack, backpower);
 			
-			//DirectX::XMFLOAT3 fNockBack;
-			//DirectX::XMStoreFloat3(&fNockBack, vNockBack);
+			DirectX::XMStoreFloat3(&m_fNockBack, vNockBack);
 
-			//m_param.pos.x += fNockBack.x;
-			//m_param.pos.y += fNockBack.y;
-			//m_param.pos.z += fNockBack.z;
-
+			m_isNockBack = true;
+			m_isCancel = true;
+			//m_CancelTime = 30.0f;　// ノックバック中の硬直時間
+			/*m_param.pos.x += fNockBack.x;
+			m_param.pos.y += fNockBack.y;
+			m_param.pos.z += fNockBack.z;*/
 
 			if (m_param.hp <= 0.0f)
 			{
