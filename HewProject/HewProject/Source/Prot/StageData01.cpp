@@ -7,6 +7,7 @@
 
 #include <ObjectManager.hpp>
 #include <Pillar.hpp>
+#include<Wall.hpp>
 
 // Stage00.cppを参考にジオメトリーで作成
 CStageData01::CStageData01()
@@ -31,6 +32,10 @@ CStageData01::CStageData01()
 	m_param.collisionType = COLLISION_NONE;
 	m_param.tag = TAG_STATIC_OBJECT;*/
 	CSceneBase::GetObjList().lock()->Add(new CPillar(-5,0,5));
+	CSceneBase::GetObjList().lock()->Add(new CPillar(5, 0, 5));
+	CSceneBase::GetObjList().lock()->Add(new Wall(-10, 0, -10));
+	
+	
 }
 
 CStageData01::~CStageData01()
