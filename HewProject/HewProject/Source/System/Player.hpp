@@ -36,5 +36,8 @@ private:
 	bool m_isCancel;	// d’¼’†H
 	int m_CancelTime;	// d’¼ŠÔ
 
+	void KnockBack();
+	int m_knockBackFrame;
+	DirectX::XMVECTOR m_vKnockBack;
 	CBillboard::Ptr m_bill;
 };
