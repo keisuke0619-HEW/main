@@ -13,6 +13,7 @@ public:
 	void Draw();
 	void Collision();
 	void SetPlayerPos(DirectX::XMFLOAT3 playerpos);
+	void SetEffekseer(int selectnum);
 private:
 	float m_size;
 	float m_maxSize;
@@ -25,7 +26,9 @@ private:
 	DirectX::XMFLOAT3 m_enemyPos;
 	DirectX::XMFLOAT3 m_enemyTarget;
 
+	int m_SelectEfk;
 	CEffect::Ptr m_pEfk;
+	CEffect::Ptr m_pEfk2;
 
 	bool m_debugOutput;
 };

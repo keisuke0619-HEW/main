@@ -16,8 +16,10 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	m_time = 2.0f;
 
 	// エフェクシアの初期化　読み込み
-	m_pEfk.reset(new CEffect(u"Assets/Effect/Laser01.efkefc"));
+	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamtame.efkefc"));
 	m_debugOutput = false;
+
+	m_pEfk2.reset(new CEffect(u"Assets/Effect/Beamhassya.efkefc"));
 }
 
 CBeam::~CBeam()
@@ -38,8 +40,19 @@ void CBeam::Update()
 		Destroy();
 	}	
 	//m_pEfk->SetRotation(0, -60, 0);
-	m_pEfk->SetScale(m_maxSize, m_maxSize, m_maxSize);
-	m_pEfk->SetPos(m_playerPos.x, m_playerPos.y + 1.5f, m_playerPos.z);//(m_param.pos.x, m_param.pos.y + 1.5f, m_param.pos.z);
+	switch (m_SelectEfk)
+	{
+	case(1):
+		m_pEfk->SetScale(m_maxSize, m_maxSize, m_maxSize);
+		m_pEfk->SetPos(m_playerPos.x, m_playerPos.y + 1.5f, m_playerPos.z);
+		break;
+	case(2):
+		m_pEfk2->SetScale(m_maxSize, m_maxSize, m_maxSize);
+		m_pEfk2->SetPos(m_playerPos.x, m_playerPos.y + 1.5f, m_playerPos.z);
+		break;
+	default:
+		break;
+	}
 }
 
 void CBeam::Draw()
@@ -69,10 +82,19 @@ void CBeam::Draw()
 	SetGeometoryScaling(m_size, 10000, m_size);
 	m_time -= 1.0f / 60.0f;
 
-	// 毎回エフェクシアを描画するため処理が重くなる
-	// 新しく関数を作るなど改善の余地あり
-	m_pEfk->SetRotation(rot.x, rot.y, rot.z);
-	m_pEfk->Play();
+	switch (m_SelectEfk)
+	{
+	case(1):
+		m_pEfk->SetRotation(rot.x, rot.y, rot.z);
+		m_pEfk->Play();
+		break;
+	case(2):
+		m_pEfk2->SetRotation(rot.x, rot.y, rot.z);
+		m_pEfk2->Play();
+		break;
+	default:
+		break;
+	}
 }
 
 void CBeam::Collision()
@@ -162,4 +184,9 @@ void CBeam::Collision()
 void CBeam::SetPlayerPos(DirectX::XMFLOAT3 playerpos)
 {
 	m_playerPos = playerpos;
+}
+
+void CBeam::SetEffekseer(int selectnum)
+{
+	m_SelectEfk = selectnum;
 }

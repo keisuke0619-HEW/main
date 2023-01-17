@@ -16,6 +16,8 @@ CPlayer::CPlayer()
 	m_gra = 0;
 	m_isGround = true;
 	m_beamSize = 0;
+	m_isBeamStore = false;
+	m_isOldBeamStore = false;
 	m_InvincibleTime = 0;
 	m_isCancel = false;
 	m_CancelTime = 0;
@@ -175,11 +177,13 @@ void CPlayer::Beam()
 {
 	const float maxBeamSize = 3.0f;
 	const float addBeamSize = 0.025f;
-
+	
 	m_playerUI->SetCharge(m_beamSize / maxBeamSize);
 	// RTÇ…ïœçX
 	if (Utility::GetKeyPress(KEY_BEAM))
-	{
+	{		
+		m_isBeamStore = true;
+
 		m_beamSize += m_beamSize < maxBeamSize ? addBeamSize : 0;
 		// seçƒê∂
 		if (m_isSE == false)
@@ -196,6 +200,7 @@ void CPlayer::Beam()
 	}
 	else
 	{
+		m_isBeamStore = false;
 		if (m_beamSize > 1.0f)
 		{
 			// Ç∆ÇËÇ†Ç¶Ç∏å©ÇƒÇ¢ÇÈï˚å¸Ç…ë≈Ç¬
@@ -203,6 +208,7 @@ void CPlayer::Beam()
 			DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
 
 			auto beam = new CBeam(CameraPos, CameraLook, m_beamSize);
+			beam->SetEffekseer(BEAM_SHOT);
 			beam->SetPlayerPos(m_param.pos);
 			CSceneBase::GetObjList().lock()->Add(beam);
 
@@ -239,6 +245,17 @@ void CPlayer::Beam()
 		}
 		m_beamSize = 0.0f;
 	}
+	if (m_isBeamStore == true && m_isOldBeamStore == false)
+	{
+		DirectX::XMFLOAT3 CameraPos = CCameraBase::GetDataFromTag("Player").pos;
+		DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
+
+		auto beam = new CBeam(CameraPos, CameraLook, 1.0f);
+		beam->SetEffekseer(BEAM_STORE);
+		beam->SetPlayerPos(m_param.pos);
+		CSceneBase::GetObjList().lock()->Add(beam);
+	}
+	m_isOldBeamStore = m_isBeamStore;
 	//if (m_beam)
 	//{
 	//	m_beam->Update();

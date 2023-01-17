@@ -149,6 +149,12 @@ void CEffect::Play()
 	}
 }
 
+void CEffect::End()
+{
+	// Effekseer‚ð‹­§I—¹
+	m_efkRenderer->EndRendering();
+}
+
 Effekseer::Matrix44 CEffect::GetMat(DirectX::XMFLOAT4X4 in)
 {
 	Effekseer::Matrix44 out;
