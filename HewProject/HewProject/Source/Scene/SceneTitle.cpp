@@ -52,7 +52,6 @@ void CSceneTitle::Update()
 	{
 		AddOverlay(new CGameEnd());
 	}
-
 }
 
 

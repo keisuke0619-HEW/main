@@ -57,7 +57,6 @@ private:
 		TARGET_MAX,
 	};
 	int m_target;
-	bool m_isDestroy;
 
 	CGameUI* m_speedXCursor;
 	CGameUI* m_speedXBar;
