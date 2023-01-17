@@ -12,5 +12,8 @@ public:
 
 private:
 	void Update() override;
-	CGameUI::Ref m_TitleUI;
+	CGameUI::Ref m_TitlebgUI;
+	CGameUI::Ref m_TitlerogoUI;
+	CGameUI::Ref m_StartUI;
+	CGameUI::Ref m_EndUI;
 };
