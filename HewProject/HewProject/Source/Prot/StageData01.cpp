@@ -31,10 +31,10 @@ CStageData01::CStageData01()
 	m_param.pos.z = 0.0f;
 	m_param.collisionType = COLLISION_NONE;
 	m_param.tag = TAG_STATIC_OBJECT;*/
-	CSceneBase::GetObjList().lock()->Add(new CPillar(-5,0,5));
-	CSceneBase::GetObjList().lock()->Add(new CPillar(5, 0, 5));
-	CSceneBase::GetObjList().lock()->Add(new Wall(-10, 0, -10));
-	CSceneBase::GetObjList().lock()->Add(new Wall(10, 0, -15,1,1,1));
+	CSceneBase::GetObjList().lock()->Add(new CPillar(-20,0,20));
+	CSceneBase::GetObjList().lock()->Add(new CPillar(20, 0,-20));
+	CSceneBase::GetObjList().lock()->Add(new Wall(20, 0, 20, 0, 90 * 3.1415 / 180, 0));
+	CSceneBase::GetObjList().lock()->Add(new Wall(-20, 0, -20,0,90*3.1415/180,0));
 
 	
 }
