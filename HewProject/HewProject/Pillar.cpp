@@ -8,7 +8,7 @@ CPillar::CPillar(float x, float y, float z)
 	m_param.pos.z = z;
 	m_param.collisionType = COLLISION_NONE;
 	m_param.tag = TAG_STATIC_OBJECT;
-	m_param.drawOffset = { 0,5.8f,0 };
+	//m_param.drawOffset = { 0,5.8f,0 };
 }
 
 CPillar::~CPillar()
