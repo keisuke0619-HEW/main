@@ -36,11 +36,5 @@ private:
 	bool m_isCancel;	// 硬直中？
 	int m_CancelTime;	// 硬直時間
 
-	bool m_isNockBack;	// ノックバックしてる？
-	DirectX::XMFLOAT3 m_fNockBack;
-	int m_NockBackTime; //	ノックバック時間
-	bool m_isRemainNockBack; // ノックバックが残っているか？
-
-
 	CBillboard::Ptr m_bill;
 };
