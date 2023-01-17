@@ -87,6 +87,7 @@
     <ClInclude Include="Source\System\Timer.h" />
     <ClInclude Include="Source\System\UiManager.hpp" />
     <ClInclude Include="Source\System\WinUtil.h" />
+    <ClInclude Include="Wall.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BGM.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Source\System\Timer.cpp" />
     <ClCompile Include="Source\System\UiManager.cpp" />
     <ClCompile Include="Source\System\WinUtil.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ColorPS.hlsl">

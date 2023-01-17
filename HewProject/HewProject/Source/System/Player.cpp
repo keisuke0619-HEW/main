@@ -93,8 +93,8 @@ void CPlayer::Move()
 	const float GRAVITY_MAX = 0.4f;
 	auto vFront = CCameraBase::GetPrimaryFrontHorizontal();
 	auto vSide = CCameraBase::GetPrimaryRightHorizontal();
-	auto fGra = DirectX::XMFLOAT3(0, -m_gra, 0);
-	auto vGra = DirectX::XMLoadFloat3(&fGra);
+	//auto fGra = DirectX::XMFLOAT3(0, -m_gra, 0);
+	//auto vGra = DirectX::XMLoadFloat3(&fGra);
 	auto vMove = DirectX::XMVectorZero();
 	
 	m_gra += m_gra < GRAVITY_MAX ? MOVE_GRAVITY : 0;
@@ -108,15 +108,11 @@ void CPlayer::Move()
 	if (Utility::GetKeyPress(KEY_MOVE_D))
 		vMove = DirectX::XMVectorAdd(vMove, vSide);
 	vMove = DirectX::XMVector3Normalize(vMove);
-	vMove = DirectX::XMVectorAdd(vMove, vGra);
+	//vMove = DirectX::XMVectorAdd(vMove, vGra);
 	vFront = DirectX::XMVectorScale(vFront, Utility::GetStickLeft().y);
 	vSide = DirectX::XMVectorScale(vSide, Utility::GetStickLeft().x);
 	vMove = DirectX::XMVectorAdd(vMove, vFront);
 	vMove = DirectX::XMVectorAdd(vMove, vSide);
-#ifdef _DEBUG
-	if (IsKeyPress(VK_CONTROL))
-		vMove = DirectX::XMVectorScale(vMove, 5.0f);
-#endif // _DEBUG
 
 	// ã‰ºˆ—
 	DirectX::XMFLOAT3 up = { 0, 1, 0 };
@@ -136,6 +132,8 @@ void CPlayer::Move()
 	vMove = DirectX::XMVectorScale(vMove, MOVE_SPEED);
 
 	DirectX::XMStoreFloat3(&m_param.move, vMove);
+	KnockBack();
+	m_param.move.y -= m_gra * 0.1f;
 
 	// ‹^Ž—°“–‚½‚è”»’è
 	if (m_param.pos.y < 0.5f)
@@ -154,6 +152,7 @@ void CPlayer::Move()
 		}
 	}
 
+	// ‹«ŠEˆ—
 	if (m_param.pos.x > 34.0f)
 	{
 		m_param.pos.x = 34.0f;
@@ -269,6 +268,18 @@ void CPlayer::CancelMove()
 	}
 }
 
+void CPlayer::KnockBack()
+{
+	if (m_knockBackFrame > 0)
+	{
+		DirectX::XMFLOAT3 fKnock;
+		DirectX::XMStoreFloat3(&fKnock, m_vKnockBack);
+		m_vKnockBack = DirectX::XMVectorScale(m_vKnockBack, 0.8f);
+		m_param.move = fKnock;
+	}
+	m_knockBackFrame--;
+}
+
 void CPlayer::SetTarget(DirectX::XMFLOAT3 target)
 {
 	m_beamTarget = target;
@@ -286,25 +297,18 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 			m_param.hp -= 0.1f;
 
 			// ƒmƒbƒNƒoƒbƒN
-			//DirectX::XMFLOAT3 Enemypos = obj->GetParam().pos;
-			//DirectX::XMVECTOR vEnemy = DirectX::XMLoadFloat3(&Enemypos);
+			const float knockBackPower = 0.3f;
+			const int knockBackFrame = 30;
+			DirectX::XMFLOAT3 Enemypos = obj->GetParam().pos;
+			DirectX::XMVECTOR vEnemy = DirectX::XMLoadFloat3(&Enemypos);
 			
-			//DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_param.pos);
+			DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_param.pos);
 			
-			//DirectX::XMVECTOR vNockBack = DirectX::XMVectorSubtract(vPos, vEnemy);
-			//DirectX::XMVector3Normalize(vNockBack);
+			m_vKnockBack = DirectX::XMVectorSubtract(vPos, vEnemy);
+			DirectX::XMVector3Normalize(m_vKnockBack);
 			
-			//float back = 3.0f;
-			//vNockBack = DirectX::XMVectorScale(vNockBack, back);
-			
-			//DirectX::XMFLOAT3 fNockBack;
-			//DirectX::XMStoreFloat3(&fNockBack, vNockBack);
-
-			//m_param.pos.x += fNockBack.x;
-			//m_param.pos.y += fNockBack.y;
-			//m_param.pos.z += fNockBack.z;
-
-
+			m_vKnockBack = DirectX::XMVectorScale(m_vKnockBack, knockBackPower);
+			m_knockBackFrame = knockBackFrame;
 			if (m_param.hp <= 0.0f)
 			{
 				//CSceneManager::SetScene(SCENE_RESULT);

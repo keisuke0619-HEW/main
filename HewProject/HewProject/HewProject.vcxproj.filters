@@ -264,6 +264,9 @@
     <ClInclude Include="Pillar.hpp">
       <Filter>シーンファイル\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Wall.hpp">
+      <Filter>シーンファイル\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -456,6 +459,9 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Pillar.cpp">
+      <Filter>シーンファイル\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
       <Filter>シーンファイル\Object</Filter>
     </ClCompile>
   </ItemGroup>
