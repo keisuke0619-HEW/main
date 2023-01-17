@@ -27,5 +27,4 @@ private:
 
 	CEffect::Ptr m_pEfk;
 
-	bool m_debugOutput;
 };

@@ -17,7 +17,6 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 
 	// エフェクシアの初期化　読み込み
 	m_pEfk.reset(new CEffect(u"Assets/Effect/Laser01.efkefc"));
-	m_debugOutput = false;
 }
 
 CBeam::~CBeam()
@@ -36,7 +35,7 @@ void CBeam::Update()
 	if (m_param.frame >= beamDeadFrame)
 	{
 		Destroy();
-	}	
+	}
 	//m_pEfk->SetRotation(0, -60, 0);
 	m_pEfk->SetScale(m_maxSize, m_maxSize, m_maxSize);
 	m_pEfk->SetPos(m_playerPos.x, m_playerPos.y + 1.5f, m_playerPos.z);//(m_param.pos.x, m_param.pos.y + 1.5f, m_param.pos.z);
@@ -93,69 +92,38 @@ void CBeam::Collision()
 		// 敵のデータを使ってエネミーとの当たり判定をとる
 		m_enemyPos = enemyParam.pos;
 		DirectX::XMVECTOR vEnemyPos = DirectX::XMLoadFloat3(&m_enemyPos);
-		DirectX::XMVECTOR vEnemyTarget = DirectX::XMVectorSubtract(vEnemyPos, vPos);		// ビームの開始地から敵の位置のベクトル
-		DirectX::XMVECTOR vEnemyTargetNormal = DirectX::XMVector3Normalize(vEnemyTarget);	// ビームの開始地から敵の位置の単位ベクトル
+		DirectX::XMVECTOR vEnemyTarget = DirectX::XMVectorSubtract(vEnemyPos, vPos); // ビームの開始地点から敵の位置のベクトル
+		DirectX::XMVECTOR vEnemyTargetNormal = DirectX::XMVector3Normalize(vEnemyTarget); // ビームの開始地点から敵の位置の単位ベクトル
 
-		// 内積の計算
-		float normalDot;
-		DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(DirectX::XMVectorSubtract(vTarget, DirectX::XMVectorZero()), DirectX::XMVectorSubtract(vEnemyTargetNormal, DirectX::XMVectorZero()));
-
-		DirectX::XMStoreFloat(&normalDot,vdot);
-		if (normalDot <= 0.0f)
+		// 内積の計算１（角度をとるための計算。単位ベクトル×単位ベクトルからAcosで角度取得可能）
+		float normalDot;	// 内積の結果を保存する変数
+		DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTargetNormal);	// 内積を計算
+		DirectX::XMStoreFloat(&normalDot, vdot);	// float型の変数に格納
+		if (normalDot <= 0.0f)	// 後ろは判定しない
 		{
 			continue;
 		}
+		// 内積の計算２（ビームのどの地点が一番近いかを取得。単位ベクトル×ベクトルでベクトルが単位ベクトルに落とす影の長さに等しいのを利用。）
+		float disToEnemy;	// ビームベクトルに落ちる影の長さを格納する
+		vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);	// ビーム単位ベクトルと敵ベクトルの内積。（＝ビームベクトルに落ちる影の長さ）
+		DirectX::XMStoreFloat(&disToEnemy, vdot);	// floatに格納
 
 		// ビームと敵の角度を計算
-		float rad;
-		rad = acosf(normalDot);// ビームベクトルと敵ベクトルの角度
+		float rad = acosf(normalDot);// ビームベクトルと敵ベクトルの角度
 
-		float disFromBeam;
-		DirectX::XMStoreFloat(&disFromBeam, DirectX::XMVector3Length(vEnemyTarget));
-		disFromBeam *= sinf(rad);
+		float disFromBeam = tanf(rad) * disToEnemy;	// ビームから敵の距離
+		disFromBeam = fabsf(disFromBeam);			// 絶対値をとる
 
-		if (disFromBeam < m_maxSize)
+		// 以下当たり判定
+		if (disFromBeam < m_maxSize * 3)
 		{
 			(*itr)->OnCollisionTag(TAG_BEAM);
+
 		}
-		else if (disFromBeam < m_maxSize * 3)
+		else if (disFromBeam < m_maxSize * 6)
 		{
 			(*itr)->OnCollisionTag(TAG_SHOCK);
 		}
-
-		if (m_debugOutput == false)
-		{
-			CDebugWindow::Print(ShimizuKeisuke, "FromBeam", disFromBeam);
-			//CDebugWindow::Print(ShimizuKeisuke, "ToEnemy", disToEnemy);
-
-		}
-
-		m_debugOutput = true;
-
-		//// ビームと敵との距離を計算
-		//DirectX::XMVECTOR vEnemyToBeamDis = DirectX::XMVectorSubtract(vEnemyPos,vPos);
-		//float EnemyToBeamDis;
-		//DirectX::XMStoreFloat(&EnemyToBeamDis, vEnemyToBeamDis);
-		//float distance = sinf(rad) * EnemyToBeamDis;
-
-		//// 絶対値  
-		//float AbsoluteValue_EnemyDis = fabsf(distance);
-		//float AbsoluteValue_BeamPos = fabsf(m_size);
-		//float AbsoluteValue_Shockwave = fabsf(m_size * 2.0f);
-
-		//// 当たり判定を取るための計算
-		//float DisResult = enemyParam.collisionData.sphire.sphireRadius - (AbsoluteValue_EnemyDis - AbsoluteValue_BeamPos);
-		//float ShockwaveDisResult = enemyParam.collisionData.sphire.sphireRadius - (AbsoluteValue_EnemyDis - AbsoluteValue_Shockwave);
-
-		// ビームと敵の当たり判定
-		//if (DisResult > 0)
-		//{
-		//	(*itr)->OnCollisionTag(TAG_BEAM);
-		//}
-		//else if (ShockwaveDisResult > 0)	// 衝撃波と敵の当たり判定
-		//{
-		//	(*itr)->OnCollisionTag(TAG_SHOCK);
-		//}
 	}
 }
 
