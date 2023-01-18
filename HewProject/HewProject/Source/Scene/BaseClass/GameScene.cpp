@@ -15,6 +15,7 @@ CGameScene::CGameScene()
 
 	SetBGM("Assets/Sound/BGM.wav");
 
+	m_isNext = false;
 }
 
 CGameScene::~CGameScene()
@@ -34,7 +35,13 @@ void CGameScene::Update()
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
-		AddOverlay(new CTitleBack());
+		auto tmp = new  CTitleBack();
+		tmp->SetIsNext(&m_isNext);
+		AddOverlay(tmp);
+	}
+	if (m_isNext)
+	{
+		CSceneManager::SetScene(SCENE_TITLE);
 	}
 }
 

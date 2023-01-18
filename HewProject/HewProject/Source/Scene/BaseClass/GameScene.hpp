@@ -14,4 +14,5 @@ public:
 	void SetData(void* dataPtr, long size = 0, const char* name = "NO_NAME");
 private:
 	std::unique_ptr<CStageData01> m_stage;
+	bool m_isNext;
 };
