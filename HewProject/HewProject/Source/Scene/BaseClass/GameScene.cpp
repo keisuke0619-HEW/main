@@ -32,6 +32,10 @@ void CGameScene::Update()
 	{
 		AddOverlay(new COverlayConfig());
 	}
+	if (Utility::GetKeyTrigger(KEY_CANCEL))
+	{
+		AddOverlay(new CTitleBack());
+	}
 }
 
 void CGameScene::Draw()

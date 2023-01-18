@@ -16,13 +16,21 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	m_time = 2.0f;
 
 	// エフェクシアの初期化　読み込み
-	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamtame.efkefc"));
+	/*m_pEfk.reset(new CEffect(u"Assets/Effect/beam.efkefc"));
 
-	m_pEfk2.reset(new CEffect(u"Assets/Effect/Beamhassya.efkefc"));
+	m_pEfk2.reset(new CEffect(u"Assets/Effect/beam.efkefc"));*/
+
+	m_pEfk.reset(new CEffect(u"Assets/Effect/Laser01.efkefc"));
+
+	m_pEfk2.reset(new CEffect(u"Assets/Effect/Laser01.efkefc"));
 }
 
 CBeam::~CBeam()
 {
+	/*m_pEfk->~CEffect();
+	m_pEfk2->~CEffect();*/
+	//m_pEfk->End();
+	//m_pEfk2->End();
 }
 
 void CBeam::Update()
@@ -32,7 +40,10 @@ void CBeam::Update()
 	if (m_param.frame < beamGrowFrame)
 	{
 		m_size = m_maxSize * Utility::OutQuad((float)m_param.frame / beamGrowFrame);// += m_maxSize / beamGrowFrame;
-		Collision();
+		if (m_SelectEfk == 2)
+		{
+			Collision();
+		}
 	}
 	if (m_param.frame >= beamDeadFrame)
 	{
