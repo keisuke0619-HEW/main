@@ -296,8 +296,8 @@ bool CTitleBack::IsLoop()
 
 void CTitleBack::Update()
 {
-	MoveCursor();
 	SetStatus();
+	MoveCursor();
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		m_isDestroy = true;
