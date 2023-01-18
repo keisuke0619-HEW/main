@@ -31,6 +31,12 @@ void CMiniMap::Update()
 		// “G‚ÌƒŠƒXƒg
 		auto enemyList = CSceneBase::GetObjList().lock()->FindTagAll(TAG_ENEMY);
 
+		for (int i = 0; i < m_Icon.size(); i++)
+		{
+			CUIManager::GetIns()->Delete(m_Icon[i]);
+			
+		}
+		m_Icon.clear();
 
 		DirectX::XMFLOAT3 playerPos = m_player.lock()->GetParam().pos;
 		DirectX::XMVECTOR player = DirectX::XMLoadFloat3(&playerPos);
