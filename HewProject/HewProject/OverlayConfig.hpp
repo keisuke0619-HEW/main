@@ -75,6 +75,7 @@ public:
 	~CTitleBack();
 	static bool IsLoop();
 
+	void SetIsNext(bool* next);
 private:
 	void Update();
 
@@ -97,6 +98,6 @@ private:
 	CNumberUI::Ptr m_speedXNum;
 	CNumberUI::Ptr m_speedYNum;
 
-
+	bool* m_next;
 
 };

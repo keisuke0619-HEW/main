@@ -283,6 +283,7 @@ CTitleBack::CTitleBack()
 
 	g_isLoop = false;
 	m_isDestroy = false;
+	m_next = false;
 }
 
 CTitleBack::~CTitleBack()
@@ -294,6 +295,11 @@ bool CTitleBack::IsLoop()
 	return g_isLoop;
 }
 
+void CTitleBack::SetIsNext(bool * next)
+{
+	m_next = next;
+}
+
 void CTitleBack::Update()
 {
 	SetStatus();
@@ -301,6 +307,21 @@ void CTitleBack::Update()
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		m_isDestroy = true;
+	}
+
+	if (Utility::GetKeyTrigger(KEY_SELECT))
+	{
+		//	Œˆ’è
+		if ((m_target % TARGET_MAX) == 0)
+		{
+			if (m_next != nullptr)
+				*m_next = true;
+			m_isDestroy = true;
+		}
+		if ((m_target % TARGET_MAX) == 1)
+		{
+			m_isDestroy = true;
+		}
 	}
 }
 
@@ -314,18 +335,7 @@ void CTitleBack::MoveCursor()
 	{
 		m_target++;
 	}
-	if (Utility::GetKeyTrigger(KEY_SELECT))
-	{
-		//	Œˆ’è
-		if ((m_target % TARGET_MAX) == 0)
-		{
-			CSceneManager::SetScene(SCENE_TITLE);
-		}
-		if ((m_target % TARGET_MAX) == 1)
-		{
-			m_isDestroy = true;
-		}
-	}
+	
 	if (m_target < 0)
 	{
 		m_target = TARGET_MAX * 100;

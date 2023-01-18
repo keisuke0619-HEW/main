@@ -16,13 +16,9 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	m_time = 2.0f;
 
 	// エフェクシアの初期化　読み込み
-	/*m_pEfk.reset(new CEffect(u"Assets/Effect/beam.efkefc"));
+	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamtame.efkefc"));
 
-	m_pEfk2.reset(new CEffect(u"Assets/Effect/beam.efkefc"));*/
-
-	m_pEfk.reset(new CEffect(u"Assets/Effect/Laser01.efkefc"));
-
-	m_pEfk2.reset(new CEffect(u"Assets/Effect/Laser01.efkefc"));
+	m_pEfk2.reset(new CEffect(u"Assets/Effect/Beamhassya.efkefc"));
 }
 
 CBeam::~CBeam()
