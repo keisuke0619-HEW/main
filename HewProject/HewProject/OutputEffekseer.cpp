@@ -152,7 +152,7 @@ void CEffect::Play()
 void CEffect::End()
 {
 	// Effekseer‚ð‹­§I—¹
-	m_efkRenderer->EndRendering();
+	m_efkManager->StopEffect(m_efkHandle);
 }
 
 Effekseer::Matrix44 CEffect::GetMat(DirectX::XMFLOAT4X4 in)
