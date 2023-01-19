@@ -9,7 +9,7 @@ TModelData CProtEnemy::sModel;
 
 CProtEnemy::CProtEnemy()
 	: CObjectBase()	// クラス全体で使いまわす場合は引数なし
-	, m_move(0.075f)
+	, m_move(0.05f)
 	, m_distance(8.0f)
 	, m_cnt(0)
 	, m_randNum(0)
