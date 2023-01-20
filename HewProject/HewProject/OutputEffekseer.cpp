@@ -139,6 +139,11 @@ void CEffect::SetScale(float x, float y, float z)
 	m_scale.Z = z;
 }
 
+void CEffect::AddPos(float x, float y, float z)
+{
+	m_efkManager->AddLocation(m_efkHandle, ::Effekseer::Vector3D(x, y, z));
+}
+
 void CEffect::Play()
 {
 	// Draw‚Åˆê‰ñ‚¾‚¯ŒÄ‚Î‚ê‚é
@@ -153,6 +158,7 @@ void CEffect::End()
 {
 	// Effekseer‚ð‹­§I—¹
 	m_efkManager->StopEffect(m_efkHandle);
+	IsPlay = false;
 }
 
 Effekseer::Matrix44 CEffect::GetMat(DirectX::XMFLOAT4X4 in)

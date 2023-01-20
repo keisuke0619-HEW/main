@@ -26,6 +26,7 @@ public:
 	void SetPos(float x, float y, float z);
 	void SetRotation(float x, float y, float z);
 	void SetScale(float x, float y, float z);
+	void AddPos(float x, float y, float z);
 	void Play();
 	void End();
 private:

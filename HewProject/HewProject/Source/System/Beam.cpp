@@ -16,17 +16,13 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	m_time = 2.0f;
 
 	// エフェクシアの初期化　読み込み
-	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamtame.efkefc"));
+	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamhassya.efkefc"));
 
-	m_pEfk2.reset(new CEffect(u"Assets/Effect/Beamhassya.efkefc"));
 }
 
 CBeam::~CBeam()
 {
-	/*m_pEfk->~CEffect();
-	m_pEfk2->~CEffect();*/
-	//m_pEfk->End();
-	//m_pEfk2->End();
+	
 }
 
 void CBeam::Update()
@@ -36,29 +32,15 @@ void CBeam::Update()
 	if (m_param.frame < beamGrowFrame)
 	{
 		m_size = m_maxSize * Utility::OutQuad((float)m_param.frame / beamGrowFrame);// += m_maxSize / beamGrowFrame;
-		if (m_SelectEfk == 2)
-		{
-			Collision();
-		}
+		Collision();
 	}
 	if (m_param.frame >= beamDeadFrame)
 	{
 		Destroy();
 	}
 	//m_pEfk->SetRotation(0, -60, 0);
-	switch (m_SelectEfk)
-	{
-	case(1):
-		m_pEfk->SetScale(m_maxSize, m_maxSize, m_maxSize);
-		m_pEfk->SetPos(m_playerPos.x, m_playerPos.y + 1.5f, m_playerPos.z);
-		break;
-	case(2):
-		m_pEfk2->SetScale(m_maxSize, m_maxSize, m_maxSize);
-		m_pEfk2->SetPos(m_playerPos.x, m_playerPos.y + 1.5f, m_playerPos.z);
-		break;
-	default:
-		break;
-	}
+	m_pEfk->SetScale(m_maxSize, m_maxSize, m_maxSize);
+	m_pEfk->SetPos(m_playerPos.x, m_playerPos.y + 1.5f, m_playerPos.z);
 }
 
 void CBeam::Draw()
@@ -88,19 +70,8 @@ void CBeam::Draw()
 	SetGeometoryScaling(m_size, 10000, m_size);
 	m_time -= 1.0f / 60.0f;
 
-	switch (m_SelectEfk)
-	{
-	case(1):
-		m_pEfk->SetRotation(rot.x, rot.y, rot.z);
-		m_pEfk->Play();
-		break;
-	case(2):
-		m_pEfk2->SetRotation(rot.x, rot.y, rot.z);
-		m_pEfk2->Play();
-		break;
-	default:
-		break;
-	}
+	m_pEfk->SetRotation(rot.x, rot.y, rot.z);
+	m_pEfk->Play();
 }
 
 void CBeam::Collision()
@@ -159,9 +130,4 @@ void CBeam::Collision()
 void CBeam::SetPlayerPos(DirectX::XMFLOAT3 playerpos)
 {
 	m_playerPos = playerpos;
-}
-
-void CBeam::SetEffekseer(int selectnum)
-{
-	m_SelectEfk = selectnum;
 }

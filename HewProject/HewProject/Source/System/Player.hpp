@@ -5,6 +5,7 @@
 #include <PlayerUI.hpp>
 #include <Billboard.h>
 #include "Sound.h"
+#include <OutputEffekseer.h>
 
 enum E_Efk
 {
@@ -49,4 +50,6 @@ private:
 	int m_knockBackFrame;
 	DirectX::XMVECTOR m_vKnockBack;
 	CBillboard::Ptr m_bill;
+
+	CEffect::Ptr m_pEfk;
 };
