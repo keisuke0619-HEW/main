@@ -15,16 +15,20 @@ CStageData01::CStageData01()
 {
 	m_enemyManager.reset(new CProtEnemyManager());
 	//°
-	m_producePlane = new ProducePlane("Assets/Img/White.png");
-	m_producePlane->SetProducePlaneInformation({ 0,0.f,0 }, { 8.37f, 8.37f, 0 }, { 90,0,0 });
-	m_producePlane->SetColor(0.3f, 0.3f, 0.3f, 1);
+	m_producePlane = new ProducePlane("Assets/Img/Game/yuka.tif");
+	m_producePlane->SetProducePlaneInformation({ 0,0.f,0 }, { 70, 70,0 }, { 90,0,0 });
+	m_producePlane->SetColor(1.0f, 1.0f, 1.0f, 1);
 	//•Ç
 	for (int i = 0; i < 4; i++)
 	{
-		m_wall[i].reset(new ProducePlane("Assets/Img/White.png"));
-		m_wall[i]->SetProducePlaneInformation({ cosf(i*3.14f/2) * 35,3.5f,sinf(i * 3.14f / 2) * 35 }, {8.37f, 2.5f, 0}, {0,-i * 90.0f + 90.0f,0});
-		m_wall[i]->SetColor(0.3f, 0.76f, 1.0f, 0.5f);
+		m_wall[i].reset(new ProducePlane("Assets/Img/Game/kabe.tif"));
+		m_wall[i]->SetProducePlaneInformation({ cosf(i*3.14f/2) * 35,5.0f,sinf(i * 3.14f / 2) * 35 }, {70.0f, 10.0f, 0}, {0,-i * 90.0f + 90.0f,0});
+		m_wall[i]->SetColor(1.0f, 1.0f, 1.0f, 1);
 	}
+	// “Vˆä
+	m_roof.reset(new ProducePlane("Assets/Img/Game/tenjyou.tif"));
+	m_roof->SetProducePlaneInformation({ 0,10,0 }, { 70.0f, 70.0f,0 }, { 270,0,0 });
+	m_roof->SetColor(1, 1, 1, 1);
 	//’Œ
 	/*m_param.pos.x = 0.0f;
 	m_param.pos.y = 0.0f;
@@ -61,4 +65,5 @@ void CStageData01::Draw()
 	{
 		m_wall[i]->Draw();
 	}
+	m_roof->Draw();
 }

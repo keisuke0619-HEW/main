@@ -28,4 +28,5 @@ private:
 	std::unique_ptr<CProtEnemyManager> m_enemyManager;
 	ProducePlane* m_producePlane;
 	std::unique_ptr<ProducePlane> m_wall[4];
+	std::unique_ptr<ProducePlane> m_roof;
 };

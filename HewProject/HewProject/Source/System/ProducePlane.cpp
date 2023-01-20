@@ -32,8 +32,8 @@ void ProducePlane::Draw()
 		DirectX::XMMATRIX Rx = DirectX::XMMatrixRotationX(m_rot.x);
 		DirectX::XMMATRIX Ry = DirectX::XMMatrixRotationY(m_rot.y);
 		DirectX::XMMATRIX Rz = DirectX::XMMatrixRotationZ(m_rot.z);
-		DirectX::XMMATRIX S = DirectX::XMMatrixScaling(m_size.x, m_size.y, 0.0f);
-		DirectX::XMMATRIX mat = S * Rx * Ry * Rz * T;
+		//DirectX::XMMATRIX S = DirectX::XMMatrixScaling(m_size.x, m_size.y, 0.0f);
+		DirectX::XMMATRIX mat = Rx * Ry * Rz * T;
 		mat = DirectX::XMMatrixTranspose(mat);
 		DirectX::XMStoreFloat4x4(&world, mat);
 		
