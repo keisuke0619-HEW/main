@@ -76,15 +76,14 @@ void CPlayer::Update()
 
 void CPlayer::Draw()
 {
-	auto param = m_param;
-	m_param.pos.y += 1.0f;
+	
 	m_modelData.model->Step(1.0f / 60.0f);
 	CObjectBase::Draw();
 	//m_playerUI->Draw();
 	//if(m_beam)
 	//	m_beam->Draw();
 	m_playerUI->SetLife(m_param.hp);
-	m_param = param;
+	
 
 }
 
@@ -138,9 +137,9 @@ void CPlayer::Move()
 	m_param.move.y -= m_gra * 0.1f;
 
 	// ‹^—°“–‚½‚è”»’è
-	if (m_param.pos.y < 0.5f)
+	if (m_param.pos.y < 0.0f)
 	{
-		m_param.pos.y = 0.5f;
+		m_param.pos.y = 0.0f;
 		m_param.move.y = 0;
 		m_gra = 0;
 		m_isGround = true;
@@ -230,7 +229,7 @@ void CPlayer::Beam()
 			// ƒvƒŒƒCƒ„[‚ğd’¼
 			m_isCancel = true;
 			auto cutin = new CCutinCamera();
-			cutin->SetData({ 0,0,0 }, { 10,10,10 }, { 0,0,0 }, { 0,0,0 });
+			cutin->SetData(m_param.pos, { m_param.pos.x,m_param.pos.y + 10,m_param.pos.z }, CCameraBase::GetDataFromTag("Player").look , m_param.rot);
 			CCameraBase::CreateCamera(cutin, "Cutin");
 			CCameraBase::SetPrimaryCamera("Cutin");
 		}
