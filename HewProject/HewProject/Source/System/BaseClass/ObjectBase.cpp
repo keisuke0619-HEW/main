@@ -2,7 +2,7 @@
 #include <Camera.hpp>
 #include <DebugWindow.hpp>
 #include <ObjectManager.hpp>
-#define AddVector3(v1, v2) v1.x += v2.x; v1.y += v2.y; v1.z += v2.z;
+
 CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string name)
 {
     // メンバ変数の初期化
@@ -16,8 +16,6 @@ CObjectBase::CObjectBase(const char* src, float scale, bool isFlip, std::string 
     m_param.name = name;
     m_param.isDestroy = false;
     m_param.collisionType = COLLISION_NONE;
-	m_param.collisionData.sphire.sphirePos = { 0 ,0, 0 };
-    m_param.collisionData.sphire.sphireRadius = 0;
     m_param.hp = 1.0f;
     m_param.drawOffset = { 0,0,0 };
     // ソースが空だったら読み込まない
@@ -34,8 +32,8 @@ CObjectBase::~CObjectBase()
 void CObjectBase::BaseUpdate()
 {
     Update();
-    AddVector3(m_param.move, m_param.accel);
-    AddVector3(m_param.pos, m_param.move);
+    //AddVector3(m_param.move, m_param.accel);
+    //AddVector3(m_param.pos, m_param.move);
     if (m_param.hp <= 0.0f)
         Destroy();
     m_param.frame++;
@@ -52,6 +50,7 @@ void CObjectBase::OnCollision(Ptr collisionObj)
 
 void CObjectBase::OnCollisionTag(EObjectTag tag)
 {
+
 }
 
 TObjectParam CObjectBase::GetParam()

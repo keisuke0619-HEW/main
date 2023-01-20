@@ -11,7 +11,6 @@
 
 CPlayer::CPlayer()
 	: CObjectBase("Assets/Model/player.fbx", 0.08f, false, "Player")
-	//: CObjectBase("Assets/unitychan/unitychan.fbx", 0.01f, false, "Player")
 {
 	m_param.tag = TAG_PLAYER;
 	m_gra = 0;
@@ -21,9 +20,16 @@ CPlayer::CPlayer()
 	m_InvincibleTime = 0;
 	m_isCancel = false;
 	m_CancelTime = 0;
-	m_param.collisionType = COLLISION_SPHIRE;
-	m_param.collisionData.sphire.sphirePos = m_param.pos;
-	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
+
+	// ‚±‚±‚Å•`‰æ‚ð‚¸‚ç‚·
+	m_param.drawOffset = { 0, 0, 0 };
+
+	// “–‚½‚è”»’è‚ÌÝ’è
+	m_param.collisionType = COLLISION_CHARACTER;
+	m_param.collisionData.character.pos = m_param.pos;
+	m_param.collisionData.character.pos.y += m_param.drawOffset.y + 0.1f;
+	m_param.collisionData.character.radius = 0.2f;
+
 	m_playerUI.reset(new CPlayerUI());
 	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/unitychan/walk.fbx");
 	if (no == Model::ANIME_NONE)
@@ -52,6 +58,8 @@ CPlayer::~CPlayer()
 
 void CPlayer::Update()
 {
+	m_oldPos = m_param.pos;
+
 	if (m_isCancel == false)
 	{
 		Move();
@@ -62,10 +70,15 @@ void CPlayer::Update()
 		CancelMove();
 	}
 	m_InvincibleTime--;
-	//m_param.rot.y = CCameraBase::GetPrimaryRadXZ() + 3.14f;
-	m_param.collisionData.sphire.sphirePos = m_param.pos;
-	m_playerUI->Update();
 
+	AddVector3(m_param.move, m_param.accel);
+	AddVector3(m_param.pos, m_param.move);
+
+	// “–‚½‚è”»’è‚ÌXV
+	m_param.collisionData.character.pos = m_param.pos;
+	m_param.collisionData.character.pos.y += m_param.drawOffset.y + 0.1f;
+
+	m_playerUI->Update();
 
 	m_bill->SetPos({ m_param.pos.x, m_param.pos.y + 100.0f, m_param.pos.z });
 	m_bill->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
@@ -311,10 +324,16 @@ void CPlayer::SetTarget(DirectX::XMFLOAT3 target)
 
 void CPlayer::OnCollision(IObjectBase::Ptr obj)
 {
-	if (m_InvincibleTime < 0)
+	switch (obj->GetParam().tag)
 	{
-
-		if (obj->GetParam().tag == TAG_ENEMY)
+	case TAG_NONE:
+		break;
+	case TAG_PLAYER:
+		break;
+	case TAG_CAMERA:
+		break;
+	case TAG_ENEMY:
+		if (m_InvincibleTime < 0)
 		{
 			m_InvincibleTime = 120;
 
@@ -328,10 +347,10 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 			auto pos = m_param.pos;
 			pos.y += 0.5f;
 			DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&pos);
-			
+
 			m_vKnockBack = DirectX::XMVectorSubtract(vPos, vEnemy);
 			DirectX::XMVector3Normalize(m_vKnockBack);
-			
+
 			m_vKnockBack = DirectX::XMVectorScale(m_vKnockBack, knockBackPower);
 			m_knockBackFrame = knockBackFrame;
 			if (m_param.hp <= 0.0f)
@@ -344,5 +363,17 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 				CPlayerCamera::SetBlur();
 			}
 		}
+		break;
+	case TAG_BEAM:
+		break;
+	case TAG_SHOCK:
+		break;
+	case TAG_STATIC_OBJECT:
+		m_param.pos.x = m_oldPos.x;
+		m_param.pos.z = m_oldPos.z;
+		m_param.move = { 0.f,0.f,0.f };
+		break;
+	default:
+		break;
 	}
 }

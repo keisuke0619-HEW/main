@@ -18,38 +18,49 @@ enum EObjectTag
 
 enum ECollisionType
 {
-	COLLISION_NONE,		// 当たり判定を使用しない
-	COLLISION_SPHIRE,	// 球の当たり判定
-	COLLISION_RAY,		// レイの当たり判定
-	COLLISION_PLANE,	// 板の当たり判定
+	COLLISION_NONE,			// 当たり判定を使用しない
+
+	COLLISION_CHARACTER,	// キャラクターの当たり判定	(円柱)
+	COLLISION_OBSTACLES,	// 障害物の当たり判定		(立方体)
+	COLLISION_CAMERARAY,	// カメラのレイの当たり判定	(レイ)
+	COLLISION_PLANE,		// 板の当たり判定			(面)
+
 	// 新たに当たり判定の種類を作る場合はここに追加する。
 };
 
-struct SphireData
+struct CharacterData
 {
-	DirectX::XMFLOAT3 sphirePos;	// 球の中心
-	float sphireRadius;				// 球の半径
+	DirectX::XMFLOAT3 pos;			// キャラクターの中心座標
+	float radius;					// キャラクターの半径
+};
+
+struct ObstaclesData
+{
+	DirectX::XMFLOAT3 pos;			// 障害物の座標
+	DirectX::XMFLOAT2 size;			// 障害物のサイズ	(X:横、Y:縦、高さはいらない)
+	bool spin;						// 障害物の回転		(true:あり、false:なし)
 };
 
 struct RayData
 {
-	DirectX::XMFLOAT3 rayStart;		// レイの開始点
-	DirectX::XMVECTOR rayDirection;	// レイの方向
-	float rayLength;				// レイの長さ
+	DirectX::XMFLOAT3 start;		// カメラレイの開始点
+	DirectX::XMVECTOR direction;	// カメラレイの方向
+	float length;					// カメラレイの長さ
 };
 
 struct PlaneData
 {
-	DirectX::XMFLOAT3 planePos;		// 面の中心座標	()
-	DirectX::XMFLOAT2 planeSize;	// 面の横縦		(x:横,y:縦)
-	DirectX::XMFLOAT3 planeRot;		// 面の角度		(デフォルトは法線ベクトル上向き。軸回転。45°のときは 45 でOK)
+	DirectX::XMFLOAT3 pos;			// 面の中心座標
+	DirectX::XMFLOAT2 size;			// 面の横縦		(x:横,y:縦)
+	DirectX::XMFLOAT3 rot;			// 面の角度		(デフォルトは法線ベクトル上向き。軸回転。45°のときは 45 でOK)
 };
 
 union UCollisionData
 {
-	SphireData sphire;		// 球の情報
-	RayData ray;			// レイの情報
-	PlaneData plane;		// 面の情報
+	CharacterData character;		// キャラクターの情報
+	ObstaclesData obstacles;		// 障害物の情報
+	RayData ray;					// カメラレイの情報
+	PlaneData plane;				// 面の情報
 };
 
 struct TObjectParam

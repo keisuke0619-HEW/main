@@ -23,16 +23,19 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_param.pos.x = (rand() % 100) / 10.0f;
 	m_param.pos.y = 1.0f;
 	m_param.pos.z = (rand() % 100) / 10.0f;
-	// 当たり判定の情報設定
-	m_param.collisionType = COLLISION_SPHIRE;	// 球の当たり判定を使用
-	m_param.collisionData.sphire.sphirePos = m_param.pos;	// 当たり判定の中心座標
-	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;	// 当たり判定の半径
+
 	// 種類を識別するタグを設定
 	m_param.tag = TAG_ENEMY;
 	// UIを設定
 	m_bossUI.reset(new CBossUI());
 	// 描画のオフセットを指定（内部的な"Pos"と描画のギャップを埋める）
-	m_param.drawOffset = { 0,0.8f,0 };
+	m_param.drawOffset = { 0,1.7f,0 };
+
+	// 当たり判定の情報設定
+	m_param.collisionType = COLLISION_CHARACTER;
+	m_param.collisionData.character.pos = m_param.pos;
+	m_param.collisionData.character.pos.y = m_param.drawOffset.y + 0.08f;
+	m_param.collisionData.character.radius = 1.0f;
 }
 
 CProtEnemyBoss::~CProtEnemyBoss()
@@ -42,21 +45,30 @@ CProtEnemyBoss::~CProtEnemyBoss()
 
 void CProtEnemyBoss::Update()
 {
+	m_oldPos = m_param.pos;
 	// もしプレイヤーのオブジェクトが消えていたらもう一度取得
 	if (m_player.expired() == true)
 	{
 		auto objList = CSceneBase::GetObjList();
 		m_player = objList.lock()->FindTag(TAG_PLAYER);
 	}
+
 	// 移動るーちん
 	Move();
-	// 当たり判定の中心を更新
-	m_param.collisionData.sphire.sphirePos = m_param.pos;
 
 	m_param.pos.y -= 0.08f;
 	// 疑似床判定
 	if(m_param.pos.y < 0)
 		m_param.pos.y = 0;
+
+	AddVector3(m_param.move, m_param.accel);
+	AddVector3(m_param.pos, m_param.move);
+
+	// 当たり判定の更新
+	m_param.collisionData.character.pos = m_param.pos;
+	m_param.collisionData.character.pos.y += m_param.drawOffset.y + 0.1f;
+	m_param.collisionData.character.radius = 1.4f;
+
 	// ボスUIの更新
 	m_bossUI->Update();
 }
@@ -112,6 +124,28 @@ void CProtEnemyBoss::Finalize()
 
 void CProtEnemyBoss::OnCollision(Ptr obj)
 {
+	switch (obj->GetParam().tag)
+	{
+	case TAG_NONE:
+		break;
+	case TAG_PLAYER:
+		break;
+	case TAG_CAMERA:
+		break;
+	case TAG_ENEMY:
+		break;
+	case TAG_BEAM:
+		break;
+	case TAG_SHOCK:
+		break;
+	case TAG_STATIC_OBJECT:
+		m_param.pos.x = m_oldPos.x;
+		m_param.pos.z = m_oldPos.z;
+		m_param.move = { 0.f,0.f,0.f };
+		break;
+	default:
+		break;
+	}
 }
 
 void CProtEnemyBoss::OnCollisionTag(EObjectTag tag)

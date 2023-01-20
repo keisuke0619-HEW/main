@@ -28,6 +28,7 @@ void COverlayWindowBase::UpdateBase()
 		}
 		return;
 	}
+	
 	m_obj->UpdateAll();
 	Update();
 	CUIManager::GetIns()->UpdateAll();

@@ -27,6 +27,7 @@ private:
 	// moveに使う変数
 	float m_move;		// エネミーの速度
 	float m_distance;	// どのくらいプレイヤーとエネミーが近づいたら追尾するかの距離
+	bool m_homing;		// 追尾中か
 
 	int m_ActionNum;		//	移動乱数用の変数
 
@@ -47,4 +48,5 @@ private:
 	// クラス全体で使うモデルデータ
 	static TModelData sModel;
 
+	DirectX::XMFLOAT3 m_oldPos;
 };

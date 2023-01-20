@@ -45,4 +45,6 @@ private:
 	CBillboard::Ptr m_bill;
 
 	CEffect::Ptr m_pEfk;
+
+	DirectX::XMFLOAT3 m_oldPos;
 };
