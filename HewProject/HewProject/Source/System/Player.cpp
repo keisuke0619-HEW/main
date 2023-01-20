@@ -18,7 +18,6 @@ CPlayer::CPlayer()
 	m_isGround = true;
 	m_beamSize = 0;
 	m_isBeamStore = false;
-	m_isOldBeamStore = false;
 	m_InvincibleTime = 0;
 	m_isCancel = false;
 	m_CancelTime = 0;

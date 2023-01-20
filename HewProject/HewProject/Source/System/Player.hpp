@@ -7,12 +7,6 @@
 #include "Sound.h"
 #include <OutputEffekseer.h>
 
-enum E_Efk
-{
-	BEAM_STORE = 1,
-	BEAM_SHOT,
-};
-
 class CPlayer : public CObjectBase
 {
 
@@ -32,7 +26,6 @@ private:
 	int m_InvincibleTime;	// 無敵時間
 	DirectX::XMFLOAT3 m_beamTarget; // ビームの方向
 	bool m_isBeamStore;	// ビームを溜めている？
-	bool m_isOldBeamStore;
 	//std::unique_ptr<CBeam> m_beam;	// ビーム本体
 	std::unique_ptr<CPlayerUI> m_playerUI;	// プレイヤーのUI
 	void Move();
