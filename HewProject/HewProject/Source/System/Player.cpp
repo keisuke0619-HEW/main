@@ -340,7 +340,10 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 				CSceneManager::SetScene(SCENE_RESULT);
 				Destroy();
 			}
-			CPlayerCamera::SetBlur();
+			if (!(m_param.hp <= 0.0f))
+			{
+				CPlayerCamera::SetBlur();
+			}
 		}
 	}
 }
