@@ -8,7 +8,7 @@
 // ìñÇΩÇËîªíËÇÕå„Ç≈ïtÇØÇ‹Ç∑ÅB
 
 CProtEnemyBoss::CProtEnemyBoss()
-	: CObjectBase("Assets/Model/bosu.fbx", 0.1f)
+	: CObjectBase("Assets/Model/bosu.fbx", 0.2f)
 	, m_move(0.015f)
 	, m_distance(4.0f)
 	, m_cnt(0)
