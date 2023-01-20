@@ -84,7 +84,15 @@ void CPlayer::Draw()
 {
 	
 	m_modelData.model->Step(1.0f / 60.0f);
-	CObjectBase::Draw();
+	if (m_InvincibleTime > 0 && m_InvincibleTime % 10 == 0)
+	{
+		// 被ダメージ時点滅処理
+	}
+	else
+	{
+		CObjectBase::Draw();
+	}
+	
 	//m_playerUI->Draw();
 	//if(m_beam)
 	//	m_beam->Draw();
