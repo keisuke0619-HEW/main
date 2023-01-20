@@ -7,6 +7,7 @@
 #include <Billboard.h>
 #include <SceneManager.hpp>
 #include <CutinCamera.hpp>
+#include <PlayerCamera.hpp>
 
 CPlayer::CPlayer()
 	: CObjectBase("Assets/Model/player.fbx", 0.08f, false, "Player")
@@ -338,6 +339,7 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 				CSceneManager::SetScene(SCENE_RESULT);
 				Destroy();
 			}
+			CPlayerCamera::SetBlur();
 		}
 	}
 }

@@ -7,6 +7,11 @@
 #define IF_MAX(v, x) v = (v) > (x) ? (x) : (v)
 #define SET_VAR_RANGE(var, min, max) IF_MIN(var, min); IF_MAX(var, max)
 
+float CPlayerCamera::m_blurX;
+float CPlayerCamera::m_blurY;
+bool CPlayerCamera::m_Isblur;
+int CPlayerCamera::m_frame;
+
 CPlayerCamera::CPlayerCamera()
 	:CCameraBase()
 {
@@ -40,7 +45,32 @@ void CPlayerCamera::Update()
 		m_data.look.z += cosf(m_radXZ - 3.14f / 2) * LOOK_OFFSET_X;
 	}
 
+	if (m_Isblur)
+	{
+		m_blurX = sinf((float)m_frame / 3.0f) * 5.1;
+		m_blurY = sinf((float)m_frame / 3.0f) * 5.1;
+		
+		if (m_frame >= m_totalframe)
+		{
+			m_blurX = 0.0f;
+			m_blurY = 0.0f;
+			m_Isblur = false;
+		}
+		m_frame++;
+	}
+
 	m_data.pos.x = cosf(m_radY) * sinf(m_radXZ) * m_distance + m_data.look.x;
 	m_data.pos.y = sinf(m_radY) * m_distance + m_data.look.y;
 	m_data.pos.z = cosf(m_radY) * cosf(m_radXZ) * m_distance + m_data.look.z;
+
+	m_data.pos.x += m_blurX;
+	m_data.pos.y += m_blurY;
+}
+
+void CPlayerCamera::SetBlur()
+{
+	m_Isblur = true;
+	m_blurX = 0;
+	m_blurY = 0;
+	m_frame = 0;
 }
