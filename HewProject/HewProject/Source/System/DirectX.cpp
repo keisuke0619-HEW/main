@@ -151,7 +151,7 @@ void UninitDX()
 }
 void BeginDrawDX()
 {
-	float color[4] = { 0.8f, 0.8f, 0.9f, 1.0f };
+	float color[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	g_pContext->ClearRenderTargetView(g_pRTV, color);
 	g_pContext->ClearDepthStencilView(g_pDSV, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
