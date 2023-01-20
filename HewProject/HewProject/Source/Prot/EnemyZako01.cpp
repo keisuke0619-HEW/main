@@ -236,6 +236,24 @@ void CProtEnemy::Move()
 		m_param.pos.x += m_moveDirection.x * m_move; // エネミーのposを使う
 		m_param.pos.z += m_moveDirection.z * m_move;
 	}
+
+	// 境界処理
+	if (m_param.pos.x > 34.0f)
+	{
+		m_param.pos.x = 34.0f;
+	}
+	if (m_param.pos.x < -34.0f)
+	{
+		m_param.pos.x = -34.0f;
+	}
+	if (m_param.pos.z > 34.0f)
+	{
+		m_param.pos.z = 34.0f;
+	}
+	if (m_param.pos.z < -34.0f)
+	{
+		m_param.pos.z = -34.0f;
+	}
 }
 
 // 死亡時に勝手に呼ばれます。
