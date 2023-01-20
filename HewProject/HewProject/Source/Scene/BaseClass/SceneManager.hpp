@@ -23,7 +23,9 @@ public:
 	static void Update();
 	static void Draw();
 
-
+	static void SwapScene();
 private:
 	static std::unique_ptr<IScene> m_scene;
+	static bool m_isSwap;
+	static ESceneID m_next;
 };

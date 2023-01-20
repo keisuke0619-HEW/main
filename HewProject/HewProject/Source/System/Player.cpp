@@ -71,7 +71,7 @@ void CPlayer::Update()
 	//if (IsKeyTrigger('U'))
 	//	Destroy();
 
-	m_param.hp = 1;
+	//m_param.hp = 1;
 }
 
 void CPlayer::Draw()
@@ -313,12 +313,13 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 			m_param.hp -= 0.1f;
 
 			// ノックバック
-			const float knockBackPower = 0.3f;
+			const float knockBackPower = 0.6f;
 			const int knockBackFrame = 30;
 			DirectX::XMFLOAT3 Enemypos = obj->GetParam().pos;
 			DirectX::XMVECTOR vEnemy = DirectX::XMLoadFloat3(&Enemypos);
-			
-			DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&m_param.pos);
+			auto pos = m_param.pos;
+			pos.y += 0.5f;
+			DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&pos);
 			
 			m_vKnockBack = DirectX::XMVectorSubtract(vPos, vEnemy);
 			DirectX::XMVector3Normalize(m_vKnockBack);
@@ -327,8 +328,8 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 			m_knockBackFrame = knockBackFrame;
 			if (m_param.hp <= 0.0f)
 			{
-				//CSceneManager::SetScene(SCENE_RESULT);
-				//Destroy();
+				CSceneManager::SetScene(SCENE_RESULT);
+				Destroy();
 			}
 		}
 	}

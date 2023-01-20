@@ -13,14 +13,34 @@
 // ステージ情報
 #include <StageData01.hpp>
 std::unique_ptr<IScene> CSceneManager::m_scene;
+bool CSceneManager::m_isSwap;
+ESceneID CSceneManager::m_next;
 
 void CSceneManager::SetScene(ESceneID ID)
 {
+	m_isSwap = true;
+	m_next = ID;
+}
+
+void CSceneManager::Update()
+{
+	m_scene->BaseUpdate();
+}
+
+void CSceneManager::Draw()
+{
+	m_scene->BaseDraw();
+}
+
+void CSceneManager::SwapScene()
+{
+	if (m_isSwap == false)
+		return;
 	CBillboard::ClearBillboard();
 	CCameraBase::DeleteCameraAll();
-	if(m_scene)
+	if (m_scene)
 		m_scene->Uninit();
-	switch (ID)
+	switch (m_next)
 	{
 	case SCENE_TITLE:
 		m_scene.reset(new CSceneTitle());
@@ -50,14 +70,5 @@ void CSceneManager::SetScene(ESceneID ID)
 	default:
 		break;
 	}
-}
-
-void CSceneManager::Update()
-{
-	m_scene->BaseUpdate();
-}
-
-void CSceneManager::Draw()
-{
-	m_scene->BaseDraw();
+	m_isSwap = false;
 }

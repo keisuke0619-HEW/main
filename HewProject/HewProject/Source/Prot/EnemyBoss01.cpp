@@ -32,7 +32,7 @@ CProtEnemyBoss::CProtEnemyBoss()
 	// UIを設定
 	m_bossUI.reset(new CBossUI());
 	// 描画のオフセットを指定（内部的な"Pos"と描画のギャップを埋める）
-	m_param.drawOffset = { 0,1.4f,0 };
+	m_param.drawOffset = { 0,0.8f,0 };
 }
 
 CProtEnemyBoss::~CProtEnemyBoss()
@@ -121,7 +121,7 @@ void CProtEnemyBoss::OnCollisionTag(EObjectTag tag)
 		m_param.hp -= 0.005f;
 		if (m_param.hp <= 0.0f)
 		{
-
+			CSceneManager::SetScene(SCENE_RESULT);
 		}
 	}
 }

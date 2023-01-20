@@ -4,6 +4,7 @@ struct PS_IN {
 	float3 normal : NORMAL0;
 };
 
+//cbuffer color
 Texture2D tex : register(t0);
 SamplerState samp : register(s0);
 

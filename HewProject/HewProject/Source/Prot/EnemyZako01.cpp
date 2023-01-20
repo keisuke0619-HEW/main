@@ -42,10 +42,9 @@ CProtEnemy::CProtEnemy()
 	m_param.collisionData.sphire.sphireRadius = m_param.scale.x / 2.0f;
 	m_startPos = m_param.pos;
 	m_param.tag = TAG_ENEMY;
-	//m_pPolyline = new GeometoryPolyline(30);
 
 	// ‚±‚±‚Å•`‰æ‚ð‚¸‚ç‚·
-	m_param.drawOffset = { 0, 1.2f, 0 };
+	m_param.drawOffset = { 0, 0.6f, 0 };
 }
 
 CProtEnemy::~CProtEnemy()
