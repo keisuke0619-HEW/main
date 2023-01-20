@@ -12,8 +12,8 @@
 
 Game3D::Game3D()
 {
-	m_scenes.reset(new CSceneManager());
-	m_scenes->SetScene(SCENE_TITLE);
+	CSceneManager::SetScene(SCENE_TITLE);
+	//CSceneManager::SwapScene();
 	CDebugWindow::Create();
 	Sprite::Init();
 	Utility::InitBlendState();
@@ -34,11 +34,12 @@ Game3D::~Game3D()
 
 void Game3D::Update()
 {
+	CSceneManager::SwapScene();
 	Utility::ControllerUpdate();
 	CSound::GetIns()->Update();
-	m_scenes->Update();
+	CSceneManager::Update();
 }
 void Game3D::Draw()
 {
-	m_scenes->Draw();
+	CSceneManager::Draw();
 }

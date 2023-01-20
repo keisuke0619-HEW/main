@@ -71,7 +71,7 @@ void CPlayer::Update()
 	//if (IsKeyTrigger('U'))
 	//	Destroy();
 
-	m_param.hp = 1;
+	//m_param.hp = 1;
 }
 
 void CPlayer::Draw()
@@ -328,8 +328,8 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 			m_knockBackFrame = knockBackFrame;
 			if (m_param.hp <= 0.0f)
 			{
-				//CSceneManager::SetScene(SCENE_RESULT);
-				//Destroy();
+				CSceneManager::SetScene(SCENE_RESULT);
+				Destroy();
 			}
 		}
 	}
