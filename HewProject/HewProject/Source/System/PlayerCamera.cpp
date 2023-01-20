@@ -47,8 +47,8 @@ void CPlayerCamera::Update()
 
 	if (m_Isblur)
 	{
-		m_blurX = sinf((float)m_frame / 3.0f) * 5.1;
-		m_blurY = sinf((float)m_frame / 3.0f) * 5.1;
+		m_blurX = (rand() % 10) / 10.0f;
+		m_blurY = (rand() % 10) / 10.0f;
 		
 		if (m_frame >= m_totalframe)
 		{
