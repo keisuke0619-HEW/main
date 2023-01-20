@@ -141,7 +141,7 @@ void CEffect::SetScale(float x, float y, float z)
 
 void CEffect::AddPos(float x, float y, float z)
 {
-	m_efkManager->AddLocation(m_efkHandle, ::Effekseer::Vector3D(x, y, z));
+	m_efkManager->SetLocation(m_efkHandle, ::Effekseer::Vector3D(x, y, z));
 }
 
 void CEffect::Play()
