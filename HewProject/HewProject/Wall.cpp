@@ -1,7 +1,7 @@
 #include"Wall.hpp"
 
 Wall::Wall(float x, float y, float z, float rx, float ry, float rz)
-	:CObjectBase("Assets/Model/kabe.fbx", 0.1f)
+	:CObjectBase("Assets/Model/kabe.fbx", 0.2f)
 {
 	m_param.pos.x = x;
 	m_param.pos.y = y;

@@ -1,7 +1,7 @@
 #include "Pillar.hpp"
 
 CPillar::CPillar(float x, float y, float z)
-	: CObjectBase("Assets/Model/hasira.fbx", 0.1f)
+	: CObjectBase("Assets/Model/hasira.fbx", 0.2f)
 {
 	m_param.pos.x = x;
 	m_param.pos.y = y;
