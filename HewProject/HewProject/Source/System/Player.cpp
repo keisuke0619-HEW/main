@@ -85,7 +85,7 @@ void CPlayer::Draw()
 {
 	
 	m_modelData.model->Step(1.0f / 60.0f);
-	if (m_InvincibleTime > 0 && m_InvincibleTime % 10 == 0)
+	if (m_InvincibleTime > 0 && m_InvincibleTime % 30 < 10)
 	{
 		// 被ダメージ時点滅処理
 	}
