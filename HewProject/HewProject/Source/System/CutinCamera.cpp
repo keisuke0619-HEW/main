@@ -21,16 +21,17 @@ void CCutinCamera::Update()
 	//m_data.look = { m_startPos.x, m_startPos.y - 10, m_startPos.z };
 }
 
-void CCutinCamera::SetData(DirectX::XMFLOAT3 startpos, DirectX::XMFLOAT3 endpos, DirectX::XMFLOAT3 startrad, DirectX::XMFLOAT3 endrad)
+void CCutinCamera::SetData(DirectX::XMFLOAT3 startpos, DirectX::XMFLOAT3 endpos, DirectX::XMFLOAT3 startrad, float rot)
 {
 	m_startPos = startpos;
 	m_endPos = endpos;
 	//m_startRad = startrad;
 	m_data.look = startrad;
-	m_endRad = endrad;
-	m_endPos.x = m_endPos.x + (cosf(m_endRad.y) * 10);
+	//m_endRad = endrad;
+	m_rad = rot;
+	m_endPos.x = m_endPos.x + (cosf(m_rad) * 10);
 	m_endPos.y = m_endPos.y;
-	m_endPos.z = m_endPos.z + (-sinf(m_endRad.y) * 10);
+	m_endPos.z = m_endPos.z + (-sinf(m_rad) * 10);
 	// m_endRad.y = 0‚ÌŽžm_endPos.x + 10, z + 0
 	// m_endRad.y = 1.57‚ÌŽžm_endPos.x + 0, z - 10
 	// m_endRad.y = 3.14‚ÌŽžm_endPos.x - 10, z + 0
