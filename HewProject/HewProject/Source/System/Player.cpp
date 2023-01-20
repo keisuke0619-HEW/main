@@ -43,6 +43,7 @@ CPlayer::CPlayer()
 	m_bill.reset(new CBillboard("Assets/Img/number.png"));
 	m_bill->SetSize({ 2.0f, 0.25f });
 
+	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamtame.efkefc"));
 }
 
 CPlayer::~CPlayer()
@@ -72,6 +73,10 @@ void CPlayer::Update()
 	//	Destroy();
 
 	//m_param.hp = 1;
+	m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
+	m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+	m_pEfk->SetRotation(m_param.rot.x, m_param.rot.y, m_param.rot.z);
+//	m_pEfk->AddPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
 }
 
 void CPlayer::Draw()
@@ -84,7 +89,10 @@ void CPlayer::Draw()
 	//	m_beam->Draw();
 	m_playerUI->SetLife(m_param.hp);
 	
-
+	if (m_isBeamStore == true)
+	{
+		m_pEfk->Play();
+	}
 }
 
 void CPlayer::Move()
@@ -200,6 +208,8 @@ void CPlayer::Beam()
 	else
 	{
 		m_isBeamStore = false;
+		m_pEfk->End();
+
 		if (m_beamSize > 1.0f)
 		{
 			// ‚Æ‚è‚ ‚¦‚¸Œ©‚Ä‚¢‚é•ûŒü‚É‘Å‚Â
@@ -207,7 +217,6 @@ void CPlayer::Beam()
 			DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
 
 			auto beam = new CBeam(CameraPos, CameraLook, m_beamSize);
-			beam->SetEffekseer(BEAM_SHOT);
 			beam->SetPlayerPos(m_param.pos);
 			CSceneBase::GetObjList().lock()->Add(beam);
 
@@ -244,21 +253,7 @@ void CPlayer::Beam()
 		}
 		m_beamSize = 0.0f;
 	}
-	if (m_isBeamStore == true && m_isOldBeamStore == false)
-	{
-		DirectX::XMFLOAT3 CameraPos = CCameraBase::GetDataFromTag("Player").pos;
-		DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
-
-		auto beam = new CBeam(CameraPos, CameraLook, 1.0f);
-		beam->SetEffekseer(BEAM_STORE);
-		beam->SetPlayerPos(m_param.pos);
-		CSceneBase::GetObjList().lock()->Add(beam);
-	}
-	m_isOldBeamStore = m_isBeamStore;
-	//if (m_beam)
-	//{
-	//	m_beam->Update();
-	//}
+	
 }
 
 void CPlayer::CancelMove()
