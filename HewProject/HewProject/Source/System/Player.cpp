@@ -219,6 +219,7 @@ void CPlayer::Beam()
 	{
 		m_isBeamStore = false;
 		m_pEfk->End();
+		CCutinCamera::SetCutinBlur();
 
 		if (m_beamSize > 1.0f)
 		{
