@@ -9,7 +9,7 @@
 
 CProtEnemyBoss::CProtEnemyBoss()
 	: CObjectBase("Assets/Model/bosu.fbx", 0.2f)
-	, m_move(0.015f)
+	, m_move(0.023f)
 	, m_distance(4.0f)
 	, m_cnt(0)
 	, m_randNum(0)

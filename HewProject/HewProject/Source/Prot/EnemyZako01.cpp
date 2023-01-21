@@ -24,7 +24,7 @@ CProtEnemy::CProtEnemy()
 	// もしモデルデータが存在しなかったらロード
 	if (!sModel.model)
 	{
-		LoadModel("Assets/Model/zako.fbx", 0.2f, false, &sModel);
+		LoadModel("Assets/Model/zako.fbx", 0.13f, false, &sModel);
 	}
 	// 自身のモデルデータにStaticモデルデータをロード
 	m_modelData = sModel;
