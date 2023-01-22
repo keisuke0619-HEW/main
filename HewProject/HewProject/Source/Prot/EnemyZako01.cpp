@@ -45,7 +45,7 @@ CProtEnemy::CProtEnemy()
 	m_param.frame = 300.0f;
 
 	// ここで描画をずらす
-	m_param.drawOffset = { 0, 1.13f, 0 };
+	m_param.drawOffset = { 0, 0.75f, 0 };
 
 	// 当たり判定の設定
 	m_param.collisionType = COLLISION_CHARACTER;
@@ -203,25 +203,32 @@ void CProtEnemy::Move()
 
 				m_ActionNum = rand() % 100;
 
-				if (0 <= m_ActionNum && m_ActionNum <= 39)	//	40%でプレイヤーへ
+				if (0 <= m_ActionNum && m_ActionNum < 40)
 				{
-					m_ActionNum = 1;
+					m_ActionNum = 1;										// 40%でプレイヤーへ
 				}
 				else
 				{
-					if (40 <= m_ActionNum && m_ActionNum <= 64)	//	25%で右
+					if (40 <= m_ActionNum && m_ActionNum < 60)
 					{
-						m_ActionNum = 2;
+						m_ActionNum = 2;									// 20%で45°
 					}
 					else
 					{
-						if (65 <= m_ActionNum && m_ActionNum <= 89)	//	25%で左
+						if (60 <= m_ActionNum && m_ActionNum < 80)
 						{
-							m_ActionNum = 3;
+							m_ActionNum = 3;								// 20%で-45°	
 						}
-						else	//残りの10%でプレイヤーとは逆へ
+						else
 						{
-							m_ActionNum = 4;
+							if (80 <= m_ActionNum && m_ActionNum < 90)	
+							{
+								m_ActionNum = 4;							// 10%で90°	
+							}
+							else
+							{
+								m_ActionNum = 5;							// 10%で-90°
+							}
 						}
 					}
 				}
@@ -245,6 +252,30 @@ void CProtEnemy::Move()
 					break;
 				case 2:
 					// 回転処理(B)
+					m_param.rot.y = DirectX::XMConvertToRadians(135.0f) - rot;
+
+					// 移動方向設定
+					move = DirectX::XMVector3TransformCoord(direction, DirectX::XMMatrixRotationY(45.0f * 3.14f / 180.0f));
+					DirectX::XMStoreFloat3(&m_moveDirection, move);
+					m_moveDirection.y = 0.0f;
+
+					// スピード変更
+					m_move = 0.05f;
+					break;
+				case 3:
+					// 回転処理(B)
+					m_param.rot.y = DirectX::XMConvertToRadians(45.0f) - rot;
+
+					// 移動方向設定
+					move = DirectX::XMVector3TransformCoord(direction, DirectX::XMMatrixRotationY(-45.0f * 3.14f / 180.0f));
+					DirectX::XMStoreFloat3(&m_moveDirection, move);
+					m_moveDirection.y = 0.0f;
+
+					// スピード変更
+					m_move = 0.05f;
+					break;
+				case 4:
+					// 回転処理(B)
 					m_param.rot.y = DirectX::XMConvertToRadians(180.0f) - rot;
 
 					// 移動方向設定
@@ -255,24 +286,12 @@ void CProtEnemy::Move()
 					// スピード変更
 					m_move = 0.05f;
 					break;
-				case 3:
+				case 5:
 					// 回転処理(B)
 					m_param.rot.y = DirectX::XMConvertToRadians(0.0f) - rot;
 
 					// 移動方向設定
 					move = DirectX::XMVector3TransformCoord(direction, DirectX::XMMatrixRotationY(-90.0f * 3.14f / 180.0f));
-					DirectX::XMStoreFloat3(&m_moveDirection, move);
-					m_moveDirection.y = 0.0f;
-
-					// スピード変更
-					m_move = 0.05f;
-					break;
-				case 4:
-					// 回転処理(B)
-					m_param.rot.y = DirectX::XMConvertToRadians(270.0f) - rot;
-
-					// 移動方向設定
-					move = DirectX::XMVector3TransformCoord(direction, DirectX::XMMatrixRotationY(180.0f * 3.14f / 180.0f));
 					DirectX::XMStoreFloat3(&m_moveDirection, move);
 					m_moveDirection.y = 0.0f;
 
@@ -341,6 +360,28 @@ void CProtEnemy::OnCollisionTag(EObjectTag tag)
 
 void CProtEnemy::OnCollision(IObjectBase::Ptr obj)
 {
+	switch (obj->GetParam().tag)
+	{
+	case TAG_NONE:
+		break;
+	case TAG_PLAYER:
+		break;
+	case TAG_CAMERA:
+		break;
+	case TAG_ENEMY:
+		break;
+	case TAG_BEAM:
+		break;
+	case TAG_SHOCK:
+		break;
+	case TAG_STATIC_OBJECT:
+		m_param.pos.x = m_oldPos.x;
+		m_param.pos.z = m_oldPos.z;
+		m_param.move = { 0.f,0.f,0.f };
+		break;
+	default:
+		break;
+	}
 }
 
 
