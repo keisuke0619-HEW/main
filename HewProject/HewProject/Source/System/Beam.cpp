@@ -16,8 +16,9 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	m_time = 2.0f;
 
 	// エフェクシアの初期化　読み込み
-	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamhassya.efkefc"));
-
+	//m_pEfk.reset(new CEffect(u"Assets/Effect/Beamhassya.efkefc"));
+	m_pEfk.reset(new CEffect(u"Assets/Effect/BeamSiohuki.efkefc"));
+	m_pEfk2.reset(new CEffect(u"Assets/Effect/BeamSyasei.efkefc"));
 }
 
 CBeam::~CBeam()
@@ -41,6 +42,9 @@ void CBeam::Update()
 	//m_pEfk->SetRotation(0, -60, 0);
 	m_pEfk->SetScale(m_maxSize, m_maxSize, m_maxSize);
 	m_pEfk->SetPos(m_playerPos.x, m_playerPos.y + 1.5f, m_playerPos.z);
+
+	m_pEfk2->SetScale(m_maxSize, m_maxSize, m_maxSize);
+	m_pEfk2->SetPos(m_playerPos.x, m_playerPos.y + 1.5f, m_playerPos.z);
 }
 
 void CBeam::Draw()
@@ -72,6 +76,9 @@ void CBeam::Draw()
 
 	m_pEfk->SetRotation(rot.x, rot.y, rot.z);
 	m_pEfk->Play();
+
+	m_pEfk2->SetRotation(rot.x, rot.y, rot.z);
+	m_pEfk2->Play();
 }
 
 void CBeam::Collision()
