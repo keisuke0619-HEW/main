@@ -340,7 +340,7 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 		{
 			m_InvincibleTime = 120;
 
-			m_param.hp -= 0.1f;
+			m_param.hp -= 0.18f;
 
 			// ノックバック
 			const float knockBackPower = 0.6f;
