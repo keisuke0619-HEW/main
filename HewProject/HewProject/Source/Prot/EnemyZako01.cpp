@@ -323,23 +323,8 @@ void CProtEnemy::OnCollisionTag(EObjectTag tag)
 	{
 		Destroy();
 	}
-}
-
-void CProtEnemy::OnCollision(IObjectBase::Ptr obj)
-{
-	switch (obj->GetParam().tag)
+	if (tag == TAG_SHOCK)
 	{
-	case TAG_NONE:
-		break;
-	case TAG_PLAYER:
-		break;
-	case TAG_CAMERA:
-		break;
-	case TAG_ENEMY:
-		break;
-	case TAG_BEAM:
-		break;
-	case TAG_SHOCK:
 		if (m_dontMove == false)
 		{
 			// ÕŒ‚”g‚É“–‚½‚Á‚½‚ç“G‚ÌˆÚ“®‚ğÁ‚·
@@ -349,17 +334,13 @@ void CProtEnemy::OnCollision(IObjectBase::Ptr obj)
 			m_blowAwayCountDown = m_blowAwayCount;
 
 			// ƒJƒƒ‰‚ÌŒü‚¢‚Ä‚é•ûŒü‚ğæ“¾
-			DirectX::XMStoreFloat3(&m_blowAwayMove, CCameraBase::GetPrimaryFront());
+			DirectX::XMStoreFloat3(&m_blowAwayMove, CCameraBase::GetFrontHorizontal("Player"));
 		}
-		break;
-	case TAG_STATIC_OBJECT:
-		m_param.pos.x = m_oldPos.x;
-		m_param.pos.z = m_oldPos.z;
-		m_param.move = { 0.f,0.f,0.f };
-		break;
-	default:
-		break;
 	}
+}
+
+void CProtEnemy::OnCollision(IObjectBase::Ptr obj)
+{
 }
 
 

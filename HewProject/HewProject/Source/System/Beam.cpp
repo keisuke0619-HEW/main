@@ -115,12 +115,12 @@ void CBeam::Collision()
 		disFromBeam = fabsf(disFromBeam);			// â‘Î’l‚ğ‚Æ‚é
 
 		// ˆÈ‰º“–‚½‚è”»’è
-		if (disFromBeam < m_maxSize * 3)
+		/*if (disFromBeam < m_maxSize * 3)
 		{
 			(*itr)->OnCollisionTag(TAG_BEAM);
 
 		}
-		else if (disFromBeam < m_maxSize * 6)
+		else */if (disFromBeam < m_maxSize * 6)
 		{
 			(*itr)->OnCollisionTag(TAG_SHOCK);
 		}

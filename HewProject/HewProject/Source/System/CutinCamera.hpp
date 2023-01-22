@@ -22,5 +22,5 @@ private:
 	static float m_blurY;	// ‰æ–Ê‚ÌcƒuƒŒ
 	static bool m_Isblur;	// ‰æ–ÊƒuƒŒ‚ª‹N‚«‚Ä‚¢‚é‚©‚Ç‚¤‚©
 	static int m_frame;
-	const int m_totalframe = 20;
+	const int m_totalframe = 120;
 };

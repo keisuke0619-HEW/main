@@ -22,8 +22,8 @@ void CCutinCamera::Update()
 
 	if (m_Isblur)
 	{
-		m_blurZ = sinf((float)m_frame / 3.0f) * 2.5;
-		m_blurY = sinf((float)m_frame / 3.0f) * 2.5;
+		m_blurZ = rand() % 10 /10.0f - 0.5f;
+		m_blurY = rand() % 10 /10.0f - 0.5f;
 
 		if (m_frame >= m_totalframe)
 		{
