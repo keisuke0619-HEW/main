@@ -181,7 +181,7 @@ void CPlayer::Move()
 	{
 		if (Utility::GetKeyPress(KEY_JUMP))
 		{
-			m_gra = -2;
+			m_gra = -1.4;
 			m_isGround = false;
 		}
 	}
