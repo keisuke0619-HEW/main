@@ -124,7 +124,7 @@ void CPlayer::Move()
 {
 	const float MOVE_SPEED = 0.1f;
 	const float MOVE_GRAVITY = 0.05f;
-	const float GRAVITY_MAX = 0.4f;
+	const float GRAVITY_MAX = 0.4f * 1.4f;
 	auto vFront = CCameraBase::GetPrimaryFrontHorizontal();
 	auto vSide = CCameraBase::GetPrimaryRightHorizontal();
 	//auto fGra = DirectX::XMFLOAT3(0, -m_gra, 0);
