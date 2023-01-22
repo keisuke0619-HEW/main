@@ -31,4 +31,5 @@ private:
 	DirectX::XMFLOAT3 m_randTarget;
 	std::unique_ptr<CBossUI> m_bossUI;	// É{ÉXÇÃUI
 
+	DirectX::XMFLOAT3 m_oldPos;
 };

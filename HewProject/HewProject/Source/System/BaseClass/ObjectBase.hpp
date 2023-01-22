@@ -31,6 +31,8 @@ public:
 
 	void Destroy();
 protected:
+#define AddVector3(v1, v2) v1.x += v2.x; v1.y += v2.y; v1.z += v2.z;
+
 	// íœ‚ÌÛ‚ÉŒÄ‚Ño‚³‚ê‚é
 	virtual void Finalize();
 

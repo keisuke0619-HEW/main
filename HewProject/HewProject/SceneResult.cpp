@@ -29,6 +29,6 @@ void CSceneResult::Update()
 {
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
-		CSceneManager::SetScene(SCENE_TITLE);
+		CSceneManager::SetScene(SCENE_STAGE_SELECT);
 	}
 }

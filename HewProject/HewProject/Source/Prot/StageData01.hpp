@@ -26,7 +26,7 @@ private:
 	StageData m_stageData;
 	CTerrainBase* m_terrain;
 	std::unique_ptr<CProtEnemyManager> m_enemyManager;
-	ProducePlane* m_producePlane;
-	std::unique_ptr<ProducePlane> m_wall[4];
-	std::unique_ptr<ProducePlane> m_roof;
+	ProducePlane* m_producePlane[12];
+	std::unique_ptr<ProducePlane> m_wall[12];
+	std::unique_ptr<ProducePlane> m_roof[12];
 };
