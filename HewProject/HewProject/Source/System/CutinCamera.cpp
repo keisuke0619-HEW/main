@@ -44,17 +44,28 @@ void CCutinCamera::Update()
 	m_data.pos.y += m_blurY;
 }
 
-void CCutinCamera::SetData(DirectX::XMFLOAT3 startpos, DirectX::XMFLOAT3 endpos, DirectX::XMFLOAT3 startrad, float rot)
+void CCutinCamera::SetData(DirectX::XMFLOAT3 startpos, DirectX::XMFLOAT3 look, float rot)
 {
 	m_startPos = startpos;
-	m_endPos = endpos;
+	m_endPos = startpos;
 	//m_startRad = startrad;
-	m_data.look = startrad;
+	m_data.look = look;
 	//m_endRad = endrad;
 	m_rad = rot;
-	m_endPos.x = m_endPos.x + (cosf(m_rad) * 10);
-	m_endPos.y = m_endPos.y;
-	m_endPos.z = m_endPos.z + (-sinf(m_rad) * 10);
+	// 右斜め
+	//m_endPos.x = m_endPos.x + (cosf(m_rad) * 10);
+	//m_endPos.y = m_endPos.y;
+	//m_endPos.z = m_endPos.z + (-sinf(m_rad) * 10);
+	// 右斜め後ろ
+	m_endPos.x = m_endPos.x + (cosf(m_rad) * 10) + (-sinf(m_rad) * 10);
+	m_endPos.y = m_endPos.y + 13;
+	m_endPos.z = m_endPos.z + (-sinf(m_rad) * 10) + (-cosf(m_rad) * 10);
+	// 右斜め後ろ
+	// rad = 0		: m_endPos.x + 10, z - 10
+	// rad = 1.57	: m_endPos.x - 10, z - 10
+	// rad = 3.14	: m_endPos.x - 10, z + 10
+	// rad = 5.71	: m_endPos.x + 10, z + 10
+	// 右斜め
 	// m_endRad.y = 0の時m_endPos.x + 10, z + 0
 	// m_endRad.y = 1.57の時m_endPos.x + 0, z - 10
 	// m_endRad.y = 3.14の時m_endPos.x - 10, z + 0

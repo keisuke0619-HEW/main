@@ -264,7 +264,7 @@ void CPlayer::Beam()
 			DirectX::XMStoreFloat3(&Front, CCameraBase::GetFrontHorizontal("Player"));
 			float rot = (90.0f * 3.14159f / 180.0f) - atan2f(Front.z, Front.x);
 			auto cutin = new CCutinCamera();
-			cutin->SetData(m_param.pos, { m_param.pos.x,m_param.pos.y + 10,m_param.pos.z }, CCameraBase::GetDataFromTag("Player").look , rot);
+			cutin->SetData(m_param.pos, CCameraBase::GetDataFromTag("Player").look , rot);
 			CCameraBase::CreateCamera(cutin, "Cutin");
 			CCameraBase::SetPrimaryCamera("Cutin");
 		}

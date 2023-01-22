@@ -9,7 +9,7 @@ public:
 	~CCutinCamera();
 
 	void Update()override;
-	void SetData(DirectX::XMFLOAT3 startpos,  DirectX::XMFLOAT3 endpos, DirectX::XMFLOAT3 startrad, float rot);
+	void SetData(DirectX::XMFLOAT3 startpos, DirectX::XMFLOAT3 look, float rot);
 	static void SetCutinBlur();
 private:
 	DirectX::XMFLOAT3 m_startPos;
