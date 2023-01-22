@@ -58,14 +58,14 @@ void CMiniMap::Update()
 			DirectX::XMStoreFloat3(&m_movePos, distance);
 
 			// ƒ}ƒbƒv‚É‰f‚é‹——£
-			float disPlayer = 7.f;
+			float disPlayer = 14.f;
 			
 			if (fabsf(m_movePos.x) <= disPlayer && fabsf(m_movePos.y) <= disPlayer && fabsf(m_movePos.z) <= disPlayer)
 			{
 				
 				if (enemyList.size() > m_Icon.size())
 					m_Icon.push_back(CUIManager::GetIns()->Add(new CGameUI("Assets/Img/PauseMenu/Cursor.png")));
-				m_Icon[i].lock()->SetPos({ ((m_movePos.x * -10)) + 1150, (m_movePos.z * 10) + 120 });
+				m_Icon[i].lock()->SetPos({ ((m_movePos.x * -5)) + 1150, (m_movePos.z * 5) + 120 });
 				m_Icon[i].lock()->SetSize(DirectX::XMFLOAT2(10.f, 10.f));
 			}
 			else
