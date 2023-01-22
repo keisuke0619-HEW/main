@@ -114,3 +114,8 @@ void CPlayerUI::UpdateCharge()
 	// ŒvŽZ‚µ‚½‰¡•‚ð“o˜^B
 	m_chargeSprite.lock()->SetSize(size);
 }
+
+void CPlayerUI::SetReticleAlpha(int a)
+{
+	m_reticle.lock()->SetColor(1, 0, 0, a);
+}

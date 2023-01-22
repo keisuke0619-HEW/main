@@ -13,6 +13,7 @@ public:
 	void Update();
 	void SetLife(float);
 	void SetCharge(float);
+	void SetReticleAlpha(int a);
 private:
 	float m_LifeUV;
 	float m_ChargeUV;
@@ -26,5 +27,6 @@ private:
 	CMiniMap* m_pMap;
 	void UpdateLife();
 	void UpdateCharge();
+	
 
 };

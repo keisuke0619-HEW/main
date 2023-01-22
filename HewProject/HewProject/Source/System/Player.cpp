@@ -59,15 +59,18 @@ CPlayer::~CPlayer()
 void CPlayer::Update()
 {
 	m_oldPos = m_param.pos;
+	
 
 	if (m_isCancel == false)
 	{
 		Move();
 		Beam();
+		m_playerUI->SetReticleAlpha(1);
 	}
 	else
 	{
 		CancelMove();
+		m_playerUI->SetReticleAlpha(0);
 	}
 	m_InvincibleTime--;
 
@@ -242,7 +245,7 @@ void CPlayer::Beam()
 			auto beam = new CBeam(CameraPos, CameraLook, m_beamSize);
 			beam->SetPlayerPos(m_param.pos);
 			CSceneBase::GetObjList().lock()->Add(beam);
-
+			
 
 			// seÄ¶
 			if (m_isSE == true)
