@@ -15,6 +15,7 @@
 std::unique_ptr<IScene> CSceneManager::m_scene;
 bool CSceneManager::m_isSwap;
 ESceneID CSceneManager::m_next;
+std::vector<TScenePassingData> CSceneManager::m_passingData;
 
 void CSceneManager::SetScene(ESceneID ID)
 {
@@ -71,4 +72,16 @@ void CSceneManager::SwapScene()
 		break;
 	}
 	m_isSwap = false;
+	for (int i = 0; i < m_passingData.size(); i++)
+	{
+		auto data = m_passingData[i];
+		m_scene->SetData(data.dataPtr, data.size, data.name);
+	}
+	m_passingData.clear();
+}
+
+void CSceneManager::SetData(void* dataPtr, long size, const char* name)
+{
+	TScenePassingData tmp = { dataPtr, size, name };
+	m_passingData.push_back(tmp);
 }

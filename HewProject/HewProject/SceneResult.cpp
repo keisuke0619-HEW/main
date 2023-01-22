@@ -17,6 +17,14 @@ CSceneResult::~CSceneResult()
 {
 }
 
+void CSceneResult::SetData(void* dataPtr, long size, const char* name)
+{
+	if (size == sizeof(TResultData))
+	{
+		m_resultData = (TResultData)*((TResultData*)dataPtr);
+	}
+}
+
 void CSceneResult::Update()
 {
 	if (Utility::GetKeyTrigger(KEY_SELECT))
