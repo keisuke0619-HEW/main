@@ -37,7 +37,7 @@ CProtEnemy::CProtEnemy()
 	m_player = objList.lock()->FindTag(TAG_PLAYER);
 	m_param.pos.x = (rand() % 100) / 10.0f;
 	m_param.pos.y = 1.0f;
-	m_param.pos.z = (rand() % 100) / 10.0f;
+	m_param.pos.z = ((rand() % 100) / 10.0f)+23.f;
 
 	m_startPos = m_param.pos;
 	m_param.tag = TAG_ENEMY;
