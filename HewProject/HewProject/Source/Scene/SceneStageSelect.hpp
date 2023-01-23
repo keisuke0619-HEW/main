@@ -29,4 +29,5 @@ private:
 	int m_cursor;	// ÉJÅ[É\Éã
 	bool m_isNext;
 
+	EStageSelectUI m_nowIcon;
 };

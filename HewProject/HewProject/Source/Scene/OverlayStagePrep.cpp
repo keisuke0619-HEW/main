@@ -43,9 +43,9 @@ void COverlayStagePrep::Update()
 {
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
-		// CSceneManager::SetScene(SCENE_STAGE01);
-		if (m_next != nullptr)
-			*m_next = true;
+		CSceneManager::SetScene(SCENE_STAGE01);
+		//if (m_next != nullptr)
+		//	*m_next = true;
 		m_isDestroy = true;
 		return;
 	}
