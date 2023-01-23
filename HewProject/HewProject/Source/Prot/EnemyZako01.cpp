@@ -52,6 +52,8 @@ CProtEnemy::CProtEnemy()
 	m_param.collisionData.character.pos = m_param.pos;
 	m_param.collisionData.character.pos.y += m_param.drawOffset.y + 0.08f;
 	m_param.collisionData.character.radius = 0.8f;
+
+	//m_pEfk.reset(new CEffect(u"Assets/Effect/bakuhatu.efkefc"));
 }
 
 CProtEnemy::~CProtEnemy()
@@ -340,6 +342,10 @@ void CProtEnemy::OnCollisionTag(EObjectTag tag)
 {
 	if (tag == TAG_BEAM || tag == TAG_PLAYER)
 	{
+		m_pEfk.reset(new CEffect(u"Assets/Effect/bakuhatu.efkefc"));
+		m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
+		m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+		m_pEfk->Play();
 		Destroy();
 	}
 	if (tag == TAG_SHOCK)
