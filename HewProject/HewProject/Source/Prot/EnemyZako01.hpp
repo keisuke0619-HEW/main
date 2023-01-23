@@ -8,6 +8,8 @@
 #include<PlayerCamera.hpp>
 #include<Camera.hpp>
 #include<Player.hpp>
+
+#include <OutputEffekseer.h>
 class CProtEnemy : public CObjectBase
 {
 public:
@@ -49,4 +51,6 @@ private:
 	static TModelData sModel;
 
 	DirectX::XMFLOAT3 m_oldPos;
+
+	CEffect::Ptr m_pEfk;
 };
