@@ -22,7 +22,7 @@ CProtEnemyBoss::CProtEnemyBoss()
 	// ‰ŠúÀ•W‚ğİ’è
 	m_param.pos.x = (rand() % 100) / 10.0f;
 	m_param.pos.y = 1.0f;
-	m_param.pos.z = (rand() % 100) / 10.0f;
+	m_param.pos.z = ((rand() % 100) / 10.0f)+23.f;
 
 	// í—Ş‚ğ¯•Ê‚·‚éƒ^ƒO‚ğİ’è
 	m_param.tag = TAG_ENEMY;
