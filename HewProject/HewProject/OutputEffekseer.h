@@ -28,6 +28,7 @@ public:
 	void SetScale(float x, float y, float z);
 	void AddPos(float x, float y, float z);
 	void Play();
+	void PlayOnce();
 	void End();
 private:
 	void Draw();

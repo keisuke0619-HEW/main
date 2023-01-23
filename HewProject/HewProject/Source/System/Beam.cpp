@@ -75,10 +75,10 @@ void CBeam::Draw()
 	m_time -= 1.0f / 60.0f;
 
 	m_pEfk->SetRotation(rot.x, rot.y, rot.z);
-	m_pEfk->Play();
+	m_pEfk->PlayOnce();
 
 	m_pEfk2->SetRotation(rot.x, rot.y, rot.z);
-	m_pEfk2->Play();
+	m_pEfk2->PlayOnce();
 }
 
 void CBeam::Collision()

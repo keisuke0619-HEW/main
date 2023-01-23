@@ -50,6 +50,7 @@ CPlayer::CPlayer()
 	m_bill->SetSize({ 2.0f, 0.25f });
 
 	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamtame.efkefc"));
+	m_pEfk2.reset(new CEffect(u"Assets/Effect/damage.efkefc"));
 }
 
 CPlayer::~CPlayer()
@@ -116,7 +117,7 @@ void CPlayer::Draw()
 	
 	if (m_isBeamStore == true)
 	{
-		m_pEfk->Play();
+		m_pEfk->PlayOnce();
 	}
 }
 
@@ -304,7 +305,7 @@ void CPlayer::CancelMove()
 		m_CancelTime = 0;
 		m_isCancel = false;
 		CCameraBase::SetPrimaryCamera("Player");	// カメラ戻す
-		CCameraBase::DeleteCamera("Cutin");			// カットインカメラ削除
+		CCameraBase::DeleteCamera("Cutin");			// カットインカメラ削除s
 	}
 }
 
@@ -338,6 +339,11 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 	case TAG_ENEMY:
 		if (m_InvincibleTime < 0)
 		{
+			m_pEfk2->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
+			m_pEfk2->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+			m_pEfk2->SetRotation(m_param.rot.x, m_param.rot.y, m_param.rot.z);
+			m_pEfk2->Play();
+
 			m_InvincibleTime = 120;
 
 			m_param.hp -= 0.18f;

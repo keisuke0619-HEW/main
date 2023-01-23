@@ -146,6 +146,11 @@ void CEffect::AddPos(float x, float y, float z)
 
 void CEffect::Play()
 {
+	m_efkHandle = m_efkManager->Play(m_effect, m_pos.X, m_pos.Y, m_pos.Z);
+}
+
+void CEffect::PlayOnce()
+{
 	// Draw‚Åˆê‰ñ‚¾‚¯ŒÄ‚Î‚ê‚é
 	if (IsPlay == false)
 	{
