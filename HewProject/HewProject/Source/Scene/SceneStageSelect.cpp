@@ -23,21 +23,21 @@ CSceneStageSelect::CSceneStageSelect()
 	const float stageIconPosMinY = 330.0f;
 	const float stageIconPosAddX = 400.0f;
 
-	m_ui[STAGE_ICON_01] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/testLogo_Stage03.png"), SORT_ORDER_DEFAULT);
+	m_ui[STAGE_ICON_01] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_configIcon.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_01].lock()->SetData(
 		stageIconPosMinX + stageIconPosAddX * 0,
 		stageIconPosMinY,
 		stageIconSizeX,
 		stageIconSizeY
 	);
-	m_ui[STAGE_ICON_02] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/testLogo_Stage01.png"), SORT_ORDER_DEFAULT);
+	m_ui[STAGE_ICON_02] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_stageIcon.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_02].lock()->SetData(
 		stageIconPosMinX + stageIconPosAddX * 1,
 		stageIconPosMinY,
 		stageIconSizeX,
 		stageIconSizeY
 	);
-	m_ui[STAGE_ICON_03] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/testLogo_Stage03.png"), SORT_ORDER_DEFAULT);
+	m_ui[STAGE_ICON_03] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_sousaIcon.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_03].lock()->SetData(
 		stageIconPosMinX + stageIconPosAddX * 2,
 		stageIconPosMinY,
