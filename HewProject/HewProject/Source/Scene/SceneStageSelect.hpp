@@ -12,6 +12,8 @@ class CSceneStageSelect : public CSceneBase
 		STAGE_ICON_03,
 		STAGE_ICON_04,
 
+		SETUMEI,
+
 		STAGE_SELECT_UI_MAX
 	};
 public:
