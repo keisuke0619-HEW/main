@@ -1,7 +1,7 @@
 #include"Wall.hpp"
 
 Wall::Wall(float x, float y, float z, bool spin)
-	:CObjectBase("Assets/Model/kabe.fbx", 0.2f)
+	:CObjectBase("Assets/Model/kabe.fbx", 0.3f)
 {
 	m_param.pos.x = x;
 	m_param.pos.y = y;
@@ -21,10 +21,10 @@ Wall::Wall(float x, float y, float z, bool spin)
 	m_param.collisionType = COLLISION_OBSTACLES;
 	m_param.tag = TAG_STATIC_OBJECT;
 	m_param.collisionData.obstacles.pos = m_param.pos;
-	m_param.collisionData.obstacles.size = {1.5f,11.5f};
+	m_param.collisionData.obstacles.size = {2.f,17.f};
 	m_param.collisionData.obstacles.spin = spin;
 
-	m_param.drawOffset = { 0,8.0f,0 };
+	m_param.drawOffset = { 0,12.0f,0 };
 }
 
 Wall::~Wall()

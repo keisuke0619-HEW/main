@@ -51,7 +51,7 @@ CProtEnemy::CProtEnemy()
 	m_param.collisionType = COLLISION_CHARACTER;
 	m_param.collisionData.character.pos = m_param.pos;
 	m_param.collisionData.character.pos.y += m_param.drawOffset.y + 0.08f;
-	m_param.collisionData.character.radius = 0.8f;
+	m_param.collisionData.character.radius = 0.6f;
 
 	//m_pEfk.reset(new CEffect(u"Assets/Effect/bakuhatu.efkefc"));
 }

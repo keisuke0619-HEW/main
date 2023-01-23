@@ -6,7 +6,7 @@ bool Utility::IsCollision(TObjectParam obj1, TObjectParam obj2)
 {
 	if (pow(obj1.pos.x - obj2.pos.x, 2) +
 		pow(obj1.pos.z - obj2.pos.z, 2) >=
-		35.0f)
+		80.0f)
 	{
 		return false;
 	}
