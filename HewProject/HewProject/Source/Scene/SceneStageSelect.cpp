@@ -57,11 +57,6 @@ void CSceneStageSelect::Update()
 	MoveCursor();
 	SetUiAlpha();
 	ChangeScene();
-
-	if (Utility::GetKeyPress(KEY_CANCEL))
-	{
-		m_isNext = false;
-	}
 }
 
 void CSceneStageSelect::MoveCursor()
@@ -74,7 +69,8 @@ void CSceneStageSelect::MoveCursor()
 	{
 		m_cursor--;
 	}
-	m_cursor = m_cursor < 0 ? 0 : m_cursor > 3 ? 3 : m_cursor;
+	m_cursor = m_cursor < 0 ? 2 : m_cursor;
+	m_cursor = m_cursor > 2 ? 0 : m_cursor;
 }
 
 void CSceneStageSelect::ChangeScene()
