@@ -51,6 +51,8 @@ CPlayer::CPlayer(Data* data)
 	m_bill.reset(new CBillboard("Assets/Img/number.png"));
 	m_bill->SetSize({ 2.0f, 0.25f });
 
+	m_isChargeContinue = false;
+	m_ChargeTime = 0;
 	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamtame.efkefc"));
 	m_pEfk2.reset(new CEffect(u"Assets/Effect/damage.efkefc"));
 	m_pEfk3.reset(new CEffect(u"Assets/Effect/zirai.efkefc"));
@@ -143,9 +145,31 @@ void CPlayer::Draw()
 	//	m_beam->Draw();
 	m_playerUI->SetLife(m_param.hp);
 	
-	if (m_isBeamStore == true)
+	// チャージし始めて最初に入る
+	if (m_isBeamStore == true && m_isChargeContinue == false)
 	{
 		m_pEfk->PlayOnce();
+		m_ChargeTime++;
+	}
+	// チャージしてから一定時間経過後入る
+	if (m_ChargeTime >= 100)
+	{
+		m_isChargeContinue = true;
+		m_pEfk->End();					// 今まで出していたエフェクトを終了
+		m_pEfk->ContinuePlay(30.0f);	// 途中からエフェクトを描画
+		m_ChargeTime = 0;
+	}
+	// チャージ満タン状態の時に入る
+	if (m_isChargeContinue == true)
+	{
+		m_ChargeTime++;
+		// 途中から描画していたエフェクトが終わる前に入る
+		if (m_ChargeTime >= 60)
+		{
+			m_pEfk->End();
+			m_pEfk->ContinuePlay(30.0f);
+			m_ChargeTime = 0;
+		}
 	}
 }
 
@@ -262,6 +286,8 @@ void CPlayer::Beam()
 	else
 	{
 		m_isBeamStore = false;
+		m_isChargeContinue = false;
+		m_ChargeTime = 0;
 		m_pEfk->End();
 		CCutinCamera::SetCutinBlur();
 

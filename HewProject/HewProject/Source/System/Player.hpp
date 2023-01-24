@@ -45,6 +45,8 @@ private:
 	DirectX::XMVECTOR m_vKnockBack;
 	CBillboard::Ptr m_bill;
 
+	int m_ChargeTime;
+	bool m_isChargeContinue; // チャージ継続中？
 	CEffect::Ptr m_pEfk;
 	CEffect::Ptr m_pEfk2;
 	CEffect::Ptr m_pEfk3;
