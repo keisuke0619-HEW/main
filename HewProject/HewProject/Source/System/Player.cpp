@@ -113,7 +113,7 @@ void CPlayer::Update()
 		m_pEfk3->PlayOnce();
 		if (m_Fream >= 180)
 		{
-			CSceneResult::SetClear();
+			CSceneResult::SetOver();
 			CSceneManager::SetScene(SCENE_RESULT);
 			Destroy();
 		}
