@@ -8,6 +8,7 @@
 #include <SceneManager.hpp>
 #include <CutinCamera.hpp>
 #include <PlayerCamera.hpp>
+#include <SceneResult.hpp>
 
 CPlayer::CPlayer()
 	: CObjectBase("Assets/Model/player.fbx", 0.08f, false, "Player")
@@ -112,6 +113,7 @@ void CPlayer::Update()
 		m_pEfk3->PlayOnce();
 		if (m_Fream >= 180)
 		{
+			CSceneResult::SetClear();
 			CSceneManager::SetScene(SCENE_RESULT);
 			Destroy();
 		}

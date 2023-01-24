@@ -17,7 +17,7 @@ CSceneResult::CSceneResult()
 	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/retry.png"));
 	m_ResultUI.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
 	m_ResultUI.lock()->SetPos({ 1050.f, 642.f });
-	if (g_isClear)
+	if (!g_isClear)
 	{
 		// ƒQ[ƒ€ƒNƒŠƒA
 		m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/gameclear.png"));
