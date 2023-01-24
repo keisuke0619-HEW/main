@@ -169,6 +169,15 @@ void CEffect::End()
 	}
 }
 
+void CEffect::ContinuePlay(float time)
+{
+	if (IsPlay == false)
+	{
+		m_efkHandle = m_efkManager->Play(m_effect, { m_pos.X, m_pos.Y, m_pos.Z }, time);
+		IsPlay = true;
+	}
+}
+
 Effekseer::Matrix44 CEffect::GetMat(DirectX::XMFLOAT4X4 in)
 {
 	Effekseer::Matrix44 out;
