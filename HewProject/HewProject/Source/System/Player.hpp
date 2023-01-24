@@ -46,6 +46,7 @@ private:
 
 	CEffect::Ptr m_pEfk;
 	CEffect::Ptr m_pEfk2;
+	CEffect::Ptr m_pEfk3;
 
 	int m_Fream;	// ƒV[ƒ“‘JˆÚ—p‚ÌŠÔ
 
