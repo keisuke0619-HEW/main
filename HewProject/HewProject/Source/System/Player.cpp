@@ -76,6 +76,11 @@ void CPlayer::Update()
 	}
 	m_InvincibleTime--;
 
+	if (m_InvincibleTime < 0)
+	{
+		m_pEfk2->End();
+	}
+
 	AddVector3(m_param.move, m_param.accel);
 	AddVector3(m_param.pos, m_param.move);
 
@@ -354,10 +359,10 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 	case TAG_ENEMY:
 		if (m_InvincibleTime < 0)
 		{
-			m_pEfk2->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
-			m_pEfk2->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+			m_pEfk2->SetScale(m_param.scale.x / 2, m_param.scale.y / 2, m_param.scale.z / 2);
+			m_pEfk2->SetPos(m_param.pos.x, m_param.pos.y + 1.0f, m_param.pos.z);
 			m_pEfk2->SetRotation(m_param.rot.x, m_param.rot.y, m_param.rot.z);
-			m_pEfk2->Play();
+			m_pEfk2->PlayOnce();
 
 			m_InvincibleTime = 120;
 
