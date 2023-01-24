@@ -267,6 +267,9 @@
     <ClInclude Include="Wall.hpp">
       <Filter>シーンファイル\Object</Filter>
     </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>システム\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -463,6 +466,9 @@
     </ClCompile>
     <ClCompile Include="Source\System\CutinCamera.cpp">
       <Filter>システム\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>システム\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
