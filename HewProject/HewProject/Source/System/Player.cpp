@@ -10,7 +10,7 @@
 #include <PlayerCamera.hpp>
 
 CPlayer::CPlayer()
-	: CObjectBase("Assets/Model/player.fbx", 0.08f, false, "Player")
+	: CObjectBase("Assets/Model/test2.fbx", 0.08f, false, "Player")
 {
 	m_param.tag = TAG_PLAYER;
 	m_gra = 0;
@@ -32,7 +32,7 @@ CPlayer::CPlayer()
 	m_param.collisionData.character.radius = 0.2f;
 
 	m_playerUI.reset(new CPlayerUI());
-	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/unitychan/walk.fbx");
+	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/aniNEKO.fbx");
 	if (no == Model::ANIME_NONE)
 		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
 	m_modelData.model->Play(no, true);
