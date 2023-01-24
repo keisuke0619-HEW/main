@@ -34,7 +34,7 @@ void CObjectBase::BaseUpdate()
     Update();
     //AddVector3(m_param.move, m_param.accel);
     //AddVector3(m_param.pos, m_param.move);
-    if (m_param.hp <= 0.0f)
+    if (m_param.hp <= 0.0f && m_param.tag != TAG_PLAYER)
         Destroy();
     m_param.frame++;
 }

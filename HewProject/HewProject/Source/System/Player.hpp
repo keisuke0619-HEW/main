@@ -47,5 +47,7 @@ private:
 	CEffect::Ptr m_pEfk;
 	CEffect::Ptr m_pEfk2;
 
+	int m_Fream;	// ƒV[ƒ“‘JˆÚ—p‚ÌŠÔ
+
 	DirectX::XMFLOAT3 m_oldPos;
 };

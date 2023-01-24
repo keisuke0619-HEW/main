@@ -20,6 +20,7 @@ CPlayer::CPlayer()
 	m_InvincibleTime = 0;
 	m_isCancel = false;
 	m_CancelTime = 0;
+	m_Fream = 0;
 
 	// ‚±‚±‚Å•`‰æ‚ð‚¸‚ç‚·
 	m_param.drawOffset = { 0, 0, 0 };
@@ -95,6 +96,20 @@ void CPlayer::Update()
 	m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
 	m_pEfk->SetRotation(m_param.rot.x, m_param.rot.y, m_param.rot.z);
 	m_pEfk->AddPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+
+	if (m_param.hp <= 0.0f)
+	{
+		m_Fream++;
+		if (m_Fream >= 180)
+		{
+			CSceneManager::SetScene(SCENE_RESULT);
+			Destroy();
+		}
+	}
+	else
+	{
+
+	}
 }
 
 void CPlayer::Draw()
@@ -362,11 +377,7 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 
 			m_vKnockBack = DirectX::XMVectorScale(m_vKnockBack, knockBackPower);
 			m_knockBackFrame = knockBackFrame;
-			if (m_param.hp <= 0.0f)
-			{
-				CSceneManager::SetScene(SCENE_RESULT);
-				Destroy();
-			}
+			
 			if (!(m_param.hp <= 0.0f))
 			{
 				CPlayerCamera::SetBlur();
