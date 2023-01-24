@@ -16,9 +16,6 @@ CSceneStageSelect::CSceneStageSelect()
 
 	m_ui[BACK] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_BG.png"), SORT_ORDER_BACK);
 	m_ui[BACK].lock()->SetData(640, 360, 1280, 720);
-	m_ui[SETUMEI] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_sousaTab.png"), SORT_ORDER_FRONT);
-	m_ui[SETUMEI].lock()->SetData(640, 360, 960, 540);
-	m_ui[SETUMEI].lock()->SetColor(0, 0, 0, 0);
 
 	const float stageIconSizeX = 300.0f;
 	const float stageIconSizeY = 300.0f;
@@ -58,18 +55,9 @@ CSceneStageSelect::~CSceneStageSelect()
 
 void CSceneStageSelect::Update()
 {
-	if (m_nowIcon == STAGE_ICON_03)
-	{
-		if (Utility::GetKeyTrigger(KEY_CONFIG))
-		{
-			m_ui[SETUMEI].lock()->SetColor(0, 0, 0, 0);
-			m_ui[BACK].lock()->SetColor(1, 1, 1, 1);
-		}
-	}
 	MoveCursor();
 	SetUiAlpha();
 	ChangeScene();
-
 }
 
 void CSceneStageSelect::MoveCursor()
@@ -99,8 +87,7 @@ void CSceneStageSelect::ChangeScene()
 			AddOverlay(new COverlayStagePrep());
 			return;
 		case STAGE_ICON_03:
-			m_ui[SETUMEI].lock()->SetColor(1, 1, 1, 1);
-			m_ui[BACK].lock()->SetColor(0.2, 0.2, 0.2, 1);
+			AddOverlay(new CSetumei());
 			return;
 		default:
 			break;

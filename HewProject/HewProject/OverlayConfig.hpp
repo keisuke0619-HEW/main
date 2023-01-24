@@ -101,3 +101,13 @@ private:
 	bool* m_next;
 
 };
+
+class CSetumei : public COverlayWindowBase
+{
+public:
+	CSetumei();
+	~CSetumei();
+
+private:
+	void Update();
+};
