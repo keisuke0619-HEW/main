@@ -55,9 +55,9 @@ CSceneResult::CSceneResult(Data data)
 	m_maxDefeat.reset(new CNumberUI(2, SORT_ORDER_UI_FRONT4, 0));
 	m_maxDefeat->SetSize(108, 135);
 	m_maxDefeat->SetColor(1, 1, 1, 1);
+	m_maxDefeat->SetIsZeroFill(true);
 	m_maxDefeat->SetNum(m_data.MAX_kill); // ‚±‚±‚ÉÅ‘åŒ‚”j”‚ð“ü‚ê‚é
-	m_maxDefeat->SetPos({ 800,490 });
-
+	m_maxDefeat->SetPos({ 840,490 });
 	float score = (float)m_data.MAX_kill / 20.f;
 	if (score <= 0.4)
 	{

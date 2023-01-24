@@ -11,6 +11,8 @@ class CMiniMap
 public:
 	CMiniMap();
 	~CMiniMap();
+	static void Init();
+	static void Uninit();
 	void Update();
 	void Draw();
 private:
@@ -19,6 +21,7 @@ private:
 	vector<CGameUI::Ref> m_Icon;
 	IObjectBase::Ref m_player;
 	DirectX::XMFLOAT3 m_movePos;
+	static ID3D11ShaderResourceView* m_img;
 	
 };
 
