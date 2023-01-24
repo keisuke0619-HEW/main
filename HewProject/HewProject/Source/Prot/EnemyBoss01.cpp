@@ -39,6 +39,8 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_param.collisionData.character.radius = 1.0f;
 
 	m_param.hp *= 1.5f;
+
+	m_Fream = 0;
 }
 
 CProtEnemyBoss::~CProtEnemyBoss()
@@ -74,6 +76,18 @@ void CProtEnemyBoss::Update()
 
 	// ボスUIの更新
 	m_bossUI->Update();
+
+	// ボスが死んでいたら
+	if (m_param.hp <= 0.0f)
+	{
+		m_Fream++;
+		// ３秒たったら
+		if (m_Fream >= 180)
+		{
+			CSceneResult::SetClear();
+			CSceneManager::SetScene(SCENE_RESULT);
+		}
+	}
 }
 
 void CProtEnemyBoss::Draw()
@@ -156,10 +170,5 @@ void CProtEnemyBoss::OnCollisionTag(EObjectTag tag)
 	if (tag == TAG_BEAM)
 	{
 		m_param.hp -= 0.005f;
-		if (m_param.hp <= 0.0f)
-		{
-			CSceneResult::SetClear();
-			CSceneManager::SetScene(SCENE_RESULT);
-		}
 	}
 }

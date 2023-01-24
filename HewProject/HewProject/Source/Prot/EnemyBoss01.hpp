@@ -20,6 +20,7 @@ private:
 	void OnCollision(Ptr obj) override;
 	void OnCollisionTag(EObjectTag tag);
 	IObjectBase::Ref m_player;
+	int m_Fream;	// シーン遷移用の時間
 
 	// moveに使う変数
 	float m_move;		// エネミーの速度
