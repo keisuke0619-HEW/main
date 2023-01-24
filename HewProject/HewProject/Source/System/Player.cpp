@@ -391,6 +391,7 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 	case TAG_CAMERA:
 		break;
 	case TAG_ENEMY:
+	case TAG_ENEMY_BOSS:
 		if (m_InvincibleTime < 0)
 		{
 			m_pEfk2->SetScale(m_param.scale.x / 2, m_param.scale.y / 2, m_param.scale.z / 2);
