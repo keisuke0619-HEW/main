@@ -26,7 +26,7 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_param.pos.z = ((rand() % 100) / 10.0f)+23.f;
 
 	// 種類を識別するタグを設定
-	m_param.tag = TAG_ENEMY;
+	m_param.tag = TAG_ENEMY_BOSS;
 	// UIを設定
 	m_bossUI.reset(new CBossUI());
 	// 描画のオフセットを指定（内部的な"Pos"と描画のギャップを埋める）

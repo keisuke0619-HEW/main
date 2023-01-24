@@ -10,6 +10,7 @@ enum EObjectTag
 	TAG_PLAYER,
 	TAG_CAMERA,
 	TAG_ENEMY,
+	TAG_ENEMY_BOSS,
 	TAG_BEAM,
 	TAG_SHOCK,	// 衝撃波
 	TAG_STATIC_OBJECT,	// 移動しないオブジェクト（Static同士の判定はしない）

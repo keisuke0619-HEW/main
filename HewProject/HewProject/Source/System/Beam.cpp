@@ -138,6 +138,47 @@ void CBeam::Collision()
 			(*itr)->OnCollisionTag(TAG_SHOCK);
 		}
 	}
+
+	auto enemyboss = CSceneBase::GetObjList().lock()->FindTagAll(TAG_ENEMY_BOSS);
+	
+	auto itr = enemyboss.begin();
+	// 敵のデータ格納
+	auto enemybossParam = (*itr)->GetParam();
+
+	// 敵のデータを使ってエネミーとの当たり判定をとる
+	m_enemyPos = enemybossParam.pos;
+	DirectX::XMVECTOR vEnemyPos = DirectX::XMLoadFloat3(&m_enemyPos);
+	DirectX::XMVECTOR vEnemyTarget = DirectX::XMVectorSubtract(vEnemyPos, vPos); // ビームの開始地点から敵の位置のベクトル
+	DirectX::XMVECTOR vEnemyTargetNormal = DirectX::XMVector3Normalize(vEnemyTarget); // ビームの開始地点から敵の位置の単位ベクトル
+
+	// 内積の計算１（角度をとるための計算。単位ベクトル×単位ベクトルからAcosで角度取得可能）
+	float normalDot;	// 内積の結果を保存する変数
+	DirectX::XMVECTOR vdot = DirectX::XMVector3Dot(vTarget, vEnemyTargetNormal);	// 内積を計算
+	DirectX::XMStoreFloat(&normalDot, vdot);	// float型の変数に格納
+	
+	// 内積の計算２（ビームのどの地点が一番近いかを取得。単位ベクトル×ベクトルでベクトルが単位ベクトルに落とす影の長さに等しいのを利用。）
+	float disToEnemy;	// ビームベクトルに落ちる影の長さを格納する
+	vdot = DirectX::XMVector3Dot(vTarget, vEnemyTarget);	// ビーム単位ベクトルと敵ベクトルの内積。（＝ビームベクトルに落ちる影の長さ）
+	DirectX::XMStoreFloat(&disToEnemy, vdot);	// floatに格納
+
+	// ビームと敵の角度を計算
+	float rad = acosf(normalDot);// ビームベクトルと敵ベクトルの角度
+
+	float disFromBeam = tanf(rad) * disToEnemy;	// ビームから敵の距離
+	disFromBeam = fabsf(disFromBeam);			// 絶対値をとる
+
+	// 以下当たり判定
+	if (disFromBeam < m_maxSize * 3)
+	{
+		(*itr)->OnCollisionTag(TAG_BEAM);
+
+	}
+	else if (disFromBeam < m_maxSize * 6)
+	{
+		(*itr)->OnCollisionTag(TAG_SHOCK);
+	}
+	
+	
 }
 
 void CBeam::SetPlayerPos(DirectX::XMFLOAT3 playerpos)
