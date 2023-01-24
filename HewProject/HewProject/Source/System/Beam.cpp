@@ -4,7 +4,7 @@
 #include <Easing.hpp>
 #include <Camera.hpp>
 #include <SceneBase.hpp>
-CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
+CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size, Data* data)
 	: CObjectBase("Assets/Box.fbx")
 {
 	m_pos = pos;
@@ -19,11 +19,17 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size)
 	//m_pEfk.reset(new CEffect(u"Assets/Effect/Beamhassya.efkefc"));
 	m_pEfk.reset(new CEffect(u"Assets/Effect/BeamSiohuki.efkefc"));
 	m_pEfk2.reset(new CEffect(u"Assets/Effect/BeamSyasei.efkefc"));
+
+	m_data = data;
+	m_killCnt = 0;
 }
 
 CBeam::~CBeam()
 {
-	
+	if (m_killCnt > m_data->MAX_kill)
+	{
+		m_data->MAX_kill = m_killCnt;
+	}
 }
 
 void CBeam::Update()

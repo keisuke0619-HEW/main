@@ -13,7 +13,7 @@ struct TResultData
 class CSceneResult : public CSceneBase
 {
 public:
-	CSceneResult();
+	CSceneResult(Data data);
 	~CSceneResult();
 	static void SetClear();
 	static void SetOver();

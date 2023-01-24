@@ -10,7 +10,7 @@
 #include <Time.h>
 CGameScene::CGameScene()
 {
-	m_obj->Add(new CPlayer());
+	m_obj->Add(new CPlayer(&m_data));
 	CCameraBase::CreateCamera(new CPlayerCamera(), "Player");
 	CCameraBase::SetPrimaryCamera("Player");
 

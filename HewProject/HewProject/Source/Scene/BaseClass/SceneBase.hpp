@@ -29,8 +29,6 @@ protected:
 	void SetBGM(const char* src, float volume = 0.6f);
 	void SetVolumeFade(float newVolume, int frame);
 
-
-
 	int m_frame;
 	std::unique_ptr<COverlayWindowBase> m_overlay;
 	static std::shared_ptr<CObjectManager> m_obj;

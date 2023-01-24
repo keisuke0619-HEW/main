@@ -10,7 +10,7 @@
 #include <PlayerCamera.hpp>
 #include <SceneResult.hpp>
 
-CPlayer::CPlayer()
+CPlayer::CPlayer(Data* data)
 	: CObjectBase("Assets/Model/player.fbx", 0.08f, false, "Player")
 {
 	m_param.tag = TAG_PLAYER;
@@ -54,6 +54,8 @@ CPlayer::CPlayer()
 	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamtame.efkefc"));
 	m_pEfk2.reset(new CEffect(u"Assets/Effect/damage.efkefc"));
 	m_pEfk3.reset(new CEffect(u"Assets/Effect/zirai.efkefc"));
+
+	m_data = data;
 }
 
 CPlayer::~CPlayer()
@@ -82,7 +84,6 @@ void CPlayer::Update()
 	{
 		m_pEfk2->End();
 	}
-
 	AddVector3(m_param.move, m_param.accel);
 	AddVector3(m_param.pos, m_param.move);
 
@@ -270,7 +271,7 @@ void CPlayer::Beam()
 			DirectX::XMFLOAT3 CameraPos = CCameraBase::GetDataFromTag("Player").pos;
 			DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
 
-			auto beam = new CBeam(CameraPos, CameraLook, m_beamSize);
+			auto beam = new CBeam(CameraPos, CameraLook, m_beamSize, m_data);
 			beam->SetPlayerPos(m_param.pos);
 			CSceneBase::GetObjList().lock()->Add(beam);
 			

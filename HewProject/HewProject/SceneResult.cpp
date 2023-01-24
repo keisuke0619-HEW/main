@@ -7,8 +7,10 @@
 
 bool g_isClear = false;
 
-CSceneResult::CSceneResult()
+CSceneResult::CSceneResult(Data data)
 {
+	// ƒQ[ƒ€‚Ìƒf[ƒ^Žæ“¾
+	m_data = data;
 	// ƒz[ƒ€
 	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/home.png"));
 	m_ResultUI.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
@@ -53,7 +55,7 @@ CSceneResult::CSceneResult()
 	m_maxDefeat.reset(new CNumberUI(2, SORT_ORDER_UI_FRONT4, 0));
 	m_maxDefeat->SetSize(108, 135);
 	m_maxDefeat->SetColor(1, 1, 1, 1);
-	m_maxDefeat->SetNum(3); // ‚±‚±‚ÉÅ‘åŒ‚”j”‚ð“ü‚ê‚é
+	m_maxDefeat->SetNum(m_data.MAX_kill); // ‚±‚±‚ÉÅ‘åŒ‚”j”‚ð“ü‚ê‚é
 	m_maxDefeat->SetPos({ 800,490 });
 
 	// “º

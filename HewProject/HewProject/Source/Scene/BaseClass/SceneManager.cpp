@@ -66,7 +66,8 @@ void CSceneManager::SwapScene()
 		m_scene->SetData(new CStageData01());
 		break;
 	case SCENE_RESULT:
-		m_scene.reset(new CSceneResult());
+		Data data = m_scene->GetData();
+		m_scene.reset(new CSceneResult(data));
 		break;
 	default:
 		break;

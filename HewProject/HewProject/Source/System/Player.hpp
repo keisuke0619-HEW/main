@@ -6,13 +6,14 @@
 #include <Billboard.h>
 #include "Sound.h"
 #include <OutputEffekseer.h>
+#include <ISceneBase.hpp>
 
 class CPlayer : public CObjectBase
 {
 
 
 public:
-	CPlayer();
+	CPlayer(Data* data);
 	~CPlayer();
 
 	void Update() override;
@@ -51,4 +52,6 @@ private:
 	int m_Fream;	// ƒV[ƒ“‘JˆÚ—p‚ÌŠÔ
 
 	DirectX::XMFLOAT3 m_oldPos;
+
+	Data* m_data;
 };

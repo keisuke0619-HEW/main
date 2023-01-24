@@ -9,7 +9,7 @@
 #include <OverlayConfig.hpp>
 CGameScene_02::CGameScene_02()
 {
-	m_obj->Add(new CPlayer());
+	m_obj->Add(new CPlayer(&m_data));
 	CCameraBase::CreateCamera(new CPlayerCamera(), "Player");
 	CCameraBase::SetPrimaryCamera("Player");
 
