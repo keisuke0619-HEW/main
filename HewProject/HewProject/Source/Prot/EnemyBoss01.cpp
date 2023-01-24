@@ -37,6 +37,8 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_param.collisionData.character.pos = m_param.pos;
 	m_param.collisionData.character.pos.y = m_param.drawOffset.y + 0.08f;
 	m_param.collisionData.character.radius = 1.0f;
+
+	m_param.hp *= 1.5f;
 }
 
 CProtEnemyBoss::~CProtEnemyBoss()
@@ -79,7 +81,7 @@ void CProtEnemyBoss::Draw()
 	CObjectBase::Draw();
 	
 	// ƒ{ƒXUI‚Ì•`‰æ
-	m_bossUI->SetLife(m_param.hp);
+	m_bossUI->SetLife(m_param.hp / 1.5f);
 }
 
 void CProtEnemyBoss::Move()

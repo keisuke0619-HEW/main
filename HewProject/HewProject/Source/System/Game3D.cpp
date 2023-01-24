@@ -8,6 +8,7 @@
 #include <Billboard.h>
 #include <OutputEffekseer.h>
 #include <NumberUI.hpp>
+#include <MiniMap.h>
 //--- Scenes ---//
 
 Game3D::Game3D()
@@ -21,9 +22,11 @@ Game3D::Game3D()
 	Utility::ControllerInit();
 	CEffect::InitSystem();
 	CNumberUI::Init();
+	CMiniMap::Init();
 }
 Game3D::~Game3D()
 {
+	CMiniMap::Uninit();
 	CNumberUI::Uninit();
 	CEffect::UninitSystem();
 	CBillboard::ClearBillboard();
