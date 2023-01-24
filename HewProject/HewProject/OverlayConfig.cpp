@@ -86,7 +86,7 @@ void COverlayConfig::MoveCursor()
 
 void COverlayConfig::SetStatus()
 {
-	const float addLevel = 0.25f;
+	const float addLevel = 0.5f;
 	float add = 0;
 	m_speedXBar->SetColor255(128, 128, 128, 128);
 	m_speedXCursor->SetColor255(128, 128, 128, 128);
