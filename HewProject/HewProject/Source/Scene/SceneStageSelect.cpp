@@ -49,6 +49,7 @@ CSceneStageSelect::CSceneStageSelect()
 	);
 
 	m_nowIcon = STAGE_ICON_01;
+	m_cursor = 1;
 }
 
 CSceneStageSelect::~CSceneStageSelect()
