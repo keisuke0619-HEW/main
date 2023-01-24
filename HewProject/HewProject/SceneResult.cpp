@@ -58,12 +58,27 @@ CSceneResult::CSceneResult(Data data)
 	m_maxDefeat->SetNum(m_data.MAX_kill); // ‚±‚±‚ÉÅ‘åŒ‚”j”‚ð“ü‚ê‚é
 	m_maxDefeat->SetPos({ 800,490 });
 
-	// “º
-	//m_ResultUI.lock()->SetColor255(134, 74, 43);
-	// ‹â
-	//m_ResultUI.lock()->SetColor(1, 1, 1);
-	// ‹à
-	m_ResultUI.lock()->SetColor255(255, 215, 0);
+	float score = (float)m_data.MAX_kill / 20.f;
+	if (score <= 0.4)
+	{
+		m_ResultUI.lock()->SetColor(1, 1, 1, 0);
+	}
+	if (score > 0.4)
+	{
+		// “º
+		m_ResultUI.lock()->SetColor255(134, 74, 43);
+	}
+	if (score > 0.6)
+	{
+		// ‹â
+		m_ResultUI.lock()->SetColor(1, 1, 1);
+	}
+	if (score > 0.8)
+	{
+		// ‹à
+		m_ResultUI.lock()->SetColor255(255, 215, 0);
+	}
+	
 }
 
 CSceneResult::~CSceneResult()
