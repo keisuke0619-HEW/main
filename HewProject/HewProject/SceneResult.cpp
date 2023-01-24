@@ -10,7 +10,7 @@ CSceneResult::CSceneResult()
 	m_ResultUI.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
 	m_ResultUI.lock()->SetPos({ 230.f, 642.f });
 	// ネクスト
-	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/ritry.png"));
+	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/retry.png"));
 	m_ResultUI.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
 	m_ResultUI.lock()->SetPos({ 1050.f, 642.f });
 	// ゲームクリア
@@ -22,7 +22,7 @@ CSceneResult::CSceneResult()
 	m_ResultUI.lock()->SetSize({ 133.3f, 137.6f });//31.f, 32.f
 	m_ResultUI.lock()->SetPos({ 365.f, 194.f });
 	// 背景
-	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/usiro.png"));
+	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/back.png"));
 	m_ResultUI.lock()->SetSize({ 1200.f, 600.f });//467.f, 276.f
 	m_ResultUI.lock()->SetPos({ 640.f, 360.f });
 	// 音データの読み込み
