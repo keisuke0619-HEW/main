@@ -1,7 +1,7 @@
 #include "MiniMap.h"
 #include <SceneBase.hpp>
 #include <UiManager.hpp>
-
+#include <Camera.hpp>
 ID3D11ShaderResourceView* CMiniMap::m_img;
 
 
