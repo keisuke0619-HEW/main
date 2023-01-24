@@ -52,6 +52,7 @@ CPlayer::CPlayer()
 
 	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamtame.efkefc"));
 	m_pEfk2.reset(new CEffect(u"Assets/Effect/damage.efkefc"));
+	m_pEfk3.reset(new CEffect(u"Assets/Effect/zirai.efkefc"));
 }
 
 CPlayer::~CPlayer()
@@ -105,6 +106,10 @@ void CPlayer::Update()
 	if (m_param.hp <= 0.0f)
 	{
 		m_Fream++;
+	
+		m_pEfk3->SetScale(1.0f, 1.0f, 1.0f);
+		m_pEfk3->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+		m_pEfk3->PlayOnce();
 		if (m_Fream >= 180)
 		{
 			CSceneManager::SetScene(SCENE_RESULT);
