@@ -16,6 +16,7 @@ public:
 	CSceneResult();
 	~CSceneResult();
 	static void SetClear();
+	static void SetOver();
 
 	void SetData(void* dataPtr, long size = 0, const char* name = "NO_NAME") override;
 private:
