@@ -1,5 +1,7 @@
 #include "DirectX.h"
+#include <dxgi.h>
 
+#pragma comment(lib, "dxgi.lib")
 //--- グローバル変数
 ID3D11Device* g_pDevice;
 ID3D11DeviceContext* g_pContext;
@@ -72,12 +74,36 @@ HRESULT InitDX(HWND hWnd, UINT width, UINT height, bool fullscreen)
 	D3D_DRIVER_TYPE driverType;
 	D3D_FEATURE_LEVEL featureLevel;
 
+
+
+	// 追記
+	IDXGIFactory* factory;
+	IDXGIAdapter* adapter;
+	IDXGIAdapter* powerAdapter;
+	DXGI_ADAPTER_DESC powerDesc;
+	UINT uint = 0;
+	CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&factory);
+	factory->EnumAdapters(uint, &adapter);
+	uint++;
+	powerAdapter = adapter;
+	powerAdapter->GetDesc(&powerDesc);
+	for (; factory->EnumAdapters(uint, &adapter) != DXGI_ERROR_NOT_FOUND; uint++)
+	{
+		DXGI_ADAPTER_DESC desc;
+		adapter->GetDesc(&desc);
+		bool isPower = desc.DedicatedVideoMemory > powerDesc.DedicatedVideoMemory;
+		if (isPower)
+		{
+			powerAdapter = adapter;
+			powerAdapter->GetDesc(&powerDesc);
+		}
+	}
 	for (UINT driverTypeIndex = 0; driverTypeIndex < numDriverTypes; ++driverTypeIndex)
 	{
 		driverType = driverTypes[driverTypeIndex];
 		hr = D3D11CreateDeviceAndSwapChain(
-			NULL,					// ディスプレイデバイスのアダプタ（NULLの場合最初に見つかったアダプタ）
-			driverType,				// デバイスドライバのタイプ
+			powerAdapter,					// ディスプレイデバイスのアダプタ（NULLの場合最初に見つかったアダプタ）
+			D3D_DRIVER_TYPE_UNKNOWN,				// デバイスドライバのタイプ
 			NULL,					// ソフトウェアラスタライザを使用する場合に指定する
 			createDeviceFlags,		// デバイスフラグ
 			featureLevels,			// 機能レベル
