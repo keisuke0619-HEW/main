@@ -49,6 +49,7 @@ CSceneStageSelect::CSceneStageSelect()
 	);
 
 	m_nowIcon = STAGE_ICON_01;
+	m_cursor = 1;
 }
 
 CSceneStageSelect::~CSceneStageSelect()
@@ -62,6 +63,7 @@ void CSceneStageSelect::Update()
 		if (Utility::GetKeyTrigger(KEY_CONFIG))
 		{
 			m_ui[SETUMEI].lock()->SetColor(0, 0, 0, 0);
+			m_ui[BACK].lock()->SetColor(1, 1, 1, 1);
 		}
 	}
 	MoveCursor();
@@ -98,6 +100,7 @@ void CSceneStageSelect::ChangeScene()
 			return;
 		case STAGE_ICON_03:
 			m_ui[SETUMEI].lock()->SetColor(1, 1, 1, 1);
+			m_ui[BACK].lock()->SetColor(0.2, 0.2, 0.2, 1);
 			return;
 		default:
 			break;

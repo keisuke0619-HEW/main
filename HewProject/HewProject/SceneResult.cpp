@@ -10,7 +10,7 @@ CSceneResult::CSceneResult()
 	m_ResultUI.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
 	m_ResultUI.lock()->SetPos({ 230.f, 642.f });
 	// ネクスト
-	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/next.png"));
+	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/ritry.png"));
 	m_ResultUI.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
 	m_ResultUI.lock()->SetPos({ 1050.f, 642.f });
 	// ゲームクリア
