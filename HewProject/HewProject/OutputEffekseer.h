@@ -30,6 +30,7 @@ public:
 	void Play();
 	void PlayOnce();
 	void End();
+	void ContinuePlay(float time);
 private:
 	void Draw();
 	//--- Effekseer‚Ì‰Šú‰»

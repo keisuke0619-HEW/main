@@ -162,8 +162,20 @@ void CEffect::PlayOnce()
 void CEffect::End()
 {
 	// Effekseer‚ð‹­§I—¹
-	m_efkManager->StopEffect(m_efkHandle);
-	IsPlay = false;
+	if (IsPlay == true)
+	{
+		m_efkManager->StopEffect(m_efkHandle);
+		IsPlay = false;
+	}
+}
+
+void CEffect::ContinuePlay(float time)
+{
+	if (IsPlay == false)
+	{
+		m_efkHandle = m_efkManager->Play(m_effect, { m_pos.X, m_pos.Y, m_pos.Z }, time);
+		IsPlay = true;
+	}
 }
 
 Effekseer::Matrix44 CEffect::GetMat(DirectX::XMFLOAT4X4 in)

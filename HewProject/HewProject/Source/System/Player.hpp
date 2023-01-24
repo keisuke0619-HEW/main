@@ -6,13 +6,14 @@
 #include <Billboard.h>
 #include "Sound.h"
 #include <OutputEffekseer.h>
+#include <ISceneBase.hpp>
 
 class CPlayer : public CObjectBase
 {
 
 
 public:
-	CPlayer();
+	CPlayer(Data* data);
 	~CPlayer();
 
 	void Update() override;
@@ -44,10 +45,15 @@ private:
 	DirectX::XMVECTOR m_vKnockBack;
 	CBillboard::Ptr m_bill;
 
+	int m_ChargeTime;
+	bool m_isChargeContinue; // チャージ継続中？
 	CEffect::Ptr m_pEfk;
 	CEffect::Ptr m_pEfk2;
+	CEffect::Ptr m_pEfk3;
 
 	int m_Fream;	// シーン遷移用の時間
 
 	DirectX::XMFLOAT3 m_oldPos;
+
+	Data* m_data;
 };

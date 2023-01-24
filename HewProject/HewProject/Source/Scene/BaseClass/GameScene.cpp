@@ -7,15 +7,17 @@
 #include <EnemyZako01.hpp>
 #include <Controller.hpp>
 #include <OverlayConfig.hpp>
+#include <Time.h>
 CGameScene::CGameScene()
 {
-	m_obj->Add(new CPlayer());
+	m_obj->Add(new CPlayer(&m_data));
 	CCameraBase::CreateCamera(new CPlayerCamera(), "Player");
 	CCameraBase::SetPrimaryCamera("Player");
 
 	SetBGM("Assets/Sound/BGM.wav");
 
 	m_isNext = false;
+	CTime::Init();
 }
 
 CGameScene::~CGameScene()
@@ -43,6 +45,7 @@ void CGameScene::Update()
 	{
 		CSceneManager::SetScene(SCENE_TITLE);
 	}
+	CTime::Update();
 }
 
 void CGameScene::Draw()

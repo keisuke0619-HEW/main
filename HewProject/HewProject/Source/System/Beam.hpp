@@ -2,11 +2,12 @@
 #include <DirectXMath.h>
 #include "BaseClass/ObjectBase.hpp"
 #include <OutputEffekseer.h>
+#include <ISceneBase.hpp>
 
 class CBeam : public CObjectBase
 {
 public:
-	CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size = 1.0f);
+	CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size,Data* data);
 	~CBeam();
 
 	void Update();
@@ -28,4 +29,6 @@ private:
 	CEffect::Ptr m_pEfk;
 	CEffect::Ptr m_pEfk2;
 
+	Data* m_data;
+	int m_killCnt;
 };

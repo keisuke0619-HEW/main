@@ -8,9 +8,10 @@
 #include <SceneManager.hpp>
 #include <CutinCamera.hpp>
 #include <PlayerCamera.hpp>
+#include <SceneResult.hpp>
 
-CPlayer::CPlayer()
-	: CObjectBase("Assets/Model/test2.fbx", 0.08f, false, "Player")
+CPlayer::CPlayer(Data* data)
+	: CObjectBase("Assets/Model/player.fbx", 0.08f, false, "Player")
 {
 	m_param.tag = TAG_PLAYER;
 	m_gra = 0;
@@ -32,7 +33,7 @@ CPlayer::CPlayer()
 	m_param.collisionData.character.radius = 0.2f;
 
 	m_playerUI.reset(new CPlayerUI());
-	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/aniNEKO.fbx");
+	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/unitychan/walk.fbx");
 	if (no == Model::ANIME_NONE)
 		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
 	m_modelData.model->Play(no, true);
@@ -50,8 +51,13 @@ CPlayer::CPlayer()
 	m_bill.reset(new CBillboard("Assets/Img/number.png"));
 	m_bill->SetSize({ 2.0f, 0.25f });
 
+	m_isChargeContinue = false;
+	m_ChargeTime = 0;
 	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamtame.efkefc"));
 	m_pEfk2.reset(new CEffect(u"Assets/Effect/damage.efkefc"));
+	m_pEfk3.reset(new CEffect(u"Assets/Effect/zirai.efkefc"));
+
+	m_data = data;
 }
 
 CPlayer::~CPlayer()
@@ -76,6 +82,10 @@ void CPlayer::Update()
 	}
 	m_InvincibleTime--;
 
+	if (m_InvincibleTime < 0)
+	{
+		m_pEfk2->End();
+	}
 	AddVector3(m_param.move, m_param.accel);
 	AddVector3(m_param.pos, m_param.move);
 
@@ -100,8 +110,13 @@ void CPlayer::Update()
 	if (m_param.hp <= 0.0f)
 	{
 		m_Fream++;
+	
+		m_pEfk3->SetScale(1.0f, 1.0f, 1.0f);
+		m_pEfk3->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+		m_pEfk3->PlayOnce();
 		if (m_Fream >= 180)
 		{
+			CSceneResult::SetOver();
 			CSceneManager::SetScene(SCENE_RESULT);
 			Destroy();
 		}
@@ -130,9 +145,31 @@ void CPlayer::Draw()
 	//	m_beam->Draw();
 	m_playerUI->SetLife(m_param.hp);
 	
-	if (m_isBeamStore == true)
+	// チャージし始めて最初に入る
+	if (m_isBeamStore == true && m_isChargeContinue == false)
 	{
 		m_pEfk->PlayOnce();
+		m_ChargeTime++;
+	}
+	// チャージしてから一定時間経過後入る
+	if (m_ChargeTime >= 100)
+	{
+		m_isChargeContinue = true;
+		m_pEfk->End();					// 今まで出していたエフェクトを終了
+		m_pEfk->ContinuePlay(30.0f);	// 途中からエフェクトを描画
+		m_ChargeTime = 0;
+	}
+	// チャージ満タン状態の時に入る
+	if (m_isChargeContinue == true)
+	{
+		m_ChargeTime++;
+		// 途中から描画していたエフェクトが終わる前に入る
+		if (m_ChargeTime >= 60)
+		{
+			m_pEfk->End();
+			m_pEfk->ContinuePlay(30.0f);
+			m_ChargeTime = 0;
+		}
 	}
 }
 
@@ -249,6 +286,8 @@ void CPlayer::Beam()
 	else
 	{
 		m_isBeamStore = false;
+		m_isChargeContinue = false;
+		m_ChargeTime = 0;
 		m_pEfk->End();
 		CCutinCamera::SetCutinBlur();
 
@@ -258,7 +297,7 @@ void CPlayer::Beam()
 			DirectX::XMFLOAT3 CameraPos = CCameraBase::GetDataFromTag("Player").pos;
 			DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
 
-			auto beam = new CBeam(CameraPos, CameraLook, m_beamSize);
+			auto beam = new CBeam(CameraPos, CameraLook, m_beamSize, m_data);
 			beam->SetPlayerPos(m_param.pos);
 			CSceneBase::GetObjList().lock()->Add(beam);
 			
@@ -354,10 +393,10 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 	case TAG_ENEMY:
 		if (m_InvincibleTime < 0)
 		{
-			m_pEfk2->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
-			m_pEfk2->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+			m_pEfk2->SetScale(m_param.scale.x / 2, m_param.scale.y / 2, m_param.scale.z / 2);
+			m_pEfk2->SetPos(m_param.pos.x, m_param.pos.y + 1.0f, m_param.pos.z);
 			m_pEfk2->SetRotation(m_param.rot.x, m_param.rot.y, m_param.rot.z);
-			m_pEfk2->Play();
+			m_pEfk2->PlayOnce();
 
 			m_InvincibleTime = 120;
 
