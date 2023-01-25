@@ -33,7 +33,7 @@ CPlayer::CPlayer(Data* data)
 	m_param.collisionData.character.radius = 0.2f;
 
 	m_playerUI.reset(new CPlayerUI());
-	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/aniNEKO.fbx");
+	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/walk_neko.fbx");
 	if (no == Model::ANIME_NONE)
 		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
 	m_modelData.model->Play(no, true);
@@ -66,54 +66,14 @@ CPlayer::~CPlayer()
 
 void CPlayer::Update()
 {
-	m_oldPos = m_param.pos;
-	
-
-	if (m_isCancel == false)
-	{
-		Move();
-		Beam();
-		m_playerUI->SetReticleAlpha(1);
-	}
-	else
-	{
-		CancelMove();
-		m_playerUI->SetReticleAlpha(0);
-	}
-	m_InvincibleTime--;
-
-	if (m_InvincibleTime < 0)
-	{
-		m_pEfk2->End();
-	}
-	AddVector3(m_param.move, m_param.accel);
-	AddVector3(m_param.pos, m_param.move);
-
-	// 当たり判定の更新
-	m_param.collisionData.character.pos = m_param.pos;
-	m_param.collisionData.character.pos.y += m_param.drawOffset.y + 0.1f;
-
-	m_playerUI->Update();
-
-	m_bill->SetPos({ m_param.pos.x, m_param.pos.y + 100.0f, m_param.pos.z });
-	m_bill->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
-	//if (IsKeyTrigger('U'))
-	//	Destroy();
-
-	//m_param.hp = 1;
-
-	m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
-	m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
-	m_pEfk->SetRotation(m_param.rot.x, m_param.rot.y, m_param.rot.z);
-	m_pEfk->AddPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
-
 	if (m_param.hp <= 0.0f)
 	{
 		m_Fream++;
-	
+
 		m_pEfk3->SetScale(1.0f, 1.0f, 1.0f);
 		m_pEfk3->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
 		m_pEfk3->PlayOnce();
+		m_playerUI->Update();
 		if (m_Fream >= 180)
 		{
 			CSceneResult::SetOver();
@@ -123,7 +83,46 @@ void CPlayer::Update()
 	}
 	else
 	{
+		m_oldPos = m_param.pos;
 
+
+		if (m_isCancel == false)
+		{
+			Move();
+			Beam();
+			m_playerUI->SetReticleAlpha(1);
+		}
+		else
+		{
+			CancelMove();
+			m_playerUI->SetReticleAlpha(0);
+		}
+		m_InvincibleTime--;
+
+		if (m_InvincibleTime < 0)
+		{
+			m_pEfk2->End();
+		}
+		AddVector3(m_param.move, m_param.accel);
+		AddVector3(m_param.pos, m_param.move);
+
+		// 当たり判定の更新
+		m_param.collisionData.character.pos = m_param.pos;
+		m_param.collisionData.character.pos.y += m_param.drawOffset.y + 0.1f;
+
+		m_playerUI->Update();
+
+		m_bill->SetPos({ m_param.pos.x, m_param.pos.y + 100.0f, m_param.pos.z });
+		m_bill->SetPosViewProj(CCameraBase::GetPrimaryViewMatrix(), CCameraBase::GetPrimaryProjectionMatrix());
+		//if (IsKeyTrigger('U'))
+		//	Destroy();
+
+		//m_param.hp = 1;
+
+		m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
+		m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+		m_pEfk->SetRotation(m_param.rot.x, m_param.rot.y, m_param.rot.z);
+		m_pEfk->AddPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
 	}
 }
 
