@@ -12,13 +12,15 @@ CSceneResult::CSceneResult(Data data)
 	// ゲームのデータ取得
 	m_data = data;
 	// ホーム
-	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/home.png"));
-	m_ResultUI.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
-	m_ResultUI.lock()->SetPos({ 230.f, 642.f });
+	m_Home = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/home.png"));
+	m_Home.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
+	m_Home.lock()->SetPos({ 230.f, 642.f });
+	m_Home.lock()->SetColor(1, 1, 1, 1);
 	// ネクスト
-	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/retry.png"));
-	m_ResultUI.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
-	m_ResultUI.lock()->SetPos({ 1050.f, 642.f });
+	m_Retry = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/retry.png"));
+	m_Retry.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
+	m_Retry.lock()->SetPos({ 1050.f, 642.f });
+	m_Retry.lock()->SetColor(1, 1, 1, 0.3f);
 	if (g_isClear)
 	{
 		// ゲームクリア
@@ -42,6 +44,10 @@ CSceneResult::CSceneResult(Data data)
 	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/cat.png"));
 	m_ResultUI.lock()->SetSize({ 83.3f, 97.6f });//31.f, 32.f
 	m_ResultUI.lock()->SetPos({ 1000.f, 490.f });
+
+	
+	
+
 	// 音データの読み込み
 	SetBGM("Assets/Sound/korinoyaiba.wav");
 
@@ -105,8 +111,32 @@ void CSceneResult::SetData(void* dataPtr, long size, const char* name)
 
 void CSceneResult::Update()
 {
+	
+
+	if (Utility::GetKeyTrigger(KEY_RIGHT))
+	{
+		m_selectCursol = 1;
+		m_Retry.lock()->SetColor(1, 1, 1, 1);
+		m_Home.lock()->SetColor(1, 1, 1, 0.3f);
+	}
+	if (Utility::GetKeyTrigger(KEY_LEFT))
+	{
+		m_selectCursol = 0;
+		m_Retry.lock()->SetColor(1, 1, 1, 0.3f);
+		m_Home.lock()->SetColor(1, 1, 1, 1);
+		
+	}
+
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
-		CSceneManager::SetScene(SCENE_STAGE_SELECT);
+
+		if (m_selectCursol == 0)
+		{
+			CSceneManager::SetScene(SCENE_TITLE);
+		}
+		if(m_selectCursol==1)
+		{
+			CSceneManager::SetScene(SCENE_STAGE01);
+		}
 	}
 }
