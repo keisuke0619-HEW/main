@@ -4,6 +4,7 @@
 #include <GameUI.h>
 #include <memory>
 #include <MiniMap.h>
+#include <NumberUI.hpp>
 class CPlayerUI
 {
 public:
@@ -27,6 +28,6 @@ private:
 	CMiniMap* m_pMap;
 	void UpdateLife();
 	void UpdateCharge();
-	
+	CNumberUI::Ptr m_timer;
 
 };

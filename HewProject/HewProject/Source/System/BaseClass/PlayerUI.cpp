@@ -2,6 +2,7 @@
 #include <Blend.hpp>
 // 追加
 #include <UiManager.hpp>
+#include <Time.h>
 
 // 定数定義
 const DirectX::XMFLOAT2 PLAYER_UI_LIFE_CENTER = { 307, 621 };
@@ -46,6 +47,13 @@ CPlayerUI::CPlayerUI()
 	m_chargeSprite.lock()->SetColor(0, 1, 1, 1);
 
 	m_pMap = new CMiniMap;
+
+	// デバッグ用で時間出してます
+	// こことUpdateの中のやつを消せば消えます
+	m_timer.reset(new CNumberUI(2, SORT_ORDER_UI_FRONT4, 2));
+	m_timer->SetSize(36, 45);
+	m_timer->SetColor(1, 1, 1);
+	m_timer->SetPos({ 980,305 });
 }
 
 CPlayerUI::~CPlayerUI()
@@ -59,6 +67,8 @@ void CPlayerUI::Update()
 	UpdateLife();
 	UpdateCharge();
 	m_pMap->Update();
+	// ここも消す
+	m_timer->SetNum(CTime::GetTime());
 }
 
 

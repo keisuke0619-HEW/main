@@ -47,8 +47,8 @@ public:
 	void SetAlign(ENumAlign align);
 	void SetSortOrder(SortOrder sort);
 	void SetMarginLevel(float level);
-	void SetColor(float r, float g, float b, float a);
-	void SetColor255(int r, int g, int b, int a);
+	void SetColor(float r, float g, float b, float a = 1);
+	void SetColor255(int r, int g, int b, int a = 255);
 private:
 	float m_num;	// 表示する値
 	DirectX::XMFLOAT2 m_pos;	// 中心座標
