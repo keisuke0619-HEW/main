@@ -10,10 +10,10 @@
 #include<Wall.hpp>
 
 // Stage00.cppを参考にジオメトリーで作成
-CStageData01::CStageData01()
+CStageData01::CStageData01(Data* data)
 	//:CObjectBase("Assets/Model/kaidan.fbx", 0.1f)
 {
-	m_enemyManager.reset(new CProtEnemyManager());
+	m_enemyManager.reset(new CProtEnemyManager(data));
 	m_stageData = { 70.0f,70.0f };
 
 	//床

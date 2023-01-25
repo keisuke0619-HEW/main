@@ -4,6 +4,7 @@
 #include <memory>
 #include <ProducePlane.h>
 #include<ObjectBase.hpp>
+#include <ISceneBase.hpp>
 
 class CStageData01
 {
@@ -16,7 +17,7 @@ public:
 		float sizeZ;
 	};
 public:
-	CStageData01();
+	CStageData01(Data* data);
 	~CStageData01();
 
 	void Update();

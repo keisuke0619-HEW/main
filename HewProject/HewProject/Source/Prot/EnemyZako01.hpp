@@ -10,10 +10,11 @@
 #include<Player.hpp>
 
 #include <OutputEffekseer.h>
+#include <ISceneBase.hpp>
 class CProtEnemy : public CObjectBase
 {
 public:
-	CProtEnemy();
+	CProtEnemy(Data* data);
 	~CProtEnemy();
 
 	void Update() override;
@@ -53,4 +54,5 @@ private:
 	DirectX::XMFLOAT3 m_oldPos;
 
 	CEffect::Ptr m_pEfk;
+	Data* m_data;
 };

@@ -8,7 +8,7 @@
 #include <SceneResult.hpp>
 // 当たり判定は後で付けます。
 
-CProtEnemyBoss::CProtEnemyBoss()
+CProtEnemyBoss::CProtEnemyBoss(Data* data)
 	: CObjectBase("Assets/Model/bosu.fbx", 0.2f)
 	, m_move(0.023f)
 	, m_distance(4.0f)
@@ -41,6 +41,8 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_param.hp *= 1.6f;
 
 	m_Fream = 0;
+
+	m_data = data;
 }
 
 CProtEnemyBoss::~CProtEnemyBoss()
@@ -80,6 +82,10 @@ void CProtEnemyBoss::Update()
 	// ボスが死んでいたら
 	if (m_param.hp <= 0.0f)
 	{
+		if (m_Fream == 0)
+		{
+			m_data->MAX_cnt++;
+		}
 		m_Fream++;
 		// ３秒たったら
 		if (m_Fream >= 180)
