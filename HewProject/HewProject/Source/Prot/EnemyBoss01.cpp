@@ -8,7 +8,7 @@
 #include <SceneResult.hpp>
 // “–‚½‚è”»’è‚ÍŒã‚Å•t‚¯‚Ü‚·B
 
-CProtEnemyBoss::CProtEnemyBoss()
+CProtEnemyBoss::CProtEnemyBoss(Data* data)
 	: CObjectBase("Assets/Model/test2.fbx", 0.2f)
 	, m_move(0.023f)
 	, m_distance(4.0f)
