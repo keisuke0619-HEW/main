@@ -139,4 +139,8 @@ void CSceneResult::Update()
 			CSceneManager::SetScene(SCENE_STAGE01);
 		}
 	}
+	if (Utility::GetKeyTrigger(KEY_CANCEL))
+	{
+		CSceneManager::SetScene(SCENE_STAGE_SELECT);
+	}
 }
