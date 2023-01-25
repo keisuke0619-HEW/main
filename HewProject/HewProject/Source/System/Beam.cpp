@@ -21,15 +21,15 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size, Data* 
 	m_pEfk2.reset(new CEffect(u"Assets/Effect/BeamSyasei.efkefc"));
 
 	m_data = data;
-	m_killCnt = 0;
 }
 
 CBeam::~CBeam()
 {
-	if (m_killCnt > m_data->MAX_kill)
+	if (m_data->MAX_cnt > m_data->MAX_kill)
 	{
-		m_data->MAX_kill = m_killCnt;
+		m_data->MAX_kill = m_data->MAX_cnt;
 	}
+	m_data->MAX_cnt = 0;
 }
 
 void CBeam::Update()

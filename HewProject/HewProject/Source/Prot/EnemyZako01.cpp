@@ -7,7 +7,7 @@
 
 TModelData CProtEnemy::sModel;
 
-CProtEnemy::CProtEnemy()
+CProtEnemy::CProtEnemy(Data* data)
 	: CObjectBase()	// クラス全体で使いまわす場合は引数なし
 	, m_move(0.05f)
 	, m_distance(8.0f)
@@ -59,6 +59,8 @@ CProtEnemy::CProtEnemy()
 	m_modelData.model->Play(no, true);
 
 	//m_pEfk.reset(new CEffect(u"Assets/Effect/bakuhatu.efkefc"));
+
+	m_data = data;
 }
 
 CProtEnemy::~CProtEnemy()
@@ -352,6 +354,7 @@ void CProtEnemy::OnCollisionTag(EObjectTag tag)
 		m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
 		m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
 		m_pEfk->Play();
+		m_data->MAX_cnt++;
 		Destroy();
 	}
 	if (tag == TAG_SHOCK)

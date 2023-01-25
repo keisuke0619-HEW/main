@@ -1,8 +1,10 @@
 #include "ProtEnemyManager.hpp"
 #include <EnemyZako01.hpp>
 #include<EnemyBoss01.hpp>
-CProtEnemyManager::CProtEnemyManager()
+CProtEnemyManager::CProtEnemyManager(Data* data)
 {
+	m_data = data;
+
 	// オブジェクトリストを格納
 	m_objList = CSceneBase::GetObjList();
 	m_objListBoss = CSceneBase::GetObjList();
@@ -15,7 +17,7 @@ CProtEnemyManager::CProtEnemyManager()
 		for (int i = 0; i < PROT_ENEMY_MAX; i++)
 		{
 			// 敵を生成
-			m_objects[i] = m_objList.lock()->Add(new CProtEnemy());
+			m_objects[i] = m_objList.lock()->Add(new CProtEnemy(m_data));
 		}
 	}
 	//ボス生成
@@ -25,7 +27,7 @@ CProtEnemyManager::CProtEnemyManager()
 		for (int i = 0; i < PROT_ENEMY_BOSS_MAX; i++)
 		{
 			// 敵を生成
-			m_objectsBoss[i] = m_objListBoss.lock()->Add(new CProtEnemyBoss());
+			m_objectsBoss[i] = m_objListBoss.lock()->Add(new CProtEnemyBoss(m_data));
 		}
 	}
 
@@ -46,7 +48,7 @@ void CProtEnemyManager::Update()
 			if (m_objects[i].expired() == true)
 			{
 				// 死んでいたら中に入る
-				m_objects[i] = m_objList.lock()->Add(new CProtEnemy());
+				m_objects[i] = m_objList.lock()->Add(new CProtEnemy(m_data));
 			}
 		}
 	}
@@ -61,7 +63,7 @@ void CProtEnemyManager::Update()
 		if (m_objectsBoss[i].expired() == true)
 		{
 			// 死んでいたら中に入る
-			m_objectsBoss[i] = m_objListBoss.lock()->Add(new CProtEnemyBoss());
+			m_objectsBoss[i] = m_objListBoss.lock()->Add(new CProtEnemyBoss(m_data));
 		}
 	}
 

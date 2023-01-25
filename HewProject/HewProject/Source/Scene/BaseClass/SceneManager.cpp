@@ -41,6 +41,7 @@ void CSceneManager::SwapScene()
 	CCameraBase::DeleteCameraAll();
 	if (m_scene)
 		m_scene->Uninit();
+	Data* data;
 	switch (m_next)
 	{
 	case SCENE_TITLE:
@@ -51,23 +52,27 @@ void CSceneManager::SwapScene()
 		break;
 	case SCENE_STAGE01:
 		m_scene.reset(new CGameScene());
-		m_scene->SetData(new CStageData01());
+		data = m_scene->GetData();
+		m_scene->SetData(new CStageData01(data));
 		break;
 	case SCENE_STAGE02:
 		m_scene.reset(new CGameScene_02());
-		m_scene->SetData(new CStageData01());
+		data = m_scene->GetData();
+		m_scene->SetData(new CStageData01(data));
 		break;
 	case SCENE_STAGE03:
 		m_scene.reset(new CGameScene_03());
-		m_scene->SetData(new CStageData01());
+		data = m_scene->GetData();
+		m_scene->SetData(new CStageData01(data));
 		break;
 	case SCENE_STAGE04:
 		m_scene.reset(new CGameScene_04());
-		m_scene->SetData(new CStageData01());
+		data = m_scene->GetData();
+		m_scene->SetData(new CStageData01(data));
 		break;
 	case SCENE_RESULT:
-		Data data = m_scene->GetData();
-		m_scene.reset(new CSceneResult(data));
+		data = m_scene->GetData();
+		m_scene.reset(new CSceneResult(*data));
 		break;
 	default:
 		break;

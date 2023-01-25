@@ -5,11 +5,12 @@
 
 #include <Billboard.h>
 #include "BossUI.h"
+#include <ISceneBase.hpp>
 
 class CProtEnemyBoss : public CObjectBase
 {
 public:
-	CProtEnemyBoss();
+	CProtEnemyBoss(Data* data);
 	~CProtEnemyBoss();
 
 	void Update() override;
@@ -33,4 +34,5 @@ private:
 	std::unique_ptr<CBossUI> m_bossUI;	// É{ÉXÇÃUI
 
 	DirectX::XMFLOAT3 m_oldPos;
+	Data* m_data;
 };

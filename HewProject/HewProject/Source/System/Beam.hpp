@@ -30,5 +30,4 @@ private:
 	CEffect::Ptr m_pEfk2;
 
 	Data* m_data;
-	int m_killCnt;
 };
