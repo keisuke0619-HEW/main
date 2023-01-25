@@ -1,7 +1,7 @@
 #include "MiniMap.h"
 #include <SceneBase.hpp>
 #include <UiManager.hpp>
-
+#include <Camera.hpp>
 ID3D11ShaderResourceView* CMiniMap::m_img;
 
 
@@ -43,6 +43,12 @@ void CMiniMap::Update()
 
 		// “G‚ÌƒŠƒXƒg
 		auto enemyList = CSceneBase::GetObjList().lock()->FindTagAll(TAG_ENEMY);
+		auto boss = CSceneBase::GetObjList().lock()->FindTagAll(TAG_ENEMY_BOSS);
+
+		DirectX::XMFLOAT3 playerPos = m_player.lock()->GetParam().pos;
+		DirectX::XMVECTOR player = DirectX::XMLoadFloat3(&playerPos);
+
+		CUIManager::GetIns()->Delete(m_bossIcon);
 
 		for (int i = 0; i < m_Icon.size(); i++)
 		{
@@ -51,8 +57,33 @@ void CMiniMap::Update()
 		}
 		m_Icon.clear();
 
-		DirectX::XMFLOAT3 playerPos = m_player.lock()->GetParam().pos;
-		DirectX::XMVECTOR player = DirectX::XMLoadFloat3(&playerPos);
+		// ƒ{ƒX
+		auto it = boss.begin();
+		auto bossParam = (*it)->GetParam();
+		DirectX::XMVECTOR enemy = DirectX::XMLoadFloat3(&bossParam.pos);
+
+
+		// ‹——£‚ðŒvŽZ
+		DirectX::XMVECTOR distance = DirectX::XMVectorSubtract(player, enemy);
+
+		// float3‚É•ÏŠ·‚µ‚ÄŠi”[
+		DirectX::XMStoreFloat3(&m_movePos, distance);
+
+		// ƒ}ƒbƒv‚É‰f‚é‹——£
+		float disPlayer = 14.f;
+
+		if (fabsf(m_movePos.x) <= disPlayer && fabsf(m_movePos.y) <= disPlayer && fabsf(m_movePos.z) <= disPlayer)
+		{
+			m_bossIcon = CUIManager::GetIns()->Add(new CGameUI(""));
+			m_bossIcon.lock()->SetResourceView(m_img);
+			m_bossIcon.lock()->SetPos({ ((m_movePos.x * -5)) + 1150, (m_movePos.z * 5) + 120 });
+			m_bossIcon.lock()->SetSize(DirectX::XMFLOAT2(20.f, 20.f));
+			m_bossIcon.lock()->SetColor(0, 1, 0);
+		}
+
+		
+
+		
 
 		int i = 0;
 		// “G‚ÌƒŠƒXƒg‘S’Tõ
@@ -81,6 +112,7 @@ void CMiniMap::Update()
 				m_Icon[i].lock()->SetResourceView(m_img);
 				m_Icon[i].lock()->SetPos({ ((m_movePos.x * -5)) + 1150, (m_movePos.z * 5) + 120 });
 				m_Icon[i].lock()->SetSize(DirectX::XMFLOAT2(10.f, 10.f));
+			
 			}
 			else
 			{
