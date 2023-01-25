@@ -9,7 +9,7 @@
 // 当たり判定は後で付けます。
 
 CProtEnemyBoss::CProtEnemyBoss()
-	: CObjectBase("Assets/Model/bosu.fbx", 0.2f)
+	: CObjectBase("Assets/Model/test2.fbx", 0.2f)
 	, m_move(0.023f)
 	, m_distance(4.0f)
 	, m_cnt(0)
@@ -37,6 +37,12 @@ CProtEnemyBoss::CProtEnemyBoss()
 	m_param.collisionData.character.pos = m_param.pos;
 	m_param.collisionData.character.pos.y = m_param.drawOffset.y + 0.08f;
 	m_param.collisionData.character.radius = 1.0f;
+
+	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/walk_neko.fbx");
+	if (no == Model::ANIME_NONE)
+		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
+	m_modelData.model->Play(no, true);
+
 
 	m_param.hp *= 1.6f;
 
@@ -92,6 +98,7 @@ void CProtEnemyBoss::Update()
 
 void CProtEnemyBoss::Draw()
 {
+	m_modelData.model->Step(1.0f / 60.0f);
 	CObjectBase::Draw();
 	
 	// ボスUIの描画

@@ -53,6 +53,11 @@ CProtEnemy::CProtEnemy()
 	m_param.collisionData.character.pos.y += m_param.drawOffset.y + 0.08f;
 	m_param.collisionData.character.radius = 0.6f;
 
+	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/ZAKO1.fbx");
+	if (no == Model::ANIME_NONE)
+		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
+	m_modelData.model->Play(no, true);
+
 	//m_pEfk.reset(new CEffect(u"Assets/Effect/bakuhatu.efkefc"));
 }
 
@@ -89,6 +94,7 @@ void CProtEnemy::Update()
 
 void CProtEnemy::Draw()
 {
+	m_modelData.model->Step(1.0f / 60.0f);
 	//Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
 	//Utility::SetBlendState(BLEND_ALPHA);
