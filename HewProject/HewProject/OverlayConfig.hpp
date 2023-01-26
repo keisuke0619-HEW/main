@@ -78,6 +78,7 @@ private:
 
 };
 
+// タイトルに戻りますか？
 class CTitleBack : public COverlayWindowBase
 {
 public:

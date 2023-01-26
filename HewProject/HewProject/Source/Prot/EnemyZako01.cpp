@@ -22,13 +22,18 @@ CProtEnemy::CProtEnemy(Data* data)
 	, m_ActionNum(rand() % 4 + 1)
 {
 	// もしモデルデータが存在しなかったらロード
+	static Model::AnimeNo animeNo;
 	if (!sModel.model)
 	{
-		LoadModel("Assets/Model/zako.fbx", 0.13f, false, &sModel);
+		LoadModel("Assets/Model/Zako/model.fbx", 0.13f, false, &sModel);
+		animeNo = sModel.model->AddAnimation("Assets/Model/Zako/Anime/walk.fbx");
+		if (animeNo == Model::ANIME_NONE)
+			MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
 	}
 	// 自身のモデルデータにStaticモデルデータをロード
 	m_modelData = sModel;
 	// モデルをクラス全体で使いまわすならここまでが必須。
+	m_modelData.model->Play(animeNo, true);
 
 	// オブジェクトのリストを取得
 	auto objList = CSceneBase::GetObjList();
@@ -52,11 +57,6 @@ CProtEnemy::CProtEnemy(Data* data)
 	m_param.collisionData.character.pos = m_param.pos;
 	m_param.collisionData.character.pos.y += m_param.drawOffset.y + 0.08f;
 	m_param.collisionData.character.radius = 0.6f;
-
-	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/ZAKO1.fbx");
-	if (no == Model::ANIME_NONE)
-		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
-	m_modelData.model->Play(no, true);
 
 	//m_pEfk.reset(new CEffect(u"Assets/Effect/bakuhatu.efkefc"));
 

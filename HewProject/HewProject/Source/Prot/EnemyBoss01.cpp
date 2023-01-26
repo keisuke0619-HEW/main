@@ -9,7 +9,7 @@
 // “–‚½‚è”»’è‚ÍŒã‚Å•t‚¯‚Ü‚·B
 
 CProtEnemyBoss::CProtEnemyBoss(Data* data)
-	: CObjectBase("Assets/Model/test2.fbx", 0.2f)
+	: CObjectBase("Assets/Model/Boss/model.fbx", 0.2f)
 	, m_move(0.023f)
 	, m_distance(4.0f)
 	, m_cnt(0)
@@ -38,7 +38,7 @@ CProtEnemyBoss::CProtEnemyBoss(Data* data)
 	m_param.collisionData.character.pos.y = m_param.drawOffset.y + 0.08f;
 	m_param.collisionData.character.radius = 1.0f;
 
-	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/walk_neko.fbx");
+	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/Zako/Anime/walk.fbx");
 	if (no == Model::ANIME_NONE)
 		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
 	m_modelData.model->Play(no, true);

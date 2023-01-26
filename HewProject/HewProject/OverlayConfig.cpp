@@ -150,128 +150,7 @@ void COverlayConfig::SetStatus()
 }
 
 
-
-CGameEnd::CGameEnd()
-{
-	auto tmp = new CGameUI("Assets/Img/PauseMenu/END.png");
-	tmp->SetPos({ OVERLAY_CONFIG_CENTER_X, 360 });
-	tmp->SetSize({ 1100, 700 });
-	//tmp->SetColor255(255, 255, 255, 128);
-	Add("Back", tmp, SORT_ORDER_UI_BACK2);
-	tmp = new CGameUI("Assets/Img/White.png");
-	tmp->SetPos({ 640, 360 });
-	tmp->SetSize({ 1280, 720 });
-	tmp->SetColor255(0, 0, 0, 255);
-	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
-	m_speedXCursor = new CGameUI("Assets/Img/PauseMenu/Cursor2.png");
-	m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-	m_speedXCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X * 1.5f, OVERLAY_CONFIG_CURSOR_SIZE_Y);
-	//m_speedXCursor->SetColor255(128, 128, 128, 128);
-	Add("XCursor", m_speedXCursor, SORT_ORDER_UI_FRONT);
-
-
-	m_speedXNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
-	m_speedXNum->SetSize(36, 45);
-	m_speedYNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
-	m_speedYNum->SetSize(36, 45);
-
-	g_isLoop = false;
-	m_isDestroy = false;
-
-	m_pcursorSE = CreateSound("Assets/Sound/cursor.mp3", false);
-	m_pselectSE = CreateSound("Assets/Sound/select.mp3", false);
-	m_pcancelSE = CreateSound("Assets/Sound/cancel.mp3", false);
-}
-
-CGameEnd::~CGameEnd()
-{
-}
-
-bool CGameEnd::IsLoop()
-{
-	return g_isLoop;
-}
-
-
-
-void CGameEnd::Update()
-{
-	MoveCursor();
-	SetStatus();
-	if (Utility::GetKeyTrigger(KEY_CANCEL))
-	{
-		m_isDestroy = true;
-		m_pSESource = StartSound(m_pcancelSE);
-	}
-}
-
-void CGameEnd::MoveCursor()
-{
-	if (Utility::GetKeyTrigger(KEY_LEFT))
-	{
-		m_target--;
-		m_pSESource = StartSound(m_pcursorSE);
-	}
-	if (Utility::GetKeyTrigger(KEY_RIGHT))
-	{
-		m_target++;
-		m_pSESource = StartSound(m_pcursorSE);
-	}
-	if (Utility::GetKeyTrigger(KEY_SELECT))
-	{
-		m_pSESource = StartSound(m_pselectSE);
-		//	決定
-		if ((m_target % TARGET_MAX) == 0)
-		{
-			g_isLoop = true;
-		}
-		if ((m_target % TARGET_MAX) == 1)
-		{
-			m_isDestroy = true;
-		}
-	}
-	if (m_target < 0)
-	{
-		m_target = TARGET_MAX * 100;
-	}
-}
-
-void CGameEnd::SetStatus()
-{
-	const float addLevel = 0.25f;
-	float add = 0;
-	m_speedXCursor->SetColor255(128, 128, 128, 128);
-	m_speedXNum->SetColor255(128, 128, 128, 128);
-	if (Utility::GetKeyPress(KEY_RIGHT))
-	{
-		add += addLevel;
-		m_pSESource = StartSound(m_pcursorSE);
-
-	}
-	if (Utility::GetKeyPress(KEY_LEFT))
-	{
-		add -= addLevel;
-		m_pSESource = StartSound(m_pcursorSE);
-	}
-	switch (m_target % TARGET_MAX)
-	{
-	case 0:
-		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-		m_speedXCursor->SetColor255(255, 255, 255, 255);
-		m_speedXNum->SetColor255(255, 255, 255, 255);
-		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
-		break;
-	case 1:
-		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X + 265.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-		m_speedXCursor->SetColor255(255, 255, 255, 255);
-		m_speedXNum->SetColor255(255, 255, 255, 255);
-		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
-		break;
-	default:
-		break;
-	}
-
-}
+//■■■■■■■■ タイトルに戻りますか？タブ ■■■■■■■■■■■
 
 CTitleBack::CTitleBack()
 {
@@ -402,6 +281,8 @@ void CTitleBack::SetStatus()
 	}
 }
 
+//■■■■■■■■ 説明タブ（？） ■■■■■■■■■■■
+
 CSetumei::CSetumei()
 {
 	auto tmp = new CGameUI("Assets/Img/StageSelect/test_sousaTab.png");
@@ -429,3 +310,129 @@ void CSetumei::Update()
 		m_isDestroy = true;
 	}
 }
+
+//■■■■■■■■ 終了タブ ■■■■■■■■■■■
+
+CGameEnd::CGameEnd()
+{
+	auto tmp = new CGameUI("Assets/Img/PauseMenu/END.png");
+	tmp->SetPos({ OVERLAY_CONFIG_CENTER_X, 360 });
+	tmp->SetSize({ 1100, 500 });
+	//tmp->SetColor255(255, 255, 255, 128);
+	Add("Back", tmp, SORT_ORDER_UI_BACK2);
+	tmp = new CGameUI("Assets/Img/White.png");
+	tmp->SetPos({ 640, 360 });
+	tmp->SetSize({ 1280, 720 });
+	tmp->SetColor255(0, 0, 0, 255);
+	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
+	m_speedXCursor = new CGameUI("Assets/Img/PauseMenu/Cursor2.png");
+	m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
+	m_speedXCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X * 1.5f, OVERLAY_CONFIG_CURSOR_SIZE_Y);
+	//m_speedXCursor->SetColor255(128, 128, 128, 128);
+	Add("XCursor", m_speedXCursor, SORT_ORDER_UI_FRONT);
+
+
+	m_speedXNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
+	m_speedXNum->SetSize(36, 45);
+	m_speedYNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
+	m_speedYNum->SetSize(36, 45);
+
+	g_isLoop = false;
+	m_isDestroy = false;
+
+	m_pcursorSE = CreateSound("Assets/Sound/cursor.mp3", false);
+	m_pselectSE = CreateSound("Assets/Sound/select.mp3", false);
+	m_pcancelSE = CreateSound("Assets/Sound/cancel.mp3", false);
+}
+
+CGameEnd::~CGameEnd()
+{
+}
+
+bool CGameEnd::IsLoop()
+{
+	return g_isLoop;
+}
+
+void CGameEnd::Update()
+{
+	MoveCursor();
+	SetStatus();
+	if (Utility::GetKeyTrigger(KEY_CANCEL))
+	{
+		m_isDestroy = true;
+		m_pSESource = StartSound(m_pcancelSE);
+	}
+}
+
+void CGameEnd::MoveCursor()
+{
+	if (Utility::GetKeyTrigger(KEY_LEFT))
+	{
+		m_target--;
+		m_pSESource = StartSound(m_pcursorSE);
+	}
+	if (Utility::GetKeyTrigger(KEY_RIGHT))
+	{
+		m_target++;
+		m_pSESource = StartSound(m_pcursorSE);
+	}
+	if (Utility::GetKeyTrigger(KEY_SELECT))
+	{
+		m_pSESource = StartSound(m_pselectSE);
+		//	決定
+		if ((m_target % TARGET_MAX) == 0)
+		{
+			g_isLoop = true;
+		}
+		if ((m_target % TARGET_MAX) == 1)
+		{
+			m_isDestroy = true;
+		}
+	}
+	if (m_target < 0)
+	{
+		m_target = TARGET_MAX * 100;
+	}
+}
+
+void CGameEnd::SetStatus()
+{
+	const float addLevel = 0.25f;
+	float add = 0;
+	m_speedXCursor->SetColor255(128, 128, 128, 128);
+	m_speedXNum->SetColor255(128, 128, 128, 128);
+	if (Utility::GetKeyPress(KEY_RIGHT))
+	{
+		add += addLevel;
+		m_pSESource = StartSound(m_pcursorSE);
+
+	}
+	if (Utility::GetKeyPress(KEY_LEFT))
+	{
+		add -= addLevel;
+		m_pSESource = StartSound(m_pcursorSE);
+	}
+	switch (m_target % TARGET_MAX)
+	{
+	case 0:
+		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
+		m_speedXCursor->SetColor255(255, 255, 255, 255);
+		m_speedXNum->SetColor255(255, 255, 255, 255);
+		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
+		break;
+	case 1:
+		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X + 265.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
+		m_speedXCursor->SetColor255(255, 255, 255, 255);
+		m_speedXNum->SetColor255(255, 255, 255, 255);
+		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
+		break;
+	default:
+		break;
+	}
+
+}
+
+
+// おわりです。
+// 完成しません。
