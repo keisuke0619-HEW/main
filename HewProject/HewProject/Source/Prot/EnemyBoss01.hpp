@@ -7,6 +7,8 @@
 #include "BossUI.h"
 #include <ISceneBase.hpp>
 
+#include <OutputEffekseer.h>
+
 class CProtEnemyBoss : public CObjectBase
 {
 public:
@@ -35,4 +37,6 @@ private:
 
 	DirectX::XMFLOAT3 m_oldPos;
 	Data* m_data;
+
+	CEffect::Ptr m_pEfk;
 };

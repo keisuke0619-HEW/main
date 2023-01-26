@@ -47,6 +47,8 @@ CProtEnemyBoss::CProtEnemyBoss(Data* data)
 	m_param.hp *= 1.6f;
 
 	m_Fream = 0;
+
+	m_pEfk.reset(new CEffect(u"Assets/Effect/zirai.efkefc"));
 }
 
 CProtEnemyBoss::~CProtEnemyBoss()
@@ -56,43 +58,51 @@ CProtEnemyBoss::~CProtEnemyBoss()
 
 void CProtEnemyBoss::Update()
 {
-	m_oldPos = m_param.pos;
-	// もしプレイヤーのオブジェクトが消えていたらもう一度取得
-	if (m_player.expired() == true)
-	{
-		auto objList = CSceneBase::GetObjList();
-		m_player = objList.lock()->FindTag(TAG_PLAYER);
-	}
-
-	// 移動るーちん
-	Move();
-
-	m_param.pos.y -= 0.08f;
-	// 疑似床判定
-	if(m_param.pos.y < 0)
-		m_param.pos.y = 0;
-
-	AddVector3(m_param.move, m_param.accel);
-	AddVector3(m_param.pos, m_param.move);
-
-	// 当たり判定の更新
-	m_param.collisionData.character.pos = m_param.pos;
-	m_param.collisionData.character.pos.y += m_param.drawOffset.y + 0.1f;
-	m_param.collisionData.character.radius = 1.4f;
-
-	// ボスUIの更新
-	m_bossUI->Update();
 
 	// ボスが死んでいたら
 	if (m_param.hp <= 0.0f)
 	{
 		m_Fream++;
+		m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
+		m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+		m_pEfk->PlayOnce();
+		m_bossUI->Update();
 		// ３秒たったら
 		if (m_Fream >= 180)
 		{
 			CSceneResult::SetClear();
 			CSceneManager::SetScene(SCENE_RESULT);
 		}
+	}
+	else
+	{
+		m_oldPos = m_param.pos;
+		// もしプレイヤーのオブジェクトが消えていたらもう一度取得
+		if (m_player.expired() == true)
+		{
+			auto objList = CSceneBase::GetObjList();
+			m_player = objList.lock()->FindTag(TAG_PLAYER);
+		}
+
+		// 移動るーちん
+		Move();
+
+		m_param.pos.y -= 0.08f;
+		// 疑似床判定
+		if (m_param.pos.y < 0)
+			m_param.pos.y = 0;
+
+		AddVector3(m_param.move, m_param.accel);
+		AddVector3(m_param.pos, m_param.move);
+
+		// 当たり判定の更新
+		m_param.collisionData.character.pos = m_param.pos;
+		m_param.collisionData.character.pos.y += m_param.drawOffset.y + 0.1f;
+		m_param.collisionData.character.radius = 1.4f;
+
+		// ボスUIの更新
+		m_bossUI->Update();
+
 	}
 }
 
