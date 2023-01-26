@@ -11,7 +11,7 @@
 #include <SceneResult.hpp>
 
 CPlayer::CPlayer(Data* data)
-	: CObjectBase("Assets/Model/Player/player.fbx", 0.08f, false, "Player")
+	: CObjectBase("Assets/Model/Player/model.fbx", 0.08f, false, "Player")
 {
 	m_param.tag = TAG_PLAYER;
 	m_gra = 0;
@@ -33,7 +33,7 @@ CPlayer::CPlayer(Data* data)
 	m_param.collisionData.character.radius = 0.2f;
 
 	m_playerUI.reset(new CPlayerUI());
-	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/Player/Anime/atkani.fbx");
+	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/Player/Anime/TAIKI1.fbx");
 	if (no == Model::ANIME_NONE)
 		MessageBox(nullptr, "free.fbx", "Error", MB_OK);
 	m_modelData.model->Play(no, true);

@@ -247,34 +247,14 @@ void CTitleBack::MoveCursor()
 
 void CTitleBack::SetStatus()
 {
-	const float addLevel = 0.25f;
-	float add = 0;
-	m_speedXCursor->SetColor255(128, 128, 128, 128);
-	m_speedXNum->SetColor255(128, 128, 128, 128);
-	if (Utility::GetKeyPress(KEY_RIGHT))
-	{
-		add += addLevel;
-		m_pSESource = StartSound(m_pcursorSE);
-
-	}
-	if (Utility::GetKeyPress(KEY_LEFT))
-	{
-		add -= addLevel;
-		m_pSESource = StartSound(m_pcursorSE);
-	}
+	//m_pSESource = StartSound(m_pcursorSE);
 	switch (m_target % TARGET_MAX)
 	{
 	case 0:
 		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-		m_speedXCursor->SetColor255(255, 255, 255, 255);
-		m_speedXNum->SetColor255(255, 255, 255, 255);
-		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
 		break;
 	case 1:
 		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X + 265.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-		m_speedXCursor->SetColor255(255, 255, 255, 255);
-		m_speedXNum->SetColor255(255, 255, 255, 255);
-		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
 		break;
 	default:
 		break;
@@ -318,24 +298,17 @@ CGameEnd::CGameEnd()
 	auto tmp = new CGameUI("Assets/Img/PauseMenu/END.png");
 	tmp->SetPos({ OVERLAY_CONFIG_CENTER_X, 360 });
 	tmp->SetSize({ 1100, 500 });
-	//tmp->SetColor255(255, 255, 255, 128);
 	Add("Back", tmp, SORT_ORDER_UI_BACK2);
 	tmp = new CGameUI("Assets/Img/White.png");
 	tmp->SetPos({ 640, 360 });
 	tmp->SetSize({ 1280, 720 });
 	tmp->SetColor255(0, 0, 0, 255);
 	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
-	m_speedXCursor = new CGameUI("Assets/Img/PauseMenu/Cursor2.png");
-	m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-	m_speedXCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X * 1.5f, OVERLAY_CONFIG_CURSOR_SIZE_Y);
-	//m_speedXCursor->SetColor255(128, 128, 128, 128);
-	Add("XCursor", m_speedXCursor, SORT_ORDER_UI_FRONT);
-
-
-	m_speedXNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
-	m_speedXNum->SetSize(36, 45);
-	m_speedYNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
-	m_speedYNum->SetSize(36, 45);
+	m_cursor = new CGameUI("Assets/Img/PauseMenu/Cursor2.png");
+	m_cursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
+	m_cursor->SetSize(200, OVERLAY_CONFIG_CURSOR_SIZE_Y);
+	m_cursor->SetColor(1.0f, 1.0f, 1.0f, 0.3f);
+	Add("XCursor", m_cursor, SORT_ORDER_UI_FRONT);
 
 	g_isLoop = false;
 	m_isDestroy = false;
@@ -398,41 +371,26 @@ void CGameEnd::MoveCursor()
 
 void CGameEnd::SetStatus()
 {
-	const float addLevel = 0.25f;
-	float add = 0;
-	m_speedXCursor->SetColor255(128, 128, 128, 128);
-	m_speedXNum->SetColor255(128, 128, 128, 128);
-	if (Utility::GetKeyPress(KEY_RIGHT))
-	{
-		add += addLevel;
-		m_pSESource = StartSound(m_pcursorSE);
-
-	}
-	if (Utility::GetKeyPress(KEY_LEFT))
-	{
-		add -= addLevel;
-		m_pSESource = StartSound(m_pcursorSE);
-	}
+	//m_pSESource = StartSound(m_pcursorSE);
+	const float moveX = 120.0f;
+	const float offsetY = 140.0f;
 	switch (m_target % TARGET_MAX)
 	{
 	case 0:
-		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-		m_speedXCursor->SetColor255(255, 255, 255, 255);
-		m_speedXNum->SetColor255(255, 255, 255, 255);
-		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
+		m_cursor->SetPos(OVERLAY_CONFIG_CENTER_X - moveX, OVERLAY_CONFIG_X_BAR_POS_Y + offsetY);
 		break;
 	case 1:
-		m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X + 265.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-		m_speedXCursor->SetColor255(255, 255, 255, 255);
-		m_speedXNum->SetColor255(255, 255, 255, 255);
-		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
+		m_cursor->SetPos(OVERLAY_CONFIG_CENTER_X + moveX, OVERLAY_CONFIG_X_BAR_POS_Y + offsetY);
 		break;
 	default:
 		break;
 	}
-
+	// デバッグ
+	static float alpha = 0.5f;
+	if (Utility::GetKeyTrigger(KEY_DOWN))
+		alpha -= 0.05f;
+	if (Utility::GetKeyTrigger(KEY_UP))
+		alpha += 0.05f;
+	m_cursor->SetColor(1, 1, 1, alpha);
+	CDebugWindow::Print(ShimizuKeisuke, "Alpha:", alpha);
 }
-
-
-// おわりです。
-// 完成しません。

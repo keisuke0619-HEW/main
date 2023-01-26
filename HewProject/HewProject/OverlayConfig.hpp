@@ -63,11 +63,8 @@ private:
 	};
 	int m_target;
 
-	CGameUI* m_speedXCursor;
+	CGameUI* m_cursor;
 	CGameUI* m_speedYCursor;
-
-	CNumberUI::Ptr m_speedXNum;
-	CNumberUI::Ptr m_speedYNum;
 
 	XAUDIO2_BUFFER* m_pselectSE;
 	XAUDIO2_BUFFER* m_pcursorSE;
