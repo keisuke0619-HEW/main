@@ -1,6 +1,7 @@
 #pragma once
 #include <OverlayWindowBase.hpp>
 #include <NumberUI.hpp>
+#include <Sound.h>
 class COverlayConfig : public COverlayWindowBase
 {
 public:
@@ -32,7 +33,11 @@ private:
 	CNumberUI::Ptr m_speedXNum;
 	CNumberUI::Ptr m_speedYNum;
 
+	XAUDIO2_BUFFER* m_pselectSE;
+	XAUDIO2_BUFFER* m_pcursorSE;
+	XAUDIO2_BUFFER* m_pbarSE;
 
+	IXAudio2SourceVoice* m_pSESource;
 };
 
 class CGameEnd : public COverlayWindowBase
@@ -64,7 +69,12 @@ private:
 	CNumberUI::Ptr m_speedXNum;
 	CNumberUI::Ptr m_speedYNum;
 
+	XAUDIO2_BUFFER* m_pselectSE;
+	XAUDIO2_BUFFER* m_pcursorSE;
+	XAUDIO2_BUFFER* m_pcancelSE;
+	
 
+	IXAudio2SourceVoice* m_pSESource;
 
 };
 
@@ -99,6 +109,13 @@ private:
 	CNumberUI::Ptr m_speedYNum;
 
 	bool* m_next;
+
+	XAUDIO2_BUFFER* m_pselectSE;
+	XAUDIO2_BUFFER* m_pcursorSE;
+	XAUDIO2_BUFFER* m_pcancelSE;
+
+
+	IXAudio2SourceVoice* m_pSESource;
 
 };
 

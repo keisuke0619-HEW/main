@@ -51,7 +51,9 @@ COverlayConfig::COverlayConfig()
 	m_speedYNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
 	m_speedYNum->SetSize(36, 45);
 
-
+	m_pcursorSE = CreateSound("Assets/Sound/cursor.mp3", false);
+	m_pselectSE = CreateSound("Assets/Sound/select.mp3", false);
+	m_pbarSE = CreateSound("Assets/Sound/bar.mp3", false);
 }
 
 COverlayConfig::~COverlayConfig()
@@ -73,10 +75,12 @@ void COverlayConfig::MoveCursor()
 	if (Utility::GetKeyTrigger(KEY_UP))
 	{
 		m_target--;
+		m_pSESource = StartSound(m_pcursorSE);
 	}
 	if (Utility::GetKeyTrigger(KEY_DOWN))
 	{
 		m_target++;
+		m_pSESource = StartSound(m_pcursorSE);
 	}
 	if (m_target < 0)
 	{
@@ -97,11 +101,13 @@ void COverlayConfig::SetStatus()
 	if (Utility::GetKeyPress(KEY_RIGHT))
 	{
 		add += addLevel;
+		m_pSESource = StartSound(m_pbarSE);
 
 	}
 	if (Utility::GetKeyPress(KEY_LEFT))
 	{
 		add -= addLevel;
+		m_pSESource = StartSound(m_pbarSE);
 	}
 	switch (m_target % TARGET_MAX)
 	{
@@ -171,6 +177,10 @@ CGameEnd::CGameEnd()
 
 	g_isLoop = false;
 	m_isDestroy = false;
+
+	m_pcursorSE = CreateSound("Assets/Sound/cursor.mp3", false);
+	m_pselectSE = CreateSound("Assets/Sound/select.mp3", false);
+	m_pcancelSE = CreateSound("Assets/Sound/cancel.mp3", false);
 }
 
 CGameEnd::~CGameEnd()
@@ -191,6 +201,7 @@ void CGameEnd::Update()
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		m_isDestroy = true;
+		m_pSESource = StartSound(m_pcancelSE);
 	}
 }
 
@@ -199,13 +210,16 @@ void CGameEnd::MoveCursor()
 	if (Utility::GetKeyTrigger(KEY_LEFT))
 	{
 		m_target--;
+		m_pSESource = StartSound(m_pcursorSE);
 	}
 	if (Utility::GetKeyTrigger(KEY_RIGHT))
 	{
 		m_target++;
+		m_pSESource = StartSound(m_pcursorSE);
 	}
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
+		m_pSESource = StartSound(m_pselectSE);
 		//	Œˆ’è
 		if ((m_target % TARGET_MAX) == 0)
 		{
@@ -231,11 +245,13 @@ void CGameEnd::SetStatus()
 	if (Utility::GetKeyPress(KEY_RIGHT))
 	{
 		add += addLevel;
+		m_pSESource = StartSound(m_pcursorSE);
 
 	}
 	if (Utility::GetKeyPress(KEY_LEFT))
 	{
 		add -= addLevel;
+		m_pSESource = StartSound(m_pcursorSE);
 	}
 	switch (m_target % TARGET_MAX)
 	{
@@ -284,6 +300,10 @@ CTitleBack::CTitleBack()
 	g_isLoop = false;
 	m_isDestroy = false;
 	m_next = false;
+
+	m_pcursorSE = CreateSound("Assets/Sound/cursor.mp3", false);
+	m_pselectSE = CreateSound("Assets/Sound/select.mp3", false);
+	m_pcancelSE = CreateSound("Assets/Sound/cancel.mp3", false);
 }
 
 CTitleBack::~CTitleBack()
@@ -307,10 +327,12 @@ void CTitleBack::Update()
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		m_isDestroy = true;
+		m_pSESource = StartSound(m_pcancelSE);
 	}
 
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
+		m_pSESource = StartSound(m_pselectSE);
 		//	Œˆ’è
 		if ((m_target % TARGET_MAX) == 0)
 		{
@@ -330,10 +352,12 @@ void CTitleBack::MoveCursor()
 	if (Utility::GetKeyTrigger(KEY_LEFT))
 	{
 		m_target--;
+		m_pSESource = StartSound(m_pcursorSE);
 	}
 	if (Utility::GetKeyTrigger(KEY_RIGHT))
 	{
 		m_target++;
+		m_pSESource = StartSound(m_pcursorSE);
 	}
 	
 	if (m_target < 0)
@@ -351,11 +375,13 @@ void CTitleBack::SetStatus()
 	if (Utility::GetKeyPress(KEY_RIGHT))
 	{
 		add += addLevel;
+		m_pSESource = StartSound(m_pcursorSE);
 
 	}
 	if (Utility::GetKeyPress(KEY_LEFT))
 	{
 		add -= addLevel;
+		m_pSESource = StartSound(m_pcursorSE);
 	}
 	switch (m_target % TARGET_MAX)
 	{

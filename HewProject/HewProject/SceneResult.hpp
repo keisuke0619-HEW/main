@@ -28,4 +28,8 @@ private:
 	TResultData m_resultData;
 	CNumberUI::Ptr m_time;
 	CNumberUI::Ptr m_maxDefeat;
+	XAUDIO2_BUFFER* m_pselectSE;
+	XAUDIO2_BUFFER* m_pcursorSE;
+	IXAudio2SourceVoice* m_pSESource;
+
 };
