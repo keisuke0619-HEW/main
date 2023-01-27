@@ -148,6 +148,7 @@ void CSceneResult::Update()
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		CSoundSE::Start(CSoundSE::SE_CANCEL);
+		SetBGM("Assets/Sound/ExtendedWinter.wav");
 		CSceneManager::SetScene(SCENE_STAGE_SELECT);
 	}
 }
