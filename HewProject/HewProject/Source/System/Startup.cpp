@@ -7,6 +7,7 @@
 const char* APP_TITLE = "It's so CHARGE BEAM -AX218-";
 const Frame DEFAULT_FPS = 60;
 
+bool g_isLoop = false;
 /*
 * エントリポイント
 */
@@ -29,7 +30,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 			Update(GetDeltaTime());
 			Draw();
-			if (CGameEnd::IsLoop())
+			if (g_isLoop)
 			{
 				state = APP_STATE_QUIT;
 			}
@@ -42,4 +43,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	UninitTimer();
 	UninitWindow();
 	return 0;
+}
+
+bool* GetLoopPointer()
+{
+	return &g_isLoop;
 }

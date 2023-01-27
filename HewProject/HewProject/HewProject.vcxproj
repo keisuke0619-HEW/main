@@ -28,6 +28,7 @@
     <ClInclude Include="MiniMap.h" />
     <ClInclude Include="NumberUI.hpp" />
     <ClInclude Include="OutputEffekseer.h" />
+    <ClInclude Include="OverlayAskBase.hpp" />
     <ClInclude Include="OverlayConfig.hpp" />
     <ClInclude Include="OverlayWindowBase.hpp" />
     <ClInclude Include="Pillar.hpp" />
@@ -87,6 +88,7 @@
     <ClInclude Include="Source\System\Timer.h" />
     <ClInclude Include="Source\System\UiManager.hpp" />
     <ClInclude Include="Source\System\WinUtil.h" />
+    <ClInclude Include="Startup.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Wall.hpp" />
   </ItemGroup>
@@ -99,6 +101,7 @@
     <ClCompile Include="MiniMap.cpp" />
     <ClCompile Include="NumberUI.cpp" />
     <ClCompile Include="OutputEffekseer.cpp" />
+    <ClCompile Include="OverlayAskBase.cpp" />
     <ClCompile Include="OverlayConfig.cpp" />
     <ClCompile Include="OverlayWindowBase.cpp" />
     <ClCompile Include="Pillar.cpp" />

@@ -270,6 +270,12 @@
     <ClInclude Include="Time.h">
       <Filter>システム\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="OverlayAskBase.hpp">
+      <Filter>システム\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Startup.h">
+      <Filter>システム\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -469,6 +475,9 @@
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>システム\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="OverlayAskBase.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

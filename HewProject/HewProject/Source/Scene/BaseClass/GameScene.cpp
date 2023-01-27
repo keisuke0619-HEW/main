@@ -7,6 +7,7 @@
 #include <EnemyZako01.hpp>
 #include <Controller.hpp>
 #include <OverlayConfig.hpp>
+#include <OverlayAskBase.hpp>
 #include <Time.h>
 CGameScene::CGameScene()
 {
@@ -37,8 +38,7 @@ void CGameScene::Update()
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
-		auto tmp = new  CTitleBack();
-		tmp->SetIsNext(&m_isNext);
+		auto tmp = new  COverlayAskBase("Assets/Img/PauseMenu/Label_BackToTitle.png", &m_isNext);
 		AddOverlay(tmp);
 	}
 	if (m_isNext)

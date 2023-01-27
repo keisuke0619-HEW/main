@@ -4,7 +4,8 @@
 #include <Controller.hpp>
 #include <UiManager.hpp>
 #include <OverlayConfig.hpp>
-
+#include <OverlayAskBase.hpp>
+#include <Startup.h>
 CSceneTitle::CSceneTitle()
 {
 	// ƒ^ƒCƒgƒ‹ƒƒS
@@ -50,7 +51,7 @@ void CSceneTitle::Update()
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
-		AddOverlay(new CGameEnd());
+		AddOverlay(new COverlayAskBase("Assets/Img/PauseMenu/Label_Exit.png", GetLoopPointer() ));
 	}
 }
 

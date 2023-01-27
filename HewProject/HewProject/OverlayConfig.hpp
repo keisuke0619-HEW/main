@@ -40,45 +40,6 @@ private:
 	IXAudio2SourceVoice* m_pSESource;
 };
 
-class CGameEnd : public COverlayWindowBase
-{
-public:
-	CGameEnd();
-	~CGameEnd();
-	static bool IsLoop();
-
-private:
-	void Update();
-
-	// カーソル移動（縦移動）
-	void MoveCursor();
-	// 要素をいじる（横移動）
-	void SetStatus();
-	enum ETargetID
-	{
-		TARGET_SPEED_X,
-		TARGET_SPEED_Y,
-
-		TARGET_MAX,
-	};
-	int m_target;
-
-	CGameUI* m_cursor;
-	CGameUI* m_circleIn;
-	CGameUI* m_circleOut;
-	CGameUI* m_labelYes;
-	CGameUI* m_labelNo;
-	CGameUI* m_gauge[7];
-
-	XAUDIO2_BUFFER* m_pselectSE;
-	XAUDIO2_BUFFER* m_pcursorSE;
-	XAUDIO2_BUFFER* m_pcancelSE;
-	
-
-	IXAudio2SourceVoice* m_pSESource;
-
-};
-
 // タイトルに戻りますか？
 class CTitleBack : public COverlayWindowBase
 {
@@ -104,11 +65,9 @@ private:
 	};
 	int m_target;
 
-	CGameUI* m_speedXCursor;
-	CGameUI* m_speedYCursor;
-
-	CNumberUI::Ptr m_speedXNum;
-	CNumberUI::Ptr m_speedYNum;
+	CGameUI* m_cursor;
+	CGameUI* m_labelYes;
+	CGameUI* m_labelNo;
 
 	bool* m_next;
 
