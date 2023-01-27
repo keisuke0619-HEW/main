@@ -273,6 +273,9 @@
     <ClInclude Include="SE.h">
       <Filter>システム\Sound</Filter>
     </ClInclude>
+    <ClInclude Include="StageData02.hpp">
+      <Filter>シーンファイル\Stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -475,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="SE.cpp">
       <Filter>システム\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="StageData02.cpp">
+      <Filter>シーンファイル\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
