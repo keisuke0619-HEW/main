@@ -4,13 +4,10 @@
 #include <Controller.hpp>
 #include <UiManager.hpp>
 #include <OverlayConfig.hpp>
-<<<<<<< HEAD
 #include <OverlayAskBase.hpp>
 #include <Startup.h>
-=======
 #include <SE.h>
 
->>>>>>> 602ca359885e97fef1965e90f68df14977f9cd6d
 CSceneTitle::CSceneTitle()
 {
 	// ƒ^ƒCƒgƒ‹ƒƒS
