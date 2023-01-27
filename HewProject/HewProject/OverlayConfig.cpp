@@ -66,6 +66,7 @@ void COverlayConfig::Update()
 	CSoundSE::CountUp();
 	if (Utility::GetKeyTrigger(KEY_CANCEL) || Utility::GetKeyTrigger(KEY_CONFIG))
 	{
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		m_isDestroy = true;
 	}
 }
@@ -105,26 +106,28 @@ void COverlayConfig::SetStatus()
 		{
 			CSoundSE::Start(CSoundSE::SE_BAR);
 			CSoundSE::BoolPlay();
+			CSoundSE::CountReset();
 		}
 		else
 		{
-			if (CSoundSE::GetCount() % 10 == 0)
+			if (CSoundSE::GetCount() % 15 == 0)
 				CSoundSE::Start(CSoundSE::SE_BAR);
 		}
 		
 
 	}
-	if (Utility::GetKeyPress(KEY_LEFT))
+	else if (Utility::GetKeyPress(KEY_LEFT))
 	{
 		add -= addLevel;
 		if (!CSoundSE::IsPlay())
 		{
 			CSoundSE::Start(CSoundSE::SE_BAR);
 			CSoundSE::BoolPlay();
+			CSoundSE::CountReset();
 		}
 		else
 		{
-			if (CSoundSE::GetCount() % 100 == 0)
+			if (CSoundSE::GetCount() % 15 == 0)
 				CSoundSE::Start(CSoundSE::SE_BAR);
 		}
 	}
@@ -202,6 +205,7 @@ void CSetumei::Update()
 {
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		m_isDestroy = true;
 	}
 }
