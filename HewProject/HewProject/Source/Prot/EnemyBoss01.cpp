@@ -9,7 +9,7 @@
 #include <SE.h>
 // 当たり判定は後で付けます。
 
-CProtEnemyBoss::CProtEnemyBoss(Data* data)
+CProtEnemyBoss::CProtEnemyBoss(Data* data, float bossHP)
 	: CObjectBase("Assets/Model/Boss/model.fbx", 0.2f)
 	, m_move(0.023f)
 	, m_distance(4.0f)
@@ -31,7 +31,7 @@ CProtEnemyBoss::CProtEnemyBoss(Data* data)
 	// UIを設定
 	m_bossUI.reset(new CBossUI());
 	// 描画のオフセットを指定（内部的な"Pos"と描画のギャップを埋める）
-	m_param.drawOffset = { 0,1.7f,0 };
+	m_param.drawOffset = { 0,0,0 };
 
 	// 当たり判定の情報設定
 	m_param.collisionType = COLLISION_CHARACTER;
@@ -44,8 +44,9 @@ CProtEnemyBoss::CProtEnemyBoss(Data* data)
 		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
 	m_modelData.model->Play(no, true);
 
+	m_HP = bossHP;
 
-	m_param.hp *= 1.6f;
+	m_param.hp *= m_HP;
 
 	m_Fream = 0;
 
@@ -117,7 +118,7 @@ void CProtEnemyBoss::Draw()
 	CObjectBase::Draw();
 	
 	// ボスUIの描画
-	m_bossUI->SetLife(m_param.hp / 1.6f);
+	m_bossUI->SetLife(m_param.hp / m_HP);
 }
 
 void CProtEnemyBoss::Move()
