@@ -13,7 +13,7 @@
 CStageData03::CStageData03(Data* data)
 //:CObjectBase("Assets/Model/kaidan.fbx", 0.1f)
 {
-	m_enemyManager.reset(new CProtEnemyManager(data, 0, 1));
+	m_enemyManager.reset(new CProtEnemyManager(data, 0, 1, 3.0f));
 	m_stageData = { 70.0f,70.0f };
 
 	//°
@@ -78,7 +78,22 @@ CStageData03::CStageData03(Data* data)
 	//•Ç
 	//(new Wall(-20, 0, -20,0,90*3.1415/180,0))POS‚ÌX,Y,ZAROT‚ÌY‚ð‰ñ“]‚³‚¹‚é‚È‚çtrue‚Å•À‚ñ‚Å‚¢‚é‚Ì‚Å’²®‚¨Šè‚¢‚µ‚Ü‚·
 	CSceneBase::GetObjList().lock()->Add(new Wall(20, 0, 20, true));
+	CSceneBase::GetObjList().lock()->Add(new Wall(20, 0, 20, false));
+
 	CSceneBase::GetObjList().lock()->Add(new Wall(-20, 0, -20, true));
+	CSceneBase::GetObjList().lock()->Add(new Wall(-20, 0, -20, false));
+
+	CSceneBase::GetObjList().lock()->Add(new Wall(20, 0, -20, true));
+	CSceneBase::GetObjList().lock()->Add(new Wall(20, 0, -20, false));
+
+	CSceneBase::GetObjList().lock()->Add(new Wall(-20, 0, 20, true));
+	CSceneBase::GetObjList().lock()->Add(new Wall(-20, 0, 20, false));
+
+	CSceneBase::GetObjList().lock()->Add(new Wall(-20, 0, -11.5, false));
+	CSceneBase::GetObjList().lock()->Add(new Wall(-11.5, 0, 20, true));
+	CSceneBase::GetObjList().lock()->Add(new Wall(20, 0, 11.5, false));
+	CSceneBase::GetObjList().lock()->Add(new Wall(11.5, 0, -20, true));
+
 }
 
 CStageData03::~CStageData03()
