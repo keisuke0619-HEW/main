@@ -34,7 +34,7 @@ CPlayer::CPlayer(Data* data)
 	m_param.collisionData.character.radius = 0.2f;
 
 	m_playerUI.reset(new CPlayerUI());
-	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/Player/Anime/TAIKI1.fbx");
+	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/Player/Anime/wait.fbx");
 	if (no == Model::ANIME_NONE)
 		MessageBox(nullptr, "free.fbx", "Error", MB_OK);
 	m_modelData.model->Play(no, true);

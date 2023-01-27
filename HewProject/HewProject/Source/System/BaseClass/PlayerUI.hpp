@@ -23,7 +23,9 @@ private:
 
 	CGameUI::Ref m_reticle;	// スプライトを格納するメンバ変数を定義
 	CGameUI::Ref m_hpbar;
-	CGameUI::Ref m_haguruma;
+	CGameUI::Ref m_haguruma01;
+	CGameUI::Ref m_haguruma02;
+	CGameUI::Ref m_haguruma03;
 
 	CMiniMap* m_pMap;
 	void UpdateLife();
