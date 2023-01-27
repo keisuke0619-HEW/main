@@ -156,6 +156,13 @@ float CCameraBase::GetPrimaryRadXZ()
     return m_cameraMap[m_primaryCameraName]->m_radXZ;
 }
 
+float CCameraBase::GetRadXZ(const char* cameraName)
+{
+    if (m_cameraMap.count(cameraName) == 0)
+        return 0;
+    return m_cameraMap[cameraName]->m_radXZ;
+}
+
 
 
 

@@ -63,6 +63,8 @@ public:
 	static DirectX::XMVECTOR GetPrimaryUpHorizontal();
 	// メインカメラのRadXZを取得
 	static float GetPrimaryRadXZ();
+	// メインカメラのRadXZを取得
+	static float GetRadXZ(const char* cameraName);
 
 
 private:
