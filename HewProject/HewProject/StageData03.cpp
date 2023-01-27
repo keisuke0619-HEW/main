@@ -1,4 +1,4 @@
-#include <StageData01.hpp>
+#include <StageData03.hpp>
 #include <stdio.h>
 #include <Windows.h>
 #include <Geometory.h>
@@ -10,10 +10,10 @@
 #include<Wall.hpp>
 
 // Stage00.cppを参考にジオメトリーで作成
-CStageData01::CStageData01(Data* data)
-	//:CObjectBase("Assets/Model/kaidan.fbx", 0.1f)
+CStageData03::CStageData03(Data* data)
+//:CObjectBase("Assets/Model/kaidan.fbx", 0.1f)
 {
-	m_enemyManager.reset(new CProtEnemyManager(data, 20, 1));
+	m_enemyManager.reset(new CProtEnemyManager(data, 0, 1));
 	m_stageData = { 70.0f,70.0f };
 
 	//床
@@ -22,11 +22,11 @@ CStageData01::CStageData01(Data* data)
 		for (int j = 0; j < 4; j++)
 		{
 			m_producePlane[i * 4 + j] = new ProducePlane("Assets/Img/Game/yuka.tif");
-			m_producePlane[i * 4 + j]->SetProducePlaneInformation({(j * 2 - 3) * (m_stageData.sizeX / 8.0f),0.f,(i * 2 - 2) * (m_stageData.sizeZ / 6.0f)}, { m_stageData.sizeX / 4.0f, m_stageData.sizeZ / 3.0f, 0.0f }, { 90.0f, 0.f, 0.f });
+			m_producePlane[i * 4 + j]->SetProducePlaneInformation({ (j * 2 - 3) * (m_stageData.sizeX / 8.0f),0.f,(i * 2 - 2) * (m_stageData.sizeZ / 6.0f) }, { m_stageData.sizeX / 4.0f, m_stageData.sizeZ / 3.0f, 0.0f }, { 90.0f, 0.f, 0.f });
 			m_producePlane[i * 4 + j]->SetColor(1.0f, 1.0f, 1.0f, 1);
 		}
 	}
-	
+
 	//壁
 	// 前
 	for (int i = 0; i < 3; i++)
@@ -46,7 +46,7 @@ CStageData01::CStageData01(Data* data)
 	for (int i = 0; i < 3; i++)
 	{
 		m_wall[6 + i].reset(new ProducePlane("Assets/Img/Game/kabe.tif"));
-		m_wall[6 + i]->SetProducePlaneInformation({m_stageData.sizeX / 2.0f, 12.0f,(i * 2 - 2) * (m_stageData.sizeZ / 6.0f) }, { m_stageData.sizeZ / 3.0f, 24.0f, 0 }, { 0.f, 90.0f, 0.f });
+		m_wall[6 + i]->SetProducePlaneInformation({ m_stageData.sizeX / 2.0f, 12.0f,(i * 2 - 2) * (m_stageData.sizeZ / 6.0f) }, { m_stageData.sizeZ / 3.0f, 24.0f, 0 }, { 0.f, 90.0f, 0.f });
 		m_wall[6 + i]->SetColor(1.0f, 1.0f, 1.0f, 1);
 	}
 	// 左
@@ -70,16 +70,18 @@ CStageData01::CStageData01(Data* data)
 
 	//柱
 	//(new CPillar(-20,0,20));POSのX,Y,Zの順で並んでいるので調整お願いします
-	CSceneBase::GetObjList().lock()->Add(new CPillar(-20,0,20));
-	CSceneBase::GetObjList().lock()->Add(new CPillar(20, 0,-20));
+	CSceneBase::GetObjList().lock()->Add(new CPillar(-20, 0, -20));
+	CSceneBase::GetObjList().lock()->Add(new CPillar(-20, 0,  20));
+	CSceneBase::GetObjList().lock()->Add(new CPillar( 20, 0, -20));
+	CSceneBase::GetObjList().lock()->Add(new CPillar( 20, 0,  20));
 
 	//壁
 	//(new Wall(-20, 0, -20,0,90*3.1415/180,0))POSのX,Y,Z、ROTのYを回転させるならtrueで並んでいるので調整お願いします
 	CSceneBase::GetObjList().lock()->Add(new Wall(20, 0, 20, true));
-	CSceneBase::GetObjList().lock()->Add(new Wall(-20, 0, -20,true));
+	CSceneBase::GetObjList().lock()->Add(new Wall(-20, 0, -20, true));
 }
 
-CStageData01::~CStageData01()
+CStageData03::~CStageData03()
 {
 	for (int i = 0; i < 12; i++)
 	{
@@ -87,13 +89,13 @@ CStageData01::~CStageData01()
 	}
 }
 
-void CStageData01::Update()
+void CStageData03::Update()
 {
 	// ステージのアップデート
 	m_enemyManager->Update();
 }
 
-void CStageData01::Draw()
+void CStageData03::Draw()
 {
 	for (int i = 0; i < 12; i++)
 	{
@@ -109,5 +111,5 @@ void CStageData01::Draw()
 	{
 		m_roof[i]->Draw();
 	}
-	
+
 }

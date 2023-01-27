@@ -2,13 +2,13 @@
 #include <SceneBase.hpp>
 #include <IObjectBase.hpp>
 #include <ISceneBase.hpp>
-#define PROT_ENEMY_MAX (20)
+#define PROT_ENEMY_MAX (30)
 #define PROT_ENEMY_BOSS_MAX (1)
 
 class CProtEnemyManager
 {
 public:
-	CProtEnemyManager(Data* data);
+	CProtEnemyManager(Data* data, int enemy, int boss);
 	void Update();
 
 private:
@@ -21,4 +21,7 @@ private:
 	int m_frame;
 
 	Data* m_data;
+
+	int m_enemy_MAX;
+	int m_boss_MAX;
 };

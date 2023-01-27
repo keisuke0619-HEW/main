@@ -22,9 +22,6 @@
     <ClInclude Include="BGM.h" />
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
-    <ClInclude Include="GameScene_02.hpp" />
-    <ClInclude Include="GameScene_03.hpp" />
-    <ClInclude Include="GameScene_04.hpp" />
     <ClInclude Include="MiniMap.h" />
     <ClInclude Include="NumberUI.hpp" />
     <ClInclude Include="OutputEffekseer.h" />
@@ -88,16 +85,17 @@
     <ClInclude Include="Source\System\Timer.h" />
     <ClInclude Include="Source\System\UiManager.hpp" />
     <ClInclude Include="Source\System\WinUtil.h" />
+<<<<<<< HEAD
     <ClInclude Include="StageData02.hpp" />
+=======
+    <ClInclude Include="StageData03.hpp" />
+>>>>>>> bf492e9e49db28cf5cef38f8246bdea2958db77e
     <ClInclude Include="Time.h" />
     <ClInclude Include="Wall.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BGM.cpp" />
     <ClCompile Include="DirectXTex\Texture.cpp" />
-    <ClCompile Include="GameScene_02.cpp" />
-    <ClCompile Include="GameScene_03.cpp" />
-    <ClCompile Include="GameScene_04.cpp" />
     <ClCompile Include="MiniMap.cpp" />
     <ClCompile Include="NumberUI.cpp" />
     <ClCompile Include="OutputEffekseer.cpp" />
@@ -164,7 +162,11 @@
     <ClCompile Include="Source\System\Timer.cpp" />
     <ClCompile Include="Source\System\UiManager.cpp" />
     <ClCompile Include="Source\System\WinUtil.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="StageData02.cpp" />
+=======
+    <ClCompile Include="StageData03.cpp" />
+>>>>>>> bf492e9e49db28cf5cef38f8246bdea2958db77e
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>

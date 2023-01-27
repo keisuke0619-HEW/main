@@ -11,7 +11,9 @@ public:
 		SE_CANCEL,
 		SE_BAR,
 		SE_KEMO,
+		SE_EXPLOTION,
 		SE_BOMB,
+		SE_RAIL,
 		SE_MAX,
 	};
 	CSoundSE();
@@ -24,6 +26,9 @@ public:
 	static void BoolPlay();
 	static void BoolStop();
 	static bool IsPlay();
+	static void CountUp();
+	static int GetCount();
+	static void CountReset();
 	
 
 private:
@@ -31,6 +36,7 @@ private:
 	static IXAudio2SourceVoice* m_pSESource;
 
 	static bool m_IsPlay;
+	static int m_cnt;
 };
 
 
