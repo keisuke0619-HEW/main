@@ -1,5 +1,6 @@
 #include "OverlayAskBase.hpp"
 #include <Controller.hpp>
+#include <SE.h>
 COverlayAskBase::COverlayAskBase(const char* textSource, bool* out)
 {
 	m_out = out;
@@ -60,21 +61,30 @@ void COverlayAskBase::Update()
 	// ƒJ[ƒ\ƒ‹ˆÚ“®
 	if (Utility::GetKeyTrigger(KEY_LEFT))
 	{
+		if (!m_target)
+			CSoundSE::Start(CSoundSE::SE_CURSOR);
 		m_target = 1;
 	}
 	if (Utility::GetKeyTrigger(KEY_RIGHT))
 	{
+		if (m_target)
+			CSoundSE::Start(CSoundSE::SE_CURSOR);
 		m_target = 0;
 	}
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
 		*m_out = m_target;
 		m_isDestroy = true;
+		if (m_target)
+		CSoundSE::Start(CSoundSE::SE_SELECT);
+		else
+			CSoundSE::Start(CSoundSE::SE_CANCEL);
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		m_out = false;
 		m_isDestroy = true;
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 	}
 	m_circleIn->SetRotation(m_frame);
 	m_circleOut->SetRotation(-m_frame * 0.8f);

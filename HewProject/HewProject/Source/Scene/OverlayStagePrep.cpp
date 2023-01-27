@@ -2,6 +2,7 @@
 #include <Controller.hpp>
 #include <SceneManager.hpp>
 #include <OverlayConfig.hpp>
+#include <SE.h>
 COverlayStagePrep::COverlayStagePrep(int id)
 {
 	m_next = nullptr;
@@ -43,6 +44,7 @@ void COverlayStagePrep::Update()
 {
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
+		CSoundSE::Start(CSoundSE::SE_SELECT);
 		CSceneManager::SetScene(SCENE_STAGE03);
 		//if (m_next != nullptr)
 		//	*m_next = true;
@@ -51,10 +53,12 @@ void COverlayStagePrep::Update()
 	}
 	else if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		m_isDestroy = true;
 	}
 	else if (Utility::GetKeyTrigger(KEY_CONFIG))
 	{
+		CSoundSE::Start(CSoundSE::SE_SELECT);
 		m_overlay.reset(new COverlayConfig());
 	}
 

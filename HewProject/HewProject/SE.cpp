@@ -22,10 +22,10 @@ void CSoundSE::Init()
 	m_pSE[SE_SELECT] = CreateSound("Assets/Sound/select.mp3", false);
 	m_pSE[SE_CURSOR] = CreateSound("Assets/Sound/cursor.mp3", false);
 	m_pSE[SE_CANCEL] = CreateSound("Assets/Sound/cancel.mp3", false);
-	m_pSE[SE_BAR] = CreateSound("Assets/Sound/bar.mp3", false);
+	m_pSE[SE_BAR] = CreateSound("Assets/Sound/rail.mp3", false);
 	m_pSE[SE_KEMO] = CreateSound("Assets/Sound/thankyou.wav", false);
-	m_pSE[SE_BOMB] = CreateSound("Assets/Sound/explotion.mp3", false);
-	m_pSE[SE_EXPLOTION] = CreateSound("Assets/Sound/bomb.mp3", false);
+	m_pSE[SE_BOMB] = CreateSound("Assets/Sound/bomb.mp3", false);
+	m_pSE[SE_EXPLOTION] = CreateSound("Assets/Sound/explotion.mp3", false);
 	m_pSE[SE_RAIL] = CreateSound("Assets/Sound/rail.mp3", false);
 }
 
@@ -109,5 +109,10 @@ int CSoundSE::GetCount()
 void CSoundSE::CountReset()
 {
 	m_cnt = 0;
+}
+
+void CSoundSE::ExitLoop()
+{
+	m_pSESource->ExitLoop();
 }
 
