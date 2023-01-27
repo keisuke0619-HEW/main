@@ -7,12 +7,12 @@
 
 // 大体ここをいじれば調整できます。
 const float OVERLAY_CONFIG_CENTER_X = 640.0f;		// コンフィグUIの中心座標
-const float OVERLAY_CONFIG_X_BAR_POS_Y = 230.0f;	// 上の設定バーのY座標
-const float OVERLAY_CONFIG_Y_BAR_POS_Y = 350.0f;	// 下の設定バーのY座標
+const float OVERLAY_CONFIG_X_BAR_POS_Y = 290.0f;	// 上の設定バーのY座標
+const float OVERLAY_CONFIG_Y_BAR_POS_Y = 490.0f;	// 下の設定バーのY座標
 const float OVERLAY_CONFIG_BAR_SIZE_X = 850.0f;		// 設定バーのサイズX
 const float OVERLAY_CONFIG_BAR_SIZE_Y = 100.0f;		// 設定バーのサイズY
-const float OVERLAY_CONFIG_CURSOR_SIZE_X = 100.0f;	// カーソルのサイズX
-const float OVERLAY_CONFIG_CURSOR_SIZE_Y = 100.0f;	// カーソルのサイズY
+const float OVERLAY_CONFIG_CURSOR_SIZE_X = 70.0f;	// カーソルのサイズX
+const float OVERLAY_CONFIG_CURSOR_SIZE_Y = 70.0f;	// カーソルのサイズY
 const float OVERLAY_CONFIG_SPEED_MIN = 1.0f;		// カメラスピードの最小値
 const float OVERLAY_CONFIG_SPEED_MAX = 100.0f;		// カメラスピードの最大値
 const float OVERLAY_CONFIG_POS_MIN = OVERLAY_CONFIG_CENTER_X - OVERLAY_CONFIG_BAR_SIZE_X / 2.08f;	// カーソルの移動制限最小値（最後の数値でうまく調整
@@ -38,12 +38,12 @@ COverlayConfig::COverlayConfig()
 	m_speedYBar->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_Y_BAR_POS_Y);
 	m_speedYBar->SetSize(OVERLAY_CONFIG_BAR_SIZE_X, OVERLAY_CONFIG_BAR_SIZE_Y);
 	Add("YBar", m_speedYBar, SORT_ORDER_UI_BACK1);
-	m_speedXCursor = new CGameUI("Assets/Img/PauseMenu/Cursor.png");
-	m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_X_BAR_POS_Y);
+	m_speedXCursor = new CGameUI("Assets/Img/StageSelect/map icon.png");
+	m_speedXCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_X_BAR_POS_Y - 60);
 	m_speedXCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
 	Add("XCursor", m_speedXCursor);
-	m_speedYCursor = new CGameUI("Assets/Img/PauseMenu/Cursor.png");
-	m_speedYCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_Y_BAR_POS_Y);
+	m_speedYCursor = new CGameUI("Assets/Img/StageSelect/map icon.png");
+	m_speedYCursor->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_Y_BAR_POS_Y - 60);
 	m_speedYCursor->SetSize(OVERLAY_CONFIG_CURSOR_SIZE_X, OVERLAY_CONFIG_CURSOR_SIZE_Y);
 	Add("YCursor", m_speedYCursor);
 
@@ -165,15 +165,15 @@ void COverlayConfig::SetStatus()
 		Utility::SetCameraSpeedX(OVERLAY_CONFIG_SPEED_MAX);
 	if (speedY > OVERLAY_CONFIG_SPEED_MAX)
 		Utility::SetCameraSpeedY(OVERLAY_CONFIG_SPEED_MAX);
-	m_speedXCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedX() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_X_BAR_POS_Y);
-	m_speedYCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedY() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_Y_BAR_POS_Y);
+	m_speedXCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedX() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_X_BAR_POS_Y - 60);
+	m_speedYCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedY() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_Y_BAR_POS_Y - 60);
 	m_speedXNum->SetPos(
 		OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedX() / OVERLAY_CONFIG_SPEED_MAX),
-		OVERLAY_CONFIG_X_BAR_POS_Y - OVERLAY_CONFIG_CURSOR_SIZE_Y / 2.5f);
+		(OVERLAY_CONFIG_X_BAR_POS_Y - OVERLAY_CONFIG_CURSOR_SIZE_Y / 2.5f) - 90);
 	m_speedXNum->SetNum(Utility::GetCameraSpeedX());
 	m_speedYNum->SetPos(
 		OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedY() / OVERLAY_CONFIG_SPEED_MAX),
-		OVERLAY_CONFIG_Y_BAR_POS_Y - OVERLAY_CONFIG_CURSOR_SIZE_Y / 2.5f);
+		(OVERLAY_CONFIG_Y_BAR_POS_Y - OVERLAY_CONFIG_CURSOR_SIZE_Y / 2.5f ) - 90);
 	m_speedYNum->SetNum(Utility::GetCameraSpeedY());
 }
 
