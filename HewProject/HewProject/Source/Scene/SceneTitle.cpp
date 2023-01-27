@@ -4,6 +4,7 @@
 #include <Controller.hpp>
 #include <UiManager.hpp>
 #include <OverlayConfig.hpp>
+#include <SE.h>
 
 CSceneTitle::CSceneTitle()
 {
@@ -42,6 +43,7 @@ void CSceneTitle::Update()
 
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
+		CSoundSE::Start(CSoundSE::SE_SELECT);
 		CSceneManager::SetScene(SCENE_STAGE_SELECT);
 	}
 	if (Utility::GetKeyTrigger(KEY_BEAM))
@@ -50,6 +52,7 @@ void CSceneTitle::Update()
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		AddOverlay(new CGameEnd());
 	}
 }

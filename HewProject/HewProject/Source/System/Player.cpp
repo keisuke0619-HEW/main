@@ -9,6 +9,7 @@
 #include <CutinCamera.hpp>
 #include <PlayerCamera.hpp>
 #include <SceneResult.hpp>
+#include <SE.h>
 
 CPlayer::CPlayer(Data* data)
 	: CObjectBase("Assets/Model/Player/model.fbx", 0.08f, false, "Player")
@@ -68,6 +69,9 @@ void CPlayer::Update()
 {
 	if (m_param.hp <= 0.0f)
 	{
+		if (!CSoundSE::IsPlay())
+			CSoundSE::Start(CSoundSE::SE_EXPLOTION);
+		CSoundSE::BoolPlay();
 		m_Fream++;
 
 		m_pEfk3->SetScale(1.0f, 1.0f, 1.0f);
@@ -76,6 +80,7 @@ void CPlayer::Update()
 		m_playerUI->Update();
 		if (m_Fream >= 180)
 		{
+			CSoundSE::BoolStop();
 			CSceneResult::SetOver();
 			CSceneManager::SetScene(SCENE_RESULT);
 			Destroy();
@@ -401,7 +406,7 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 			m_InvincibleTime = 120;
 
 			m_param.hp -= 0.18f;
-
+			CSoundSE::Start(CSoundSE::SE_BOMB);
 			// ノックバック
 			const float knockBackPower = 0.6f;
 			const int knockBackFrame = 30;

@@ -64,7 +64,7 @@ void CProtEnemyBoss::Update()
 	if (m_param.hp <= 0.0f)
 	{
 		if(!CSoundSE::IsPlay())
-		CSoundSE::Start(CSoundSE::SE_BOMB);
+		CSoundSE::Start(CSoundSE::SE_EXPLOTION);
 		CSoundSE::BoolPlay();
 		m_Fream++;
 		m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
