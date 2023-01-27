@@ -6,6 +6,7 @@
 #include <Blend.hpp>
 #include <SceneManager.hpp>
 #include <SceneResult.hpp>
+#include <SE.h>
 // 当たり判定は後で付けます。
 
 CProtEnemyBoss::CProtEnemyBoss(Data* data)
@@ -62,6 +63,9 @@ void CProtEnemyBoss::Update()
 	// ボスが死んでいたら
 	if (m_param.hp <= 0.0f)
 	{
+		if(!CSoundSE::IsPlay())
+		CSoundSE::Start(CSoundSE::SE_EXPLOTION);
+		CSoundSE::BoolPlay();
 		m_Fream++;
 		m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
 		m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
@@ -70,6 +74,7 @@ void CProtEnemyBoss::Update()
 		// ３秒たったら
 		if (m_Fream >= 180)
 		{
+			CSoundSE::BoolStop();
 			CSceneResult::SetClear();
 			CSceneManager::SetScene(SCENE_RESULT);
 		}

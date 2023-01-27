@@ -4,8 +4,13 @@
 #include <Controller.hpp>
 #include <UiManager.hpp>
 #include <OverlayConfig.hpp>
+<<<<<<< HEAD
 #include <OverlayAskBase.hpp>
 #include <Startup.h>
+=======
+#include <SE.h>
+
+>>>>>>> 602ca359885e97fef1965e90f68df14977f9cd6d
 CSceneTitle::CSceneTitle()
 {
 	// É^ÉCÉgÉãÉçÉS
@@ -43,6 +48,7 @@ void CSceneTitle::Update()
 
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
+		CSoundSE::Start(CSoundSE::SE_SELECT);
 		CSceneManager::SetScene(SCENE_STAGE_SELECT);
 	}
 	if (Utility::GetKeyTrigger(KEY_BEAM))
@@ -52,6 +58,8 @@ void CSceneTitle::Update()
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		AddOverlay(new COverlayAskBase("Assets/Img/PauseMenu/Label_Exit.png", GetLoopPointer() ));
+
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 	}
 }
 

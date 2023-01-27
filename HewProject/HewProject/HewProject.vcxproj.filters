@@ -252,15 +252,6 @@
     <ClInclude Include="MiniMap.h">
       <Filter>システム\2D</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene_02.hpp">
-      <Filter>シーンファイル\シーンファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene_03.hpp">
-      <Filter>シーンファイル\シーンファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene_04.hpp">
-      <Filter>シーンファイル\シーンファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Pillar.hpp">
       <Filter>シーンファイル\Object</Filter>
     </ClInclude>
@@ -275,6 +266,15 @@
     </ClInclude>
     <ClInclude Include="Startup.h">
       <Filter>システム\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="SE.h">
+      <Filter>システム\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="StageData02.hpp">
+      <Filter>シーンファイル\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="StageData03.hpp">
+      <Filter>シーンファイル\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -452,15 +452,6 @@
     <ClCompile Include="MiniMap.cpp">
       <Filter>システム\2D</Filter>
     </ClCompile>
-    <ClCompile Include="GameScene_02.cpp">
-      <Filter>シーンファイル\シーンファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene_03.cpp">
-      <Filter>シーンファイル\シーンファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene_04.cpp">
-      <Filter>シーンファイル\シーンファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Source\System\CutinCamera.hpp">
       <Filter>システム\Camera</Filter>
     </ClCompile>
@@ -478,6 +469,15 @@
     </ClCompile>
     <ClCompile Include="OverlayAskBase.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="SE.cpp">
+      <Filter>システム\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="StageData02.cpp">
+      <Filter>シーンファイル\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="StageData03.cpp">
+      <Filter>シーンファイル\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

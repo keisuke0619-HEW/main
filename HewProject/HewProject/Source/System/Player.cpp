@@ -9,6 +9,7 @@
 #include <CutinCamera.hpp>
 #include <PlayerCamera.hpp>
 #include <SceneResult.hpp>
+#include <SE.h>
 
 CPlayer::CPlayer(Data* data)
 	: CObjectBase("Assets/Model/Player/model.fbx", 0.08f, false, "Player")
@@ -68,14 +69,18 @@ void CPlayer::Update()
 {
 	if (m_param.hp <= 0.0f)
 	{
+		if (!CSoundSE::IsPlay())
+			CSoundSE::Start(CSoundSE::SE_EXPLOTION);
+		CSoundSE::BoolPlay();
 		m_Fream++;
-
+		m_pEfk->End();
 		m_pEfk3->SetScale(1.0f, 1.0f, 1.0f);
 		m_pEfk3->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
 		m_pEfk3->PlayOnce();
 		m_playerUI->Update();
 		if (m_Fream >= 180)
 		{
+			CSoundSE::BoolStop();
 			CSceneResult::SetOver();
 			CSceneManager::SetScene(SCENE_RESULT);
 			Destroy();
@@ -119,10 +124,10 @@ void CPlayer::Update()
 
 		//m_param.hp = 1;
 
-		m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
-		m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+		m_pEfk->SetScale(m_param.scale.x / 2.0f, m_param.scale.y / 2.0f, m_param.scale.z / 2.0f);
+		m_pEfk->SetPos(m_param.pos.x, m_param.pos.y + 1.0f, m_param.pos.z);
 		m_pEfk->SetRotation(m_param.rot.x, m_param.rot.y, m_param.rot.z);
-		m_pEfk->AddPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+		m_pEfk->AddPos(m_param.pos.x, m_param.pos.y + 1.0f, m_param.pos.z);
 	}
 }
 
@@ -401,7 +406,7 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 			m_InvincibleTime = 120;
 
 			m_param.hp -= 0.18f;
-
+			CSoundSE::Start(CSoundSE::SE_BOMB);
 			// ノックバック
 			const float knockBackPower = 0.6f;
 			const int knockBackFrame = 30;

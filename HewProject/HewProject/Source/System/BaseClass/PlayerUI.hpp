@@ -28,6 +28,5 @@ private:
 	CMiniMap* m_pMap;
 	void UpdateLife();
 	void UpdateCharge();
-	CNumberUI::Ptr m_timer;
 
 };

@@ -4,6 +4,7 @@
 #include <Controller.hpp>
 #include <UiManager.hpp>
 #include <Time.h>
+#include <SE.h>
 
 bool g_isClear = false;
 
@@ -50,8 +51,7 @@ CSceneResult::CSceneResult(Data data)
 
 	// ‰¹ƒf[ƒ^‚Ì“Ç‚Ýž‚Ý
 	SetBGM("Assets/Sound/korinoyaiba.wav");
-	m_pcursorSE = CreateSound("Assets/Sound/cursor.mp3", false);
-	m_pselectSE = CreateSound("Assets/Sound/select.mp3", false);
+	
 
 	// ”Žš
 	m_time.reset(new CNumberUI(2, SORT_ORDER_UI_FRONT4, 2));
@@ -117,8 +117,8 @@ void CSceneResult::Update()
 
 	if (Utility::GetKeyTrigger(KEY_RIGHT))
 	{
-		if(m_selectCursol == 0)
-		m_pSESource = StartSound(m_pcursorSE);
+		if (m_selectCursol == 0)
+			CSoundSE::Start(CSoundSE::SE_CURSOR);
 		m_selectCursol = 1;
 		m_Retry.lock()->SetColor(1, 1, 1, 1);
 		m_Home.lock()->SetColor(1, 1, 1, 0.3f);
@@ -126,7 +126,7 @@ void CSceneResult::Update()
 	if (Utility::GetKeyTrigger(KEY_LEFT))
 	{
 		if(m_selectCursol == 1)
-		m_pSESource = StartSound(m_pcursorSE);
+			CSoundSE::Start(CSoundSE::SE_CURSOR);
 		m_selectCursol = 0;
 		m_Retry.lock()->SetColor(1, 1, 1, 0.3f);
 		m_Home.lock()->SetColor(1, 1, 1, 1);
@@ -135,7 +135,7 @@ void CSceneResult::Update()
 
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
-		m_pSESource = StartSound(m_pselectSE);
+		CSoundSE::Start(CSoundSE::SE_SELECT);
 		if (m_selectCursol == 0)
 		{
 			CSceneManager::SetScene(SCENE_TITLE);
@@ -147,6 +147,7 @@ void CSceneResult::Update()
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		CSceneManager::SetScene(SCENE_STAGE_SELECT);
 	}
 }

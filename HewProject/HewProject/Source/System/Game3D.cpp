@@ -9,6 +9,7 @@
 #include <OutputEffekseer.h>
 #include <NumberUI.hpp>
 #include <MiniMap.h>
+#include <SE.h>
 //--- Scenes ---//
 
 Game3D::Game3D()
@@ -23,6 +24,7 @@ Game3D::Game3D()
 	CEffect::InitSystem();
 	CNumberUI::Init();
 	CMiniMap::Init();
+	CSoundSE::Init();
 }
 Game3D::~Game3D()
 {
