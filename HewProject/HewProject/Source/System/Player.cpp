@@ -73,7 +73,7 @@ void CPlayer::Update()
 			CSoundSE::Start(CSoundSE::SE_EXPLOTION);
 		CSoundSE::BoolPlay();
 		m_Fream++;
-
+		m_pEfk->End();
 		m_pEfk3->SetScale(1.0f, 1.0f, 1.0f);
 		m_pEfk3->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
 		m_pEfk3->PlayOnce();
