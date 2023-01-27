@@ -64,7 +64,11 @@ private:
 	int m_target;
 
 	CGameUI* m_cursor;
-	CGameUI* m_speedYCursor;
+	CGameUI* m_circleIn;
+	CGameUI* m_circleOut;
+	CGameUI* m_labelYes;
+	CGameUI* m_labelNo;
+	CGameUI* m_gauge[7];
 
 	XAUDIO2_BUFFER* m_pselectSE;
 	XAUDIO2_BUFFER* m_pcursorSE;

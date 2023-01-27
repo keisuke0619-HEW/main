@@ -295,21 +295,45 @@ void CSetumei::Update()
 
 CGameEnd::CGameEnd()
 {
-	auto tmp = new CGameUI("Assets/Img/PauseMenu/END.png");
-	tmp->SetPos({ OVERLAY_CONFIG_CENTER_X, 360 });
-	tmp->SetSize({ 1100, 500 });
-	Add("Back", tmp, SORT_ORDER_UI_BACK2);
-	tmp = new CGameUI("Assets/Img/White.png");
-	tmp->SetPos({ 640, 360 });
-	tmp->SetSize({ 1280, 720 });
-	tmp->SetColor255(0, 0, 0, 255);
-	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
-	m_cursor = new CGameUI("Assets/Img/PauseMenu/Cursor2.png");
-	m_cursor->SetPos(OVERLAY_CONFIG_CENTER_X - 240.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 215.0f);
-	m_cursor->SetSize(200, OVERLAY_CONFIG_CURSOR_SIZE_Y);
-	m_cursor->SetColor(1.0f, 1.0f, 1.0f, 0.3f);
-	Add("XCursor", m_cursor, SORT_ORDER_UI_FRONT);
+	auto tmp = new CGameUI("Assets/Img/PauseMenu/flame.png");
+	tmp->SetData( OVERLAY_CONFIG_CENTER_X, 360 ,1100, 500);
+	Add("Back", tmp, SORT_ORDER_UI_BACK4);
 
+	m_circleIn = new CGameUI("Assets/Img/PauseMenu/circle_in.png");
+	m_circleIn->SetData( 640, 360,200, 200);
+	Add("CircleIn", m_circleIn, SORT_ORDER_UI_BACK3);
+
+	m_circleOut = new CGameUI("Assets/Img/PauseMenu/circle_out.png");
+	m_circleOut->SetData( 640, 360 ,300, 300);
+	Add("CircleOut", m_circleOut, SORT_ORDER_UI_BACK3);
+
+	tmp = new CGameUI("Assets/Img/White.png");
+	tmp->SetData(640, 360, 1280, 720);
+	tmp->SetColor255(0, 0, 0, 128);
+	Add("Fade", tmp, SORT_ORDER_UI_BACKEND);
+
+	m_cursor = new CGameUI("Assets/Img/PauseMenu/Cursor2.png");
+	m_cursor->SetPos(OVERLAY_CONFIG_CENTER_X - 120.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 140.0f);
+	m_cursor->SetColor(1.0f, 1.0f, 1.0f, 0.3f);
+	Add("XCursor", m_cursor, SORT_ORDER_UI_BACK);
+
+
+	m_labelYes = new CGameUI("Assets/Img/PauseMenu/Label_Yes.png");
+	m_labelYes->SetData(OVERLAY_CONFIG_CENTER_X - 120.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 140.0f, 1400, 70);
+	Add("Label_Yes", m_labelYes, SORT_ORDER_UI_FRONT);
+
+	m_labelNo = new CGameUI("Assets/Img/PauseMenu/Label_No.png");
+	m_labelNo->SetData(OVERLAY_CONFIG_CENTER_X + 120.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 140.0f, 1400, 70);
+	Add("Label_No", m_labelNo, SORT_ORDER_UI_FRONT);
+
+	for (int i = 0; i < 7; i++)
+	{
+		std::string str = "GAUGE_";
+		str += std::to_string(i);
+		m_gauge[i] = new CGameUI("Assets/Img/PauseMenu/virticalBar.png");
+		m_gauge[i]->SetData(934 + i * 36, 547, 23, 60);
+		Add(str, m_gauge[i]);
+	}
 	g_isLoop = false;
 	m_isDestroy = false;
 
@@ -336,10 +360,17 @@ void CGameEnd::Update()
 		m_isDestroy = true;
 		m_pSESource = StartSound(m_pcancelSE);
 	}
+	m_circleIn->SetRotation(m_frame);
+	m_circleOut->SetRotation(-m_frame * 0.8f);
+	m_cursor->SetSize(
+		(sinf(DirectX::XMConvertToRadians(m_frame * 4)) * 0.05f + 0.9f) * OVERLAY_CONFIG_CURSOR_SIZE_Y * 2.5f * 0.5f, 
+		(sinf(DirectX::XMConvertToRadians(m_frame * 4)) * 0.05f + 0.9f) * OVERLAY_CONFIG_CURSOR_SIZE_Y        * 0.5f);
 }
 
 void CGameEnd::MoveCursor()
 {
+	m_labelYes->SetSize(1400, 70);
+	m_labelNo->SetSize(1400, 70);
 	if (Utility::GetKeyTrigger(KEY_LEFT))
 	{
 		m_target--;
@@ -367,17 +398,26 @@ void CGameEnd::MoveCursor()
 	{
 		m_target = TARGET_MAX * 100;
 	}
+	if (m_target % 2 == 1)
+	{
+		m_labelNo->SetSize(1800, 90);
+
+	}
+	else
+	{
+		m_labelYes->SetSize(1800, 90);
+	}
 }
 
 void CGameEnd::SetStatus()
 {
 	//m_pSESource = StartSound(m_pcursorSE);
 	const float moveX = 120.0f;
-	const float offsetY = 140.0f;
+	const float offsetY = 170.0f;
 	switch (m_target % TARGET_MAX)
 	{
 	case 0:
-		m_cursor->SetPos(OVERLAY_CONFIG_CENTER_X - moveX, OVERLAY_CONFIG_X_BAR_POS_Y + offsetY);
+		m_cursor->SetPos(OVERLAY_CONFIG_CENTER_X - moveX - 5, OVERLAY_CONFIG_X_BAR_POS_Y + offsetY);
 		break;
 	case 1:
 		m_cursor->SetPos(OVERLAY_CONFIG_CENTER_X + moveX, OVERLAY_CONFIG_X_BAR_POS_Y + offsetY);
