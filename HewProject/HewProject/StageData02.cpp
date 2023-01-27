@@ -13,7 +13,7 @@
 CStageData02::CStageData02(Data* data)
 //:CObjectBase("Assets/Model/kaidan.fbx", 0.1f)
 {
-	m_enemyManager.reset(new CProtEnemyManager(data, 20, 1));
+	m_enemyManager.reset(new CProtEnemyManager(data, 20, 1, 1.6f));
 	m_stageData = { 70.0f,70.0f };
 
 	//è∞
