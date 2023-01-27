@@ -6,6 +6,7 @@
 #include <SceneManager.hpp>
 #include <OverlayStagePrep.hpp>
 #include <OverlayConfig.hpp>
+#include <SE.h>
 CSceneStageSelect::CSceneStageSelect()
 {
 	// BGMSet("");	// BGMÇì¸ÇÍÇÈÅB
@@ -48,9 +49,7 @@ CSceneStageSelect::CSceneStageSelect()
 	m_nowIcon = STAGE_ICON_01;
 	m_cursor = 1;
 
-	m_pcursorSE = CreateSound("Assets/Sound/cursor.mp3", false);
-	m_pselectSE = CreateSound("Assets/Sound/select.mp3", false);
-	m_pcancelSE = CreateSound("Assets/Sound/cancel.mp3", false);
+	
 }
 
 CSceneStageSelect::~CSceneStageSelect()
@@ -69,12 +68,14 @@ void CSceneStageSelect::MoveCursor()
 	if (Utility::GetKeyTrigger(KEY_RIGHT))
 	{
 		m_cursor++;
-		m_pSESource = StartSound(m_pcursorSE);
+		//if(m_cursor < 2)
+		CSoundSE::Start(CSoundSE::SE_CURSOR);
 	}
 	if (Utility::GetKeyTrigger(KEY_LEFT))
 	{
 		m_cursor--;
-		m_pSESource = StartSound(m_pcursorSE);
+		//if(m_cursor > 0)
+		CSoundSE::Start(CSoundSE::SE_CURSOR);
 	}
 	m_cursor = m_cursor < 0 ? 2 : m_cursor;
 	m_cursor = m_cursor > 2 ? 0 : m_cursor;
@@ -84,7 +85,7 @@ void CSceneStageSelect::ChangeScene()
 {
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
-		m_pSESource = StartSound(m_pselectSE);
+		CSoundSE::Start(CSoundSE::SE_SELECT);
 		switch (m_nowIcon)
 		{
 		case STAGE_ICON_01:
@@ -102,7 +103,7 @@ void CSceneStageSelect::ChangeScene()
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
-		m_pSESource = StartSound(m_pcancelSE);
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		CSceneManager::SetScene(SCENE_TITLE);
 		return;
 	}

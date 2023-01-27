@@ -270,6 +270,9 @@
     <ClInclude Include="Time.h">
       <Filter>システム\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="SE.h">
+      <Filter>システム\Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -469,6 +472,9 @@
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>システム\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SE.cpp">
+      <Filter>システム\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

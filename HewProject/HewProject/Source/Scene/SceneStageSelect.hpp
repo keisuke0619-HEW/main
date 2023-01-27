@@ -32,12 +32,6 @@ private:
 	int m_cursor;	// ÉJÅ[É\Éã
 	bool m_isNext;
 
-	XAUDIO2_BUFFER* m_pselectSE;
-	XAUDIO2_BUFFER* m_pcursorSE;
-	XAUDIO2_BUFFER* m_pcancelSE;
-
-
-	IXAudio2SourceVoice* m_pSESource;
 
 	EStageSelectUI m_nowIcon;
 };

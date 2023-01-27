@@ -33,6 +33,7 @@
     <ClInclude Include="Pillar.hpp" />
     <ClInclude Include="Polyline.h" />
     <ClInclude Include="SceneResult.hpp" />
+    <ClInclude Include="SE.h" />
     <ClInclude Include="Source\Prot\EnemyZako01.hpp" />
     <ClInclude Include="Source\Prot\EnemyBoss01.hpp" />
     <ClInclude Include="Source\Prot\ProtEnemyManager.hpp" />
@@ -104,6 +105,7 @@
     <ClCompile Include="Pillar.cpp" />
     <ClCompile Include="Polyline.cpp" />
     <ClCompile Include="SceneResult.cpp" />
+    <ClCompile Include="SE.cpp" />
     <ClCompile Include="Source\Prot\EnemyZako01.cpp" />
     <ClCompile Include="Source\Prot\EnemyBoss01.cpp" />
     <ClCompile Include="Source\Prot\ProtEnemyManager.cpp" />

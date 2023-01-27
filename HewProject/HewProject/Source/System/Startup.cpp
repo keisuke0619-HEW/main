@@ -2,6 +2,7 @@
 #include "WinUtil.h"
 #include "Timer.h"
 #include <OverlayConfig.hpp>
+#include <SE.h>
 
 //--- íËêîíËã`
 const char* APP_TITLE = "It's so CHARGE BEAM -AX218-";
@@ -32,6 +33,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			if (CGameEnd::IsLoop())
 			{
 				state = APP_STATE_QUIT;
+				CSoundSE::Start(CSoundSE::SE_KEMO);
+				Sleep(1800);
 			}
 			
 		}
