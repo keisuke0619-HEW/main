@@ -264,11 +264,10 @@
     <ClInclude Include="SE.h">
       <Filter>システム\Sound</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="StageData02.hpp">
-=======
+      <Filter>シーンファイル\Stage</Filter>
+    </ClInclude>
     <ClInclude Include="StageData03.hpp">
->>>>>>> bf492e9e49db28cf5cef38f8246bdea2958db77e
       <Filter>シーンファイル\Stage</Filter>
     </ClInclude>
   </ItemGroup>
@@ -465,11 +464,10 @@
     <ClCompile Include="SE.cpp">
       <Filter>システム\Sound</Filter>
     </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="StageData02.cpp">
-=======
+      <Filter>シーンファイル\Stage</Filter>
+    </ClCompile>
     <ClCompile Include="StageData03.cpp">
->>>>>>> bf492e9e49db28cf5cef38f8246bdea2958db77e
       <Filter>シーンファイル\Stage</Filter>
     </ClCompile>
   </ItemGroup>

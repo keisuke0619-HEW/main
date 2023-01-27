@@ -85,11 +85,8 @@
     <ClInclude Include="Source\System\Timer.h" />
     <ClInclude Include="Source\System\UiManager.hpp" />
     <ClInclude Include="Source\System\WinUtil.h" />
-<<<<<<< HEAD
     <ClInclude Include="StageData02.hpp" />
-=======
     <ClInclude Include="StageData03.hpp" />
->>>>>>> bf492e9e49db28cf5cef38f8246bdea2958db77e
     <ClInclude Include="Time.h" />
     <ClInclude Include="Wall.hpp" />
   </ItemGroup>
@@ -162,11 +159,8 @@
     <ClCompile Include="Source\System\Timer.cpp" />
     <ClCompile Include="Source\System\UiManager.cpp" />
     <ClCompile Include="Source\System\WinUtil.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="StageData02.cpp" />
-=======
     <ClCompile Include="StageData03.cpp" />
->>>>>>> bf492e9e49db28cf5cef38f8246bdea2958db77e
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
