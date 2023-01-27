@@ -50,7 +50,7 @@ CProtEnemy::CProtEnemy(Data* data)
 	m_param.frame = 300.0f;
 
 	// ‚±‚±‚Å•`‰æ‚ğ‚¸‚ç‚·
-	m_param.drawOffset = { 0, 0.75f, 0 };
+	m_param.drawOffset = { 0, 0.2f, 0 };
 
 	// “–‚½‚è”»’è‚Ìİ’è
 	m_param.collisionType = COLLISION_CHARACTER;
