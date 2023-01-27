@@ -119,10 +119,10 @@ void CPlayer::Update()
 
 		//m_param.hp = 1;
 
-		m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
-		m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+		m_pEfk->SetScale(m_param.scale.x / 2.0f, m_param.scale.y / 2.0f, m_param.scale.z / 2.0f);
+		m_pEfk->SetPos(m_param.pos.x, m_param.pos.y + 1.0f, m_param.pos.z);
 		m_pEfk->SetRotation(m_param.rot.x, m_param.rot.y, m_param.rot.z);
-		m_pEfk->AddPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+		m_pEfk->AddPos(m_param.pos.x, m_param.pos.y + 1.0f, m_param.pos.z);
 	}
 }
 
