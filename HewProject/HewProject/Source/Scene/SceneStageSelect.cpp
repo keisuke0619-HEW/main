@@ -24,7 +24,7 @@ CSceneStageSelect::CSceneStageSelect()
 	const float stageIconPosMinY = 330.0f;
 	const float stageIconPosAddX = 400.0f;
 
-	m_ui[STAGE_ICON_01] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_configIcon.png"), SORT_ORDER_DEFAULT);
+	m_ui[STAGE_ICON_01] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/haguruma.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_01].lock()->SetData(
 		stageIconPosMinX + stageIconPosAddX * 0,
 		stageIconPosMinY,
@@ -38,7 +38,7 @@ CSceneStageSelect::CSceneStageSelect()
 		stageIconSizeX,
 		stageIconSizeY
 	);
-	m_ui[STAGE_ICON_03] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_sousaIcon.png"), SORT_ORDER_DEFAULT);
+	m_ui[STAGE_ICON_03] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/setumeisyo.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_03].lock()->SetData(
 		stageIconPosMinX + stageIconPosAddX * 2,
 		stageIconPosMinY,
