@@ -80,6 +80,8 @@ CStageData02::CStageData02(Data* data)
 	CSceneBase::GetObjList().lock()->Add(new CPillar( -3, 0, -20));
 	CSceneBase::GetObjList().lock()->Add(new CPillar( -20, 0, -3));
 
+	CSceneBase::GetObjList().lock()->Add(new CPillar( 20, 0, -14));
+
 	//•Ç
 	//(new Wall(-20, 0, -20,0,90*3.1415/180,0))POS‚ÌX,Y,ZAROT‚ÌY‚ð‰ñ“]‚³‚¹‚é‚È‚çtrue‚Å•À‚ñ‚Å‚¢‚é‚Ì‚Å’²®‚¨Šè‚¢‚µ‚Ü‚·
 
@@ -87,6 +89,9 @@ CStageData02::CStageData02(Data* data)
 	CSceneBase::GetObjList().lock()->Add(new Wall(20, 0, 11.5, false));
 	CSceneBase::GetObjList().lock()->Add(new Wall(20, 0, -5.5, false));
 	CSceneBase::GetObjList().lock()->Add(new Wall(-20, 0, -11.5, false));
+
+	CSceneBase::GetObjList().lock()->Add(new Wall(-20, 0, -3, true));
+	CSceneBase::GetObjList().lock()->Add(new Wall(20, 0, 20, true));
 }
 
 CStageData02::~CStageData02()
