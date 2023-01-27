@@ -50,7 +50,34 @@ CSceneResult::CSceneResult(Data data)
 		m_ResultUI.lock()->SetSize({ 646.f, 91.7f });//265.f, 37.f
 		m_ResultUI.lock()->SetPos({ 650.f, 204.f });
 	}
-	
+
+	// ”L
+	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/cat.png"));
+	m_ResultUI.lock()->SetSize({ 83.3f, 97.6f });//31.f, 32.f
+	m_ResultUI.lock()->SetPos({ 1000.f, 490.f });
+
+	float score = (float)m_data.MAX_kill / 20.f;
+	if (score <= 0.4)
+	{
+		m_ResultUI.lock()->SetColor(1, 1, 1, 0);
+	}
+	if (score > 0.4)
+	{
+		// “º
+		m_ResultUI.lock()->SetColor255(134, 74, 43);
+	}
+	if (score > 0.6)
+	{
+		// ‹â
+		m_ResultUI.lock()->SetColor(1, 1, 1);
+	}
+	if (score > 0.8)
+	{
+		// ‹à
+		m_ResultUI.lock()->SetColor255(255, 215, 0);
+	}
+
+
 	// ”wŒi
 	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/back.png"));
 	m_ResultUI.lock()->SetSize({ 1200.f, 600.f });//467.f, 276.f
@@ -59,10 +86,6 @@ CSceneResult::CSceneResult(Data data)
 	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/title_background.png"));
 	m_ResultUI.lock()->SetSize({ 1280.f, 720.f });//467.f, 276.f
 	m_ResultUI.lock()->SetPos({ 640.f, 360.f });
-	// ”L
-	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/cat.png"));
-	m_ResultUI.lock()->SetSize({ 83.3f, 97.6f });//31.f, 32.f
-	m_ResultUI.lock()->SetPos({ 1000.f, 490.f });
 
 	
 	
@@ -84,26 +107,6 @@ CSceneResult::CSceneResult(Data data)
 	m_maxDefeat->SetIsZeroFill(true);
 	m_maxDefeat->SetNum(m_data.MAX_kill); // ‚±‚±‚ÉÅ‘åŒ‚”j”‚ð“ü‚ê‚é
 	m_maxDefeat->SetPos({ 840,490 });
-	float score = (float)m_data.MAX_kill / 20.f;
-	if (score <= 0.4)
-	{
-		m_ResultUI.lock()->SetColor(1, 1, 1, 0);
-	}
-	if (score > 0.4)
-	{
-		// “º
-		m_ResultUI.lock()->SetColor255(134, 74, 43);
-	}
-	if (score > 0.6)
-	{
-		// ‹â
-		m_ResultUI.lock()->SetColor(1, 1, 1);
-	}
-	if (score > 0.8)
-	{
-		// ‹à
-		m_ResultUI.lock()->SetColor255(255, 215, 0);
-	}
 }
 
 CSceneResult::~CSceneResult()
