@@ -15,7 +15,7 @@ CSceneStageSelect::CSceneStageSelect()
 	tmp.lock()->SetSize(400, 150);
 	tmp.lock()->SetPos(1075, 642);
 
-	m_ui[BACK] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_BG.png"), SORT_ORDER_BACK);
+	m_ui[BACK] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/title_background.png"), SORT_ORDER_BACK);
 	m_ui[BACK].lock()->SetData(640, 360, 1280, 720);
 
 	const float stageIconSizeX = 300.0f;
