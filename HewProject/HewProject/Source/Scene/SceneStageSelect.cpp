@@ -7,6 +7,7 @@
 #include <OverlayStagePrep.hpp>
 #include <OverlayConfig.hpp>
 #include <SE.h>
+#include <BGM.h>
 CSceneStageSelect::CSceneStageSelect()
 {
 	// BGMSet("");	// BGMÇì¸ÇÍÇÈÅB
@@ -49,7 +50,7 @@ CSceneStageSelect::CSceneStageSelect()
 	m_nowIcon = STAGE_ICON_01;
 	m_cursor = 1;
 
-	
+	SetBGM("Assets/Sound/StageSelectBGM.mp3");
 }
 
 CSceneStageSelect::~CSceneStageSelect()
