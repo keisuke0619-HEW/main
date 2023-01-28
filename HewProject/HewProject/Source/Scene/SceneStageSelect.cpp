@@ -8,22 +8,24 @@
 #include <OverlayConfig.hpp>
 #include <SE.h>
 #include <BGM.h>
+
+const float stageIconSizeX = 300.0f;
+const float stageIconSizeY = 300.0f;
+const float stageIconPosMinX = 245.0f;
+const float stageIconPosMinY = 330.0f;
+const float stageIconPosAddX = 400.0f;
 CSceneStageSelect::CSceneStageSelect()
 {
 	// BGMSet("");	// BGM‚ð“ü‚ê‚éB
 	m_isNext = false;
-	auto tmp = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_sousaUI.png"), SORT_ORDER_DEFAULT);
-	tmp.lock()->SetSize(400, 150);
-	tmp.lock()->SetPos(1075, 642);
+	auto tmp = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/satageSelect_sousa.png"), SORT_ORDER_DEFAULT);
+	tmp.lock()->SetSize(400, 200);
+	tmp.lock()->SetPos(1075, 602);
 
 	m_ui[BACK] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/title_background.png"), SORT_ORDER_BACK);
 	m_ui[BACK].lock()->SetData(640, 360, 1280, 720);
 
-	const float stageIconSizeX = 300.0f;
-	const float stageIconSizeY = 300.0f;
-	const float stageIconPosMinX = 245.0f;
-	const float stageIconPosMinY = 330.0f;
-	const float stageIconPosAddX = 400.0f;
+	
 
 	/*m_ui[STAGE_ICON_01] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/haguruma.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_01].lock()->SetData(
@@ -57,7 +59,14 @@ CSceneStageSelect::CSceneStageSelect()
 		stageIconSizeX,
 		stageIconSizeY
 	);
-
+	m_ui[STAGE_ICON_04] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/fairu.png"), SORT_ORDER_DEFAULT);
+	m_ui[STAGE_ICON_04].lock()->SetData(
+		stageIconPosMinX + stageIconPosAddX * 2,
+		stageIconPosMinY,
+		stageIconSizeX,
+		stageIconSizeY
+	);
+	m_ui[STAGE_ICON_04].lock()->SetColor255(0, 0, 0, 0);
 	m_nowIcon = STAGE_ICON_01;
 	m_cursor = 1;
 	m_frame = 0;
@@ -165,7 +174,6 @@ void CSceneStageSelect::SetUiAlpha()
 			}
 		}
 		
-		
 	}
 }
 
@@ -188,5 +196,15 @@ void CSceneStageSelect::RotationIcon()
 	else
 	{
 		m_ui[STAGE_ICON_02].lock()->SetRotation(0);
+	}
+	if (m_cursor == 2)
+	{
+		m_ui[STAGE_ICON_03].lock()->SetColor255(255, 255, 255, 0);
+		m_ui[STAGE_ICON_04].lock()->SetColor255(255, 255, 255, 255);
+	}
+	else
+	{
+		m_ui[STAGE_ICON_03].lock()->SetColor255(128, 128, 128, 128);
+		m_ui[STAGE_ICON_04].lock()->SetColor255(255, 255, 255, 0);
 	}
 }
