@@ -21,6 +21,13 @@ public:
 	void SetTarget(DirectX::XMFLOAT3 target);
 	void OnCollision(IObjectBase::Ptr obj) override;
 private:
+	
+	
+	Model::AnimeNo no;
+	Model::AnimeNo no1;
+	Model::AnimeNo no2;
+
+
 	float m_gra;		// 重力
 	bool m_isGround;	// 地に足ついてる？
 	float m_beamSize;	// ビームのサイズ

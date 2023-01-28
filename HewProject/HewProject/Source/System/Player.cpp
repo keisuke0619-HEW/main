@@ -12,7 +12,7 @@
 #include <SE.h>
 
 CPlayer::CPlayer(Data* data)
-	: CObjectBase("Assets/Model/Player/model.fbx", 0.08f, false, "Player")
+	: CObjectBase("Assets/test/Player/ani.fbx", 0.08f, false, "Player")
 {
 	m_param.tag = TAG_PLAYER;
 	m_gra = 0;
@@ -34,10 +34,21 @@ CPlayer::CPlayer(Data* data)
 	m_param.collisionData.character.radius = 0.2f;
 
 	m_playerUI.reset(new CPlayerUI());
-	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/Player/Anime/wait.fbx");
+	 no = m_modelData.model->AddAnimation("Assets/test/Player/waitbone.fbx");//待機
 	if (no == Model::ANIME_NONE)
 		MessageBox(nullptr, "free.fbx", "Error", MB_OK);
+	
+	no1 = m_modelData.model->AddAnimation("Assets/test/Player/atkbone.fbx");//atakku
+	if (no1 == Model::ANIME_NONE)
+		MessageBox(nullptr, "free.fbx", "Error", MB_OK);
+	
+
+	no2 = m_modelData.model->AddAnimation("Assets/test/Player/walkbone.fbx");//歩き
+	if (no2 == Model::ANIME_NONE)
+		MessageBox(nullptr, "free.fbx", "Error", MB_OK);
+	
 	m_modelData.model->Play(no, true);
+
 
 	// 音データの読み込み
 	m_pChargeSE = CreateSound("Assets/Sound/Charge.wav", false);
@@ -179,6 +190,9 @@ void CPlayer::Draw()
 
 void CPlayer::Move()
 {
+	
+	
+	
 	const float MOVE_SPEED = 0.1f;
 	const float MOVE_GRAVITY = 0.05f;
 	const float GRAVITY_MAX = 0.4f * 1.4f;
@@ -187,17 +201,34 @@ void CPlayer::Move()
 	//auto fGra = DirectX::XMFLOAT3(0, -m_gra, 0);
 	//auto vGra = DirectX::XMLoadFloat3(&fGra);
 	auto vMove = DirectX::XMVectorZero();
-	
+	if (m_param.move.x == 0.f && m_param.move.y == 0.f && m_param.move.z == 0.f)
+	{
+		m_modelData.model->Play(no, true);//待機
+		//ぼったち
+	}
 	m_gra += m_gra < GRAVITY_MAX ? MOVE_GRAVITY : 0;
 
 	if (Utility::GetKeyPress(KEY_MOVE_W))
+	{
 		vMove = DirectX::XMVectorAdd(vMove, vFront);
+		m_modelData.model->Play(no2, true);//歩き
+	}
 	if (Utility::GetKeyPress(KEY_MOVE_S))
+	{
 		vMove = DirectX::XMVectorSubtract(vMove, vFront);
+		m_modelData.model->Play(no2, true);//歩き
+	}
 	if (Utility::GetKeyPress(KEY_MOVE_A))
+	{
 		vMove = DirectX::XMVectorSubtract(vMove, vSide);
+		m_modelData.model->Play(no2, true);//歩き
+	}
 	if (Utility::GetKeyPress(KEY_MOVE_D))
+	{
 		vMove = DirectX::XMVectorAdd(vMove, vSide);
+		m_modelData.model->Play(no2, true);//歩き
+	}
+	
 	vMove = DirectX::XMVector3Normalize(vMove);
 	//vMove = DirectX::XMVectorAdd(vMove, vGra);
 	vFront = DirectX::XMVectorScale(vFront, Utility::GetStickLeft().y);
@@ -271,6 +302,7 @@ void CPlayer::Beam()
 	// RTに変更
 	if (Utility::GetKeyPress(KEY_BEAM))
 	{		
+		//m_modelData.model->Play(no1, true);//歩き
 		m_isBeamStore = true;
 
 		m_beamSize += m_beamSize < maxBeamSize ? addBeamSize : 0;
