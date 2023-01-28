@@ -14,6 +14,8 @@ private:
 	void Update() override;
 	CGameUI::Ref m_TitlebgUI;
 	CGameUI::Ref m_TitlerogoUI;
+	CGameUI::Ref m_TitleLogoEffect;
 	CGameUI::Ref m_StartUI;
 	CGameUI::Ref m_EndUI;
+	float m_titleEffectAlpha;
 };

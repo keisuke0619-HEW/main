@@ -9,7 +9,9 @@ ID3D11ShaderResourceView* CMiniMap::m_img;
 CMiniMap::CMiniMap()
 {
 	
-	
+	m_playerIcon = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Map/MapPlayer.png"));
+	m_playerIcon.lock()->SetPos(DirectX::XMFLOAT2(1150.f, 120.f));
+	m_playerIcon.lock()->SetSize(DirectX::XMFLOAT2(40.f, 40.f));
 	m_player = CSceneBase::GetObjList().lock()->FindTag(TAG_PLAYER);
 	m_map = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Map/UI map.png"));
 	m_map.lock()->SetPos(DirectX::XMFLOAT2(1150.f, 120.f));
@@ -37,8 +39,9 @@ void CMiniMap::Update()
 {
 	if (m_player.expired() == true)
 		m_player = CSceneBase::GetObjList().lock()->FindTag(TAG_PLAYER);
-
-
+	
+	// ƒvƒŒƒCƒ„[‰ñ“]ˆ—
+	m_playerIcon.lock()->SetRotation(-DirectX::XMConvertToDegrees(CCameraBase::GetPrimaryRadXZ() + 3.14 - m_player.lock()->GetParam().rot.y));
 	if (m_player.expired() == false)
 	{
 
