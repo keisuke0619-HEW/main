@@ -183,11 +183,15 @@ void COverlayConfig::SetStatus()
 
 CSetumei::CSetumei()
 {
-	auto tmp = new CGameUI("Assets/Img/StageSelect/test_sousaTab.png");
+	auto tmp = new CGameUI("Assets/Img/StageSelect/BackGround.png");
 	tmp->SetPos({ OVERLAY_CONFIG_CENTER_X, 360 });
 	tmp->SetSize({ 960, 540 });
 	//tmp->SetColor255(255, 255, 255, 128);
 	Add("Back", tmp, SORT_ORDER_UI_BACK2);
+	tmp = new CGameUI("Assets/Img/StageSelect/Explanation.png");
+	tmp->SetPos({ OVERLAY_CONFIG_CENTER_X, 360 });
+	tmp->SetSize({ 960 * 0.7, 540 * 0.6 });
+	Add("Explamation", tmp, SORT_ORDER_UI_BACK1);
 	tmp = new CGameUI("Assets/Img/White.png");
 	tmp->SetPos({ 640, 360 });
 	tmp->SetSize({ 1280, 720 });
