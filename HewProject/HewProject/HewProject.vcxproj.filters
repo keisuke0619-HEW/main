@@ -276,6 +276,9 @@
     <ClInclude Include="StageData03.hpp">
       <Filter>シーンファイル\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="Source\System\CutinCamera.hpp">
+      <Filter>システム\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -452,17 +455,11 @@
     <ClCompile Include="MiniMap.cpp">
       <Filter>システム\2D</Filter>
     </ClCompile>
-    <ClCompile Include="Source\System\CutinCamera.hpp">
-      <Filter>システム\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="Pillar.cpp">
       <Filter>シーンファイル\Object</Filter>
     </ClCompile>
     <ClCompile Include="Wall.cpp">
       <Filter>シーンファイル\Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\System\CutinCamera.cpp">
-      <Filter>システム\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
       <Filter>システム\Manager</Filter>
@@ -478,6 +475,9 @@
     </ClCompile>
     <ClCompile Include="StageData03.cpp">
       <Filter>シーンファイル\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\System\CutinCamera.cpp">
+      <Filter>システム\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

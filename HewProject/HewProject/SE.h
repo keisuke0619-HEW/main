@@ -29,6 +29,7 @@ public:
 	static void CountUp();
 	static int GetCount();
 	static void CountReset();
+	static void ExitLoop();
 	
 
 private:

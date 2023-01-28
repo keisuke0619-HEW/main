@@ -3,17 +3,7 @@
 #include <memory>
 #include <vector>
 
-enum ESceneID
-{
-	SCENE_TITLE,
-	SCENE_STAGE_SELECT,
-	SCENE_STAGE01,
-	SCENE_STAGE02,
-	SCENE_STAGE03,
-	SCENE_STAGE04,
-	SCENE_RESULT,
 
-};
 
 struct TScenePassingData
 {

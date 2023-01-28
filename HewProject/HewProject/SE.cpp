@@ -22,45 +22,17 @@ void CSoundSE::Init()
 	m_pSE[SE_SELECT] = CreateSound("Assets/Sound/select.mp3", false);
 	m_pSE[SE_CURSOR] = CreateSound("Assets/Sound/cursor.mp3", false);
 	m_pSE[SE_CANCEL] = CreateSound("Assets/Sound/cancel.mp3", false);
-	m_pSE[SE_BAR] = CreateSound("Assets/Sound/bar.mp3", false);
+	m_pSE[SE_BAR] = CreateSound("Assets/Sound/rail.mp3", false);
 	m_pSE[SE_KEMO] = CreateSound("Assets/Sound/thankyou.wav", false);
-	m_pSE[SE_BOMB] = CreateSound("Assets/Sound/explotion.mp3", false);
-	m_pSE[SE_EXPLOTION] = CreateSound("Assets/Sound/bomb.mp3", false);
+	m_pSE[SE_BOMB] = CreateSound("Assets/Sound/bomb.mp3", false);
+	m_pSE[SE_EXPLOTION] = CreateSound("Assets/Sound/explotion.mp3", false);
 	m_pSE[SE_RAIL] = CreateSound("Assets/Sound/rail.mp3", false);
 }
 
 void CSoundSE::Start(SESource Source)
 {
 	//Stop();
-	switch (Source)
-	{
-	case CSoundSE::SE_SELECT:
-		m_pSESource = StartSound(m_pSE[SE_SELECT]);
-		break;
-	case CSoundSE::SE_CURSOR:
-		m_pSESource = StartSound(m_pSE[SE_CURSOR]);
-		break;
-	case CSoundSE::SE_CANCEL:
-		m_pSESource = StartSound(m_pSE[SE_CANCEL]);
-		break;
-	case CSoundSE::SE_BAR:
-		m_pSESource = StartSound(m_pSE[SE_BAR]);
-		break;
-	case CSoundSE::SE_KEMO:
-		m_pSESource = StartSound(m_pSE[SE_KEMO]);
-		break;
-	case CSoundSE::SE_BOMB:
-		m_pSESource = StartSound(m_pSE[SE_BOMB]);
-		break;
-	case CSoundSE::SE_EXPLOTION:
-		m_pSESource = StartSound(m_pSE[SE_EXPLOTION]);
-		break;
-	case CSoundSE::SE_RAIL:
-		m_pSESource = StartSound(m_pSE[SE_RAIL]);
-		break;
-	default:
-		break;
-	}
+	m_pSESource = StartSound(m_pSE[Source]);
 }
 
 void CSoundSE::Stop()
@@ -109,5 +81,10 @@ int CSoundSE::GetCount()
 void CSoundSE::CountReset()
 {
 	m_cnt = 0;
+}
+
+void CSoundSE::ExitLoop()
+{
+	m_pSESource->ExitLoop();
 }
 

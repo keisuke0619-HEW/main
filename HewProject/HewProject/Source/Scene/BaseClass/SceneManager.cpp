@@ -9,7 +9,7 @@
 
 // ステージ情報
 #include <StageData01.hpp>
-//#include <StageData02.hpp>
+#include <StageData02.hpp>
 #include <StageData03.hpp>
 //#include <StageData04.hpp>
 std::unique_ptr<IScene> CSceneManager::m_scene;
@@ -52,21 +52,25 @@ void CSceneManager::SwapScene()
 		break;
 	case SCENE_STAGE01:
 		m_scene.reset(new CGameScene());
+		m_scene->SetData(SCENE_STAGE01);
 		data = m_scene->GetData();
 		m_scene->SetData(new CStageData01(data));
 		break;
 	case SCENE_STAGE02:
-		//m_scene.reset(new CGameScene());
-		//data = m_scene->GetData();
-		//m_scene->SetData(new CStageData02(data));
+		m_scene.reset(new CGameScene());
+		m_scene->SetData(SCENE_STAGE02);
+		data = m_scene->GetData();
+		m_scene->SetData(new CStageData02(data));
 		break;
 	case SCENE_STAGE03:
 		m_scene.reset(new CGameScene());
+		m_scene->SetData(SCENE_STAGE03);
 		data = m_scene->GetData();
 		m_scene->SetData(new CStageData03(data));
 		break;
 	case SCENE_STAGE04:
 		//m_scene.reset(new CGameScene());
+		//m_scene->SetData(SCENE_STAGE04);
 		//data = m_scene->GetData();
 		//m_scene->SetData(new CStageData04(data));
 		break;

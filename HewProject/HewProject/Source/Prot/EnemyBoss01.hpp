@@ -12,7 +12,7 @@
 class CProtEnemyBoss : public CObjectBase
 {
 public:
-	CProtEnemyBoss(Data* data);
+	CProtEnemyBoss(Data* data, float bossHP);
 	~CProtEnemyBoss();
 
 	void Update() override;
@@ -37,6 +37,8 @@ private:
 
 	DirectX::XMFLOAT3 m_oldPos;
 	Data* m_data;
+
+	float m_HP;
 
 	CEffect::Ptr m_pEfk;
 };

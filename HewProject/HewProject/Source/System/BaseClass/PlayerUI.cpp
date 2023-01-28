@@ -34,17 +34,28 @@ CPlayerUI::CPlayerUI()
 	m_hpbar.lock()->SetSize({ 448, 168 });
 	m_hpbar.lock()->SetColor(0.376f, 0.698f, 0.753f, 0.8f);
 
-	// 歯車
-	m_haguruma = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/HPbar/UI bar_02_haguruma2.png"));
-	m_haguruma.lock()->SetPos({ 94, 630 });
-	m_haguruma.lock()->SetSize({ 68, 68 });
-	m_haguruma.lock()->SetColor(0.376f, 0.698f, 0.753f, 0.8f);
 
 	// チャージゲージ
 	m_chargeSprite = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Charge2.png"));
 	m_chargeSprite.lock()->SetPos(PLAYER_UI_CHARGE_CENTER);
 	m_chargeSprite.lock()->SetSize(PLAYER_UI_CHARGE_SIZE);
 	m_chargeSprite.lock()->SetColor(0, 1, 1, 1);
+
+	// 歯車
+	m_haguruma01 = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/HPbar/Haguruma01.png"));
+	m_haguruma01.lock()->SetPos({ 94, 630 });
+	m_haguruma01.lock()->SetSize({ 68, 68 });
+	m_haguruma01.lock()->SetColor(0.376f, 0.698f, 0.753f, 0.8f);
+
+	m_haguruma02 = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/HPbar/Haguruma02.png"));
+	m_haguruma02.lock()->SetPos({ 94, 630 });
+	m_haguruma02.lock()->SetSize({ 72, 72 });
+	m_haguruma02.lock()->SetColor(0.376f, 0.698f, 0.753f, 0.8f);
+	// 歯車最外
+	m_haguruma03 = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/HPbar/Haguruma03.png"));
+	m_haguruma03.lock()->SetPos({ 94, 630 });
+	m_haguruma03.lock()->SetSize({ 140, 140 });
+	m_haguruma03.lock()->SetColor(0.376f, 0.698f, 0.753f, 0.8f);
 
 	m_pMap = new CMiniMap;
 
@@ -94,7 +105,9 @@ void CPlayerUI::UpdateLife()
 
 	// 回転
 	static int hagurumaAngle = 0;
-	m_haguruma.lock()->SetRotation(hagurumaAngle);
+	m_haguruma01.lock()->SetRotation(-hagurumaAngle * 1.2f);
+	m_haguruma02.lock()->SetRotation(hagurumaAngle);
+	m_haguruma03.lock()->SetRotation(hagurumaAngle * 0.5f);
 	hagurumaAngle += 1;
 }
 

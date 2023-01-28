@@ -7,6 +7,7 @@
 #include <OverlayStagePrep.hpp>
 #include <OverlayConfig.hpp>
 #include <SE.h>
+#include <BGM.h>
 CSceneStageSelect::CSceneStageSelect()
 {
 	// BGMSet("");	// BGM‚ð“ü‚ê‚éB
@@ -15,7 +16,7 @@ CSceneStageSelect::CSceneStageSelect()
 	tmp.lock()->SetSize(400, 150);
 	tmp.lock()->SetPos(1075, 642);
 
-	m_ui[BACK] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_BG.png"), SORT_ORDER_BACK);
+	m_ui[BACK] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/title_background.png"), SORT_ORDER_BACK);
 	m_ui[BACK].lock()->SetData(640, 360, 1280, 720);
 
 	const float stageIconSizeX = 300.0f;
@@ -24,21 +25,21 @@ CSceneStageSelect::CSceneStageSelect()
 	const float stageIconPosMinY = 330.0f;
 	const float stageIconPosAddX = 400.0f;
 
-	m_ui[STAGE_ICON_01] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_configIcon.png"), SORT_ORDER_DEFAULT);
+	m_ui[STAGE_ICON_01] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/haguruma.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_01].lock()->SetData(
 		stageIconPosMinX + stageIconPosAddX * 0,
 		stageIconPosMinY,
 		stageIconSizeX,
 		stageIconSizeY
 	);
-	m_ui[STAGE_ICON_02] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_stageIcon.png"), SORT_ORDER_DEFAULT);
+	m_ui[STAGE_ICON_02] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/map icon.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_02].lock()->SetData(
 		stageIconPosMinX + stageIconPosAddX * 1,
 		stageIconPosMinY,
 		stageIconSizeX,
 		stageIconSizeY
 	);
-	m_ui[STAGE_ICON_03] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_sousaIcon.png"), SORT_ORDER_DEFAULT);
+	m_ui[STAGE_ICON_03] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/setumeisyo.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_03].lock()->SetData(
 		stageIconPosMinX + stageIconPosAddX * 2,
 		stageIconPosMinY,
@@ -49,7 +50,7 @@ CSceneStageSelect::CSceneStageSelect()
 	m_nowIcon = STAGE_ICON_01;
 	m_cursor = 1;
 
-	
+	SetBGM("Assets/Sound/StageSelectBGM.mp3");
 }
 
 CSceneStageSelect::~CSceneStageSelect()

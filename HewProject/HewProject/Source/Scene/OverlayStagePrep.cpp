@@ -2,6 +2,7 @@
 #include <Controller.hpp>
 #include <SceneManager.hpp>
 #include <OverlayConfig.hpp>
+#include <SE.h>
 COverlayStagePrep::COverlayStagePrep(int id)
 {
 	m_next = nullptr;
@@ -9,8 +10,8 @@ COverlayStagePrep::COverlayStagePrep(int id)
 	m_ui[PREP_FADE]->SetData(640, 360, 1280, 720);
 	m_ui[PREP_FADE]->SetColor255(0, 0, 0, 128);
 	Add("Fade", m_ui[PREP_FADE], SORT_ORDER_UI_BACKEND);
-	m_ui[PREP_BACK] = new CGameUI("Assets/Img/stagePreparationTab/test_Tab.png");
-	m_ui[PREP_BACK]->SetData(640, 360, 700, 700);
+	m_ui[PREP_BACK] = new CGameUI("Assets/Img/stagePreparationTab/IRAI.png");
+	m_ui[PREP_BACK]->SetData(640, 360, 1280 * 0.8f, 720 * 0.8f);
 	Add("Back", m_ui[PREP_BACK], SORT_ORDER_UI_BACK4);
 
 
@@ -43,7 +44,11 @@ void COverlayStagePrep::Update()
 {
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
-		CSceneManager::SetScene(SCENE_STAGE03);
+
+		CSoundSE::Start(CSoundSE::SE_SELECT);
+
+		CSceneManager::SetScene(SCENE_STAGE01);
+
 		//if (m_next != nullptr)
 		//	*m_next = true;
 		m_isDestroy = true;
@@ -51,10 +56,12 @@ void COverlayStagePrep::Update()
 	}
 	else if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		m_isDestroy = true;
 	}
 	else if (Utility::GetKeyTrigger(KEY_CONFIG))
 	{
+		CSoundSE::Start(CSoundSE::SE_SELECT);
 		m_overlay.reset(new COverlayConfig());
 	}
 

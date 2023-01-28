@@ -3,15 +3,16 @@
 #include <SceneManager.hpp>
 #include <Controller.hpp>
 #include <DebugWindow.hpp>
+#include <SE.h>
 
 // 大体ここをいじれば調整できます。
 const float OVERLAY_CONFIG_CENTER_X = 640.0f;		// コンフィグUIの中心座標
-const float OVERLAY_CONFIG_X_BAR_POS_Y = 230.0f;	// 上の設定バーのY座標
-const float OVERLAY_CONFIG_Y_BAR_POS_Y = 350.0f;	// 下の設定バーのY座標
+const float OVERLAY_CONFIG_X_BAR_POS_Y = 290.0f;	// 上の設定バーのY座標
+const float OVERLAY_CONFIG_Y_BAR_POS_Y = 490.0f;	// 下の設定バーのY座標
 const float OVERLAY_CONFIG_BAR_SIZE_X = 850.0f;		// 設定バーのサイズX
 const float OVERLAY_CONFIG_BAR_SIZE_Y = 100.0f;		// 設定バーのサイズY
-const float OVERLAY_CONFIG_CURSOR_SIZE_X = 100.0f;	// カーソルのサイズX
-const float OVERLAY_CONFIG_CURSOR_SIZE_Y = 100.0f;	// カーソルのサイズY
+const float OVERLAY_CONFIG_CURSOR_SIZE_X = 70.0f;	// カーソルのサイズX
+const float OVERLAY_CONFIG_CURSOR_SIZE_Y = 70.0f;	// カーソルのサイズY
 const float OVERLAY_CONFIG_SPEED_MIN = 1.0f;		// カメラスピードの最小値
 const float OVERLAY_CONFIG_SPEED_MAX = 100.0f;		// カメラスピードの最大値
 const float OVERLAY_CONFIG_POS_MIN = OVERLAY_CONFIG_CENTER_X - OVERLAY_CONFIG_BAR_SIZE_X / 2.08f;	// カーソルの移動制限最小値（最後の数値でうまく調整
@@ -51,9 +52,7 @@ COverlayConfig::COverlayConfig()
 	m_speedYNum.reset(new CNumberUI(3, SORT_ORDER_UI_FRONT4, 2));
 	m_speedYNum->SetSize(36, 45);
 
-	m_pcursorSE = CreateSound("Assets/Sound/cursor.mp3", false);
-	m_pselectSE = CreateSound("Assets/Sound/select.mp3", false);
-	m_pbarSE = CreateSound("Assets/Sound/bar.mp3", false);
+	CSoundSE::CountReset();
 }
 
 COverlayConfig::~COverlayConfig()
@@ -64,8 +63,10 @@ void COverlayConfig::Update()
 {
 	MoveCursor();
 	SetStatus();
+	CSoundSE::CountUp();
 	if (Utility::GetKeyTrigger(KEY_CANCEL) || Utility::GetKeyTrigger(KEY_CONFIG))
 	{
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		m_isDestroy = true;
 	}
 }
@@ -75,12 +76,12 @@ void COverlayConfig::MoveCursor()
 	if (Utility::GetKeyTrigger(KEY_UP))
 	{
 		m_target--;
-		m_pSESource = StartSound(m_pcursorSE);
+		CSoundSE::Start(CSoundSE::SE_CURSOR);
 	}
 	if (Utility::GetKeyTrigger(KEY_DOWN))
 	{
 		m_target++;
-		m_pSESource = StartSound(m_pcursorSE);
+		CSoundSE::Start(CSoundSE::SE_CURSOR);
 	}
 	if (m_target < 0)
 	{
@@ -101,14 +102,41 @@ void COverlayConfig::SetStatus()
 	if (Utility::GetKeyPress(KEY_RIGHT))
 	{
 		add += addLevel;
-		m_pSESource = StartSound(m_pbarSE);
+		if (!CSoundSE::IsPlay())
+		{
+			CSoundSE::Start(CSoundSE::SE_BAR);
+			CSoundSE::BoolPlay();
+			CSoundSE::CountReset();
+		}
+		else
+		{
+			if (CSoundSE::GetCount() % 15 == 0)
+				CSoundSE::Start(CSoundSE::SE_BAR);
+		}
+		
 
 	}
-	if (Utility::GetKeyPress(KEY_LEFT))
+	else if (Utility::GetKeyPress(KEY_LEFT))
 	{
 		add -= addLevel;
-		m_pSESource = StartSound(m_pbarSE);
+		if (!CSoundSE::IsPlay())
+		{
+			CSoundSE::Start(CSoundSE::SE_BAR);
+			CSoundSE::BoolPlay();
+			CSoundSE::CountReset();
+		}
+		else
+		{
+			if (CSoundSE::GetCount() % 15 == 0)
+				CSoundSE::Start(CSoundSE::SE_BAR);
+		}
 	}
+	else
+	{
+		CSoundSE::BoolStop();
+	}
+
+	
 	switch (m_target % TARGET_MAX)
 	{
 	case 0:
@@ -150,125 +178,6 @@ void COverlayConfig::SetStatus()
 }
 
 
-//■■■■■■■■ タイトルに戻りますか？タブ ■■■■■■■■■■■
-
-CTitleBack::CTitleBack()
-{
-	auto tmp = new CGameUI("Assets/Img/PauseMenu/flame.png");
-	tmp->SetData( OVERLAY_CONFIG_CENTER_X, 360, 1100, 700);
-	Add("Back", tmp, SORT_ORDER_UI_BACK4);
-
-	tmp = new CGameUI("Assets/Img/White.png");
-	tmp->SetData( 640, 360 ,1280, 720);
-	tmp->SetColor255(0, 0, 0, 255);
-	Add("Fade", tmp, SORT_ORDER_UI_BACKEND);
-
-	m_cursor = new CGameUI("Assets/Img/PauseMenu/Cursor2.png");
-	m_cursor->SetPos(OVERLAY_CONFIG_CENTER_X - 120.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 140.0f);
-	m_cursor->SetColor(1.0f, 1.0f, 1.0f, 0.3f);
-	Add("Cursor", m_cursor, SORT_ORDER_UI_BACK);
-
-
-	m_labelYes = new CGameUI("Assets/Img/PauseMenu/Label_Yes.png");
-	m_labelYes->SetData(OVERLAY_CONFIG_CENTER_X - 120.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 140.0f, 1400, 70);
-	Add("Label_Yes", m_labelYes, SORT_ORDER_UI_FRONT);
-
-	m_labelNo = new CGameUI("Assets/Img/PauseMenu/Label_No.png");
-	m_labelNo->SetData(OVERLAY_CONFIG_CENTER_X + 120.0f, OVERLAY_CONFIG_X_BAR_POS_Y + 140.0f, 1400, 70);
-	Add("Label_No", m_labelNo, SORT_ORDER_UI_FRONT);
-
-	g_isLoop = false;
-	m_isDestroy = false;
-	m_next = false;
-
-	m_pcursorSE = CreateSound("Assets/Sound/cursor.mp3", false);
-	m_pselectSE = CreateSound("Assets/Sound/select.mp3", false);
-	m_pcancelSE = CreateSound("Assets/Sound/cancel.mp3", false);
-}
-
-CTitleBack::~CTitleBack()
-{
-}
-
-bool CTitleBack::IsLoop()
-{
-	return g_isLoop;
-}
-
-void CTitleBack::SetIsNext(bool * next)
-{
-	m_next = next;
-}
-
-void CTitleBack::Update()
-{
-	SetStatus();
-	MoveCursor();
-	if (Utility::GetKeyTrigger(KEY_CANCEL))
-	{
-		m_isDestroy = true;
-		m_pSESource = StartSound(m_pcancelSE);
-	}
-
-	if (Utility::GetKeyTrigger(KEY_SELECT))
-	{
-		m_pSESource = StartSound(m_pselectSE);
-		//	決定
-		if ((m_target % TARGET_MAX) == 0)
-		{
-			if (m_next != nullptr)
-				*m_next = true;
-			m_isDestroy = true;
-		}
-		if ((m_target % TARGET_MAX) == 1)
-		{
-			m_isDestroy = true;
-		}
-	}
-}
-
-void CTitleBack::MoveCursor()
-{
-	m_labelYes->SetSize(1400, 70);
-	m_labelNo->SetSize(1400, 70);
-	if (Utility::GetKeyTrigger(KEY_LEFT))
-	{
-		m_target--;
-		m_pSESource = StartSound(m_pcursorSE);
-	}
-	if (Utility::GetKeyTrigger(KEY_RIGHT))
-	{
-		m_target++;
-		m_pSESource = StartSound(m_pcursorSE);
-	}
-	
-	if (m_target < 0)
-	{
-		m_target = TARGET_MAX * 100;
-	}
-	if (m_target % 2 == 1)
-	{
-		m_labelNo->SetSize(1800, 90);
-
-	}
-	else
-	{
-		m_labelYes->SetSize(1800, 90);
-	}
-
-}
-
-void CTitleBack::SetStatus()
-{
-	//m_pSESource = StartSound(m_pcursorSE);
-	const float moveX = 120.0f;
-	const float offsetY = 170.0f;
-	if (m_target % TARGET_MAX)
-		m_cursor->SetPos(OVERLAY_CONFIG_CENTER_X - moveX - 5, OVERLAY_CONFIG_X_BAR_POS_Y + offsetY);
-	else
-		m_cursor->SetPos(OVERLAY_CONFIG_CENTER_X + moveX, OVERLAY_CONFIG_X_BAR_POS_Y + offsetY);
-
-}
 
 //■■■■■■■■ 説明タブ（？） ■■■■■■■■■■■
 
@@ -282,7 +191,7 @@ CSetumei::CSetumei()
 	tmp = new CGameUI("Assets/Img/White.png");
 	tmp->SetPos({ 640, 360 });
 	tmp->SetSize({ 1280, 720 });
-	tmp->SetColor255(0, 0, 0, 255);
+	tmp->SetColor255(0, 0, 0, 128);
 	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
 
 	m_isDestroy = false;
@@ -296,6 +205,7 @@ void CSetumei::Update()
 {
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		m_isDestroy = true;
 	}
 }

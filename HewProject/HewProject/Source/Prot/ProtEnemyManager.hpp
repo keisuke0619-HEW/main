@@ -8,7 +8,7 @@
 class CProtEnemyManager
 {
 public:
-	CProtEnemyManager(Data* data, int enemy, int boss);
+	CProtEnemyManager(Data* data, int enemy, int boss, float bossHP);
 	void Update();
 
 private:

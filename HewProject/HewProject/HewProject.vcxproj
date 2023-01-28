@@ -61,6 +61,7 @@
     <ClInclude Include="Source\System\CollisionBase.hpp" />
     <ClInclude Include="Source\System\ConstantBuffer.h" />
     <ClInclude Include="Source\System\Controller.hpp" />
+    <ClInclude Include="Source\System\CutinCamera.hpp" />
     <ClInclude Include="Source\System\DebugCamera.hpp" />
     <ClInclude Include="Source\System\DebugWindow.hpp" />
     <ClInclude Include="Source\System\DirectX.h" />
@@ -134,7 +135,6 @@
     <ClCompile Include="Source\System\Controller.cpp" />
     <ClCompile Include="Source\System\CreatorUnique.cpp" />
     <ClCompile Include="Source\System\CutinCamera.cpp" />
-    <ClCompile Include="Source\System\CutinCamera.hpp" />
     <ClCompile Include="Source\System\DebugCamera.cpp" />
     <ClCompile Include="Source\System\DebugWindow.cpp" />
     <ClCompile Include="Source\System\DirectX.cpp" />
