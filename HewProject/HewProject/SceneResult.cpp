@@ -91,7 +91,7 @@ CSceneResult::CSceneResult(Data data)
 	
 
 	// ‰¹ƒf[ƒ^‚Ì“Ç‚İ‚İ
-	SetBGM("Assets/Sound/korinoyaiba.wav");
+	SetBGM("Assets/Sound/ResultBGM.mp3");
 	
 
 	// ”š
@@ -188,7 +188,6 @@ void CSceneResult::Update()
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		CSoundSE::Start(CSoundSE::SE_CANCEL);
-		SetBGM("Assets/Sound/ExtendedWinter.wav");
 		CSceneManager::SetScene(SCENE_STAGE_SELECT);
 	}
 }
