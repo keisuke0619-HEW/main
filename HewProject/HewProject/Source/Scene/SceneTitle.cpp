@@ -15,6 +15,11 @@ CSceneTitle::CSceneTitle()
 	m_TitlerogoUI.lock()->SetSize({ 702.0f, 436.0f });
 	m_TitlerogoUI.lock()->SetPos({ 640.0f, 285.0f });
 
+	m_TitleLogoEffect = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/titlerogo.png"), SORT_ORDER_FRONT);
+	m_TitleLogoEffect.lock()->SetSize({ 702.0f, 436.0f });
+	m_TitleLogoEffect.lock()->SetPos({ 640.0f, 285.0f });
+	m_TitleLogoEffect.lock()->SetColor255(255, 255, 255, 128);
+
 	m_StartUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/start.png"));
 	m_StartUI.lock()->SetSize({ 263.0f, 47.0f });
 	m_StartUI.lock()->SetPos({ 640.0f, 530.0f });
@@ -29,6 +34,7 @@ CSceneTitle::CSceneTitle()
 	m_TitlebgUI.lock()->SetPos({ 640.0f, 360.0f });
 
 	SetBGM("Assets/Sound/ExtendedWinter.wav");
+	m_titleEffectAlpha = 128;
 	
 }
 
@@ -36,13 +42,9 @@ CSceneTitle::~CSceneTitle()
 {
 }
 
+#include <DebugWindow.hpp>
 void CSceneTitle::Update()
 {
-	m_TitlerogoUI.lock()->Draw();
-	m_StartUI.lock()->Draw();
-	m_EndUI.lock()->Draw();
-	m_TitlebgUI.lock()->Draw();
-
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
 		CSoundSE::Start(CSoundSE::SE_SELECT);
@@ -57,6 +59,18 @@ void CSceneTitle::Update()
 		AddOverlay(new COverlayAskBase("Assets/Img/PauseMenu/Label_Exit.png", GetLoopPointer() ));
 
 		CSoundSE::Start(CSoundSE::SE_CANCEL);
+	}
+	if (m_frame % 180 == 0)
+	{
+		m_TitleLogoEffect.lock()->SetSize({ 702.0f, 436.0f });
+		m_TitleLogoEffect.lock()->SetColor255(255, 255, 255, 255);
+		m_titleEffectAlpha = 128.0f;
+	}
+	else
+	{
+		m_TitleLogoEffect.lock()->SetSize({ 702.0f + m_frame % 180 * 3, 436.0f + m_frame % 180 * 3 });
+		m_TitleLogoEffect.lock()->SetColor255(255, 255, 255, m_titleEffectAlpha);
+		m_titleEffectAlpha -= 5;
 	}
 }
 
