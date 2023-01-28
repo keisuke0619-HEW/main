@@ -21,7 +21,7 @@ cbuffer WVP : register(b0)
 };
 cbuffer Anime : register(b1)
 {
-	float4x4 bones[200];
+	float4x4 bones[500];
 };
 
 VS_OUT main(VS_IN vin)

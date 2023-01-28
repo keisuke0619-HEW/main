@@ -17,7 +17,7 @@ public:
 	static const NodeIndex		INDEX_NONE = -1;
 	static const AnimeNo		ANIME_NONE = -1;
 	static const AnimeNo		ANIME_PARAMETRIC = -2;
-	static const unsigned int	MAX_BONE = 200; // ここを変更する場合、.hlsl側の定数も変更する
+	static const unsigned int	MAX_BONE = 500; // ここを変更する場合、.hlsl側の定数も変更する
 
 	enum AnimeTransformKind
 	{

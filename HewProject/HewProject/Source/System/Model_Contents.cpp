@@ -65,13 +65,15 @@ bool Model::Load(const char* file, float scale, bool flip)
 		m_pMeshes[i].pIndices = new unsigned int[m_pMeshes[i].indexNum];
 
 		// メッシュ内のインデックスデータを読み取り
+		int idx1 = flip ? 2 : 1;
+		int idx2 = flip ? 1 : 2;
 		for (unsigned int j = 0; j < pScene->mMeshes[i]->mNumFaces; j++)
 		{
 			aiFace face = pScene->mMeshes[i]->mFaces[j];
 			int idx = j * 3;
 			m_pMeshes[i].pIndices[idx + 0] = face.mIndices[0];
-			m_pMeshes[i].pIndices[idx + 1] = face.mIndices[1];
-			m_pMeshes[i].pIndices[idx + 2] = face.mIndices[2];
+			m_pMeshes[i].pIndices[idx + 1] = face.mIndices[idx1];
+			m_pMeshes[i].pIndices[idx + 2] = face.mIndices[idx2];
 		}
 
 		// マテリアルの割り当て
