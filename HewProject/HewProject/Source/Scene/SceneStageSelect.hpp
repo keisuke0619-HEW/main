@@ -27,11 +27,14 @@ private:
 	void MoveCursor();
 	void ChangeScene();
 	void SetUiAlpha();
+	void RotationIcon();
 
 	CGameUI::Ref m_ui[STAGE_SELECT_UI_MAX];
 	int m_cursor;	// ÉJÅ[É\Éã
 	bool m_isNext;
 
+	CGameUI::Ref m_gearRight;
+	CGameUI::Ref m_gearLeft;
 
 	EStageSelectUI m_nowIcon;
 };

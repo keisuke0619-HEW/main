@@ -25,13 +25,24 @@ CSceneStageSelect::CSceneStageSelect()
 	const float stageIconPosMinY = 330.0f;
 	const float stageIconPosAddX = 400.0f;
 
-	m_ui[STAGE_ICON_01] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/haguruma.png"), SORT_ORDER_DEFAULT);
+	/*m_ui[STAGE_ICON_01] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/haguruma.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_01].lock()->SetData(
 		stageIconPosMinX + stageIconPosAddX * 0,
 		stageIconPosMinY,
 		stageIconSizeX,
 		stageIconSizeY
-	);
+	);*/
+	m_gearRight = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/haguruma.png"), SORT_ORDER_DEFAULT);
+	m_gearRight.lock()->SetData(stageIconPosMinX + stageIconPosAddX * 0.1,
+		stageIconPosMinY,
+		stageIconSizeX * 0.5f,
+		stageIconSizeY * 0.5f);
+	m_gearRight.lock()->SetRotation(359);
+	m_gearLeft = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/haguruma.png"), SORT_ORDER_DEFAULT);
+	m_gearLeft.lock()->SetData(stageIconPosMinX + stageIconPosAddX * -0.2,
+		stageIconPosMinY * 0.8,
+		stageIconSizeX * 0.5f,
+		stageIconSizeY * 0.5f);
 	m_ui[STAGE_ICON_02] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/map icon.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_02].lock()->SetData(
 		stageIconPosMinX + stageIconPosAddX * 1,
@@ -49,6 +60,7 @@ CSceneStageSelect::CSceneStageSelect()
 
 	m_nowIcon = STAGE_ICON_01;
 	m_cursor = 1;
+	m_frame = 0;
 
 	SetBGM("Assets/Sound/StageSelectBGM.mp3");
 }
@@ -61,6 +73,7 @@ void CSceneStageSelect::Update()
 {
 	MoveCursor();
 	SetUiAlpha();
+	RotationIcon();
 	ChangeScene();
 }
 
@@ -133,10 +146,47 @@ void CSceneStageSelect::SetUiAlpha()
 	for (int i = 0; i < stageNum; i++)
 	{
 		int uiID = i + STAGE_ICON_01;
-		m_ui[uiID].lock()->SetColor255(128, 128, 128, 128);
-		if (m_cursor % stageNum == i)
+		if (uiID == STAGE_ICON_01)
 		{
-			m_ui[uiID].lock()->SetColor255(255, 255, 255, 255);
+			m_gearRight.lock()->SetColor255(128, 128, 128, 128);
+			m_gearLeft.lock()->SetColor255(128, 128, 128, 128);
+			if (m_cursor % stageNum == i)
+			{
+				m_gearRight.lock()->SetColor255(255, 255, 255, 255);
+				m_gearLeft.lock()->SetColor255(255, 255, 255, 255);
+			}
 		}
+		else
+		{
+			m_ui[uiID].lock()->SetColor255(128, 128, 128, 128);
+			if (m_cursor % stageNum == i)
+			{
+				m_ui[uiID].lock()->SetColor255(255, 255, 255, 255);
+			}
+		}
+		
+		
+	}
+}
+
+void CSceneStageSelect::RotationIcon()
+{
+	if (m_cursor == 0)
+	{
+		m_gearRight.lock()->SetRotation(m_frame);
+		m_gearLeft.lock()->SetRotation(-m_frame);
+	}
+	else
+	{
+		m_gearRight.lock()->SetRotation(m_frame * 0.3);
+		m_gearLeft.lock()->SetRotation(-m_frame * 0.3);
+	}
+	if (m_cursor == 1)
+	{
+		m_ui[STAGE_ICON_02].lock()->SetRotation((sinf(m_frame * 0.1)) * 3);
+	}
+	else
+	{
+		m_ui[STAGE_ICON_02].lock()->SetRotation(0);
 	}
 }
