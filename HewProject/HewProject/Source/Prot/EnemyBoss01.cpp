@@ -69,9 +69,15 @@ void CProtEnemyBoss::Update()
 		CSoundSE::BoolPlay();
 		m_Fream++;
 		m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
-		m_pEfk->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+		m_pEfk->SetPos(m_param.pos.x + (rand() % 3), m_param.pos.y + (rand() % 3), m_param.pos.z + (rand() % 3));
 		m_pEfk->PlayOnce();
 		m_bossUI->Update();
+		m_cnt++;
+		if (m_cnt >= 20)
+		{
+			m_pEfk->End();
+			m_cnt = 0;
+		}
 		// ‚R•b‚½‚Á‚½‚ç
 		if (m_Fream >= 180)
 		{
