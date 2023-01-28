@@ -32,35 +32,7 @@ void CSoundSE::Init()
 void CSoundSE::Start(SESource Source)
 {
 	//Stop();
-	switch (Source)
-	{
-	case CSoundSE::SE_SELECT:
-		m_pSESource = StartSound(m_pSE[SE_SELECT]);
-		break;
-	case CSoundSE::SE_CURSOR:
-		m_pSESource = StartSound(m_pSE[SE_CURSOR]);
-		break;
-	case CSoundSE::SE_CANCEL:
-		m_pSESource = StartSound(m_pSE[SE_CANCEL]);
-		break;
-	case CSoundSE::SE_BAR:
-		m_pSESource = StartSound(m_pSE[SE_BAR]);
-		break;
-	case CSoundSE::SE_KEMO:
-		m_pSESource = StartSound(m_pSE[SE_KEMO]);
-		break;
-	case CSoundSE::SE_BOMB:
-		m_pSESource = StartSound(m_pSE[SE_BOMB]);
-		break;
-	case CSoundSE::SE_EXPLOTION:
-		m_pSESource = StartSound(m_pSE[SE_EXPLOTION]);
-		break;
-	case CSoundSE::SE_RAIL:
-		m_pSESource = StartSound(m_pSE[SE_RAIL]);
-		break;
-	default:
-		break;
-	}
+	m_pSESource = StartSound(m_pSE[Source]);
 }
 
 void CSoundSE::Stop()
