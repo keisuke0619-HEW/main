@@ -25,8 +25,8 @@ CProtEnemy::CProtEnemy(Data* data)
 	static Model::AnimeNo animeNo;
 	if (!sModel.model)
 	{
-		LoadModel("Assets/test/zako/ani.fbx", 0.13f, false, &sModel);
-		animeNo = sModel.model->AddAnimation("Assets/test/zako/bone.fbx");
+		LoadModel("Assets/Model/zako/ani.fbx", 0.13f, false, &sModel);
+		animeNo = sModel.model->AddAnimation("Assets/Model/zako/bone.fbx");
 		if (animeNo == Model::ANIME_NONE)
 			MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
 	}

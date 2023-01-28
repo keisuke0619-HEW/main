@@ -12,7 +12,7 @@
 #include <SE.h>
 
 CPlayer::CPlayer(Data* data)
-	: CObjectBase("Assets/test/Player/ani.fbx", 0.08f, false, "Player")
+	: CObjectBase("Assets/Model/Player/ani.fbx", 0.08f, false, "Player")
 {
 	m_param.tag = TAG_PLAYER;
 	m_gra = 0;
@@ -34,19 +34,21 @@ CPlayer::CPlayer(Data* data)
 	m_param.collisionData.character.radius = 0.2f;
 
 	m_playerUI.reset(new CPlayerUI());
-	 no = m_modelData.model->AddAnimation("Assets/test/Player/waitbone.fbx");//待機
+	 no = m_modelData.model->AddAnimation("Assets/Model/Player/waitbone.fbx");//待機
 	if (no == Model::ANIME_NONE)
 		MessageBox(nullptr, "free.fbx", "Error", MB_OK);
 	
-	no1 = m_modelData.model->AddAnimation("Assets/test/Player/atkbone.fbx");//atakku
+	no1 = m_modelData.model->AddAnimation("Assets/Model/Player/atkbone.fbx");//atakku
 	if (no1 == Model::ANIME_NONE)
 		MessageBox(nullptr, "free.fbx", "Error", MB_OK);
 	
 
-	no2 = m_modelData.model->AddAnimation("Assets/test/Player/walkbone.fbx");//歩き
+	no2 = m_modelData.model->AddAnimation("Assets/Model/Player/walkbone.fbx");//歩き
 	if (no2 == Model::ANIME_NONE)
 		MessageBox(nullptr, "free.fbx", "Error", MB_OK);
 	
+	
+
 	m_modelData.model->Play(no, true);
 
 
@@ -89,7 +91,7 @@ void CPlayer::Update()
 		m_pEfk3->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
 		m_pEfk3->PlayOnce();
 		m_playerUI->Update();
-		if (m_Fream >= 180)
+		if (m_Fream >= 120)//爆発後即シーン遷移OR少し為を作る
 		{
 			CSoundSE::BoolStop();
 			CSceneResult::SetOver();
@@ -203,9 +205,9 @@ void CPlayer::Move()
 	auto vMove = DirectX::XMVectorZero();
 	if (m_param.move.x == 0.f && m_param.move.y == 0.f && m_param.move.z == 0.f)
 	{
-		m_modelData.model->Play(no, true);//待機
-		//ぼったち
+		m_modelData.model->Play(no, true);//待機		
 	}
+	
 	m_gra += m_gra < GRAVITY_MAX ? MOVE_GRAVITY : 0;
 
 	if (Utility::GetKeyPress(KEY_MOVE_W))

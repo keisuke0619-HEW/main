@@ -10,7 +10,7 @@
 // ìñÇΩÇËîªíËÇÕå„Ç≈ïtÇØÇ‹Ç∑ÅB
 
 CProtEnemyBoss::CProtEnemyBoss(Data* data, float bossHP)
-	: CObjectBase("Assets/test/boss/ani.fbx", 0.2f)
+	: CObjectBase("Assets/Model/boss/ani.fbx", 0.2f)
 	, m_move(0.023f)
 	, m_distance(4.0f)
 	, m_cnt(0)
@@ -39,7 +39,7 @@ CProtEnemyBoss::CProtEnemyBoss(Data* data, float bossHP)
 	m_param.collisionData.character.pos.y = m_param.drawOffset.y + 0.08f;
 	m_param.collisionData.character.radius = 1.0f;
 
-	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/test/boss/bone.fbx");
+	Model::AnimeNo no = m_modelData.model->AddAnimation("Assets/Model/boss/bone.fbx");
 	if (no == Model::ANIME_NONE)
 		MessageBox(nullptr, "walk.fbx", "Error", MB_OK);
 	m_modelData.model->Play(no, true);
@@ -79,7 +79,7 @@ void CProtEnemyBoss::Update()
 			m_cnt = 0;
 		}
 		// ÇRïbÇΩÇ¡ÇΩÇÁ
-		if (m_Fream >= 180)
+		if (m_Fream >= 120)//óví≤êÆ
 		{
 			CSoundSE::BoolStop();
 			CSceneResult::SetClear();
