@@ -198,6 +198,15 @@ CSetumei::CSetumei()
 	tmp->SetColor255(0, 0, 0, 128);
 	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
 
+	m_wakka[OUTSIDE] = new CGameUI("Assets/Img/StageSelect/sotowakka.png");
+	m_wakka[OUTSIDE]->SetPos(260, 180);
+	m_wakka[OUTSIDE]->SetSize(150, 150);
+	Add("OutWakka", m_wakka[OUTSIDE], SORT_ORDER_UI_FRONT);
+	m_wakka[INSIDE] = new CGameUI("Assets/Img/StageSelect/utiwakka.png");
+	m_wakka[INSIDE]->SetPos(260, 180);
+	m_wakka[INSIDE]->SetSize(100, 100);
+	Add("InWakka", m_wakka[INSIDE], SORT_ORDER_UI_BACK1);
+
 	m_isDestroy = false;
 }
 
@@ -207,6 +216,8 @@ CSetumei::~CSetumei()
 
 void CSetumei::Update()
 {
+	m_wakka[OUTSIDE]->SetRotation(m_frame);
+	m_wakka[INSIDE]->SetRotation(-m_frame);
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		CSoundSE::Start(CSoundSE::SE_CANCEL);

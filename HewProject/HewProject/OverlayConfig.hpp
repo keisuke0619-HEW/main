@@ -43,4 +43,12 @@ public:
 
 private:
 	void Update();
+	enum Wakka
+	{
+		OUTSIDE,
+		INSIDE,
+
+		SIDE_MAX
+	};
+	CGameUI* m_wakka[SIDE_MAX];
 };

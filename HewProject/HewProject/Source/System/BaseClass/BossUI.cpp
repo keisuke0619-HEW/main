@@ -26,7 +26,7 @@ CBossUI::CBossUI()
 	m_bossbar.lock()->SetColor(0.404f, 0.772f, 0.847f, 1);
 
 	// ボスアイコン
-	m_bossicon = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Boss/UI bar_boss3.png"));
+	m_bossicon = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Boss/bossbar_04.png"));
 	m_bossicon.lock()->SetPos({ 340, 60 });
 	m_bossicon.lock()->SetSize({ 660, 110 });
 	m_bossicon.lock()->SetColor(1, 1, 1, 1);
