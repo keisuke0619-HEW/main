@@ -31,7 +31,7 @@ CSceneStageSelect::CSceneStageSelect()
 		stageIconSizeX,
 		stageIconSizeY
 	);
-	m_ui[STAGE_ICON_02] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/test_stageIcon.png"), SORT_ORDER_DEFAULT);
+	m_ui[STAGE_ICON_02] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/map icon.png"), SORT_ORDER_DEFAULT);
 	m_ui[STAGE_ICON_02].lock()->SetData(
 		stageIconPosMinX + stageIconPosAddX * 1,
 		stageIconPosMinY,

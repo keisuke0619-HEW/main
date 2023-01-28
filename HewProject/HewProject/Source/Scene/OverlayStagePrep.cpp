@@ -10,8 +10,8 @@ COverlayStagePrep::COverlayStagePrep(int id)
 	m_ui[PREP_FADE]->SetData(640, 360, 1280, 720);
 	m_ui[PREP_FADE]->SetColor255(0, 0, 0, 128);
 	Add("Fade", m_ui[PREP_FADE], SORT_ORDER_UI_BACKEND);
-	m_ui[PREP_BACK] = new CGameUI("Assets/Img/stagePreparationTab/test_Tab.png");
-	m_ui[PREP_BACK]->SetData(640, 360, 700, 700);
+	m_ui[PREP_BACK] = new CGameUI("Assets/Img/stagePreparationTab/IRAI.png");
+	m_ui[PREP_BACK]->SetData(640, 360, 1280 * 0.8f, 720 * 0.8f);
 	Add("Back", m_ui[PREP_BACK], SORT_ORDER_UI_BACK4);
 
 
