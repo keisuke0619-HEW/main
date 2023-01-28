@@ -17,6 +17,7 @@ public:
 	void Draw();
 private:
 	CGameUI::Ref m_map;
+	CGameUI::Ref m_playerIcon;
 	CGameUI::Ref m_bossIcon;
 	list<CGameUI*> m_enemyIcon;
 	vector<CGameUI::Ref> m_Icon;
