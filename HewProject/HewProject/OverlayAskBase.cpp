@@ -51,6 +51,7 @@ COverlayAskBase::COverlayAskBase(const char* textSource, bool* out)
 	m_target = 1;
 	CSoundSE::Stop();
 	CSoundSE::Start(CSoundSE::SE_BACK);
+	CSoundSE::Start(CSoundSE::SE_VOICE_CHECK);
 }
 
 COverlayAskBase::~COverlayAskBase()

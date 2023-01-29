@@ -18,7 +18,7 @@ COverlayStagePrep::COverlayStagePrep(int id)
 	m_ui[PREP_WARNING_FADE]->SetColor255(255, 0, 0, 128);
 	Add("WarningFade", m_ui[PREP_WARNING_FADE], SORT_ORDER_UI_FRONT);
 	m_ui[PREP_WARNING_ICON] = new CGameUI("Assets/Img/stagePreparationTab/warning.png");
-	m_ui[PREP_WARNING_ICON]->SetData(640, 520, 960, 140);
+	m_ui[PREP_WARNING_ICON]->SetData(640, 535, 1020, 160);
 	Add("WarningIcon", m_ui[PREP_WARNING_ICON], SORT_ORDER_UI_BACK3);
 
 	switch (id)
@@ -56,6 +56,7 @@ void COverlayStagePrep::Update()
 	{
 		CSoundSE::Stop();
 		CSoundSE::Start(CSoundSE::SE_LOAD);
+		CSoundSE::Start(CSoundSE::SE_VOICE_LOAD);
 		CSceneManager::SetScene(SCENE_STAGE01);
 
 		//if (m_next != nullptr)

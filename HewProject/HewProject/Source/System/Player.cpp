@@ -81,6 +81,7 @@ CPlayer::CPlayer(Data* data)
 	m_isBeamChargeUpBuff = false;
 	m_BuffCnt = 0;
 	m_OldKillCnt = 0;
+	CSoundSE::BoolStop();
 }
 
 CPlayer::~CPlayer()
@@ -89,6 +90,11 @@ CPlayer::~CPlayer()
 
 void CPlayer::Update()
 {
+	if (m_param.hp <= 0.5f &&  !CSoundSE::IsPlay())
+	{
+		CSoundSE::Start(CSoundSE::SE_VOICE_FIGHT_LOSE);
+		CSoundSE::BoolPlay();
+	}
 	if (m_param.hp <= 0.0f)
 	{
 		if (!CSoundSE::IsPlay())

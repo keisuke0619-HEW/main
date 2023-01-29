@@ -34,7 +34,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			if (g_isLoop)
 			{
 				state = APP_STATE_QUIT;
-				CSoundSE::Start(CSoundSE::SE_KEMO);
+				//CSoundSE::Start(CSoundSE::SE_KEMO);
+				CSoundSE::Start(CSoundSE::SE_VOICE_END);
 				Sleep(1800);
 			}
 			

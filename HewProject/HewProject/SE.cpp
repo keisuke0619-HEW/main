@@ -33,6 +33,16 @@ void CSoundSE::Init()
 	m_pSE[SE_RESULT] = CreateSound("Assets/Sound/SE/Result.mp3", false);
 	m_pSE[SE_BACK] = CreateSound("Assets/Sound/SE/Back.mp3", false);
 	m_pSE[SE_P] = CreateSound("Assets/Sound/SE/P.mp3", false);
+	m_pSE[SE_VOICE_CHECK] = CreateSound("Assets/Sound/SE/CheckVoice.wav", false);
+	m_pSE[SE_VOICE_END] = CreateSound("Assets/Sound/SE/EndVoice.wav", false);
+	m_pSE[SE_VOICE_LOAD] = CreateSound("Assets/Sound/SE/LoadVoice.wav", false);
+	m_pSE[SE_VOISE_LOSE] = CreateSound("Assets/Sound/SE/LoseVoice.wav", false);
+	m_pSE[SE_VOICE_WIN] = CreateSound("Assets/Sound/SE/WinNormalVoice.wav", false);
+	m_pSE[SE_VOICE_WIN_BRONZE] = CreateSound("Assets/Sound/SE/WinBronzeVoice.wav", false);
+	m_pSE[SE_VOICE_WIN_SILVER] = CreateSound("Assets/Sound/SE/WinSilverVoice.wav", false);
+	m_pSE[SE_VOICE_WIN_GOLD] = CreateSound("Assets/Sound/SE/WinGoldVoice.wav", false);
+	m_pSE[SE_VOICE_FIGHT_WIN] = CreateSound("Assets/Sound/SE/FightWinVoice.wav", false);
+	m_pSE[SE_VOICE_FIGHT_LOSE] = CreateSound("Assets/Sound/SE/FightLoseVoice.wav", false);
 }
 
 void CSoundSE::Start(SESource Source)
