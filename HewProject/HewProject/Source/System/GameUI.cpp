@@ -151,3 +151,8 @@ void CGameUI::SetResourceView(ID3D11ShaderResourceView* pTex)
 {
 	m_pPicture = pTex;
 }
+
+DirectX::XMFLOAT2 CGameUI::GetPos()
+{
+	return m_pos;
+}

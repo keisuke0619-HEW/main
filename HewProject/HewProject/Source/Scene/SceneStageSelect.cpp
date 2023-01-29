@@ -186,8 +186,8 @@ void CSceneStageSelect::RotationIcon()
 	}
 	else
 	{
-		m_gearRight.lock()->SetRotation(m_frame * 0.3);
-		m_gearLeft.lock()->SetRotation(-m_frame * 0.3);
+		m_gearRight.lock()->SetRotation(m_frame * 0.2);
+		m_gearLeft.lock()->SetRotation(-m_frame * 0.2);
 	}
 	if (m_cursor == 1)
 	{
@@ -201,6 +201,7 @@ void CSceneStageSelect::RotationIcon()
 	{
 		m_ui[STAGE_ICON_03].lock()->SetColor255(255, 255, 255, 0);
 		m_ui[STAGE_ICON_04].lock()->SetColor255(255, 255, 255, 255);
+		m_ui[STAGE_ICON_04].lock()->SetPos(m_ui[STAGE_ICON_04].lock()->GetPos().x, m_ui[STAGE_ICON_04].lock()->GetPos().y + (sinf(m_frame * 0.1) * 2));
 	}
 	else
 	{

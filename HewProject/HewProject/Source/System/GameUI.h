@@ -78,6 +78,8 @@ public:
 	void SetData(float posX, float posY, float sizeX, float sizeY);
 
 	void SetResourceView(ID3D11ShaderResourceView* pTex);
+
+	DirectX::XMFLOAT2 GetPos();
 private:
 	ID3D11ShaderResourceView* m_pPicture;	// 画像
 	DirectX::XMFLOAT2 m_pos;				// 画像の座標(HPバーのように常に画面に張り付くように描画するのでZ軸はなし)
