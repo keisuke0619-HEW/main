@@ -7,6 +7,7 @@
 #include <SceneManager.hpp>
 #include <SceneResult.hpp>
 #include <SE.h>
+#include <Player.hpp>
 // “–‚½‚è”»’è‚ÍŒã‚Å•t‚¯‚Ü‚·B
 
 CProtEnemyBoss::CProtEnemyBoss(Data* data, float bossHP)
@@ -50,6 +51,8 @@ CProtEnemyBoss::CProtEnemyBoss(Data* data, float bossHP)
 
 	m_Fream = 0;
 
+	m_Damage = 0.005f;
+	m_isPlayerPowerUp = false;
 	m_pEfk.reset(new CEffect(u"Assets/Effect/zirai.efkefc"));
 }
 
@@ -116,6 +119,8 @@ void CProtEnemyBoss::Update()
 		m_bossUI->Update();
 
 	}
+
+	m_isPlayerPowerUp = CPlayer::isGetPlayerBuff();
 }
 
 void CProtEnemyBoss::Draw()
@@ -198,6 +203,13 @@ void CProtEnemyBoss::OnCollisionTag(EObjectTag tag)
 {
 	if (tag == TAG_BEAM)
 	{
-		m_param.hp -= 0.005f;
+		if (m_isPlayerPowerUp == true)
+		{
+			m_param.hp -= m_Damage * 1.5f;
+		}
+		else
+		{
+			m_param.hp -= m_Damage;
+		}
 	}
 }

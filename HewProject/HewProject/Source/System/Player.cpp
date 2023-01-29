@@ -11,6 +11,9 @@
 #include <SceneResult.hpp>
 #include <SE.h>
 
+bool CPlayer::m_isBeamPowerUpBuff;
+bool CPlayer::m_isBeamChargeUpBuff;
+
 CPlayer::CPlayer(Data* data)
 	: CObjectBase("Assets/Model/Player/ani.fbx", 0.08f, false, "Player")
 {
@@ -97,7 +100,7 @@ void CPlayer::Update()
 		m_pEfk3->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
 		m_pEfk3->PlayOnce();
 		m_playerUI->Update();
-		if (m_Fream >= 120)//爆発後即シーン遷移OR少し為を作る
+		if (m_Fream >= 60)//爆発後即シーン遷移OR少し為を作る
 		{
 			CSoundSE::BoolStop();
 			CSceneResult::SetOver();
@@ -120,6 +123,8 @@ void CPlayer::Update()
 		}
 		else
 		{
+			//m_pEnmeyBoss->GetPlayerState(m_isBeamPowerUpBuff);
+
 			CancelMove();
 			m_playerUI->SetReticleAlpha(0);
 			m_KillCnt = m_data->MAX_cnt - m_OldKillCnt;	// キル数をカウント
@@ -355,8 +360,8 @@ void CPlayer::Beam()
 		if (m_beamSize > 1.0f)
 		{
 			// ビームを打ったらバフを消す
-			m_isBeamChargeUpBuff = false;
-			m_isBeamPowerUpBuff = false;
+			//m_isBeamChargeUpBuff = false;
+			//m_isBeamPowerUpBuff = false;
 
 			// とりあえず見ている方向に打つ
 			DirectX::XMFLOAT3 CameraPos = CCameraBase::GetDataFromTag("Player").pos;
@@ -421,6 +426,7 @@ void CPlayer::CancelMove()
 	}
 	else
 	{
+		ResetBuff();
 		m_CancelTime = 0;
 		m_isCancel = false;
 		CCameraBase::SetPrimaryCamera("Player");	// カメラ戻す
@@ -531,4 +537,15 @@ void CPlayer::OnCollision(IObjectBase::Ptr obj)
 	default:
 		break;
 	}
+}
+
+bool CPlayer::isGetPlayerBuff()
+{
+	return m_isBeamPowerUpBuff;
+}
+
+void CPlayer::ResetBuff()
+{
+	m_isBeamChargeUpBuff = false;
+	m_isBeamPowerUpBuff = false;
 }

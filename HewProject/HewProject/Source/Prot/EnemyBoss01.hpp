@@ -39,6 +39,10 @@ private:
 	Data* m_data;
 
 	float m_HP;
+	float m_Damage;
+
+	bool m_isPlayerPowerUp;
+	
 
 	CEffect::Ptr m_pEfk;
 };

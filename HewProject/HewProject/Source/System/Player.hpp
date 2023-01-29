@@ -7,6 +7,7 @@
 #include "Sound.h"
 #include <OutputEffekseer.h>
 #include <ISceneBase.hpp>
+#include <EnemyBoss01.hpp>
 
 class CPlayer : public CObjectBase
 {
@@ -20,6 +21,9 @@ public:
 	void Draw() override;
 	void SetTarget(DirectX::XMFLOAT3 target);
 	void OnCollision(IObjectBase::Ptr obj) override;
+
+	static bool isGetPlayerBuff();
+	static void ResetBuff();
 private:
 	
 	
@@ -65,9 +69,11 @@ private:
 
 	Data* m_data;
 
+	CProtEnemyBoss* m_pEnmeyBoss;
+
 	void Buff();
-	bool m_isBeamPowerUpBuff;	// ビームの威力をあげるバフ中？
-	bool m_isBeamChargeUpBuff;	// ビームのチャージ速度をあげるバフ中?
+	static bool m_isBeamPowerUpBuff;	// ビームの威力をあげるバフ中？
+	static bool m_isBeamChargeUpBuff;	// ビームのチャージ速度をあげるバフ中?
 	int m_BuffCnt;
 	int m_OldKillCnt;	// 前回のキルカウント
 	int m_KillCnt;
