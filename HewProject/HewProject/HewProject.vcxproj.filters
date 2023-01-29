@@ -76,6 +76,9 @@
     <Filter Include="システム\Window">
       <UniqueIdentifier>{5ed6214c-b622-4fc1-bd33-6b0d2e2d1616}</UniqueIdentifier>
     </Filter>
+    <Filter Include="シーンファイル\Overlay">
+      <UniqueIdentifier>{fc698574-161f-4244-b45e-519dd97aa3b5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\System\BaseClass\IObjectBase.hpp">
@@ -144,13 +147,7 @@
     <ClInclude Include="OverlayWindowBase.hpp">
       <Filter>シーンファイル\Base</Filter>
     </ClInclude>
-    <ClInclude Include="OverlayConfig.hpp">
-      <Filter>シーンファイル\シーンファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Scene\SceneStageSelect.hpp">
-      <Filter>シーンファイル\シーンファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Scene\OverlayStagePrep.hpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClInclude>
     <ClInclude Include="Source\System\BaseClass\Billboard.h">
@@ -261,9 +258,6 @@
     <ClInclude Include="Time.h">
       <Filter>システム\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="OverlayAskBase.hpp">
-      <Filter>システム\Window</Filter>
-    </ClInclude>
     <ClInclude Include="Startup.h">
       <Filter>システム\Texture</Filter>
     </ClInclude>
@@ -278,6 +272,15 @@
     </ClInclude>
     <ClInclude Include="Source\System\CutinCamera.hpp">
       <Filter>システム\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="OverlayConfig.hpp">
+      <Filter>シーンファイル\Overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Scene\OverlayStagePrep.hpp">
+      <Filter>シーンファイル\Overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="OverlayAskBase.hpp">
+      <Filter>シーンファイル\Overlay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -338,9 +341,6 @@
     <ClCompile Include="OverlayWindowBase.cpp">
       <Filter>シーンファイル\Base</Filter>
     </ClCompile>
-    <ClCompile Include="OverlayConfig.cpp">
-      <Filter>シーンファイル\シーンファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SceneResult.cpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
@@ -348,9 +348,6 @@
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\Scene\SceneStageSelect.cpp">
-      <Filter>シーンファイル\シーンファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Scene\OverlayStagePrep.cpp">
       <Filter>シーンファイル\シーンファイル</Filter>
     </ClCompile>
     <ClCompile Include="Source\System\BaseClass\Billboard.cpp">
@@ -464,9 +461,6 @@
     <ClCompile Include="Time.cpp">
       <Filter>システム\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="OverlayAskBase.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="SE.cpp">
       <Filter>システム\Sound</Filter>
     </ClCompile>
@@ -478,6 +472,15 @@
     </ClCompile>
     <ClCompile Include="Source\System\CutinCamera.cpp">
       <Filter>システム\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="OverlayConfig.cpp">
+      <Filter>シーンファイル\Overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Scene\OverlayStagePrep.cpp">
+      <Filter>シーンファイル\Overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="OverlayAskBase.cpp">
+      <Filter>シーンファイル\Overlay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

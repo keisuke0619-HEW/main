@@ -13,7 +13,10 @@ COverlayStagePrep::COverlayStagePrep(int id)
 	m_ui[PREP_BACK] = new CGameUI("Assets/Img/stagePreparationTab/IRAI.png");
 	m_ui[PREP_BACK]->SetData(640, 360, 1280 * 0.8f, 720 * 0.8f);
 	Add("Back", m_ui[PREP_BACK], SORT_ORDER_UI_BACK4);
-
+	m_ui[PREP_WARNING_FADE] = new CGameUI("Assets/Img/White.png");
+	m_ui[PREP_WARNING_FADE]->SetData(640, 360, 1280, 720);
+	m_ui[PREP_WARNING_FADE]->SetColor255(255, 0, 0, 128);
+	Add("WarningFade", m_ui[PREP_WARNING_FADE], SORT_ORDER_UI_FRONT);
 
 	switch (id)
 	{
@@ -42,6 +45,7 @@ void COverlayStagePrep::SetIsNext(bool* next)
 
 void COverlayStagePrep::Update()
 {
+	m_ui[PREP_WARNING_FADE]->SetColor255(255, 0, 0, fabs((sinf(m_frame * 0.05) * 128)));
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
 
