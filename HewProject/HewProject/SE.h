@@ -18,6 +18,7 @@ public:
 		SE_LOAD,
 		SE_WARNING,
 		SE_RESULT,
+		SE_BACK,
 
 
 		SE_MAX,

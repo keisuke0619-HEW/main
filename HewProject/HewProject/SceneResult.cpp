@@ -162,6 +162,7 @@ void CSceneResult::Update()
 		}
 		if(m_selectCursol==1)
 		{
+			CSoundSE::Start(CSoundSE::SE_LOAD);
 			if (g_isClear == true)
 			{
 				switch (m_data.BackScene)

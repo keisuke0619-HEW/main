@@ -49,7 +49,8 @@ COverlayAskBase::COverlayAskBase(const char* textSource, bool* out)
 		Add(str, m_gauge[i]);
 	}
 	m_target = 1;
-
+	CSoundSE::Stop();
+	CSoundSE::Start(CSoundSE::SE_BACK);
 }
 
 COverlayAskBase::~COverlayAskBase()

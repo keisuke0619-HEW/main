@@ -53,12 +53,12 @@ CPlayer::CPlayer(Data* data)
 
 
 	// ‰¹ƒf[ƒ^‚Ì“Ç‚İ‚İ
-	m_pChargeSE = CreateSound("Assets/Sound/Charge.wav", false);
+	m_pChargeSE = CreateSound("Assets/Sound/SE/Charge.wav", false);
 	if (m_pChargeSE == nullptr)
 	{
 
 	}
-	m_pBeamSE = CreateSound("Assets/Sound/Beam.wav", false);
+	m_pBeamSE = CreateSound("Assets/Sound/SE/Beam.wav", false);
 	m_isSE = false;
 	
 

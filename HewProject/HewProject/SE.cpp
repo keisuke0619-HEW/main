@@ -31,6 +31,7 @@ void CSoundSE::Init()
 	m_pSE[SE_LOAD] = CreateSound("Assets/Sound/SE/Load.mp3", false);
 	m_pSE[SE_WARNING] = CreateSound("Assets/Sound/SE/Warning.mp3", true);
 	m_pSE[SE_RESULT] = CreateSound("Assets/Sound/SE/Result.mp3", false);
+	m_pSE[SE_BACK] = CreateSound("Assets/Sound/SE/Back.mp3", false);
 }
 
 void CSoundSE::Start(SESource Source)
