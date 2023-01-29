@@ -21,10 +21,12 @@ public:
 	void SetData(void* dataPtr, long size = 0, const char* name = "NO_NAME") override;
 private:
 	void Update() override;
+	void CatMove();
 	int m_selectCursol=0;//セレクトの選択
 	CGameUI::Ref m_ResultUI;	
 	CGameUI::Ref m_Home;
 	CGameUI::Ref m_Retry;
+	CGameUI::Ref m_Cat;
 	TResultData m_resultData;
 	CNumberUI::Ptr m_time;
 	CNumberUI::Ptr m_maxDefeat;

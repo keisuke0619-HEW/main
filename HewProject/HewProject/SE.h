@@ -21,6 +21,7 @@ public:
 		SE_BACK,
 
 
+		SE_P,
 		SE_MAX,
 	};
 	CSoundSE();

@@ -52,29 +52,29 @@ CSceneResult::CSceneResult(Data data)
 	}
 
 	// 猫
-	m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/cat.png"));
-	m_ResultUI.lock()->SetSize({ 83.3f, 97.6f });//31.f, 32.f
-	m_ResultUI.lock()->SetPos({ 1000.f, 490.f });
+	m_Cat = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/cat.png"));
+	m_Cat.lock()->SetSize({ 83.3f, 97.6f });//31.f, 32.f
+	m_Cat.lock()->SetPos({ 1000.f, 490.f });
 
 	float score = (float)m_data.MAX_kill / 20.f;
 	if (score <= 0.4)
 	{
-		m_ResultUI.lock()->SetColor(1, 1, 1, 0);
+		m_Cat.lock()->SetColor(1, 1, 1, 0);
 	}
 	if (score > 0.4)
 	{
 		// 銅
-		m_ResultUI.lock()->SetColor255(134, 74, 43);
+		m_Cat.lock()->SetColor255(134, 74, 43);
 	}
 	if (score > 0.6)
 	{
 		// 銀
-		m_ResultUI.lock()->SetColor(1, 1, 1);
+		m_Cat.lock()->SetColor(1, 1, 1);
 	}
 	if (score > 0.8)
 	{
 		// 金
-		m_ResultUI.lock()->SetColor255(255, 215, 0);
+		m_Cat.lock()->SetColor255(255, 215, 0);
 	}
 
 
@@ -134,7 +134,7 @@ void CSceneResult::SetData(void* dataPtr, long size, const char* name)
 void CSceneResult::Update()
 {
 	
-
+	CatMove();
 	if (Utility::GetKeyTrigger(KEY_RIGHT))
 	{
 		if (m_selectCursol == 0)
@@ -191,4 +191,10 @@ void CSceneResult::Update()
 		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		CSceneManager::SetScene(SCENE_STAGE_SELECT);
 	}
+}
+
+void CSceneResult::CatMove()
+{
+	// 軟体アニメーション
+	m_Cat.lock()->SetSize(m_Cat.lock()->GetSize().x + (sinf(m_frame * 0.0625) * 0.5), (m_Cat.lock()->GetSize().y + (-sinf(m_frame * 0.0625) * 2)));
 }

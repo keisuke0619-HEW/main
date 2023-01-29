@@ -160,13 +160,29 @@ void COverlayConfig::SetStatus()
 	auto speedX = Utility::GetCameraSpeedX();
 	auto speedY = Utility::GetCameraSpeedY();
 	if (speedX < OVERLAY_CONFIG_SPEED_MIN)
+	{
 		Utility::SetCameraSpeedX(OVERLAY_CONFIG_SPEED_MIN);
+		CSoundSE::Stop();
+	}
+		
 	if (speedY < OVERLAY_CONFIG_SPEED_MIN)
+	{
 		Utility::SetCameraSpeedY(OVERLAY_CONFIG_SPEED_MIN);
+		CSoundSE::Stop();
+	}
+		
 	if (speedX > OVERLAY_CONFIG_SPEED_MAX)
+	{
 		Utility::SetCameraSpeedX(OVERLAY_CONFIG_SPEED_MAX);
+		CSoundSE::Stop();
+	}
+		
 	if (speedY > OVERLAY_CONFIG_SPEED_MAX)
+	{
 		Utility::SetCameraSpeedY(OVERLAY_CONFIG_SPEED_MAX);
+		CSoundSE::Stop();
+	}
+		
 	m_speedXCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedX() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_X_BAR_POS_Y);
 	m_speedYCursor->SetPos(OVERLAY_CONFIG_POS_MIN + (OVERLAY_CONFIG_POS_MAX - OVERLAY_CONFIG_POS_MIN) * (Utility::GetCameraSpeedY() / OVERLAY_CONFIG_SPEED_MAX), OVERLAY_CONFIG_Y_BAR_POS_Y);
 	m_speedXNum->SetPos(
