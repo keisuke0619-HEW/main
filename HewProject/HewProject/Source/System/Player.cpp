@@ -70,8 +70,14 @@ CPlayer::CPlayer(Data* data)
 	m_pEfk.reset(new CEffect(u"Assets/Effect/Beamtame.efkefc"));
 	m_pEfk2.reset(new CEffect(u"Assets/Effect/damage.efkefc"));
 	m_pEfk3.reset(new CEffect(u"Assets/Effect/zirai.efkefc"));
+	m_pEfk4.reset(new CEffect(u"Assets/Effect/Buff.efkefc"));
 
 	m_data = data;
+
+	m_isBeamPowerUpBuff = false;
+	m_isBeamChargeUpBuff = false;
+	m_BuffCnt = 0;
+	m_OldKillCnt = 0;
 }
 
 CPlayer::~CPlayer()
@@ -109,11 +115,15 @@ void CPlayer::Update()
 			Move();
 			Beam();
 			m_playerUI->SetReticleAlpha(1);
+			Buff();
+			m_OldKillCnt = m_data->MAX_cnt; // これまでのキル数をカウント
 		}
 		else
 		{
 			CancelMove();
 			m_playerUI->SetReticleAlpha(0);
+			m_KillCnt = m_data->MAX_cnt - m_OldKillCnt;	// キル数をカウント
+			
 		}
 		m_InvincibleTime--;
 
@@ -141,6 +151,11 @@ void CPlayer::Update()
 		m_pEfk->SetPos(m_param.pos.x, m_param.pos.y + 1.0f, m_param.pos.z);
 		m_pEfk->SetRotation(m_param.rot.x, m_param.rot.y, m_param.rot.z);
 		m_pEfk->AddPos(m_param.pos.x, m_param.pos.y + 1.0f, m_param.pos.z);
+
+		m_pEfk4->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);
+		m_pEfk4->SetPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
+		m_pEfk4->SetRotation(m_param.rot.x, m_param.rot.y, m_param.rot.z);
+		m_pEfk4->AddPos(m_param.pos.x, m_param.pos.y, m_param.pos.z);
 	}
 }
 
@@ -307,7 +322,15 @@ void CPlayer::Beam()
 		//m_modelData.model->Play(no1, true);//歩き
 		m_isBeamStore = true;
 
-		m_beamSize += m_beamSize < maxBeamSize ? addBeamSize : 0;
+		if (m_isBeamChargeUpBuff == false)
+		{
+			m_beamSize += m_beamSize < maxBeamSize ? addBeamSize : 0;
+		}
+		else
+		{
+			m_beamSize += m_beamSize < maxBeamSize ? addBeamSize * 1.5f: 0;
+		}
+
 		// se再生
 		if (m_isSE == false)
 		{
@@ -331,6 +354,10 @@ void CPlayer::Beam()
 
 		if (m_beamSize > 1.0f)
 		{
+			// ビームを打ったらバフを消す
+			m_isBeamChargeUpBuff = false;
+			m_isBeamPowerUpBuff = false;
+
 			// とりあえず見ている方向に打つ
 			DirectX::XMFLOAT3 CameraPos = CCameraBase::GetDataFromTag("Player").pos;
 			DirectX::XMFLOAT3 CameraLook = CCameraBase::GetDataFromTag("Player").look;
@@ -411,6 +438,36 @@ void CPlayer::KnockBack()
 		m_param.move = fKnock;
 	}
 	m_knockBackFrame--;
+}
+
+void CPlayer::Buff()
+{
+	if (m_KillCnt >= 10)
+	{
+		m_isBeamChargeUpBuff = true;
+		m_KillCnt = 0;
+	}
+	else if (m_KillCnt >= 7)
+	{
+		m_isBeamPowerUpBuff = true;
+		m_KillCnt = 0;
+	}
+
+	if (m_isBeamChargeUpBuff == true || m_isBeamPowerUpBuff == true)
+	{
+		m_pEfk4->PlayOnce();
+		if (m_BuffCnt >= 60)
+		{
+			m_pEfk4->End();
+			m_BuffCnt = 0;
+		}
+		m_BuffCnt++;
+	}
+	else
+	{
+		m_pEfk4->End();
+		m_BuffCnt = 0;
+	}
 }
 
 void CPlayer::SetTarget(DirectX::XMFLOAT3 target)
