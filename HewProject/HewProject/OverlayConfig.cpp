@@ -53,6 +53,8 @@ COverlayConfig::COverlayConfig()
 	m_speedYNum->SetSize(36, 45);
 
 	CSoundSE::CountReset();
+	CSoundSE::Stop();
+	CSoundSE::Start(CSoundSE::SE_MENU);
 }
 
 COverlayConfig::~COverlayConfig()

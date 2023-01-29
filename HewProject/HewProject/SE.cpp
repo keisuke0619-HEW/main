@@ -19,14 +19,18 @@ void CSoundSE::Init()
 {
 	m_IsPlay = false;
 	m_cnt = 0;
-	m_pSE[SE_SELECT] = CreateSound("Assets/Sound/select.mp3", false);
-	m_pSE[SE_CURSOR] = CreateSound("Assets/Sound/cursor.mp3", false);
-	m_pSE[SE_CANCEL] = CreateSound("Assets/Sound/cancel.mp3", false);
-	m_pSE[SE_BAR] = CreateSound("Assets/Sound/rail.mp3", false);
-	m_pSE[SE_KEMO] = CreateSound("Assets/Sound/thankyou.wav", false);
-	m_pSE[SE_BOMB] = CreateSound("Assets/Sound/bomb.mp3", false);
-	m_pSE[SE_EXPLOTION] = CreateSound("Assets/Sound/explotion.mp3", false);
-	m_pSE[SE_RAIL] = CreateSound("Assets/Sound/rail.mp3", false);
+	m_pSE[SE_SELECT] = CreateSound("Assets/Sound/SE/Select.mp3", false);
+	m_pSE[SE_CURSOR] = CreateSound("Assets/Sound/SE/Cursor.mp3", false);
+	m_pSE[SE_CANCEL] = CreateSound("Assets/Sound/SE/cancel.mp3", false);
+	m_pSE[SE_BAR] = CreateSound("Assets/Sound/SE/rail.mp3", false);
+	m_pSE[SE_KEMO] = CreateSound("Assets/Sound/SE/thankyou.wav", false);
+	m_pSE[SE_BOMB] = CreateSound("Assets/Sound/SE/bomb.mp3", false);
+	m_pSE[SE_EXPLOTION] = CreateSound("Assets/Sound/SE/explotion.mp3", false);
+	m_pSE[SE_RAIL] = CreateSound("Assets/Sound/SE/rail.mp3", false);
+	m_pSE[SE_MENU] = CreateSound("Assets/Sound/SE/Menu.mp3", false);
+	m_pSE[SE_LOAD] = CreateSound("Assets/Sound/SE/Load.mp3", false);
+	m_pSE[SE_WARNING] = CreateSound("Assets/Sound/SE/Warning.mp3", true);
+	m_pSE[SE_RESULT] = CreateSound("Assets/Sound/SE/Result.mp3", false);
 }
 
 void CSoundSE::Start(SESource Source)

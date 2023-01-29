@@ -91,8 +91,8 @@ CSceneResult::CSceneResult(Data data)
 	
 
 	// ‰¹ƒf[ƒ^‚Ì“Ç‚İ‚İ
-	SetBGM("Assets/Sound/ResultBGM.mp3");
-	
+	SetBGM("Assets/Sound/BGM/ResultBGM.mp3");
+	CSoundSE::Start(CSoundSE::SE_RESULT);
 
 	// ”š
 	m_time.reset(new CNumberUI(2, SORT_ORDER_UI_FRONT4, 2));

@@ -71,7 +71,7 @@ CSceneStageSelect::CSceneStageSelect()
 	m_cursor = 1;
 	m_frame = 0;
 
-	SetBGM("Assets/Sound/StageSelectBGM.mp3");
+	SetBGM("Assets/Sound/BGM/StageSelectBGM.mp3");
 }
 
 CSceneStageSelect::~CSceneStageSelect()

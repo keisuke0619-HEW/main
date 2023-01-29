@@ -14,6 +14,12 @@ public:
 		SE_EXPLOTION,
 		SE_BOMB,
 		SE_RAIL,
+		SE_MENU,
+		SE_LOAD,
+		SE_WARNING,
+		SE_RESULT,
+
+
 		SE_MAX,
 	};
 	CSoundSE();

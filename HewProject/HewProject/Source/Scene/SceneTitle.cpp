@@ -33,7 +33,7 @@ CSceneTitle::CSceneTitle()
 	m_TitlebgUI.lock()->SetSize({ 1281.0f, 720.0f });
 	m_TitlebgUI.lock()->SetPos({ 640.0f, 360.0f });
 
-	SetBGM("Assets/Sound/ExtendedWinter.wav");
+	SetBGM("Assets/Sound/BGM/ExtendedWinter.wav");
 	m_titleEffectAlpha = 128;
 	
 }
@@ -52,7 +52,7 @@ void CSceneTitle::Update()
 	}
 	if (Utility::GetKeyTrigger(KEY_BEAM))
 	{
-		SetBGM("Assets/Sound/korinoyaiba.wav");
+		SetBGM("Assets/Sound/BGM/korinoyaiba.wav");
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{

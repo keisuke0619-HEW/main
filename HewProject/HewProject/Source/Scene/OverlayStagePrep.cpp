@@ -32,10 +32,12 @@ COverlayStagePrep::COverlayStagePrep(int id)
 		MessageBox(NULL, "渡された値が不正です。", "COverlayStagePreparationコンストラクタ", MB_OK);
 		break;
 	}
+	CSoundSE::Start(CSoundSE::SE_WARNING);
 }
 
 COverlayStagePrep::~COverlayStagePrep()
 {
+	
 }
 
 void COverlayStagePrep::SetIsNext(bool* next)
@@ -48,9 +50,8 @@ void COverlayStagePrep::Update()
 	m_ui[PREP_WARNING_FADE]->SetColor255(255, 0, 0, fabs((sinf(m_frame * 0.05) * 128)));
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
-
-		CSoundSE::Start(CSoundSE::SE_SELECT);
-
+		CSoundSE::Stop();
+		CSoundSE::Start(CSoundSE::SE_LOAD);
 		CSceneManager::SetScene(SCENE_STAGE01);
 
 		//if (m_next != nullptr)
@@ -60,6 +61,7 @@ void COverlayStagePrep::Update()
 	}
 	else if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
+		CSoundSE::Stop();
 		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		m_isDestroy = true;
 	}
