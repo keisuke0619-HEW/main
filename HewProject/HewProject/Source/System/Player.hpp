@@ -57,10 +57,18 @@ private:
 	CEffect::Ptr m_pEfk;
 	CEffect::Ptr m_pEfk2;
 	CEffect::Ptr m_pEfk3;
+	CEffect::Ptr m_pEfk4;
 
 	int m_Fream;	// シーン遷移用の時間
 
 	DirectX::XMFLOAT3 m_oldPos;
 
 	Data* m_data;
+
+	void Buff();
+	bool m_isBeamPowerUpBuff;	// ビームの威力をあげるバフ中？
+	bool m_isBeamChargeUpBuff;	// ビームのチャージ速度をあげるバフ中?
+	int m_BuffCnt;
+	int m_OldKillCnt;	// 前回のキルカウント
+	int m_KillCnt;
 };
