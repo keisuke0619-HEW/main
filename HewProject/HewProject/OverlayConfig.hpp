@@ -29,6 +29,8 @@ private:
 	CGameUI* m_speedXBar;
 	CGameUI* m_speedYCursor;
 	CGameUI* m_speedYBar;
+	CGameUI* m_speedXLabel;
+	CGameUI* m_speedYLabel;
 
 	CNumberUI::Ptr m_speedXNum;
 	CNumberUI::Ptr m_speedYNum;

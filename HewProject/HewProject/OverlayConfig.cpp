@@ -30,6 +30,14 @@ COverlayConfig::COverlayConfig()
 	tmp->SetSize({ 1280, 720 });
 	tmp->SetColor255(0, 0, 0, 128);
 	Add("Fade", tmp, SORT_ORDER_UI_BACK3);
+	m_speedXLabel = new CGameUI("Assets/Img/Label/config_speedX.png");
+	m_speedXLabel->SetPos({ 350, OVERLAY_CONFIG_X_BAR_POS_Y - 70 });
+	m_speedXLabel->SetSize({ 1000, 50 });
+	Add("label_x", m_speedXLabel, SORT_ORDER_UI_BACK1);
+	m_speedYLabel = new CGameUI("Assets/Img/Label/config_speedY.png");
+	m_speedYLabel->SetPos({ 350, OVERLAY_CONFIG_Y_BAR_POS_Y - 70 });
+	m_speedYLabel->SetSize({ 1000, 50 });
+	Add("label_y", m_speedYLabel, SORT_ORDER_UI_BACK1);
 	m_speedXBar = new CGameUI("Assets/Img/PauseMenu/Bar.png");
 	m_speedXBar->SetPos(OVERLAY_CONFIG_CENTER_X, OVERLAY_CONFIG_X_BAR_POS_Y);
 	m_speedXBar->SetSize(OVERLAY_CONFIG_BAR_SIZE_X, OVERLAY_CONFIG_BAR_SIZE_Y);
@@ -101,6 +109,8 @@ void COverlayConfig::SetStatus()
 	m_speedYCursor->SetColor255(128, 128, 128, 128);
 	m_speedXNum->SetColor255(128, 128, 128, 128);
 	m_speedYNum->SetColor255(128, 128, 128, 128);
+	m_speedXLabel->SetColor255(128, 128, 128, 128);
+	m_speedYLabel->SetColor255(128, 128, 128, 128);
 	if (Utility::GetKeyPress(KEY_RIGHT))
 	{
 		add += addLevel;
@@ -145,12 +155,14 @@ void COverlayConfig::SetStatus()
 		m_speedXBar->SetColor255(255, 255, 255, 255);
 		m_speedXCursor->SetColor255(255, 255, 255, 255);
 		m_speedXNum->SetColor255(255, 255, 255, 255);
+		m_speedXLabel->SetColor255(255, 255, 255, 255);
 		Utility::SetCameraSpeedX(Utility::GetCameraSpeedX() + add);
 		break;
 	case 1:
 		m_speedYBar->SetColor255(255, 255, 255, 255);
 		m_speedYCursor->SetColor255(255, 255, 255, 255);
 		m_speedYNum->SetColor255(255, 255, 255, 255);
+		m_speedYLabel->SetColor255(255, 255, 255, 255);
 		Utility::SetCameraSpeedY(Utility::GetCameraSpeedY() + add);
 		break;
 	default:
