@@ -20,11 +20,22 @@ CSceneResult::CSceneResult(Data data)
 	m_Home.lock()->SetColor(1, 1, 1, 0.3f);
 	if (g_isClear == true)
 	{
-		// ネクスト
-		m_Retry = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/next.png"));
-		m_Retry.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
-		m_Retry.lock()->SetPos({ 1050.f, 642.f });
-		m_Retry.lock()->SetColor(1, 1, 1, 1);
+		if (m_data.BackScene == SCENE_STAGE03)
+		{
+			// タイトル
+			m_Retry = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/next.png"));
+			m_Retry.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
+			m_Retry.lock()->SetPos({ 1050.f, 642.f });
+			m_Retry.lock()->SetColor(1, 1, 1, 1);
+		}
+		else
+		{
+			// ネクスト
+			m_Retry = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/next.png"));
+			m_Retry.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
+			m_Retry.lock()->SetPos({ 1050.f, 642.f });
+			m_Retry.lock()->SetColor(1, 1, 1, 1);
+		}
 	}
 	else
 	{
