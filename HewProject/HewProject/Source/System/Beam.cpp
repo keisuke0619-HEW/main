@@ -4,6 +4,7 @@
 #include <Easing.hpp>
 #include <Camera.hpp>
 #include <SceneBase.hpp>
+#include <Player.hpp>
 CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size, Data* data)
 	: CObjectBase("Assets/Box.fbx")
 {
@@ -19,6 +20,8 @@ CBeam::CBeam(DirectX::XMFLOAT3 pos, DirectX::XMFLOAT3 target, float size, Data* 
 	//m_pEfk.reset(new CEffect(u"Assets/Effect/Beamhassya.efkefc"));
 	m_pEfk.reset(new CEffect(u"Assets/Effect/BeamSiohuki.efkefc"));
 	m_pEfk2.reset(new CEffect(u"Assets/Effect/BeamSyasei.efkefc"));
+
+	m_isPlayerPowerUp = false;
 
 	m_data = data;
 }
@@ -51,6 +54,13 @@ void CBeam::Update()
 
 	m_pEfk2->SetScale(m_maxSize, m_maxSize, m_maxSize);
 	m_pEfk2->SetPos(m_playerPos.x, m_playerPos.y + 1.5f, m_playerPos.z);
+
+	m_isPlayerPowerUp = CPlayer::isGetPlayerBuff();
+	if (m_isPlayerPowerUp)
+	{
+		m_pEfk->SetColor(255, 50, 50, 255);
+		m_pEfk2->SetColor(255, 50, 50, 255);
+	}
 }
 
 void CBeam::Draw()

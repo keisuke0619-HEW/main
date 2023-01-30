@@ -29,5 +29,7 @@ private:
 	CEffect::Ptr m_pEfk;
 	CEffect::Ptr m_pEfk2;
 
+	bool m_isPlayerPowerUp;
+
 	Data* m_data;
 };
