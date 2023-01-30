@@ -49,9 +49,9 @@ void CSoundSE::Init()
 
 void CSoundSE::Start(SESource Source)
 {
-	if (m_SoundNum > 2)
+	//if (m_SoundNum > 2)
 	{
-		Stop();
+		//Stop();
 		m_SoundNum = 0;
 	}
 	

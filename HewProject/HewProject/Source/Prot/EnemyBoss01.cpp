@@ -65,7 +65,7 @@ CProtEnemyBoss::~CProtEnemyBoss()
 
 void CProtEnemyBoss::Update()
 {
-	if (m_param.hp <= 0.1f && CSoundSE::GetCount() == 0)
+	if (m_param.hp <= 0.3f && CSoundSE::GetCount() == 0)
 	{
 		CSoundSE::Start(CSoundSE::SE_VOICE_FIGHT_WIN);
 		CSoundSE::CountUp();
