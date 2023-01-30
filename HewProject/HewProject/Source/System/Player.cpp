@@ -27,7 +27,7 @@ CPlayer::CPlayer(Data* data)
 	m_CancelTime = 0;
 	m_Fream = 0;
 
-	m_param.pos = { 0,0,-20.0f };
+	m_param.pos = { 5,0,-20.0f };
 
 	// ‚±‚±‚Å•`‰æ‚ð‚¸‚ç‚·
 	m_param.drawOffset = { 0, 0, 0 };
