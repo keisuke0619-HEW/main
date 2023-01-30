@@ -10,15 +10,17 @@
 
 CSceneTitle::CSceneTitle()
 {
-	//エフェクト流星
-	m_EffectUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/meteor.png"));
-	m_EffectUI.lock()->SetSize({ 702.0f, 436.0f });
-	m_EffectUI.lock()->SetPos({ 640.0f, 360.0f });
+	
 
 	// タイトルロゴ
 	m_TitlerogoUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/titlerogo.png"));
 	m_TitlerogoUI.lock()->SetSize({ 702.0f, 436.0f });
 	m_TitlerogoUI.lock()->SetPos({ 640.0f, 285.0f });
+
+	//エフェクト流星
+	m_EffectUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/meteor.png"),SORT_ORDER_BACK);
+	m_EffectUI.lock()->SetSize({ 702.0f, 436.0f });
+	m_EffectUI.lock()->SetPos({ 840.0f, 0.0f });
 
 	m_TitleLogoEffect = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/titlerogo.png"), SORT_ORDER_FRONT);
 	m_TitleLogoEffect.lock()->SetSize({ 702.0f, 436.0f });
@@ -34,7 +36,7 @@ CSceneTitle::CSceneTitle()
 	m_EndUI.lock()->SetPos({ 600.0f, 620.0f });
 	
 	// 背景
-	m_TitlebgUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/title_background.png"));
+	m_TitlebgUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/title_background.png"),SORT_ORDER_BACK);
 	m_TitlebgUI.lock()->SetSize({ 1281.0f, 720.0f });
 	m_TitlebgUI.lock()->SetPos({ 640.0f, 360.0f });
 
@@ -85,11 +87,11 @@ void CSceneTitle::Update()
 		m_titleEffectAlpha -= 5;
 	}
 	
-	m_EffectUI.lock()->SetPos({ 640.0f-m_efect*14.f, 360.0f+ m_efect *14.f });
+	m_EffectUI.lock()->SetPos({ 840.0f-m_efect*14.f, 0.0f+ m_efect *14.f });
 
 	if (m_efect%180==0/*m_EffectUI.lock()->GetPos().x >= -555.0f&& m_EffectUI.lock()->GetPos().y>= 444.0f*/)
 	{
-		m_EffectUI.lock()->SetPos({ 640.0f, 360.0f });
+		m_EffectUI.lock()->SetPos({ 840.0f, 0.0f });//ここで位置調整して
 		m_efect = 0;
 	}
 //流星群関係	
