@@ -42,7 +42,7 @@ CSceneTitle::CSceneTitle()
 
 	
 
-	SetBGM("Assets/Sound/BGM/ExtendedWinter.wav");
+	SetBGM("Assets/Sound/BGM/BGM_title.mp3");
 	m_titleEffectAlpha = 128;
 }
 
