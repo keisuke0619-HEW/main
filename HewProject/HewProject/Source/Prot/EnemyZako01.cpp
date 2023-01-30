@@ -34,7 +34,7 @@ CProtEnemy::CProtEnemy(Data* data)
 	m_modelData = sModel;
 	// モデルをクラス全体で使いまわすならここまでが必須。
 	m_modelData.model->Play(animeNo, true);
-
+	m_modelData.model->Step(1);
 	// オブジェクトのリストを取得
 	auto objList = CSceneBase::GetObjList();
 
@@ -106,7 +106,7 @@ void CProtEnemy::Update()
 
 void CProtEnemy::Draw()
 {
-	m_modelData.model->Step(1.0f / 60.0f);
+	//m_modelData.model->Step(1.0f / 60.0f);
 	//Utility::SetBlendState(BLEND_NONE);
 	CObjectBase::Draw();
 	//Utility::SetBlendState(BLEND_ALPHA);
