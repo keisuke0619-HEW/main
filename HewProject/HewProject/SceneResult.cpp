@@ -57,6 +57,9 @@ CSceneResult::CSceneResult(Data data)
 		m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/gameclear.png"));
 		m_ResultUI.lock()->SetSize({ 646.f, 91.7f });//265.f, 37.f
 		m_ResultUI.lock()->SetPos({ 650.f, 204.f });
+		m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/result_gameclear.png"));
+		m_ResultUI.lock()->SetSize({ 380.f, 270.f });//265.f, 37.f
+		m_ResultUI.lock()->SetPos({ 330.f, 404.f });
 		float score = (float)m_data.MAX_kill / 20.f;
 		if (score <= 0.4)
 			CSoundSE::Start(CSoundSE::SE_VOICE_WIN);
@@ -73,6 +76,9 @@ CSceneResult::CSceneResult(Data data)
 		m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/gameover.png"));
 		m_ResultUI.lock()->SetSize({ 646.f, 91.7f });//265.f, 37.f
 		m_ResultUI.lock()->SetPos({ 650.f, 204.f });
+		m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/result_gameover.png"));
+		m_ResultUI.lock()->SetSize({ 380.f, 270.f });//265.f, 37.f
+		m_ResultUI.lock()->SetPos({ 330.f, 404.f });
 		CSoundSE::Start(CSoundSE::SE_VOISE_LOSE);
 	}
 
