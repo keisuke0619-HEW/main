@@ -31,6 +31,7 @@ public:
 	void PlayOnce();
 	void End();
 	void ContinuePlay(float time);
+	void SetColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a);
 private:
 	void Draw();
 	//--- Effekseer‚Ì‰Šú‰»
