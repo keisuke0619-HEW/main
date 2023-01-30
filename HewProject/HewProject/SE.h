@@ -57,6 +57,7 @@ private:
 
 	static bool m_IsPlay;
 	static int m_cnt;
+	static int m_SoundNum;
 };
 
 

@@ -54,6 +54,8 @@ CProtEnemyBoss::CProtEnemyBoss(Data* data, float bossHP)
 	m_Damage = 0.005f;
 	m_isPlayerPowerUp = false;
 	m_pEfk.reset(new CEffect(u"Assets/Effect/zirai.efkefc"));
+	CSoundSE::BoolStop();
+	CSoundSE::CountReset();
 }
 
 CProtEnemyBoss::~CProtEnemyBoss()
@@ -63,12 +65,19 @@ CProtEnemyBoss::~CProtEnemyBoss()
 
 void CProtEnemyBoss::Update()
 {
-
+	if (m_param.hp <= 0.1f && CSoundSE::GetCount() == 0)
+	{
+		CSoundSE::Start(CSoundSE::SE_VOICE_FIGHT_WIN);
+		CSoundSE::CountUp();
+	}
 	// ƒ{ƒX‚ªŽ€‚ñ‚Å‚¢‚½‚ç
 	if (m_param.hp <= 0.0f)
 	{
-		if(!CSoundSE::IsPlay())
-		CSoundSE::Start(CSoundSE::SE_EXPLOTION);
+		if (!CSoundSE::IsPlay())
+		{
+			CSoundSE::Start(CSoundSE::SE_EXPLOTION);
+		}
+		
 		CSoundSE::BoolPlay();
 		m_Fream++;
 		m_pEfk->SetScale(m_param.scale.x, m_param.scale.y, m_param.scale.z);

@@ -56,9 +56,10 @@ void CSceneTitle::Update()
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
+		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		AddOverlay(new COverlayAskBase("Assets/Img/PauseMenu/Label_Exit.png", GetLoopPointer() ));
 
-		CSoundSE::Start(CSoundSE::SE_CANCEL);
+		
 	}
 	if (m_frame % 180 == 0)
 	{

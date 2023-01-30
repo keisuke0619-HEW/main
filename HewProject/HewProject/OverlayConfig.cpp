@@ -62,6 +62,7 @@ COverlayConfig::COverlayConfig()
 
 	CSoundSE::CountReset();
 	CSoundSE::Stop();
+	CSoundSE::BoolStop();
 	CSoundSE::Start(CSoundSE::SE_MENU);
 }
 

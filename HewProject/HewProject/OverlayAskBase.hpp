@@ -17,7 +17,7 @@ protected:
 	CGameUI* m_labelYes;
 	CGameUI* m_labelNo;
 	CGameUI* m_cursor;
-
+	
 	CGameUI* m_gauge[7];
 	int m_target;
 };
