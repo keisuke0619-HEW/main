@@ -10,6 +10,11 @@
 
 CSceneTitle::CSceneTitle()
 {
+	//エフェクト流星
+	m_EffectUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/meteor.png"));
+	m_EffectUI.lock()->SetSize({ 702.0f, 436.0f });
+	m_EffectUI.lock()->SetPos({ 640.0f, 360.0f });
+
 	// タイトルロゴ
 	m_TitlerogoUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/titlerogo.png"));
 	m_TitlerogoUI.lock()->SetSize({ 702.0f, 436.0f });
@@ -33,9 +38,10 @@ CSceneTitle::CSceneTitle()
 	m_TitlebgUI.lock()->SetSize({ 1281.0f, 720.0f });
 	m_TitlebgUI.lock()->SetPos({ 640.0f, 360.0f });
 
+	
+
 	SetBGM("Assets/Sound/BGM/ExtendedWinter.wav");
 	m_titleEffectAlpha = 128;
-	
 }
 
 CSceneTitle::~CSceneTitle()
@@ -45,6 +51,11 @@ CSceneTitle::~CSceneTitle()
 #include <DebugWindow.hpp>
 void CSceneTitle::Update()
 {
+	m_efect++;
+
+
+
+	
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
 		CSoundSE::Start(CSoundSE::SE_SELECT);
@@ -73,6 +84,15 @@ void CSceneTitle::Update()
 		m_TitleLogoEffect.lock()->SetColor255(255, 255, 255, m_titleEffectAlpha);
 		m_titleEffectAlpha -= 5;
 	}
+	
+	m_EffectUI.lock()->SetPos({ 640.0f-m_efect*14.f, 360.0f+ m_efect *14.f });
+
+	if (m_efect%180==0/*m_EffectUI.lock()->GetPos().x >= -555.0f&& m_EffectUI.lock()->GetPos().y>= 444.0f*/)
+	{
+		m_EffectUI.lock()->SetPos({ 640.0f, 360.0f });
+		m_efect = 0;
+	}
+//流星群関係	
 }
 
 
