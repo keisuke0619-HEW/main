@@ -7,6 +7,7 @@ bool CDebugWindow::m_enable = true;
 
 void CDebugWindow::Create()
 {
+    return;
 #ifdef _DEBUG
     if (m_fp != nullptr)
         return;

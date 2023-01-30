@@ -14,6 +14,7 @@
 
 Game3D::Game3D()
 {
+	CSceneManager::Init();
 	CSceneManager::SetScene(SCENE_TITLE);
 	//CSceneManager::SwapScene();
 	CDebugWindow::Create();
@@ -35,6 +36,7 @@ Game3D::~Game3D()
 	Utility::UninitBlendState();
 	Sprite::Uninit();
 	CDebugWindow::Close();
+	CSceneManager::Uninit();
 }
 
 void Game3D::Update()
