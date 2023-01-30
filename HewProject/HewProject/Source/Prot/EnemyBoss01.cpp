@@ -73,7 +73,7 @@ void CProtEnemyBoss::Update()
 	// ƒ{ƒX‚ªŽ€‚ñ‚Å‚¢‚½‚ç
 	if (m_param.hp <= 0.0f)
 	{
-		if (!CSoundSE::IsPlay())
+		if (m_Fream == 0)
 		{
 			CSoundSE::Start(CSoundSE::SE_EXPLOTION);
 		}
