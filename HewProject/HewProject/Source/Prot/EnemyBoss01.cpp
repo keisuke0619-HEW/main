@@ -65,7 +65,7 @@ CProtEnemyBoss::~CProtEnemyBoss()
 
 void CProtEnemyBoss::Update()
 {
-	if (m_param.hp <= 0.1f && CSoundSE::GetCount() == 0)
+	if (m_param.hp <= 0.3f && CSoundSE::GetCount() == 0)
 	{
 		CSoundSE::Start(CSoundSE::SE_VOICE_FIGHT_WIN);
 		CSoundSE::CountUp();
@@ -73,7 +73,7 @@ void CProtEnemyBoss::Update()
 	// ƒ{ƒX‚ªŽ€‚ñ‚Å‚¢‚½‚ç
 	if (m_param.hp <= 0.0f)
 	{
-		if (!CSoundSE::IsPlay())
+		if (m_Fream == 0)
 		{
 			CSoundSE::Start(CSoundSE::SE_EXPLOTION);
 		}

@@ -15,7 +15,7 @@ CGameScene::CGameScene()
 	CCameraBase::CreateCamera(new CPlayerCamera(), "Player");
 	CCameraBase::SetPrimaryCamera("Player");
 
-	SetBGM("Assets/Sound/BGM/StageSelectBGM.mp3");
+	SetBGM("Assets/Sound/BGM/BGM_game.mp3");
 
 	m_isNext = false;
 	CTime::Init();

@@ -106,24 +106,8 @@ void CProtEnemy::Update()
 
 void CProtEnemy::Draw()
 {
-	//m_modelData.model->Step(1.0f / 60.0f);
-	//Utility::SetBlendState(BLEND_NONE);
+	m_param.rot.z = sinf(DirectX::XMConvertToRadians(m_param.frame * 5)) / 4;
 	CObjectBase::Draw();
-	//Utility::SetBlendState(BLEND_ALPHA);
-	//ŠïÕ‚Ì’Ç‰Á
-	//GeometoryPolyline::Point point = {};
-	////ƒ|ƒŠƒ‰ƒCƒ“
-	//auto fCamPos = CCameraBase::GetPrimaryData().pos;
-	//
-	//DirectX::XMVECTOR vCamPos = DirectX::XMLoadFloat3(&fCamPos);
-	//DirectX::XMVECTOR vPos = DirectX::XMLoadFloat3(&CProtEnemy::m_param.pos);
-	//DirectX::XMStoreFloat3(&point.normal, DirectX::XMVectorSubtract(vCamPos, vPos));
-	//point.pos = CProtEnemy::m_param.pos;
-	//point.width = 200.0f;
-	//m_pPolyline->PushPoint(point);
-	//m_pPolyline->SetView(CCameraBase::GetPrimaryViewMatrix());
-	//m_pPolyline->SetProjection(CCameraBase::GetPrimaryProjectionMatrix());
-	//m_pPolyline->Draw();
 
 }
 

@@ -23,10 +23,11 @@ CSceneResult::CSceneResult(Data data)
 		if (m_data.BackScene == SCENE_STAGE03)
 		{
 			// タイトル
-			m_Retry = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/next.png"));
+			m_Retry = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/home.png"));
 			m_Retry.lock()->SetSize({ 377.5f, 35.f });//151.f, 14.f
 			m_Retry.lock()->SetPos({ 1050.f, 642.f });
 			m_Retry.lock()->SetColor(1, 1, 1, 1);
+			m_Home.lock()->SetColor(1, 1, 1, 0);
 		}
 		else
 		{
@@ -46,13 +47,28 @@ CSceneResult::CSceneResult(Data data)
 		m_Retry.lock()->SetColor(1, 1, 1, 1);
 	}
 	
-	
+	CSoundSE::Stop();
+	// 音データの読み込み
+	SetBGM("Assets/Sound/BGM/ResultBGM.mp3");
+	CSoundSE::Start(CSoundSE::SE_RESULT);
 	if (g_isClear)
 	{
 		// ゲームクリア
 		m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/gameclear.png"));
 		m_ResultUI.lock()->SetSize({ 646.f, 91.7f });//265.f, 37.f
 		m_ResultUI.lock()->SetPos({ 650.f, 204.f });
+		m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/result_gameclear.png"));
+		m_ResultUI.lock()->SetSize({ 380.f, 270.f });//265.f, 37.f
+		m_ResultUI.lock()->SetPos({ 330.f, 404.f });
+		float score = (float)m_data.MAX_kill / 20.f;
+		if (score <= 0.4)
+			CSoundSE::Start(CSoundSE::SE_VOICE_WIN);
+		if (score > 0.4 && score <= 0.6)
+			CSoundSE::Start(CSoundSE::SE_VOICE_WIN_BRONZE);
+		if (score > 0.6 && score <= 0.8)
+			CSoundSE::Start(CSoundSE::SE_VOICE_WIN_SILVER);
+		if (score > 0.8)
+			CSoundSE::Start(CSoundSE::SE_VOICE_WIN_GOLD);
 	}
 	else
 	{
@@ -60,6 +76,10 @@ CSceneResult::CSceneResult(Data data)
 		m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/Clear/gameover.png"));
 		m_ResultUI.lock()->SetSize({ 646.f, 91.7f });//265.f, 37.f
 		m_ResultUI.lock()->SetPos({ 650.f, 204.f });
+		m_ResultUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Result/result_gameover.png"));
+		m_ResultUI.lock()->SetSize({ 380.f, 270.f });//265.f, 37.f
+		m_ResultUI.lock()->SetPos({ 330.f, 404.f });
+		CSoundSE::Start(CSoundSE::SE_VOISE_LOSE);
 	}
 
 	// 猫
@@ -101,9 +121,7 @@ CSceneResult::CSceneResult(Data data)
 	
 	
 
-	// 音データの読み込み
-	SetBGM("Assets/Sound/BGM/ResultBGM.mp3");
-	CSoundSE::Start(CSoundSE::SE_RESULT);
+	
 
 	// 数字
 	m_time.reset(new CNumberUI(2, SORT_ORDER_UI_FRONT4, 2));
@@ -146,23 +164,27 @@ void CSceneResult::Update()
 {
 	
 	CatMove();
-	if (Utility::GetKeyTrigger(KEY_RIGHT))
+	if (m_data.BackScene != SCENE_STAGE03)
 	{
-		if (m_selectCursol == 0)
-			CSoundSE::Start(CSoundSE::SE_CURSOR);
-		m_selectCursol = 1;
-		m_Retry.lock()->SetColor(1, 1, 1, 1);
-		m_Home.lock()->SetColor(1, 1, 1, 0.3f);
+		if (Utility::GetKeyTrigger(KEY_RIGHT))
+		{
+			if (m_selectCursol == 0)
+				CSoundSE::Start(CSoundSE::SE_CURSOR);
+			m_selectCursol = 1;
+			m_Retry.lock()->SetColor(1, 1, 1, 1);
+			m_Home.lock()->SetColor(1, 1, 1, 0.3f);
+		}
+		if (Utility::GetKeyTrigger(KEY_LEFT))
+		{
+			if (m_selectCursol == 1)
+				CSoundSE::Start(CSoundSE::SE_CURSOR);
+			m_selectCursol = 0;
+			m_Retry.lock()->SetColor(1, 1, 1, 0.3f);
+			m_Home.lock()->SetColor(1, 1, 1, 1);
+
+		}
 	}
-	if (Utility::GetKeyTrigger(KEY_LEFT))
-	{
-		if(m_selectCursol == 1)
-			CSoundSE::Start(CSoundSE::SE_CURSOR);
-		m_selectCursol = 0;
-		m_Retry.lock()->SetColor(1, 1, 1, 0.3f);
-		m_Home.lock()->SetColor(1, 1, 1, 1);
-		
-	}
+	
 
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
