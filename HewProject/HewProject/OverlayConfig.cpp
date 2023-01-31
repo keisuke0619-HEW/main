@@ -82,7 +82,13 @@ void COverlayConfig::Update()
 	}
 	if (Utility::GetKeyTrigger(KEY_BEAM))
 	{
-		CSoundSE::Start(CSoundSE::SE_HENTAI);
+		if (Utility::GetKeyTrigger(KEY_CAMERA_UP))
+		{
+			if (Utility::GetKeyTrigger(KEY_CAMERA_DOWN))
+			{
+				CSoundSE::Start(CSoundSE::SE_HENTAI);
+			}
+		}
 	}
 }
 
