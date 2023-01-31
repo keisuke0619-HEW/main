@@ -71,8 +71,15 @@ void CSceneTitle::Update()
 	}
 	if (Utility::GetKeyTrigger(KEY_BEAM))
 	{
-		SetBGM("Assets/Sound/BGM/korinoyaiba.wav");
-		CSoundSE::Start(CSoundSE::SE_SETSUNA);
+		if (Utility::GetKeyTrigger(KEY_CAMERA_UP))
+		{
+			if (Utility::GetKeyTrigger(KEY_CAMERA_DOWN))
+			{
+				SetBGM("Assets/Sound/BGM/korinoyaiba.wav");
+				CSoundSE::Start(CSoundSE::SE_SETSUNA);
+			}
+		}
+		
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
