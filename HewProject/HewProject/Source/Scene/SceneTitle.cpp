@@ -11,7 +11,7 @@
 
 CSceneTitle::CSceneTitle()
 {
-	
+	m_cometSS = new CCometSS();
 
 	// ƒ^ƒCƒgƒ‹ƒƒS
 	m_TitlerogoUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/titlerogo.png"));
@@ -54,6 +54,7 @@ CSceneTitle::CSceneTitle()
 
 CSceneTitle::~CSceneTitle()
 {
+	delete m_cometSS;
 }
 
 #include <DebugWindow.hpp>
@@ -115,6 +116,12 @@ void CSceneTitle::Update()
 		}
 	}
 //—¬¯ŒQŠÖŒW	
+	m_cometSS->Update();
+}
+
+void CSceneTitle::Draw()
+{
+	m_cometSS->Draw();
 }
 
 

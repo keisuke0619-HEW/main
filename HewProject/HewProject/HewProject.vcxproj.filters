@@ -282,6 +282,9 @@
     <ClInclude Include="OverlayAskBase.hpp">
       <Filter>シーンファイル\Overlay</Filter>
     </ClInclude>
+    <ClInclude Include="CometSS.hpp">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\System\BaseClass\ObjectBase.cpp">
@@ -481,6 +484,9 @@
     </ClCompile>
     <ClCompile Include="OverlayAskBase.cpp">
       <Filter>シーンファイル\Overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="CometSS.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

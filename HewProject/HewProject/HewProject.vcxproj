@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BGM.h" />
+    <ClInclude Include="CometSS.hpp" />
     <ClInclude Include="DirectXTex\DirectXTex.h" />
     <ClInclude Include="DirectXTex\Texture.h" />
     <ClInclude Include="MiniMap.h" />
@@ -95,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BGM.cpp" />
+    <ClCompile Include="CometSS.cpp" />
     <ClCompile Include="DirectXTex\Texture.cpp" />
     <ClCompile Include="MiniMap.cpp" />
     <ClCompile Include="NumberUI.cpp" />
