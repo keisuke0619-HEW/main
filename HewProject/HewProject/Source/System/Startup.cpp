@@ -5,7 +5,7 @@
 #include <SE.h>
 
 //--- ’è”’è‹`
-const char* APP_TITLE = "It's so CHARGE BEAM -AX218-";
+const char* APP_TITLE = "It's so CHARGE BEAM!!";
 const Frame DEFAULT_FPS = 60;
 
 bool g_isLoop = false;
