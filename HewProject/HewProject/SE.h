@@ -33,7 +33,8 @@ public:
 		SE_VOICE_FIGHT_LOSE,
 
 
-
+		SE_SETSUNA,
+		SE_HENTAI,
 		SE_P,
 		SE_MAX,
 	};

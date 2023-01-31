@@ -47,6 +47,8 @@ void CSoundSE::Init()
 	m_pSE[SE_VOICE_WIN_GOLD]	= CreateSound("Assets/Sound/SE/WinGoldVoice.wav", false);
 	m_pSE[SE_VOICE_FIGHT_WIN]	= CreateSound("Assets/Sound/SE/FightWinVoice.wav", false);
 	m_pSE[SE_VOICE_FIGHT_LOSE]	= CreateSound("Assets/Sound/SE/FightLoseVoice.wav", false);
+	m_pSE[SE_SETSUNA] = CreateSound("Assets/Sound/SE/s-20.wav", false);
+	m_pSE[SE_HENTAI] = CreateSound("Assets/Sound/SE/s-18.wav", false);
 }
 
 void CSoundSE::Start(SESource Source)

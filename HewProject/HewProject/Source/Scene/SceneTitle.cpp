@@ -72,6 +72,7 @@ void CSceneTitle::Update()
 	if (Utility::GetKeyTrigger(KEY_BEAM))
 	{
 		SetBGM("Assets/Sound/BGM/korinoyaiba.wav");
+		CSoundSE::Start(CSoundSE::SE_SETSUNA);
 	}
 	if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
