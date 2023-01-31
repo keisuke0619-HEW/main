@@ -80,6 +80,10 @@ void COverlayConfig::Update()
 		CSoundSE::Start(CSoundSE::SE_CANCEL);
 		m_isDestroy = true;
 	}
+	if (Utility::GetKeyTrigger(KEY_BEAM))
+	{
+		CSoundSE::Start(CSoundSE::SE_HENTAI);
+	}
 }
 
 void COverlayConfig::MoveCursor()
@@ -98,6 +102,7 @@ void COverlayConfig::MoveCursor()
 	{
 		m_target = TARGET_MAX * 100;
 	}
+	
 }
 
 void COverlayConfig::SetStatus()
