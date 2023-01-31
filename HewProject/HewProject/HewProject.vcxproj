@@ -81,7 +81,7 @@
     <ClInclude Include="Source\System\Shader.h" />
     <ClInclude Include="Source\System\Sound.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Source\System\Sprite.h" />
     <ClInclude Include="Source\System\Timer.h" />
@@ -155,7 +155,7 @@
     <ClCompile Include="Source\System\Shader.cpp" />
     <ClCompile Include="Source\System\Sound.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Source\System\Sprite.cpp" />
     <ClCompile Include="Source\System\Startup.cpp" />
