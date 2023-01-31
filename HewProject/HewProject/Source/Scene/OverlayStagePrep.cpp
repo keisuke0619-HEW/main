@@ -6,6 +6,7 @@
 COverlayStagePrep::COverlayStagePrep(int id)
 {
 	m_next = nullptr;
+	m_lock = true;
 	m_ui[PREP_FADE] = new CGameUI("Assets/Img/White.png");
 	m_ui[PREP_FADE]->SetData(640, 360, 1280, 720);
 	m_ui[PREP_FADE]->SetColor255(0, 0, 0, 128);
@@ -54,20 +55,21 @@ void COverlayStagePrep::Update()
 	m_ui[PREP_WARNING_ICON]->SetColor255(255, 255, 255, fabs((sinf(m_frame * 0.05) * 255)));
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
-		CSoundSE::Stop();
-		CSoundSE::Start(CSoundSE::SE_LOAD);
-		CSoundSE::Start(CSoundSE::SE_VOICE_LOAD);
-		CSceneManager::SetScene(SCENE_STAGE01);
-
-		//if (m_next != nullptr)
-		//	*m_next = true;
-		m_isDestroy = true;
-		return;
+			CSoundSE::Stop();
+			CSoundSE::Start(CSoundSE::SE_LOAD);
+			CSoundSE::Start(CSoundSE::SE_VOICE_LOAD);
+			CSceneManager::SetScene(SCENE_STAGE01);
+			
+			//if (m_next != nullptr)
+			//	*m_next = true;
+			m_isDestroy = true;
+			return;	
 	}
 	else if (Utility::GetKeyTrigger(KEY_CANCEL))
 	{
 		CSoundSE::Stop();
 		CSoundSE::Start(CSoundSE::SE_CANCEL);
+		
 		m_isDestroy = true;
 	}
 	/*else if (Utility::GetKeyTrigger(KEY_CONFIG))

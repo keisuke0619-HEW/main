@@ -4,6 +4,7 @@
 #include <DirectXMath.h>
 #include <Xinput.h>
 #include "Input.h"
+#include<SceneManager.hpp>
 
 #define _USE_KEYBOARD_
 #define  INPUT_RT_LT (127)

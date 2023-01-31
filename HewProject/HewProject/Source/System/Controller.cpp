@@ -73,17 +73,29 @@ void Utility::ControllerUpdate()
 bool Utility::GetKeyTrigger(KeySet key)
 {
 	// —á
+	if (CSceneManager::getState() != SWAP_NONE)
+	{
+		return false;
+	}
 	return GetKeyTrigger(g_keyID[key]) || GetKeyTrigger(g_padID[key]);
 	
 }
 
 bool Utility::GetKeyPress(KeySet key)
 {
+	if (CSceneManager::getState() != SWAP_NONE)
+	{
+		return false;
+	}
 	return Utility::GetKeyPress(g_keyID[key]) || GetKeyPress(g_padID[key]);
 }
 
 bool Utility::GetKeyRelease(KeySet key)
 {
+	if (CSceneManager::getState() != SWAP_NONE)
+	{
+		return false;
+	}
 	return Utility::GetKeyRelease(g_keyID[key]) || GetKeyRelease(g_padID[key]);
 }
 

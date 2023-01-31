@@ -9,9 +9,9 @@ public:
 	~COverlayStagePrep();
 
 	void SetIsNext(bool* next);
+
 private:
 	void Update() override;
-
 	enum PrepID
 	{
 		PREP_FADE,
@@ -32,7 +32,8 @@ private:
 	};
 
 
-
+	bool m_lock;
 	CGameUI* m_ui[PREP_MAX];
 	bool* m_next;
+	
 };

@@ -22,6 +22,11 @@ std::vector<TScenePassingData> CSceneManager::m_passingData;
 ID3D11ShaderResourceView* CSceneManager::m_fade;
 float CSceneManager::m_alpha;
 
+ESwapState CSceneManager::getState()
+{
+	return m_isSwap;
+}
+
 void CSceneManager::SetScene(ESceneID ID)
 {
 	if (m_isSwap != SWAP_NONE)

@@ -18,6 +18,7 @@ CSceneStageSelect::CSceneStageSelect()
 {
 	// BGMSet("");	// BGM‚ð“ü‚ê‚éB
 	m_isNext = false;
+	
 	auto tmp = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/satageSelect_sousa.png"), SORT_ORDER_DEFAULT);
 	tmp.lock()->SetSize(400 * 0.8, 200 * 0.8);
 	tmp.lock()->SetPos(1075, 602);
@@ -83,6 +84,7 @@ void CSceneStageSelect::Update()
 	MoveCursor();
 	SetUiAlpha();
 	RotationIcon();
+
 	ChangeScene();
 }
 
@@ -108,6 +110,7 @@ void CSceneStageSelect::ChangeScene()
 {
 	if (Utility::GetKeyTrigger(KEY_SELECT))
 	{
+
 		CSoundSE::Start(CSoundSE::SE_SELECT);
 		switch (m_nowIcon)
 		{
