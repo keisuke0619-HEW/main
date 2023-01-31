@@ -8,6 +8,7 @@
 #include <Startup.h>
 #include <SE.h>
 
+
 CSceneTitle::CSceneTitle()
 {
 	
@@ -18,9 +19,14 @@ CSceneTitle::CSceneTitle()
 	m_TitlerogoUI.lock()->SetPos({ 640.0f, 285.0f });
 
 	//エフェクト流星
-	m_EffectUI = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/meteor.png"),SORT_ORDER_BACK);
-	m_EffectUI.lock()->SetSize({ 702.0f, 436.0f });
-	m_EffectUI.lock()->SetPos({ 840.0f, 0.0f });
+	for (int i = 0; i < 7; i++)
+	{
+		m_efectPosX[i] = (float)(rand() % 1880);
+		m_efectPosY[i] = -350.0f - (float)(rand() % 350);
+		m_EffectUI[i] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/meteor.png"), SORT_ORDER_BACK);
+		m_EffectUI[i].lock()->SetSize({ 100.0f, 100.0f });
+		m_EffectUI[i].lock()->SetPos({ m_efectPosX[i], m_efectPosY[i] });
+	}
 
 	m_TitleLogoEffect = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/titlerogo.png"), SORT_ORDER_FRONT);
 	m_TitleLogoEffect.lock()->SetSize({ 702.0f, 436.0f });
@@ -53,9 +59,9 @@ CSceneTitle::~CSceneTitle()
 #include <DebugWindow.hpp>
 void CSceneTitle::Update()
 {
-	m_efect++;
+	
 
-
+	
 
 	
 	if (Utility::GetKeyTrigger(KEY_SELECT))
@@ -87,12 +93,18 @@ void CSceneTitle::Update()
 		m_titleEffectAlpha -= 5;
 	}
 	
-	m_EffectUI.lock()->SetPos({ 840.0f-m_efect*14.f, 0.0f+ m_efect *14.f });
-
-	if (m_efect%180==0/*m_EffectUI.lock()->GetPos().x >= -555.0f&& m_EffectUI.lock()->GetPos().y>= 444.0f*/)
+	for (int i = 0; i < 7; i++)
 	{
-		m_EffectUI.lock()->SetPos({ 840.0f, 0.0f });//ここで位置調整して
-		m_efect = 0;
+		m_efectPosX[i] -= 17.0f;
+		m_efectPosY[i] += 17.0f;
+		m_EffectUI[i].lock()->SetPos({ m_efectPosX[i],m_efectPosY[i] });
+
+		if (m_EffectUI[i].lock()->GetPos().x <= -350.0f || m_EffectUI[i].lock()->GetPos().y <= -1420.0f)
+		{
+			m_efectPosX[i] = (float)(rand() % 1880);
+			m_efectPosY[i] = -350.0f - (float)(rand() % 350);
+			m_EffectUI[i].lock()->SetPos({ m_efectPosX[i],m_efectPosY[i] });//ここで位置調整して
+		}
 	}
 //流星群関係	
 }
