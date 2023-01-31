@@ -23,6 +23,7 @@ enum ESwapState
 class CSceneManager
 {
 public:
+	static ESwapState getState();
 	static void SetScene(ESceneID id);
 	static void Init();
 	static void Update();
