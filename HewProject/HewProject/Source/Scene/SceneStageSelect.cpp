@@ -19,7 +19,7 @@ CSceneStageSelect::CSceneStageSelect()
 	// BGMSet("");	// BGM‚ð“ü‚ê‚éB
 	m_isNext = false;
 	auto tmp = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/StageSelect/satageSelect_sousa.png"), SORT_ORDER_DEFAULT);
-	tmp.lock()->SetSize(400, 200);
+	tmp.lock()->SetSize(400 * 0.8, 200 * 0.8);
 	tmp.lock()->SetPos(1075, 602);
 
 	m_ui[BACK] = CUIManager::GetIns()->Add(new CGameUI("Assets/Img/Title/title_background.png"), SORT_ORDER_BACK);
@@ -207,5 +207,7 @@ void CSceneStageSelect::RotationIcon()
 	{
 		m_ui[STAGE_ICON_03].lock()->SetColor255(128, 128, 128, 128);
 		m_ui[STAGE_ICON_04].lock()->SetColor255(255, 255, 255, 0);
+		m_ui[STAGE_ICON_04].lock()->SetPos(stageIconPosMinX + stageIconPosAddX * 2,
+			stageIconPosMinY);
 	}
 }

@@ -41,7 +41,7 @@ void CMiniMap::Update()
 		m_player = CSceneBase::GetObjList().lock()->FindTag(TAG_PLAYER);
 	
 	// ƒvƒŒƒCƒ„[‰ñ“]ˆ—
-	m_playerIcon.lock()->SetRotation(-DirectX::XMConvertToDegrees(CCameraBase::GetPrimaryRadXZ() + 3.14 - m_player.lock()->GetParam().rot.y));
+	m_playerIcon.lock()->SetRotation(-DirectX::XMConvertToDegrees(CCameraBase::GetRadXZ("Player") + 3.14 - m_player.lock()->GetParam().rot.y));
 	if (m_player.expired() == false)
 	{
 
