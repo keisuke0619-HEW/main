@@ -454,6 +454,7 @@ void CPlayer::KnockBack()
 		DirectX::XMStoreFloat3(&fKnock, m_vKnockBack);
 		m_vKnockBack = DirectX::XMVectorScale(m_vKnockBack, 0.8f);
 		m_param.move = fKnock;
+		m_gra = 0;
 	}
 	m_knockBackFrame--;
 }
