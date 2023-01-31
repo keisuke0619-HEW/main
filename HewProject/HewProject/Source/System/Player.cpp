@@ -57,15 +57,9 @@ CPlayer::CPlayer(Data* data)
 	m_modelData.model->Play(no, true);
 
 
-	// 音データの読み込み
-	m_pChargeSE = CreateSound("Assets/Sound/SE/Charge.wav", false);
-	if (m_pChargeSE == nullptr)
-	{
-
-	}
-	m_pBeamSE = CreateSound("Assets/Sound/SE/Beam.wav", false);
+	// 音関係
 	m_isSE = false;
-	
+	CSoundSE::BoolStop();
 
 	m_bill.reset(new CBillboard("Assets/Img/number.png"));
 	m_bill->SetSize({ 2.0f, 0.25f });
@@ -83,7 +77,7 @@ CPlayer::CPlayer(Data* data)
 	m_isBeamChargeUpBuff = false;
 	m_BuffCnt = 0;
 	m_OldKillCnt = 0;
-	CSoundSE::BoolStop();
+	
 }
 
 CPlayer::~CPlayer()
@@ -351,11 +345,7 @@ void CPlayer::Beam()
 		// se再生
 		if (m_isSE == false)
 		{
-			m_pSESource = StartSound(m_pChargeSE);
-			// 音量
-			m_pSESource->SetVolume(0.3f);
-			// 再生スピード
-			m_pSESource->SetFrequencyRatio(1.f);
+			CSoundSE::Start(CSoundSE::SE_CHARGE);
 			// 再生したか判定
 			m_isSE = true;
 		}
@@ -388,12 +378,8 @@ void CPlayer::Beam()
 			if (m_isSE == true)
 			{
 				// チャージ音を止める
-				m_pSESource->Stop();
-				m_pSESource = StartSound(m_pBeamSE);
-				// 音量
-				m_pSESource->SetVolume(0.3f);
-				// 再生スピード
-				m_pSESource->SetFrequencyRatio(1.f);
+				CSoundSE::Stop();
+				CSoundSE::Start(CSoundSE::SE_BEAM);
 				// 再生判定
 				m_isSE = false;
 			}
@@ -413,7 +399,7 @@ void CPlayer::Beam()
 			// 一定以下のチャージの時でやめたときにもチャージ音が消えるようにする
 			if (m_isSE == true)
 			{
-				m_pSESource->Stop();
+				CSoundSE::Stop();
 				m_isSE = false;
 			}
 		}

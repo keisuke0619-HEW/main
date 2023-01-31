@@ -6,6 +6,8 @@ class CSoundSE
 public:
 	enum SESource
 	{
+		SE_BEAM,
+		SE_CHARGE,
 		SE_SELECT,
 		SE_CURSOR,
 		SE_CANCEL,

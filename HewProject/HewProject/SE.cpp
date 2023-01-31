@@ -21,6 +21,8 @@ void CSoundSE::Init()
 	m_IsPlay = false;
 	m_cnt = 0;
 	m_SoundNum = 0;
+	m_pSE[SE_BEAM]				= CreateSound("Assets/Sound/SE/Beam.wav", false);
+	m_pSE[SE_CHARGE]			= CreateSound("Assets/Sound/SE/Charge.wav", false);
 	m_pSE[SE_SELECT]			= CreateSound("Assets/Sound/SE/Select.mp3", false);
 	m_pSE[SE_CURSOR]			= CreateSound("Assets/Sound/SE/Cursor.mp3", false);
 	m_pSE[SE_CANCEL]			= CreateSound("Assets/Sound/SE/cancel.mp3", false);

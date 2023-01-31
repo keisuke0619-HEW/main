@@ -42,9 +42,6 @@ private:
 	std::unique_ptr<CPlayerUI> m_playerUI;	// ÉvÉåÉCÉÑÅ[ÇÃUI
 	void Move();
 	void Beam();
-	XAUDIO2_BUFFER* m_pBeamSE;
-	XAUDIO2_BUFFER* m_pChargeSE;
-	IXAudio2SourceVoice* m_pSESource;
 	bool m_isSE;
 
 	void CancelMove();
